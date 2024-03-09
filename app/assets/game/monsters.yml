@@ -2,7 +2,7 @@ monsters:
   - animated_door:
     total: 2
     defeat:
-      walk: 1
+      move: 1
     danger: 1
   - cave_troll:
     total: 1

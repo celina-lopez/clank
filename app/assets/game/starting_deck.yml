@@ -4,10 +4,10 @@ starting_deck:
     total: 24
   - scramble:
     victory_points: 1
-    walk: 1
+    move: 1
     total: 4
   - sidestep:
-    walk: 1
+    move: 1
     total: 4
   - stumble:
     clank: 1

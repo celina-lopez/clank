@@ -3,7 +3,7 @@ reserve_cards:
     total: 15
     victory_points: 2
     cost: 2
-    walk: 1
+    move: 1
   - goblin:
     total: 1
     gold: 1

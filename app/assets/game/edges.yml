@@ -19,22 +19,22 @@ map_1:
       x: 2
       y: 3
     metadata:
-      walk: 2
+      move: 2
   - edge:
       x: 3
       y: 2
     metadata:
-      walk: 2
+      move: 2
   - edge:
       x: 3
       y: 4
     metadata:
-      walk: 2
+      move: 2
   - edge:
       x: 4
       y: 3
     metadata:
-      walk: 2
+      move: 2
   - edge:
       x: 5
       y: 4
@@ -53,7 +53,7 @@ map_1:
       x: 6
       y: 2
     metadata:
-      walk: 2
+      move: 2
   - edge:
       x: 6
       y: 11
