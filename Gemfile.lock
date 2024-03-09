@@ -84,6 +84,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    light-service (0.18.0)
+      activesupport (>= 4.0.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -241,6 +243,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   jbuilder (~> 2.7)
+  light-service
   listen (~> 3.2)
   puma (~> 4.1)
   rails (~> 6.0.6, >= 6.0.6.1)
