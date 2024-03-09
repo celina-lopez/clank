@@ -1,0 +1,21 @@
+devices:
+  - teleporter:
+    cost: 4
+    use:
+      - teleport
+    total: 2
+  - the_vault:
+    environment: depths
+    cost: 3
+    use:
+      - gold: 5
+        clank: 3
+    total: 1
+  - shrine:
+    ability:
+      dragon_cubes: 3
+    use:
+      - heal: 1
+      - gold: 1
+    cost: 2
+    total: 3

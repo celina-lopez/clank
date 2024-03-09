@@ -1,0 +1,19 @@
+reserve_cards:
+  - explore:
+    total: 15
+    victory_points: 2
+    cost: 2
+    walk: 1
+  - goblin:
+    total: 1
+    gold: 1
+    danger: 2
+  - mercenary:
+    total: 15
+    victory: 1
+    attack: 2
+    cost: 2
+  - secret_tome:
+    victory: 7
+    cost: 7
+    total: 12

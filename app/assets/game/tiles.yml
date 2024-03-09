@@ -1,0 +1,10 @@
+map_1:
+  - tile: 4
+    type: big_mystery_token
+  - tile: 5
+    type: big_mystery_token
+  - tile: 6
+    type: cave
+  - tile: 10
+    metadata:
+      health: true

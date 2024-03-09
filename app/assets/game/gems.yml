@@ -1,0 +1,41 @@
+gems:
+  - ruby:
+    total: 2
+    cost: 6
+    ability:
+      clank: 2
+    use:
+      - draw: 1
+  - dragon_eye:
+    total: 1
+    cost: 5
+    ability:
+      clank: 2
+    environment: depths
+    use:
+      - draw: 1
+    conditional:
+      - type: victory
+        value: 10
+        logic: mastery_token
+  - diamond:
+    total: 1
+    cost: 8
+    ability:
+      clank: 2
+    use:
+      - draw: 1
+  - sapphire:
+    total: 3
+    cost: 4
+    ability:
+      clank: 2
+    use:
+      - draw: 1
+  - emerald:
+    total: 2
+    cost: 5
+    ability:
+      clank: 2
+    use:
+      - draw: 1

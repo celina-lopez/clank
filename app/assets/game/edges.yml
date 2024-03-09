@@ -1,0 +1,66 @@
+map_1:
+  - edge:
+      x: 0
+      y: 1
+    metadata: {}
+  - edge:
+      x: 1
+      y: 0
+    metadata: {}
+  - edge:
+      x: 1
+      y: 2
+    metadata: {}
+  - edge:
+      x: 2
+      y: 1
+    metadata: {}
+  - edge:
+      x: 2
+      y: 3
+    metadata:
+      walk: 2
+  - edge:
+      x: 3
+      y: 2
+    metadata:
+      walk: 2
+  - edge:
+      x: 3
+      y: 4
+    metadata:
+      walk: 2
+  - edge:
+      x: 4
+      y: 3
+    metadata:
+      walk: 2
+  - edge:
+      x: 5
+      y: 4
+    metadata: {}
+  - edge:
+      x: 5
+      y: 10
+    metadata:
+      locked: true
+  - edge:
+      x: 10
+      y: 5
+    metadata:
+      locked: true
+  - edge:
+      x: 6
+      y: 2
+    metadata:
+      walk: 2
+  - edge:
+      x: 6
+      y: 11
+    metadata:
+      danger: 1
+  - edge:
+      x: 11
+      y: 6
+    metadata:
+      danger: 1

@@ -1,0 +1,14 @@
+starting_deck:
+  - burgle:
+    victory_points: 1
+    total: 24
+  - scramble:
+    victory_points: 1
+    walk: 1
+    total: 4
+  - sidestep:
+    walk: 1
+    total: 4
+  - stumble:
+    clank: 1
+    total: 8

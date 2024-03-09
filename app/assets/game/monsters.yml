@@ -1,0 +1,25 @@
+monsters:
+  - animated_door:
+    total: 2
+    defeat:
+      walk: 1
+    danger: 1
+  - cave_troll:
+    total: 1
+    defeat:
+      gold: 3
+      draw: 2
+    environment: depths
+    danger: 4
+  - kobold:
+    total: 2
+    danger: 2
+    ability:
+      clank_cube: 1
+    defeat:
+      victory: 1
+  - ogre:
+    defeat:
+      gold: 5
+    danger: 3
+    total: 2
