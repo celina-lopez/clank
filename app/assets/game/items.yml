@@ -1,13 +1,14 @@
 items:
-  - pickaxe:
+  - name: pickaxe
       attack: 2
       cost: 4
-      use:
+      actions:
         - gold: 2
       total: 2
-  - boots_of_swiftness:
+  - name: boots_of_swiftness
       total: 1
       cost: 5
-      move: 3
-      ability:
-        move: 1
+      actions:
+        - move: 3
+      immediate_actions:
+        - move: 1

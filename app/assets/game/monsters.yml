@@ -1,25 +1,27 @@
 monsters:
-  - animated_door:
+  - name: animated_door
     total: 2
-    defeat:
-      move: 1
-    danger: 1
-  - cave_troll:
+    actions:
+      - move: 1
+    attack: 1
+  - name: cave_troll
     total: 1
-    defeat:
-      gold: 3
-      draw: 2
-    environment: depths
-    danger: 4
-  - kobold:
+    actions:
+      - gold: 3
+        draw: 2
+    conditionals:
+      - type: environment
+        logic: "depths == true"
+    attack: 4
+  - name: kobold
     total: 2
-    danger: 2
-    ability:
-      clank_cube: 1
-    defeat:
-      victory: 1
-  - ogre:
-    defeat:
-      gold: 5
-    danger: 3
+    attack: 2
+    immediate_actions:
+      - clank_cube: 1
+    actions:
+      - victory: 1
+  - name: ogre
+    actions:
+      - gold: 5
+    attack: 3
     total: 2

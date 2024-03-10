@@ -1,41 +1,21 @@
 gems:
-  - ruby:
+  - name: ruby
     total: 2
     cost: 6
-    ability:
-      clank: 2
-    use:
-      - draw: 1
-  - dragon_eye:
+  - name: dragon_eye
     total: 1
     cost: 5
-    ability:
-      clank: 2
-    environment: depths
-    use:
-      - draw: 1
-    conditional:
+    conditionals:
+      - type: environment
+        logic: "depths == true"
       - type: victory
-        value: 10
-        logic: mastery_token
-  - diamond:
+        logic: "mastery_token <= 10"
+  - name: diamond
     total: 1
     cost: 8
-    ability:
-      clank: 2
-    use:
-      - draw: 1
-  - sapphire:
+  - name: sapphire
     total: 3
     cost: 4
-    ability:
-      clank: 2
-    use:
-      - draw: 1
-  - emerald:
+  - name: emerald
     total: 2
     cost: 5
-    ability:
-      clank: 2
-    use:
-      - draw: 1

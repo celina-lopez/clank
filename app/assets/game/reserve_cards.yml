@@ -1,19 +1,21 @@
 reserve_cards:
-  - explore:
+  - name: explore
     total: 15
     victory_points: 2
     cost: 2
-    move: 1
-  - goblin:
+    actions:
+      - move: 1
+  - name: goblin
     total: 1
-    gold: 1
-    danger: 2
-  - mercenary:
+    actions:
+      - gold: 1
+        danger: 2
+  - name: mercenary
     total: 15
-    victory: 1
+    victory_points: 1
     attack: 2
     cost: 2
-  - secret_tome:
-    victory: 7
+  - name: secret_tome
+    victory_points: 7
     cost: 7
     total: 12

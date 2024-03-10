@@ -1,14 +1,17 @@
 starting_deck:
-  - burgle:
+  - name: burgle
     victory_points: 1
     total: 24
-  - scramble:
+  - name: scramble
     victory_points: 1
-    move: 1
+    actions:
+      - move: 1
     total: 4
-  - sidestep:
-    move: 1
+  - name: sidestep
+    actions:
+      - move: 1
     total: 4
-  - stumble:
-    clank: 1
+  - name: stumble
+    actions:
+      - clank: 1
     total: 8
