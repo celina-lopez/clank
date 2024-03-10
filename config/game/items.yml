@@ -1,0 +1,13 @@
+- name: pickaxe
+    attack: 2
+    cost: 4
+    actions:
+      - gold: 2
+    total: 2
+- name: boots_of_swiftness
+    total: 1
+    cost: 5
+    actions:
+      - move: 3
+    immediate_actions:
+      - move: 1

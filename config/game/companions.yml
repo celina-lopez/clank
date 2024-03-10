@@ -1,0 +1,21 @@
+- name: archaeologist
+  victory: 1
+  cost: 2
+  total: 2
+  actions:
+    - draw: 1
+  conditionals:
+    - type: victory
+      value: 2
+      logic: monkey_idol == true
+- name: invoker_of_the_ancients
+  cost: 4
+  total: 1
+  actions:
+    - teleport: true
+      clank: 1
+- master_burglar:
+  cost: 3
+  total: 2
+  actions:
+    - trash: burgle

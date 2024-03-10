@@ -1,0 +1,21 @@
+- name: teleporter
+  cost: 4
+  actions:
+    - teleport: true
+  total: 2
+- name: the_vault
+  conditionals:
+    - environment: depths
+  cost: 3
+  actions:
+    - gold: 5
+      clank: 3
+  total: 1
+- name: shrine
+  immediate_action:
+    - dragon_cubes: 3
+  actions:
+    - heal: 1
+    - gold: 1
+  cost: 2
+  total: 3

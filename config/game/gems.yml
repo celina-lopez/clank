@@ -1,0 +1,41 @@
+- name: ruby
+  total: 2
+  cost: 6
+  actions:
+    - draw: 1
+  immediate_actions:
+    - clank: 2
+- name: dragon_eye
+  total: 1
+  cost: 5
+  conditionals:
+    - type: environment
+      logic: "depths == true"
+    - type: victory
+      value: 10
+      logic: "mastery_token == true"
+  actions:
+    - draw: 1
+  immediate_actions:
+    - clank: 2
+- name: diamond
+  total: 1
+  cost: 8
+  actions:
+    - draw: 1
+  immediate_actions:
+    - clank: 2
+- name: sapphire
+  total: 3
+  cost: 4
+  actions:
+    - draw: 1
+  immediate_actions:
+    - clank: 2
+- name: emerald
+  total: 2
+  cost: 5
+  actions:
+    - draw: 1
+  immediate_actions:
+    - clank: 2
