@@ -8,7 +8,7 @@ companions:
     conditionals:
       - type: victory
         value: 2
-        logic: monkey_idol
+        logic: monkey_idol == true
   - name: invoker_of_the_ancients
     cost: 4
     total: 1

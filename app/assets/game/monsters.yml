@@ -19,7 +19,7 @@ monsters:
     immediate_actions:
       - clank_cube: 1
     actions:
-      - victory: 1
+      - victory_points: 1
   - name: ogre
     actions:
       - gold: 5

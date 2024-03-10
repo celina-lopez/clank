@@ -9,7 +9,8 @@ gems:
       - type: environment
         logic: "depths == true"
       - type: victory
-        logic: "mastery_token <= 10"
+        value: 10
+        logic: "mastery_token == true"
   - name: diamond
     total: 1
     cost: 8

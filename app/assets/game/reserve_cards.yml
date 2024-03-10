@@ -13,7 +13,8 @@ reserve_cards:
   - name: mercenary
     total: 15
     victory_points: 1
-    attack: 2
+    actions:
+      - attack: 2
     cost: 2
   - name: secret_tome
     victory_points: 7
