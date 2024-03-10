@@ -6,7 +6,8 @@ class Card # rubocop:disable Style/Documentation
                 :actions,
                 :attack,
                 :conditionals,
-                :immediate_actions
+                :immediate_actions,
+                :on_acquire
 
   def initialize( # rubocop:disable Metrics/ParameterLists
     name:,
@@ -15,6 +16,7 @@ class Card # rubocop:disable Style/Documentation
     attack: 0,
     conditionals: [],
     immediate_actions: [],
+    on_acquire: [],
     **_args
   )
     @name = name
@@ -23,6 +25,7 @@ class Card # rubocop:disable Style/Documentation
     @attack = attack
     @conditionals = conditionals
     @immediate_actions = immediate_actions
+    @on_acquire = on_acquire
   end
 
   def valid?

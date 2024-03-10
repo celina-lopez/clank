@@ -1,4 +1,4 @@
-class Gameplay
+class Gameplay # rubocop:disable Metrics/ClassLength
   attr_accessor :players,
                 :current_player_index,
                 :map,
@@ -14,11 +14,11 @@ class Gameplay
     map:,
     current_player_index: nil,
     players: [],
-    deck: [],
-    discard: [],
-    active_cards: [],
-    reserve_deck: [],
-    monster_state: []
+    deck:,
+    discard: Deck.new([]),
+    active_cards:,
+    reserve_deck:,
+    monster_state:, 
   )
     @players = players
     @current_player_index = current_player_index || rand(players.length - 1)
@@ -40,10 +40,13 @@ class Gameplay
   end
 
   def self.start!(num_players)
+    deck = Deck.from_yaml(:starter).shuffle
+    active_cards = Deck.new(deck.draw(5))
     new(
       players: num_players.times.map { |i| Player.start!(i) },
       map: Map.start!,
-      deck: Deck.from_yaml(:miscellaneous).shuffle,
+      deck:,
+      active_cards:,
       reserve_deck: Deck.from_yaml(:reserve),
       monster_state: Dragon.new(cubes: num_players - 1)
     )
@@ -51,7 +54,7 @@ class Gameplay
 
   def draw
     card = deck.draw
-    active_cards << card
+    active_cards.cards << card
     card.immediate_actions.each do |action|
       commit_action(action)
     end
@@ -88,11 +91,14 @@ class Gameplay
   end
 
   def buy_card(value)
-    card = active_cards.find { |card| card.name == value }
-    card = reserve_deck.draw.find { |card| card.name == value } if card.nil?
+    card = active_cards.cards.find { |card| card.name == value }
+    card = reserve_deck.cards.draw.find { |card| card.name == value } if card.nil?
     return unless card.cost <= current_player.action_inventory[:skill_points]
 
     current_player.action_inventory[:skill_points] -= card.cost
+    card.on_acquire.each do |action|
+      commit_action(action)
+    end
     current_player.discard << card
   end
 
