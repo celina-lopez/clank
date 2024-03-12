@@ -5,11 +5,15 @@ class Action::Base
 
   def initialize(gameplay_data, type:, value:)
     @gameplay_data = gameplay_data
-    @type = type 
+    @type = type
     @value = value
   end
 
   def execute!
     send(type, value)
+  end
+
+  def current_player
+    @current_player ||= gameplay_data.current_player
   end
 end

@@ -1,41 +1,46 @@
 # frozen_string_literal: true
 
 class Action::Player < Action::Base
-  MAX_HEALTH = 10
   def attack
-    # TODO in validation, make sure card is active! 
-    # TODO in basr, add current player 
-    attack_points = current_player.attack_points
-    monster_health = monster_card["health"] # i think i named this attack so change that
-    # monster card find monster and if goblin dont discard 
-    current_player.update(attack_points: attack_points - monster_health)
-    if monster_card["rewards"].one? # again i named this differently, also some awards you can chose either or 
-      (rewards = monster_card["rewards"].first).keys.each do |key| 
-        Action::Cards.new(gameplay_data, type: key, value: rewards[key]).execute
-      end
-    else 
-      Action::Cards.new(gameplay_data, type: "choose_reward", value: monster_card["rewards"])
-    end
+    # TODO: in validation, make sure card is active!
+    # TODO: for monster: again i named this differently, also some awards you can chose either or
+    current_player.update(attack_points: current_player.attack_points - monster['health'])
+    monster['rewards'].one? ? redeem_monster_reward : choose_reward
     discard!(monster_card)
   end
 
-  def heal #put this in card actuon? 
-    current_player.health += value
-    if current_player.health > MAX_HEALTH
-      current_player.health = MAX_HEALTH
+  def redeem_monster_reward
+    (rewards = monster['rewards'].first).each_key do |key|
+      Action::Card.new(gameplay_data, type: key, value: rewards[key]).execute
     end
   end
 
-  def buy
-    # TODO: validation for posotjon and able to buy 
-    item = BUYABLE_ITEMS.find_by {|x| x["name"]}
-    current_player.coins -= item["cost"]
+  def choose_reward
+    Action::Cards.new(gameplay_data, type: 'choose_reward', value: monster['rewards'])
+  end
+
+  def monster
+    @monster ||= Validation::MONSTER_CARDS.find { |card| card['name'] == value }
+  end
+
+  def buy_artifact
+    # TODO: validation for posotjon and able to buy
+    item = BUYABLE_ITEMS.find_by { |x| x['name'] }
+    current_player.coins -= item['cost']
     current_player.inventory << item
-  end 
+  end
+
+  def buy_card
+    card = gameplay_data.active_cards.find { |x| x['name'] == value }
+    current_player.skill_points -= card['skill_point_cost']
+    current_player.discard_deck << card
+    gameplay_data.active_cards.delete(card) # check this works
+  end
 
   def discard!(card)
     return if goblin?(card)
-    gameplay_data.active_cards.delete(card) # uhhh chrck if tbis works 
+
+    gameplay_data.active_cards.delete(card) # uhhh chrck if tbis works
     gameplay_data.discard_deck << card
   end
 end

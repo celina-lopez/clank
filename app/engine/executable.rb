@@ -3,19 +3,20 @@
 class Executeable
   PLAYER_ACTIONS = %i[
     attack
-    buy
+    buy_artifact
     move
     teleport
+    buy_card
   ].freeze
 
   CARD_ACTIONS = %i[
     add_teleport
     add_attack_points
     add_clank
-    remove_clank
+    add_coins
     add_move_points
-    heal
-    increase_coins
+    add_health
+    remove_clank
   ].freeze
 
   GAME_ACTIONS = %i[

@@ -31,7 +31,7 @@ class Validation
               Validation::Player
             when CARD_NAMES.include?(type)
               Validation::Game
-            when Executeable::CARD_ACTIONS.include?(type)
+            when Executeable::GAME_ACTIONS.include?(type)
               Validation::Card
             end
     klass.new(gameplay_data, value:, type:).valid?
