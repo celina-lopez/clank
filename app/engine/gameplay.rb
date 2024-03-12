@@ -12,13 +12,9 @@ class Gameplay # rubocop:disable Metrics/ClassLength
 
   def initialize( # rubocop:disable Metrics/ParameterLists
     map:,
-    current_player_index: nil,
+    deck:, active_cards:, reserve_deck:, monster_state:, current_player_index: nil,
     players: [],
-    deck:,
-    discard: Deck.new([]),
-    active_cards:,
-    reserve_deck:,
-    monster_state:, 
+    discard: Deck.new([])
   )
     @players = players
     @current_player_index = current_player_index || rand(players.length - 1)
