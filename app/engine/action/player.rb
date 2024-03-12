@@ -4,7 +4,7 @@ class Action::Player < Action::Base
   def attack
     # TODO: in validation, make sure card is active!
     # TODO: for monster: again i named this differently, also some awards you can chose either or
-    current_player.update(attack_points: current_player.attack_points - monster['health'])
+    current_player.attack_points = current_player.attack_points - monster['health']
     monster['rewards'].one? ? redeem_monster_reward : choose_reward
     discard!(monster_card)
   end
