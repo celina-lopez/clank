@@ -11,8 +11,9 @@
   conditionals:
     - type: environment
       logic: "depths == true"
-    - type: victory
-      value: 10
+    - type: item
+      value:
+        victory_points: 10
       logic: "mastery_token == true"
   actions:
     - draw: 1

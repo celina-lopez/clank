@@ -5,8 +5,9 @@
   actions:
     - draw: 1
   conditionals:
-    - type: victory
+    - type: item 
       value: 2
+        victory: 2
       logic: monkey_idol == true
 - name: invoker_of_the_ancients
   cost: 4
