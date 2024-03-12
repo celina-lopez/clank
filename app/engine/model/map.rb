@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Model::Map < Model::Base
+class Model::Map
   attr_accessor :tiles
 
   def initialize

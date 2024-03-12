@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Model::Game < Model::Base
+class Model::Game
   attr_accessor :id, :players, :current_player, :active_deck, :deck, :discard_deck, :marketplace_deck, :map,
                 :dragon_clank
 

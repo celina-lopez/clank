@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Model::Player < Model::Base
+class Model::Player
   attr_accessor :name, :attack_points, :health, :move_points, :teleport, :coins, :inventory, :active_deck, :deck,
                 :discard_deck, :skill_points, :active_clank, :inactive_clank, :position
 
