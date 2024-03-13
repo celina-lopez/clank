@@ -23,7 +23,7 @@ class Engine
       'Player'
     when Constants::CARD_NAMES.include?(type)
       'Card'
-    when Action::GAME_ACTIONS.actions_include?(type)
+    when Action::Game.actions_include?(type)
       'Game'
     end
   end
