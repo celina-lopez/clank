@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class Engine
-  attr_accessor :gameplay_data, :validation_klass, :action_klass
+  attr_accessor :gameplay_data
 
-  def initialize(gameplay_data)
+  def initialize(gameplay_data=nil)
     @gameplay_data = gameplay_data
-    @validation_klass = Validation.new(self)
-    @action_klass = Action.new(self)
   end
 
   def execute(type:, value:)
