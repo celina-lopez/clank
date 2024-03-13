@@ -23,11 +23,11 @@ class Action::Player < Action::Base
   end
 
   def move
-    raise NotImplemented
+    current_player.position.current_position = value
   end
 
   def teleport
-    raise NotImplemented
+    move
   end
 
   private

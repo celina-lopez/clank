@@ -10,7 +10,7 @@ class Action::Base
   end
 
   def self.actions_include?(type)
-    instance_methods(false).include?(type)
+    instance_methods(false).include?(type.to_sym)
   end
 
   def execute!

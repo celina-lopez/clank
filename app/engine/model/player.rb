@@ -2,7 +2,7 @@
 
 class Model::Player
   attr_accessor :name, :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
-                :active_clank, :position
+                :clank, :position
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
@@ -14,7 +14,7 @@ class Model::Player
     @inventory = []
     @position = Model::Position.new
     @deck = Model::Deck.new(Constants::STARTING_DECK_CARDS)
-    @active_clank = STARTING_CLANK_CUBES[index]
+    @clank = STARTING_CLANK_CUBES[index]
     initialize_player_attributes
     super()
   end
@@ -38,7 +38,7 @@ class Model::Player
   end
 
   def inactive_clank
-    active_clank - MAX_CLANK
+    clank - MAX_CLANK
   end
 
   def depths?

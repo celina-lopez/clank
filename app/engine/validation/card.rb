@@ -14,7 +14,7 @@ class Validation::Card < Validation::Base
   end
 
   def card
-    @card ||= CARDS.find_by { |card| card['name'] == type }
+    @card ||= Constants::CARDS.find { |card| card['name'] == type }
   end
 
   def conditions

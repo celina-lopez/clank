@@ -16,11 +16,11 @@ class Engine
   end
 
   def klass_type(type)
-    if Action::Player.actions_include?(type.to_sym)
+    if Action::Player.actions_include?(type)
       'Player'
-    elsif Constants::CARD_NAMES.include?(type.to_sym)
+    elsif Constants::CARD_NAMES.include?(type)
       'Card'
-    elsif Action::Game.actions_include?(type.to_sym)
+    elsif Action::Game.actions_include?(type)
       'Game'
     end
   end

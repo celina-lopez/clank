@@ -4,13 +4,13 @@
 - name: scramble
   victory_points: 1
   actions:
-    - move: 1
+    - add_move_points: 1
   total: 2
 - name: sidestep
   actions:
-    - move: 1
+    - add_move_points: 1
   total: 1
 - name: stumble
   actions:
-    - clank: 1
+    - add_clank: 1
   total: 1
