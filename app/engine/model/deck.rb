@@ -4,7 +4,7 @@ class Model::Deck
   attr_accessor :active, :deck, :discarded, :num_of_active_cards
 
   def initialize(cards, num_of_active_cards: 5)
-    cards.shuffle!
+    cards = cards.dup.shuffle!
     @num_of_active_cards = num_of_active_cards
     @active = cards.pop(num_of_active_cards)
     @deck = cards
@@ -17,12 +17,13 @@ class Model::Deck
   end
 
   def draw(number_of_cards)
-    cards = deck.pop(number_of_cards)
-    if (cards_needed = number_of_cards - cards.length).positive?
+    drawn_cards = deck.pop(number_of_cards)
+    if (cards_needed = number_of_cards - drawn_cards.length).positive?
       reload_deck
-      cards.concat(deck.pop(cards_needed))
+      drawn_cards.concat(deck.pop(cards_needed))
     end
-    active.concat(cards)
+    active.concat(drawn_cards)
+    drawn_cards
   end
 
   def destroy!(card)

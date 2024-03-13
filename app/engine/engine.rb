@@ -3,25 +3,24 @@
 class Engine
   attr_accessor :gameplay_data
 
-  def initialize(gameplay_data=nil)
+  def initialize(gameplay_data = nil)
     @gameplay_data = gameplay_data
   end
 
   def execute(type:, value:)
-    klass_type = klass_type(type)
-    valid = Validation.const_get(klass_type).new(gameplay_data, type:, value:).valid?
+    klass = klass_type(type)
+    valid = Validation.const_get(klass).new(gameplay_data, type:, value:).valid?
     raise 'Invalid request' unless valid
 
-    Action.const_get(klass_type).new(gameplay_data, type:, value:).execute!
+    self.gameplay_data = Action.const_get(klass).new(gameplay_data, type:, value:).execute!
   end
 
   def klass_type(type)
-    case type
-    when Action::Player.actions_include?(type)
+    if Action::Player.actions_include?(type.to_sym)
       'Player'
-    when Constants::CARD_NAMES.include?(type)
+    elsif Constants::CARD_NAMES.include?(type.to_sym)
       'Card'
-    when Action::Game.actions_include?(type)
+    elsif Action::Game.actions_include?(type.to_sym)
       'Game'
     end
   end

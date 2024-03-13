@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Constants
-  def config_yaml(name)
+  def self.config_yaml(name)
     YAML.load_file(Rails.root.join('config', 'game', "#{name}.yml"))
   end
   MISC_DECK = %w[companions devices gems items].flat_map { |name| config_yaml(name) }.freeze

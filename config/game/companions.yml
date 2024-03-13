@@ -5,8 +5,8 @@
   actions:
     - draw: 1
   conditionals:
-    - type: item 
-      value: 2
+    - type: item
+      value:
         victory: 2
       logic: monkey_idol == true
 - name: invoker_of_the_ancients
@@ -15,7 +15,7 @@
   actions:
     - teleport: true
       clank: 1
-- master_burglar:
+- name: master_burglar
   cost: 3
   total: 2
   actions:

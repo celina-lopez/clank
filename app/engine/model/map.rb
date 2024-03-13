@@ -4,7 +4,7 @@ class Model::Map
   attr_accessor :tiles
 
   def initialize
-    @tiles = YAML.load_file('config/game/tiles.yml')['map_1']
+    @tiles = YAML.load_file('config/game/maps.yml')['map_1']
     super
   end
 end

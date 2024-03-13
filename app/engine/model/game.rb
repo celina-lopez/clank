@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Model::Game
-  attr_accessor :id, :players, :current_player, :deck, :marketplace_deck, :map,
+  attr_accessor :players, :current_player, :deck, :marketplace_deck, :map,
                 :dragon_clank
 
   def initialize(num_players:)
-    @id = SecureRandom.uuid
     @dragon_clank = 0
     @deck = Model::Deck.new(
       Constants::MISC_DECK + Constants::MONSTER_CARDS,
@@ -13,14 +12,19 @@ class Model::Game
     )
     @marketplace_deck = Constants::RESERVE_CARDS
     @map = Model::Map.new
-    initialize_players
-    super
+    initialize_players(num_players)
+    super()
   end
 
-  def initialize_players
+  def initialize_players(num_players)
     @players = num_players.times.map do |i|
       Model::Player.new(i)
     end
     @current_player = @players.first
+  end
+
+  def next_player!
+    current_player.deck.reload_active_deck
+    self.current_player = players[(player.index + 1) % players.length]
   end
 end
