@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 class Model::Deck
-  attr_accessor :active_deck, :deck, :discard_deck
+  attr_accessor :active, :deck, :discarded, :num_of_active_cards
 
-  def initialize(cards)
+  def initialize(cards, num_of_active_cards: 5)
     cards.shuffle!
-    @active_deck = cards.pop(5)
+    @num_of_active_cards = num_of_active_cards
+    @active = cards.pop(num_of_active_cards)
     @deck = cards
-    @discard_deck = []
+    @discarded = []
   end
 
   def discard(card)
-    active_deck.delete(card)
-    discard_deck << card
+    active.delete(card)
+    discarded << card
   end
 
   def draw(number_of_cards)
@@ -21,17 +22,21 @@ class Model::Deck
       reload_deck
       cards.concat(deck.pop(cards_needed))
     end
-    active_deck.concat(cards)
+    active.concat(cards)
   end
 
   def destroy!(card)
-    active_deck.delete(card)
+    active.delete(card)
+  end
+
+  def reload_active_deck
+    draw(num_of_active_cards - active.length)
   end
 
   private
 
   def reload_deck
-    self.deck = discard_deck.shuffle!
-    self.discard_deck = []
+    self.deck = discarded.shuffle!
+    self.discarded = []
   end
 end

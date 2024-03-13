@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class Action::Game < Action::Base
-  MINIMUM_ACTIVE_CARDS = 6
   def end_turn
     rotate_player
-    return unless gameplay_data.active_deck.length < MINIMUM_ACTIVE_CARDS
-
     restore_active_cards
   end
 
@@ -16,9 +13,8 @@ class Action::Game < Action::Base
   private
 
   def restore_active_cards
-    cards_to_draw = MINIMUM_ACTIVE_CARDS - gameplay_data.active_cards.length
-    drawn_cards = draw_cards(gameplay_data.deck, cards_to_draw)
     gameplay_data.active_cards = drawn_cards
+    # TODO; fix
     fullfill_immediate_actions(drawn_cards)
   end
 
