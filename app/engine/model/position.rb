@@ -21,12 +21,14 @@ class Model::Position
     graph[current_position].keys.include?(goal)
   end
 
-  def marketplace?
-    tile.fetch('metadata', {})['marketplace'].present?
+  %w[marketplace depths].each do |key|
+    define_method "#{key}?" do
+      metadata[key].present?
+    end
   end
 
-  def tile
-    @tile ||= MAP.find { |x| x == current_position }
+  def metadata
+    @metadata ||= MAP.find { |x| x == current_position }.fetch('metadata', {})
   end
 
   private

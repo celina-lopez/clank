@@ -39,4 +39,8 @@ class Model::Player
 
     self.health = MAX_HEALTH
   end
+
+  def depths?
+    position.depths?
+  end
 end

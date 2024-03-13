@@ -7,6 +7,7 @@ class Constants
   MISC_DECK = %w[companions devices gems items].flat_map { |name| config_yaml(name) }.freeze
   MONSTER_CARDS = config_yaml('monsters').freeze
   RESERVE_CARDS = config_yaml('reserves').freeze
-  STARTING_DECK_CARDS = config_yaml('starting_deck')
-  CARD_NAMES = [MISC_DECK, MONSTER_CARDS, RESERVE_CARDS, STARTING_DECK_CARDS].flatten.map { |c| c['name'] }.freeze
+  STARTING_DECK_CARDS = config_yaml('starting_deck').freeze
+  CARDS = [MISC_DECK, MONSTER_CARDS, RESERVE_CARDS, STARTING_DECK_CARDS].flatten
+  CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
 end
