@@ -16,4 +16,8 @@ class Validation::Base
   def current_player
     @current_player ||= gameplay_data.current_player
   end
+
+  def errors
+    raise NotImplemented
+  end
 end

@@ -9,6 +9,10 @@ class Action::Base
     @value = value
   end
 
+  def self.actions_include?(type)
+    instance_methods(false).include?(type)
+  end
+
   def execute!
     send(type, value)
     gameplay_data

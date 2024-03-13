@@ -10,8 +10,21 @@ class Engine
   end
 
   def execute(type:, value:)
-    raise 'Invalid request' unless validation_klass.valid?(type:, value:)
+    klass_type = klass_type(type)
+    valid = Validation.const_get(klass_type).new(gameplay_data, type:, value:).valid?
+    raise 'Invalid request' unless valid
 
-    action_klass.execute(type:, value:) # returns new gameplay data
+    Action.const_get(klass_type).new(gameplay_data, type:, value:).execute!
+  end
+
+  def klass_type(type)
+    case type
+    when Action::Player.actions_include?(type)
+      'Player'
+    when Constants::CARD_NAMES.include?(type)
+      'Card'
+    when Action::GAME_ACTIONS.actions_include?(type)
+      'Game'
+    end
   end
 end
