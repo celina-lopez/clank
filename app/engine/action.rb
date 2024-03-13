@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class Action
-  attr_accesor :gameplay_data
+  attr_accessor :gameplay_data
+
   def initialize(gameplay_data)
     @gameplay_data = gameplay_data
   end

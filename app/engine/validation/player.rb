@@ -6,7 +6,8 @@ class Validation::Player < Validation::Base
   end
 
   def valid_buy?
-    current_player.coins >= value
+    # TODO: make this better for certain artificats
+    current_player.coins >= value && current_player.position.marketplace?
   end
 
   def valid_move?

@@ -2,6 +2,7 @@
 
 class Model::Position
   EDGES = YAML.load_file('config/game/edges.yml')['map_1']
+  MAP = YAML.load_file('config/game/maps.yml')['map_1']
   attr_accessor :current_position
 
   def initialize
@@ -18,6 +19,14 @@ class Model::Position
 
   def next_to?(goal)
     graph[current_position].keys.include?(goal)
+  end
+
+  def marketplace?
+    tile.fetch('metadata', {})['marketplace'].present?
+  end
+
+  def tile
+    @tile ||= MAP.find { |x| x == current_position }
   end
 
   private

@@ -9,22 +9,7 @@ class Action::Player < Action::Base
     discard!(monster_card)
   end
 
-  def redeem_monster_reward
-    (rewards = monster['rewards'].first).each_key do |key|
-      Action::Card.new(gameplay_data, type: key, value: rewards[key]).execute
-    end
-  end
-
-  def choose_reward
-    Action::Cards.new(gameplay_data, type: 'choose_reward', value: monster['rewards'])
-  end
-
-  def monster
-    @monster ||= Validation::MONSTER_CARDS.find { |card| card['name'] == value }
-  end
-
   def buy_artifact
-    # TODO: validation for posotjon and able to buy
     item = BUYABLE_ITEMS.find_by { |x| x['name'] }
     current_player.coins -= item['cost']
     current_player.inventory << item
@@ -35,6 +20,31 @@ class Action::Player < Action::Base
     current_player.skill_points -= card['skill_point_cost']
     current_player.discard_deck << card
     gameplay_data.active_cards.delete(card) # check this works
+  end
+
+  def move
+    raise NotImplemented
+  end
+
+  def teleport
+    raise NotImplemented
+  end
+
+  private
+
+  def redeem_monster_reward
+    (rewards = monster['rewards'].first).each_key do |key|
+      Action::Card.new(gameplay_data, type: key, value: rewards[key]).execute
+    end
+  end
+
+  def choose_reward
+    current_player.rewards = monster['rewards']
+    # need to think about this one...
+  end
+
+  def monster
+    @monster ||= Validation::MONSTER_CARDS.find { |card| card['name'] == value }
   end
 
   def discard!(card)

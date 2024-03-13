@@ -10,9 +10,10 @@ class Action::Game < Action::Base
   end
 
   def start_game
-    gameplay_data.players = value.times.map { Player.new }
-    gameplay_data.current_player = gameplay_data.players.first
+    Model::Game.new(num_players: value)
   end
+
+  private
 
   def restore_active_cards
     cards_to_draw = MINIMUM_ACTIVE_CARDS - gameplay_data.active_cards.length

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Action::Base
-  attr_accesor :gameplay_data
+  attr_accessor :gameplay_data
 
   def initialize(gameplay_data, type:, value:)
     @gameplay_data = gameplay_data
@@ -11,6 +11,7 @@ class Action::Base
 
   def execute!
     send(type, value)
+    gameplay_data
   end
 
   def current_player
