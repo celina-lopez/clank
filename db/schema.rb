@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2024_03_14_015732) do
   create_table "games", force: :cascade do |t|
     t.json "data", default: {}, null: false
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -10,8 +10,6 @@ gem 'sqlite3', '~> 1.4' # Use sqlite3 as the database for Active Record
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -28,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # 3rd party gems
+gem 'bootstrap', '~> 5.3.2'
+gem 'font-awesome-sass'
 gem 'light-service'
 
 group :development, :test do
@@ -57,3 +57,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'tailwindcss-rails', '~> 2.3'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Engine < Base
-  def execute(type:, value:)
+  def execute(type:, value: nil)
     klass = klass_type(type)
     valid = Validation.const_get(klass).new(gameplay_data, type:, value:).valid?
     raise 'Invalid request' unless valid

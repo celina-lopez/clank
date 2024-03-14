@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
   def change
     create_table :games do |t|
       t.json :data, default: {}, null: false
+      t.string :password
       t.timestamps
     end
   end

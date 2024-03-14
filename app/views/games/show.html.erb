@@ -1,0 +1,54 @@
+<div class="mx-2">
+  <div class="grid grid-cols-2 gap-1">
+    <div>
+      <div class="flex">
+        <div class="grow bg-blue-100 h-[50vh] min-h-[200px]">
+          <%# TODO: have this with the current player based on index %>
+          Current Hand
+          <div class='grid grid-cols-5 gap-1'>
+            <% @player.dig('deck', 'active').each do |card| %>
+              <div class="bg-red-100 h-[150px]"> 
+                <%= card['name'] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="flex-none">
+          <div>
+            <div><%= @player.dig('attack_points') %></div>
+            <div><i class="fa-solid fa-wand-sparkles"></i></div>
+          </div>
+          <div>
+            <div><%= @player.dig('move_points') %></div>
+            <div><i class="fa-solid fa-person-walking"></i></div>
+          </div>
+          <div>
+            <div><%= @player.dig('clank') %></div>
+            <div><i class="fa-solid fa-face-sad-cry"></i></div>
+          </div>
+          <div>
+            <div><%= @player.dig('health') %></div>
+            <div><i class="fa-solid fa-heart"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-blue-200 h-[50vh] flex flex-col">
+        <div>
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <i class="fa-solid fa-comment"></i> 
+        </div>
+        <div class="flex-1">
+          chat
+        </div>
+        <div class="join w-full">
+          <input class="input w-full input-bordered join-item" /> 
+          <button class="btn join-item">Subscribe</button>
+        </div> 
+      </div>
+    </div>
+    <div class="bg-blue-300 h-100"> 
+      game area
+      <img src="/images/sample_game.png"></img>
+    </div>
+  </div>
+</div>
