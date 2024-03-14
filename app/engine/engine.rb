@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-class Engine
-  attr_accessor :gameplay_data
-
-  def initialize(gameplay_data = nil)
-    @gameplay_data = gameplay_data
-  end
-
+class Engine < Base
   def execute(type:, value:)
     klass = klass_type(type)
     valid = Validation.const_get(klass).new(gameplay_data, type:, value:).valid?
