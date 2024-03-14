@@ -11,7 +11,7 @@ class Validation::Player < Validation::Base
   end
 
   def move?
-    # make position class with distance_to method
+    # TODO: still need to check locks
     current_player.position.distance_to(value) <= current_player.move_points
   end
 

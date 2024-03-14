@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Action::Base
-  attr_accessor :gameplay_data, :type, :value
+class Action::Base < Base
+  attr_accessor :type, :value
 
   def initialize(gameplay_data, type:, value:)
-    @gameplay_data = gameplay_data
     @type = type
     @value = value
+    super(gameplay_data)
   end
 
   def self.actions_include?(type)
@@ -16,9 +16,5 @@ class Action::Base
   def execute!
     send(type)
     gameplay_data
-  end
-
-  def current_player
-    @current_player ||= gameplay_data.current_player
   end
 end

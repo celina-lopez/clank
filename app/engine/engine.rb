@@ -22,7 +22,7 @@ class Engine
   def self.klass_type(type)
     if Action::Player.actions_include?(type)
       'Player'
-    elsif Constants::CARD_NAMES.include?(type)
+    elsif Base::CARD_NAMES.include?(type)
       'Card'
     elsif Action::Game.actions_include?(type)
       'Game'

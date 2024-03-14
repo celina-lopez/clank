@@ -13,7 +13,7 @@ class Model::Player
     @index = index
     @inventory = []
     @position = Model::Position.new
-    @deck = Model::Deck.new(Constants::STARTING_DECK_CARDS)
+    @deck = Model::Deck.new(Base::STARTING_DECK_CARDS)
     @clank = STARTING_CLANK_CUBES[index]
     initialize_player_attributes
     super()

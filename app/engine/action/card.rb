@@ -11,7 +11,7 @@ class Action::Card < Action::Base
   end
 
   def card
-    @card ||= Constants::CARDS.find { |data| data['name'] == type }
+    @card ||= Base::CARDS.find { |data| data['name'] == type }
   end
 
   %i[health attack_points move_points coins clank teleport].each do |type|

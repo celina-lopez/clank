@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
-class Validation::Base
+class Validation::Base < Base
   class InvalidMoveError < StandardError; end
-  attr_reader :gameplay_data, :type, :value
+  attr_reader :type, :value
 
   def initialize(gameplay_data, type:, value:)
-    @gameplay_data = gameplay_data
     @type = type
     @value = value
+    super(gameplay_data)
   end
 
   def valid?
     return true if public_send("#{type}?")
 
     raise InvalidMoveError, type
-  end
-
-  def current_player
-    @current_player ||= gameplay_data.current_player
   end
 
   def errors

@@ -7,10 +7,10 @@ class Model::Game
   def initialize(num_players:)
     @dragon_clank = 0
     @deck = Model::Deck.new(
-      Constants::MISC_DECK + Constants::MONSTER_CARDS,
+      Base::MISC_DECK + Base::MONSTER_CARDS,
       num_of_active_cards: 6
     )
-    @marketplace_deck = Constants::RESERVE_CARDS
+    @marketplace_deck = Base::RESERVE_CARDS
     @map = Model::Map.new
     initialize_players(num_players)
     super()
