@@ -1,9 +1,8 @@
-<div class="mx-2">
+<div class="mx-2 overflow-hidden">
   <div class="grid grid-cols-2 gap-1">
     <div>
       <div class="flex">
         <div class="grow bg-blue-100 h-[50vh] min-h-[200px]">
-          <%# TODO: have this with the current player based on index %>
           Current Hand
           <div class='grid grid-cols-5 gap-1'>
             <% @player.dig('deck', 'active').each do |card| %>
@@ -47,8 +46,9 @@
       </div>
     </div>
     <div class="bg-blue-300 h-100"> 
-      game area
-      <img src="/images/sample_game.png"></img>
+      <div class="overflow-y-scroll h-[100vh]">
+        <img src="/images/sample_game.png" />
+      </div>
     </div>
   </div>
 </div>
