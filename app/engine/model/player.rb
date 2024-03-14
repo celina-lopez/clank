@@ -2,7 +2,7 @@
 
 class Model::Player
   attr_accessor :name, :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
-                :clank, :position
+                :clank, :position, :rewards
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
@@ -25,6 +25,7 @@ class Model::Player
     @move_points = 0
     @teleport = 0
     @coins = 0
+    @rewards = []
   end
 
   def skill_points

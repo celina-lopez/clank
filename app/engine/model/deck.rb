@@ -4,16 +4,24 @@ class Model::Deck
   attr_accessor :active, :deck, :discarded, :num_of_active_cards
 
   def initialize(cards, num_of_active_cards: 5)
-    cards = cards.dup.shuffle!
+    deck = initialize_deck(cards)
     @num_of_active_cards = num_of_active_cards
-    @active = cards.pop(num_of_active_cards)
-    @deck = cards
+    @active = deck.pop(num_of_active_cards)
+    @deck = deck
     @discarded = []
   end
 
   def discard(card)
-    active.delete(card)
+    active.delete_at(active.index(card))
     discarded << card
+  end
+
+  def initialize_deck(cards)
+    total_cards = []
+    cards.each do |card|
+      card['total'].times { total_cards << card }
+    end
+    total_cards.shuffle!
   end
 
   def draw(number_of_cards)
@@ -27,7 +35,7 @@ class Model::Deck
   end
 
   def destroy!(card)
-    active.delete(card)
+    active.delete_at(active.index(card))
   end
 
   def reload_active_deck

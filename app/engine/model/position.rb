@@ -13,12 +13,14 @@ class Model::Position
     distances = Hash.new(Float::INFINITY)
     distances[current_position] = 0
     queue = [current_position]
-    calculate_distance_with_queue(queue, distances, goal)
-    distances[goal]
+    build_graph
+    calculate_distance_with_queue(queue, distances, goal.to_i)
+    distances[goal.to_i]
   end
 
   def next_to?(goal)
-    graph[current_position].keys.include?(goal)
+    build_graph
+    graph[current_position].keys.include?(goal.to_i)
   end
 
   %w[marketplace depths].each do |key|
@@ -34,15 +36,16 @@ class Model::Position
   private
 
   def graph
-    return @graph if defined?(@graph)
+    @graph ||= Hash.new { |h, k| h[k] = {} if k.is_a?(Integer) }
+  end
 
-    @graph = Hash.new { |h, k| h[k] = {} }
+  def build_graph
     EDGES.each do |edge|
       from = edge['x']
       to = edge['y']
       weight = edge.fetch('metdata', {}).fetch('move', 1)
-      @graph[from][to] = weight
-      @graph[to][from] = weight
+      graph[from][to] = weight
+      graph[to][from] = weight
     end
   end
 

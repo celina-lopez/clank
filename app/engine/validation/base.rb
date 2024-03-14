@@ -11,7 +11,7 @@ class Validation::Base
   end
 
   def valid?
-    return true if public_send("valid_#{type}?")
+    return true if public_send("#{type}?")
 
     raise InvalidMoveError, type
   end

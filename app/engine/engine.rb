@@ -16,6 +16,10 @@ class Engine
   end
 
   def klass_type(type)
+    self.class.klass_type(type)
+  end
+
+  def self.klass_type(type)
     if Action::Player.actions_include?(type)
       'Player'
     elsif Constants::CARD_NAMES.include?(type)

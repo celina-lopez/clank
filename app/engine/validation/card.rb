@@ -5,7 +5,9 @@ class Validation::Card < Validation::Base
   LOGIC_OPERATORS = ['==', '!=', '>', '>=', '<', '<='].freeze
   LOGIC_VALUES = ['true', 'false', /\d+/].freeze
   CONDITIONALS = %i[environment].freeze
+
   def valid?
+    return false unless card.present?
     return true unless conditions.any?
 
     conditions.all? do |condition|
@@ -14,7 +16,7 @@ class Validation::Card < Validation::Base
   end
 
   def card
-    @card ||= Constants::CARDS.find { |card| card['name'] == type }
+    @card ||= current_player.deck.active.find { |card| card['name'] == type }
   end
 
   def conditions

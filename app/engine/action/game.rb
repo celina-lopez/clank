@@ -18,7 +18,8 @@ class Action::Game < Action::Base
       card.fetch('immediate_actions', [])
     end
     immediate_actions.each do |action|
-      Action.new(self).execute(type: action['type'], value: action['value'])
+      klass_type = Engine.klass_type(action['type'])
+      Action.const_get(klass_type).new(gameplay_data, type: action['type'], value: action['value']).execute!
     end
   end
 end

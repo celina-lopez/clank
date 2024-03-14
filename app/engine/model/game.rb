@@ -25,6 +25,6 @@ class Model::Game
 
   def next_player!
     current_player.deck.reload_active_deck
-    self.current_player = players[(player.index + 1) % players.length]
+    self.current_player = players[(current_player.index + 1) % players.length]
   end
 end
