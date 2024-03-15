@@ -24,18 +24,24 @@ function preload() {
 }
 
 function create() {
-    var background = this.add.image(0, 0, 'background').setOrigin(0);
-    background.setScale(.483);
-    var tileSize = 4;
-    var tileColor = 0xffffff;
-    var tiles = this.add.graphics();
-    tiles.fillStyle(tileColor, 1);
-    for (var i = 0; i < 10; i++) {
-      for (var j = 0; j < 10; j++) {
-        tiles.fillRect(i * tileSize + 20, j * tileSize + 15, tileSize, tileSize);
-      }
-    }
-
+  var background = this.add.image(0, 0, 'background').setOrigin(0);
+  background.setScale(.483);
+  var tileSize = 20;
+  var tileColor = 0xffffff;
+  var tileAlpha = 0.5; // Transparency
+  var tile = this.add.rectangle(tileSize + 20, tileSize, tileSize, tileSize, tileColor);
+  tile.setOrigin(0);
+  tile.setInteractive(); // Enable input events
+  tile.on('pointerover', function () {
+      this.setStrokeStyle(4, 0xffffff); // White border
+      this.setAlpha(1); // Full opacity on hover
+      this.setTint(0xffff00); // Glow effect
+  });
+  tile.on('pointerout', function () {
+      this.setStrokeStyle(); // Remove border
+      this.setAlpha(tileAlpha); // Restore transparency
+      this.clearTint(); // Remove glow effect
+  });
   // Add player
   var player = this.add.image(0, 0, 'player').setOrigin(0);
   player.setScale(.1);
