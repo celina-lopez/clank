@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js" %>
+  </head>
+
+  <body>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>

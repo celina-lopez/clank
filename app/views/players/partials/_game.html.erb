@@ -1,0 +1,48 @@
+<div class="bg-blue-300 h-100"> 
+  <div class="overflow-y-scroll h-[100vh]">
+    <div id="boardgame"></div>
+  </div>
+</div>
+
+<script>
+  var config = {
+    type: Phaser.AUTO,
+    height: 710,
+    width: 680,
+    parent: 'boardgame',
+    scene: {
+        preload: preload,
+        create: create
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload() {
+    this.load.image('background', "/images/sample_game.png");
+    this.load.image('player', "/images/pawn.png");
+}
+
+function create() {
+    var background = this.add.image(0, 0, 'background').setOrigin(0);
+    background.setScale(.483);
+    var tileSize = 4;
+    var tileColor = 0xffffff;
+    var tiles = this.add.graphics();
+    tiles.fillStyle(tileColor, 1);
+    for (var i = 0; i < 10; i++) {
+      for (var j = 0; j < 10; j++) {
+        tiles.fillRect(i * tileSize + 20, j * tileSize + 15, tileSize, tileSize);
+      }
+    }
+
+  // Add player
+  var player = this.add.image(0, 0, 'player').setOrigin(0);
+  player.setScale(.1);
+}
+
+function update() {
+  console.log("nothing for now")
+}
+
+</script>

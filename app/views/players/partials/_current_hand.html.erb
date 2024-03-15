@@ -1,0 +1,10 @@
+<div class="grow bg-blue-100 h-[50vh] min-h-[200px]">
+  Current Hand
+  <div class='grid grid-cols-5 gap-1'>
+    <% player.dig('deck', 'active').each do |card| %>
+      <div class="bg-red-100 h-[150px]"> 
+        <%= card['name'] %>
+      </div>
+    <% end %>
+  </div>
+</div>

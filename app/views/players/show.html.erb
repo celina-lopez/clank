@@ -1,0 +1,12 @@
+<div class="mx-2 overflow-hidden">
+  <div class="grid grid-cols-2 gap-1">
+    <div>
+      <div class="flex">
+        <%= render 'players/partials/current_hand', player: @player %>
+        <%= render 'players/partials/stats', player: @player %> 
+      </div>
+      <%= render 'players/partials/chat', player: @player %> 
+    </div>
+    <%= render 'players/partials/game', game: @game, player: @player %> 
+  </div>
+</div>
