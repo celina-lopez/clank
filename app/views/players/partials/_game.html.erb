@@ -8,7 +8,7 @@
   var config = {
     type: Phaser.AUTO,
     height: 710,
-    width: 680,
+    width: 700,
     parent: 'boardgame',
     scene: {
         preload: preload,
@@ -22,25 +22,43 @@ function preload() {
     this.load.image('background', "/images/sample_game.png");
     this.load.image('player', "/images/pawn.png");
 }
+const typeOfTileConfig = {
+  default: {
+    size: 20, 
+    color: 0xffffff,
+  },
+}
+// TODO: populate from backend 
+const mapTiles = [
+  {x: 0, y: .9, type: 'default', index: 0},
+  {x: 0, y: -1.7, type: 'default', index: 1},
+  {x: -6, y: -1.7, type: 'default', index: 2},
+  {x: -12, y: -1.7, type: 'default', index: 3},
+  {x: -17, y: -1.7, type: 'default', index: 4},
+  {x: -23, y: -1.5, type: 'default', index: 5},
+  {x: 0, y: -6, type: 'default', index: 6},
+]
 
 function create() {
   var background = this.add.image(0, 0, 'background').setOrigin(0);
-  background.setScale(.483);
-  var tileSize = 20;
-  var tileColor = 0xffffff;
-  var tileAlpha = 0.5; // Transparency
-  var tile = this.add.rectangle(tileSize + 20, tileSize, tileSize, tileSize, tileColor);
-  tile.setOrigin(0);
-  tile.setInteractive(); // Enable input events
-  tile.on('pointerover', function () {
-      this.setStrokeStyle(4, 0xffffff); // White border
+  background.setScale(.5);
+  mapTiles.forEach((tileData) => {
+    let config = typeOfTileConfig['default'];
+    let tile = this.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
+    tile.setOrigin(tileData.x, tileData.y);
+    tile.setInteractive(); 
+    tile.on('pointerover', function () {
+      this.setStrokeStyle(4, config.color); // White border
       this.setAlpha(1); // Full opacity on hover
-  });
-  tile.on('pointerout', function () {
+    });
+    tile.on('pointerout', function () {
       this.setStrokeStyle(); // Remove border
-      this.setAlpha(tileAlpha); // Restore transparency
+      this.setAlpha(0.5); // Restore transparency
+    });
+    tile.on('pointerdown', function () {
+      console.log(`TODO: Game function here ${tileData.index}`)
+    });
   });
-  // Add player
   var player = this.add.image(0, 0, 'player').setOrigin(0);
   player.setScale(.1);
 }
