@@ -1,10 +1,54 @@
 map_1:
+  - tile: 0
+    frontend_data:
+      x: 0
+      y: 0.9
+  - tile: 1
+    frontend_data:
+      x: 0
+      y: -1.7
+  - tile: 2
+    frontend_data:
+      x: -6
+      y: -1.7
+  - tile: 3
+    frontend_data:
+      x: -12
+      y: -1.7
   - tile: 4
-    type: big_mystery_token
+    items:
+      - big_mystery_token
+    frontend_data:
+      x: -17
+      y: -1.7
   - tile: 5
-    type: big_mystery_token
+    items:
+      - big_mystery_token
+    frontend_data:
+      x: -23
+      y: -1.5
   - tile: 6
     type: cave
+    frontend_data:
+      x: 0
+      y: -6
+  - tile: 7
+    type: cave
+    frontend_data:
+      x: -7
+      y: -6
+  - tile: 8
+    frontend_data:
+      x: -12
+      y: -6
+  - tile: 9
+    type: cave
+    frontend_data:
+      x: -17
+      y: -7
   - tile: 10
-    metadata:
-      health: true
+    items:
+      - health
+    frontend_data:
+      x: -23
+      y: -6

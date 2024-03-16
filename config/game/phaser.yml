@@ -1,0 +1,13 @@
+tiles:
+  default:
+    size: 20
+    color: 0xffffff
+  cave:
+    size: 20
+    color: 0xff3232
+preload_images:
+  background: "/images/sample_game.png"
+  player: "/images/pawn.png"
+config:
+  height: 710
+  width: 700

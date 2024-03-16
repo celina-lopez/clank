@@ -16,63 +16,55 @@
 <script>
   var config = {
     type: Phaser.AUTO,
-    height: 710,
-    width: 700,
+    height: <%= @phaser_config.dig('config','height') %>,
+    width: <%= @phaser_config.dig('config','width') %>,
     parent: 'boardgame',
     scene: {
         preload: preload,
         create: create
     },
     transparent: true,
-};
+  };
 
-var game = new Phaser.Game(config);
+  var game = new Phaser.Game(config);
 
-function preload() {
-    this.load.image('background', "/images/sample_game.png");
-    this.load.image('player', "/images/pawn.png");
-}
-const typeOfTileConfig = {
-  default: {
-    size: 20, 
-    color: 0xffffff,
-  },
-}
-// TODO: populate from backend 
-const mapTiles = [
-  {x: 0, y: .9, type: 'default', index: 0},
-  {x: 0, y: -1.7, type: 'default', index: 1},
-  {x: -6, y: -1.7, type: 'default', index: 2},
-  {x: -12, y: -1.7, type: 'default', index: 3},
-  {x: -17, y: -1.7, type: 'default', index: 4},
-  {x: -23, y: -1.5, type: 'default', index: 5},
-  {x: 0, y: -6, type: 'default', index: 6},
-]
+  function preload() {
+    <% @phaser_config['preload_images'].each do |name, source| %>
+      this.load.image("<%= name %>", "<%= source %>");
+    <% end %>
+  }
 
-function create() {
-  this.add.image(0, 0, 'background').setOrigin(0).setScale(0.5);
-  mapTiles.forEach((tileData) => {
-    let config = typeOfTileConfig['default'];
-    let tile = this.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
-    tile.setOrigin(tileData.x, tileData.y);
-    tile.setInteractive(); 
-    tile.on('pointerover', function () {
-      this.setStrokeStyle(4, config.color); // White border
-      this.setAlpha(1); // Full opacity on hover
+  const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
+  var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
+
+  function generateTileMap(thiz) {
+    mapTiles.forEach((tileData) => {
+      let config = typeOfTileConfig[tileData.type || 'default'];
+      let tile = thiz.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
+      tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
+      tile.setAlpha(.5);
+      tile.setInteractive(); 
+      tile.on('pointerover', function () {
+        this.setAlpha(1); // Full opacity on hover
+      });
+      tile.on('pointerout', function () {
+        this.setAlpha(0.5); // Restore transparency
+      });
+      tile.on('pointerdown', function () {
+        console.log(`TODO: send to backend type: move, value: ${tileData.tile}`)
+      });
     });
-    tile.on('pointerout', function () {
-      this.setStrokeStyle(); // Remove border
-      this.setAlpha(0.5); // Restore transparency
-    });
-    tile.on('pointerdown', function () {
-      console.log(`TODO: Game function here ${tileData.index}`)
-    });
-  });
-  var player = this.add.image(0, 0, 'player').setOrigin(0);
-  player.setScale(.1);
-}
+  }
 
-function update() {
-  console.log("nothing for now")
-}
+  function addPlayerToMap(thiz){
+    var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
+    var player = thiz.add.image(playerPosition.x, playerPosition.y, 'player').setOrigin(0);
+    player.setScale(.1);
+  }
+
+  function create() {
+    this.add.image(0, 0, 'background').setOrigin(0).setScale(0.5);
+    generateTileMap(this);
+    addPlayerToMap(this);
+  }
 </script>
