@@ -1,15 +1,13 @@
 <style>
 #boardgame{
   overflow: scroll;
-  background-image: url('/images/sample_game.png');
   background-size: 100% 100%;
   height: 710px;
-              overflow: auto; /* Enable scrolling for the game container */
-
+  overflow: auto; /* Enable scrolling for the game container */
 }
 </style>
 
-<div class="bg-blue-300 h-100"> 
+<div class="bg-blue-300 h-100 w-[700px]"> 
   <div class="overflow-y-scroll h-[100vh]">
     <div id="boardgame">
     </div>
@@ -32,7 +30,6 @@ var game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('background', "/images/sample_game.png");
-
     this.load.image('player', "/images/pawn.png");
 }
 const typeOfTileConfig = {
@@ -53,13 +50,7 @@ const mapTiles = [
 ]
 
 function create() {
-  canvas = this.sys.game.canvas;
-
-    // Add event listener for scroll event
-    canvas.addEventListener('scroll', function(event) {
-        // Handle scroll event here
-        console.log('Canvas scrolled!');
-    });
+  this.add.image(0, 0, 'background').setOrigin(0).setScale(0.5);
   mapTiles.forEach((tileData) => {
     let config = typeOfTileConfig['default'];
     let tile = this.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
@@ -84,5 +75,4 @@ function create() {
 function update() {
   console.log("nothing for now")
 }
-
 </script>
