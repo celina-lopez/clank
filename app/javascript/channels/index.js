@@ -4,3 +4,4 @@
 const channels = require.context('.', true, /_channel\.js$/)
 channels.keys().forEach(channels)
 import "./game_channel"
+import "./player_channel"

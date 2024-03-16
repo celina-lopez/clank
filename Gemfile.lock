@@ -98,6 +98,10 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
+    importmap-rails (2.0.1)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -292,6 +296,7 @@ DEPENDENCIES
   factory_bot (~> 6.2)
   factory_bot_rails
   font-awesome-sass
+  importmap-rails (~> 2.0)
   jbuilder (~> 2.7)
   light-service
   listen (~> 3.2)
