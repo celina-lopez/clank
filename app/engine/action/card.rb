@@ -2,6 +2,7 @@
 
 class Action::Card < Action::Base
   def execute!
+    binding.pry
     card.fetch('actions', []).each do |action|
       self.value = action.values.first
       send(action.keys.first)

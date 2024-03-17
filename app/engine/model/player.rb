@@ -9,39 +9,48 @@ class Model::Player
   MAX_HEALTH = 10
   MAX_CLANK = 30
 
-  def self.from_json(json)
-    # TODO: fix this later
-    player = Model::Player.new
-    player.attack_points = json['attack_points']
-    player.move_points = json['move_points']
-    player.teleport = json['teleport']
-    player.coins = json['coins']
-    player.inventory = json['inventory']
-    player.deck = Model::Deck.from_json(json['deck'])
-    player.clank = json['clank']
-    player.position = Model::Position.from_json(json['position'])
-    player.rewards = json['rewards']
-    player.health = json['health']
-    player
+  def self.from_json(json) # rubocop:disable Metrics/MethodLength
+    Model::Player.new(
+      json['index'],
+      health: json['health'],
+      clank: json['clank'],
+      inventory: json['inventory'],
+      position: Model::Position.from_json(json['position']),
+      deck: Model::Deck.from_json(json['deck']),
+      attack_points: json['attack_points'],
+      move_points: json['move_points'],
+      teleport: json['teleport'],
+      coins: json['coins'],
+      rewards: json['rewards']
+    )
   end
 
-  def initialize(index = 0)
+  def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
+    index = 0,
+    health: MAX_HEALTH,
+    clank: STARTING_CLANK_CUBES[index],
+    inventory: [],
+    position: Model::Position.new,
+    deck: Model::Deck.new(Base::STARTING_DECK_CARDS),
+    attack_points: 0,
+    move_points: 0,
+    teleport: 0,
+    coins: 0,
+    rewards: []
+  )
     @index = index
-    @inventory = []
-    @position = Model::Position.new
-    @deck = Model::Deck.new(Base::STARTING_DECK_CARDS)
-    @clank = STARTING_CLANK_CUBES[index]
-    initialize_player_attributes
+    @inventory = inventory
+    @position = position
+    @deck = deck
+    @clank = clank
+    @inventory = inventory
+    @attack_points = attack_points
+    @health = health
+    @move_points = move_points
+    @teleport = teleport
+    @coins = coins
+    @rewards = rewards
     super()
-  end
-
-  def initialize_player_attributes
-    @attack_points = 0
-    @health = 10
-    @move_points = 0
-    @teleport = 0
-    @coins = 0
-    @rewards = []
   end
 
   def skill_points

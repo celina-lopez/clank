@@ -5,19 +5,31 @@ class Model::Game
                 :dragon_clank
 
   def self.from_json(json)
-    # TODO: fix this
-    game = Model::Game.new(num_players: 0)
-    game.dragon_clank = json['dragon_clank']
-    game.deck = Model::Deck.from_json(json['deck'])
-    game.marketplace_deck = json['marketplace_deck']
-    game.map = Model::Map.from_json(json['map'])
-    game.players = json['players'].map { |p| Model::Player.from_json(p) }
-    game.current_player = Model::Player.from_json(json['current_player'])
-    game
+    Model::Game.new(
+      dragon_clank: json['dragon_clank'],
+      deck: Model::Deck.from_json(json['deck']),
+      marketplace_deck: json['marketplace_deck'],
+      map: Model::Map.from_json(json['map']),
+      players: json['players'].map { |p| Model::Player.from_json(p) },
+      current_player: Model::Player.from_json(json['current_player'])
+    )
   end
 
-  def initialize(num_players:)
-    @dragon_clank = 0
+  def initialize(num_players: nil, dragon_clank: 0, deck: nil, marketplace_deck: nil, map: nil, players: nil, # rubocop:disable Metrics/ParameterLists
+                 current_player: nil)
+    @dragon_clank = dragon_clank
+    if num_players.present?
+      initialize_new_game(num_players:)
+    else
+      @deck = deck
+      @marketplace_deck = marketplace_deck
+      @map = map
+      @players = players
+      @current_player = current_player
+    end
+  end
+
+  def initialize_new_game(num_players:)
     @deck = Model::Deck.new(
       Base::MISC_DECK + Base::MONSTER_CARDS,
       num_of_active_cards: 6

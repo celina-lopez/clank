@@ -3,15 +3,13 @@
 class Model::Map
   attr_accessor :tiles
 
-  def initialize
-    @tiles = YAML.load_file('config/game/maps.yml')['map_1']
-    super
+  DEFAULT_MAP = YAML.load_file('config/game/maps.yml')['map_1']
+
+  def initialize(tiles = nil)
+    @tiles = tiles || DEFAULT_MAP
   end
 
   def self.from_json(json)
-    # TODO: fix this
-    map = Model::Map.new
-    map.tiles = json['tiles']
-    map
+    Model::Map.new(json['tiles'])
   end
 end

@@ -6,10 +6,11 @@ class Engine < Base
     new(data)
   end
 
-  def execute(type:, value: nil)
+  def execute(data)
+    type, value, player_index = data.values_at('type', 'value', 'player_index')
     klass = klass_type(type)
-    valid = Validation.const_get(klass).new(gameplay_data, type:, value:).valid?
-    raise 'Invalid request' unless valid
+    validation_klass = Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
+    raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
 
     self.gameplay_data = Action.const_get(klass).new(gameplay_data, type:, value:).execute!
   end

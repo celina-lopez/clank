@@ -19,6 +19,6 @@ class Base
   end
 
   def current_player
-    @current_player ||= gameplay_data.current_player
+    gameplay_data.current_player
   end
 end

@@ -7,12 +7,19 @@ class Validation::Card < Validation::Base
   CONDITIONALS = %i[environment].freeze
 
   def valid?
-    return false unless card.present?
+    return false unless valid_card?
     return true unless conditions.any?
 
     conditions.all? do |condition|
       evaluate_position(condition['logic'])
     end
+  end
+
+  def valid_card?
+    return true if card.present?
+
+    errors << 'Card not found'
+    false
   end
 
   def card
@@ -26,6 +33,8 @@ class Validation::Card < Validation::Base
   def evaluate_position(logic)
     logic_key, logic_operator, logic_value = logic.split
     logic_value = logic_value.match?(/\d+/) ? logic_value.to_i : logic_value.downcase
-    current_player.send(logic_key).public_send(logic_operator, logic_value)
+    valid = current_player.send(logic_key).public_send(logic_operator, logic_value)
+    errors << "Invalid conditional: #{logic}" unless valid
+    valid
   end
 end
