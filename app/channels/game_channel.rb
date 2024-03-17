@@ -8,9 +8,8 @@ class GameChannel < ApplicationCable::Channel
 
   def receive(data)
     game = Game.find(params[:game_id])
-    engine = Engine.new(game.data)
+    engine = Engine.from_json(game.data)
     new_game_data = engine.execute(type: data['type'], value: data['value'])
-    binding.pry
     game.update!(data: new_game_data)
     ActionCable.server.broadcast("game_channel_#{game_id}", data)
   end

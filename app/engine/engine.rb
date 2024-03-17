@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Engine < Base
+  def self.from_json(json)
+    data = Model::Game.from_json(json)
+    new(data)
+  end
+
   def execute(type:, value: nil)
     klass = klass_type(type)
     valid = Validation.const_get(klass).new(gameplay_data, type:, value:).valid?
