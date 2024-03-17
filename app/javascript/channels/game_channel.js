@@ -1,24 +1,22 @@
-import consumer from "./consumer"
+import consumer from "channels/consumer"
 
-consumer.subscriptions.create("GameChannel", {
+window.app = {}
+let params = new URLSearchParams(document.location.search);
+let gameId = params.get("game_id"); // is the string "Jonathan"
+
+window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game_id: gameId }, {
   connected() {
     // Called when the subscription is ready for use on the server
-    console.log("Connected to the chat room!");
+    console.log(`Hello ${gameId}`);
   },
 
   disconnected() {
     // Called when the subscription has been terminated by the server
-    console.log("Disconnected from the chat room!");
   },
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    console.log("Received:", data);
-  },
-
-  send(data) {
-    // Send data to the server
-    this.perform('receive', data);
+    console.log(data)
+    document.querySelector("#messages").innerHTML += `<p>${data.message}</p>`;
   }
 });
-

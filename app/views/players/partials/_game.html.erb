@@ -13,6 +13,7 @@
     </div>
   </div>
 </div>
+
 <script>
   var config = {
     type: Phaser.AUTO,
@@ -51,7 +52,7 @@
         this.setAlpha(0.5); // Restore transparency
       });
       tile.on('pointerdown', function () {
-        console.log(`TODO: send to backend type: move, value: ${tileData.tile}`)
+        window.app.action.send({ message: `Guess: ${tileData.tile}` });
       });
     });
   }

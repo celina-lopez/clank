@@ -2,11 +2,13 @@
 
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    stream_from 'game_channel'
+    game_id = params[:game_id]
+    stream_from "game_channel_#{game_id}"
   end
 
   def receive(data)
-    ActionCable.server.broadcast('game_channel', data)
+    game_id = params[:game_id]
+    ActionCable.server.broadcast("game_channel_#{game_id}", data)
   end
 
   def unsubscribed
