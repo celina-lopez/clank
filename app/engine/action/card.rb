@@ -2,12 +2,11 @@
 
 class Action::Card < Action::Base
   def execute!
-    binding.pry
     card.fetch('actions', []).each do |action|
       self.value = action.values.first
       send(action.keys.first)
     end
-    gameplay_data.current_player.deck.discard(card)
+    current_player.deck.discard(card)
     gameplay_data
   end
 

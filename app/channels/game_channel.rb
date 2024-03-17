@@ -11,7 +11,7 @@ class GameChannel < ApplicationCable::Channel
     engine = Engine.from_json(game.data)
     new_game_data = engine.execute(data)
     game.update!(data: new_game_data)
-    ActionCable.server.broadcast("game_channel_#{game_id}", data)
+    ActionCable.server.broadcast("game_channel_#{game.id}", new_game_dataQ)
   rescue StandardError => e
     ActionCable.server.broadcast("game_channel_#{game_id}", { error: e.message })
   end

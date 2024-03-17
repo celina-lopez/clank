@@ -5,14 +5,12 @@ class Model::Position
   MAP = YAML.load_file('config/game/maps.yml')['map_1']
   attr_accessor :current_position
 
-  def initialize
+  def initialize(_current_position = 0)
     @current_position = 0
   end
 
   def self.from_json(json)
-    position = Model::Position.new
-    position.current_position = json['current_position']
-    position
+    Model::Position.new(json['current_position'])
   end
 
   def distance_to(goal)

@@ -2,17 +2,18 @@
 
 class Validation::Base < Base
   class InvalidMoveError < StandardError; end
-  attr_reader :type, :value, :errors
+  attr_reader :type, :value, :errors, :player_index
 
   def initialize(gameplay_data, type:, value:, player_index: nil)
     @type = type
     @value = value
+    @player_index = player_index
     @errors = []
     super(gameplay_data)
   end
 
   def valid_player_index?
-    return true if player_index == current_player.index
+    return true if player_index == current_player_index
 
     errors << 'You are not the current player'
     false

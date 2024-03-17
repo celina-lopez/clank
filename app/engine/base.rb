@@ -19,6 +19,10 @@ class Base
   end
 
   def current_player
-    gameplay_data.current_player
+    gameplay_data.players[current_player_index]
+  end
+
+  def current_player_index
+    gameplay_data&.current_player_index
   end
 end
