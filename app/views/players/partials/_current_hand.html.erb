@@ -4,7 +4,11 @@
     <% player.dig('deck', 'active').each do |card| %>
       <div class="bg-red-100 h-[150px]"> 
         <%= card['name'] %>
+        <%= card['actions'] %>
       </div>
     <% end %>
   </div>
 </div>
+<script>
+  // TODO add on click events for broadcast cards
+</script>
