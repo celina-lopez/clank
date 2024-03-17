@@ -10,4 +10,8 @@
 #
 class Game < ApplicationRecord
   validates :data, presence: true
+
+  def engine
+    Engine.from_json(data)
+  end
 end

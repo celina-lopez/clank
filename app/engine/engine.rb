@@ -6,8 +6,7 @@ class Engine < Base
     new(data)
   end
 
-  def execute(data)
-    type, value, player_index = data.values_at('type', 'value', 'player_index')
+  def execute(type:, value: nil, player_index: nil)
     klass = klass_type(type)
     validation_klass = Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?

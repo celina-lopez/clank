@@ -8,12 +8,12 @@ class GameChannel < ApplicationCable::Channel
 
   def receive(data)
     game = Game.find(params[:game_id])
-    engine = Engine.from_json(game.data)
-    new_game_data = engine.execute(data)
+    type, value, player_index = data.values_at('type', 'value', 'player_index')
+    new_game_data = game.engine.execute(type:, value:, player_index:)
     game.update!(data: new_game_data)
     ActionCable.server.broadcast("game_channel_#{game.id}", new_game_dataQ)
   rescue StandardError => e
-    ActionCable.server.broadcast("game_channel_#{game_id}", { error: e.message })
+    ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
   end
 
   def unsubscribed
