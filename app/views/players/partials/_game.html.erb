@@ -52,7 +52,7 @@
         this.setAlpha(0.5); // Restore transparency
       });
       tile.on('pointerdown', function () {
-        window.app.action.send({ message: `Guess: ${tileData.tile}` });
+        window.app.action.send({ type:"move", value:`${tileData.tile}` });
       });
     });
   }

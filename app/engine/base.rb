@@ -15,7 +15,7 @@ class Base
   attr_accessor :gameplay_data
 
   def initialize(gameplay_data = nil)
-    @gameplay_data = gameplay_data
+    @gameplay_data = (Model::Game.from_json(gameplay_data) if gameplay_data.present?)
   end
 
   def current_player

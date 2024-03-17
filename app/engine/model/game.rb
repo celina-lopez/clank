@@ -4,6 +4,18 @@ class Model::Game
   attr_accessor :players, :current_player, :deck, :marketplace_deck, :map,
                 :dragon_clank
 
+  def self.from_json(json)
+    # TODO: fix this
+    game = Model::Game.new(num_players: 0)
+    game.dragon_clank = json['dragon_clank']
+    game.deck = Model::Deck.from_json(json['deck'])
+    game.marketplace_deck = json['marketplace_deck']
+    game.map = Model::Map.from_json(json['map'])
+    game.players = json['players'].map { |p| Model::Player.from_json(p) }
+    game.current_player = Model::Player.from_json(json['current_player'])
+    game
+  end
+
   def initialize(num_players:)
     @dragon_clank = 0
     @deck = Model::Deck.new(

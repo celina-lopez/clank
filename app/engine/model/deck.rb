@@ -3,6 +3,16 @@
 class Model::Deck
   attr_accessor :active, :deck, :discarded, :num_of_active_cards
 
+  def self.from_json(json)
+    # TODO: fix this later
+    deck = Model::Deck.new([])
+    deck.num_of_active_cards = json['num_of_active_cards']
+    deck.active = json['active']
+    deck.deck = json['deck']
+    deck.discarded = json['discarded']
+    deck
+  end
+
   def initialize(cards, num_of_active_cards: 5)
     deck = initialize_deck(cards)
     @num_of_active_cards = num_of_active_cards

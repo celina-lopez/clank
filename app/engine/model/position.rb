@@ -9,6 +9,12 @@ class Model::Position
     @current_position = 0
   end
 
+  def self.from_json(json)
+    position = Model::Position.new
+    position.current_position = json['current_position']
+    position
+  end
+
   def distance_to(goal)
     distances = Hash.new(Float::INFINITY)
     distances[current_position] = 0
