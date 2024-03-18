@@ -24,6 +24,8 @@ class Action::Player < Action::Base
 
   def move
     current_player.position.current_position = value
+    binding.pry
+    current_player.move_points -= current_player.position.distance_to(value)
   end
 
   def teleport
