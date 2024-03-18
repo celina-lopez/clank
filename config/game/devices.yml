@@ -1,7 +1,7 @@
 - name: teleporter
   cost: 4
   actions:
-    - teleport: true
+    - teleport: 1
   total: 2
 - name: the_vault
   conditionals:

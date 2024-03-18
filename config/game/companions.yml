@@ -13,12 +13,13 @@
   cost: 4
   total: 1
   actions:
-    - teleport: true
+    - teleport: 1
       clank: 1
 - name: master_burglar
   cost: 3
   total: 2
   victory_points: 2
   actions:
-    - trash: burgle
+    - trash:
+        burgle: 1
       skill_points: 2

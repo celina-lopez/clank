@@ -8,6 +8,7 @@ class Model::Player
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
   MAX_HEALTH = 10
   MAX_CLANK = 30
+  START_COINS = 7
 
   def self.from_json(json) # rubocop:disable Metrics/MethodLength
     Model::Player.new(
@@ -36,7 +37,7 @@ class Model::Player
     attack_points: 0,
     move_points: 0,
     teleport: 0,
-    coins: 0,
+    coins: START_COINS,
     skill_points: 0,
     rewards: []
   )

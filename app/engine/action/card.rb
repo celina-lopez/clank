@@ -20,6 +20,11 @@ class Action::Card < Action::Base
     end
   end
 
+  def add_trash
+    # test
+    current_player.rewards << value
+  end
+
   %i[clank].each do |type|
     define_method("remove_#{type}") do
       current_player.public_send("#{type}=", current_player.public_send(type) - value)

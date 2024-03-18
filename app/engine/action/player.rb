@@ -17,14 +17,16 @@ class Action::Player < Action::Base
 
   def buy_card
     card = gameplay_data.active_cards.find { |x| x['name'] == value }
-    current_player.skill_points -= card['skill_point_cost']
+    current_player.skill_points -= card['cost']
     current_player.discard_deck << card
-    gameplay_data.active_cards.delete(card) # check this works
+    gameplay_data.active_cards.delete(card) # TODO: check if this works
+    card.fetch('acquire', []).each do |action, action_value|
+      Action::Card.new(gameplay_data, type: action, value: action_value).execute
+    end
   end
 
   def move
     current_player.position.current_position = value
-    binding.pry
     current_player.move_points -= current_player.position.distance_to(value)
   end
 
