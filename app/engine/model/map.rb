@@ -7,6 +7,8 @@ class Model::Map
 
   def initialize(tiles = nil)
     @tiles = tiles || DEFAULT_MAP
+
+    # shuffle mystery tokens metadata....
   end
 
   def self.from_json(json)

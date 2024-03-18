@@ -5,7 +5,7 @@ class Action::Player < Action::Base
     # TODO: in validation, make sure card is active!
     # TODO: for monster: again i named this differently, also some awards you can chose either or
     current_player.attack_points = current_player.attack_points - monster['health']
-    monster['rewards'].one? ? redeem_monster_reward : choose_reward
+    monster['actions'].one? ? redeem_monster_reward : choose_reward
     discard!(monster_card)
   end
 
@@ -15,12 +15,11 @@ class Action::Player < Action::Base
     current_player.inventory << item
   end
 
-  def buy_card # rubocop:disable Metrics/AbcSize
-    card = gameplay_data.active_cards.find { |x| x['name'] == value }
+  def buy_card
+    card = take_card
     current_player.skill_points -= card['cost']
     current_player.discard_deck << card
-    gameplay_data.active_cards.delete(card) # TODO: check if this works
-    card.fetch('acquire', []).each { |action| action_card(*action) } # TODO: UM does it work?
+    card.fetch('acquire', []).each { |action, action_value| action_card(action, action_value) }
   end
 
   def move
@@ -34,18 +33,26 @@ class Action::Player < Action::Base
 
   private
 
+  def take_card # rubocop:disable Metrics/AbcSize
+    card = gameplay_data.deck.active.find { |x| x['name'] == value }
+    gameplay_data.deck.destroy!(card) if card.present?
+    card = gameplay_data.marketplace.find { |x| x['name'] == value } if card.nil?
+    card['total'] -= 1
+    card
+  end
+
   def action_card(action_type, action_value)
     Action::Card.new(gameplay_data, type: action_type, value: action_value).execute
   end
 
   def redeem_monster_reward
-    (rewards = monster['rewards'].first).each_key do |key|
+    (rewards = monster.fetch('actions', []).first).each_key do |key|
       action_card(key, rewards[key])
     end
   end
 
   def choose_reward
-    current_player.rewards = monster['rewards']
+    current_player.rewards = monster.fetch('actions', [])
     # need to think about this one...
   end
 
@@ -56,7 +63,6 @@ class Action::Player < Action::Base
   def discard!(card)
     return if goblin?(card)
 
-    gameplay_data.active_cards.delete(card) # uhhh chrck if tbis works
-    gameplay_data.discard_deck << card
+    gameplay_data.deck.discard(card)
   end
 end
