@@ -2,7 +2,7 @@
 
 class Model::Player
   attr_accessor :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
-                :clank, :position, :rewards
+                :clank, :position, :rewards, :skill_points
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
@@ -21,7 +21,8 @@ class Model::Player
       move_points: json['move_points'],
       teleport: json['teleport'],
       coins: json['coins'],
-      rewards: json['rewards']
+      rewards: json['rewards'],
+      skill_points: json['skill_points']
     )
   end
 
@@ -36,6 +37,7 @@ class Model::Player
     move_points: 0,
     teleport: 0,
     coins: 0,
+    skill_points: 0,
     rewards: []
   )
     @index = index
@@ -50,11 +52,7 @@ class Model::Player
     @teleport = teleport
     @coins = coins
     @rewards = rewards
-    super()
-  end
-
-  def skill_points
-    deck.active_cards.map { |card| card['skill_points'] }.sum
+    @skill_points = skill_points
   end
 
   def health=(value)

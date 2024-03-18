@@ -14,7 +14,7 @@ class Action::Card < Action::Base
     @card ||= Base::CARDS.find { |data| data['name'] == type }
   end
 
-  %i[health attack_points move_points coins clank teleport].each do |type|
+  %i[health attack_points move_points coins clank teleport skill_points].each do |type|
     define_method("add_#{type}") do
       current_player.public_send("#{type}=", current_player.public_send(type) + value)
     end

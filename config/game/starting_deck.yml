@@ -1,11 +1,12 @@
 - name: burgle
-  victory_points: 1
   total: 6
+  actions:
+    - add_skill_points: 1
 - name: scramble
-  victory_points: 1
   actions:
     - add_move_points: 1
-  total: 2
+    - add_ skill_points: 1
+  total: 1
 - name: sidestep
   actions:
     - add_move_points: 1
@@ -13,4 +14,4 @@
 - name: stumble
   actions:
     - add_clank: 1
-  total: 1
+  total: 2
