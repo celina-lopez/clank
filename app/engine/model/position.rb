@@ -5,8 +5,8 @@ class Model::Position
   MAP = YAML.load_file('config/game/maps.yml')['map_1']
   attr_accessor :current_position
 
-  def initialize(_current_position = 0)
-    @current_position = 0
+  def initialize(current_position = 0)
+    @current_position = current_position.to_i
   end
 
   def self.from_json(json)

@@ -52,14 +52,15 @@
         this.setAlpha(0.5); // Restore transparency
       });
       tile.on('pointerdown', function () {
-        window.app.action.send({ type:"move", value:`${tileData.tile}` });
+        window.app.action.send({ type:"move", value:`${tileData.tile}`, player_index: <%= player.dig('index') %>});
       });
     });
   }
 
   function addPlayerToMap(thiz){
-    var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
-    var player = thiz.add.image(playerPosition.x, playerPosition.y, 'player').setOrigin(0);
+    var playerPosition = mapTiles.find((tile) => tile.tile === 2);
+    var player = thiz.add.image(0,0, 'player')
+    player.setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
     player.setScale(.1);
   }
 
