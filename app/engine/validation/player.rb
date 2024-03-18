@@ -12,6 +12,7 @@ class Validation::Player < Validation::Base
 
   def move?
     # TODO: still need to check locks
+    # TODO: health
     current_player.position.distance_to(value) <= current_player.move_points
   end
 
