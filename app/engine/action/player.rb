@@ -15,14 +15,12 @@ class Action::Player < Action::Base
     current_player.inventory << item
   end
 
-  def buy_card
+  def buy_card # rubocop:disable Metrics/AbcSize
     card = gameplay_data.active_cards.find { |x| x['name'] == value }
     current_player.skill_points -= card['cost']
     current_player.discard_deck << card
     gameplay_data.active_cards.delete(card) # TODO: check if this works
-    card.fetch('acquire', []).each do |action, action_value|
-      Action::Card.new(gameplay_data, type: action, value: action_value).execute
-    end
+    card.fetch('acquire', []).each { |action| action_card(*action) } # TODO: UM does it work?
   end
 
   def move
@@ -36,9 +34,13 @@ class Action::Player < Action::Base
 
   private
 
+  def action_card(action_type, action_value)
+    Action::Card.new(gameplay_data, type: action_type, value: action_value).execute
+  end
+
   def redeem_monster_reward
     (rewards = monster['rewards'].first).each_key do |key|
-      Action::Card.new(gameplay_data, type: key, value: rewards[key]).execute
+      action_card(key, rewards[key])
     end
   end
 
