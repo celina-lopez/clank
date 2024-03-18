@@ -3,7 +3,7 @@
   victory_points: 2
   actions:
     - coin: 2
-    - attack_points: 2
+      attack_points: 2
   total: 2
 - name: boots_of_swiftness
   total: 1

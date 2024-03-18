@@ -1,5 +1,5 @@
 - name: archaeologist
-  victory: 1
+  victory_points: 1
   cost: 2
   total: 2
   actions:
@@ -7,7 +7,7 @@
   conditionals:
     - type: item
       value:
-        victory: 2
+        skill_points: 2
       logic: monkey_idol == true
 - name: invoker_of_the_ancients
   cost: 4
@@ -18,5 +18,7 @@
 - name: master_burglar
   cost: 3
   total: 2
+  victory_points: 2
   actions:
     - trash: burgle
+      skill_points: 2

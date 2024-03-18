@@ -13,7 +13,7 @@
   total: 15
   actions:
     - attack: 2
-    - skill_points: 1
+      skill_points: 1
   cost: 2
 - name: secret_tome
   victory_points: 7

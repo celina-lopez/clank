@@ -7,6 +7,7 @@
   conditionals:
     - environment: depths
   cost: 3
+  dragon_attack: true
   actions:
     - gold: 5
       clank: 3

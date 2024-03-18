@@ -5,7 +5,7 @@
 - name: scramble
   actions:
     - move_points: 1
-    - skill_points: 1
+      skill_points: 1
   total: 1
 - name: sidestep
   actions:
