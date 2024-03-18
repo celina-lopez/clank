@@ -1,13 +1,16 @@
 - name: ruby
   total: 2
   cost: 6
+  dragon_attack: true
   actions:
     - draw: 1
-  immediate_actions:
+  acquire:
     - clank: 2
 - name: dragon_eye
   total: 1
   cost: 5
+  acquire:
+    - clank: 2
   conditionals:
     - type: environment
       logic: "depths == true"
@@ -17,26 +20,27 @@
       logic: "mastery_token == true"
   actions:
     - draw: 1
-  immediate_actions:
-    - clank: 2
 - name: diamond
   total: 1
   cost: 8
+  victory_points: 8
   actions:
     - draw: 1
-  immediate_actions:
+  acquire:
     - clank: 2
 - name: sapphire
   total: 3
   cost: 4
+  victory_points: 4
   actions:
     - draw: 1
-  immediate_actions:
+  acquire:
     - clank: 2
 - name: emerald
   total: 2
   cost: 5
+  victory_points: 5
   actions:
     - draw: 1
-  immediate_actions:
+  acquire:
     - clank: 2

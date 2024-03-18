@@ -1,26 +1,29 @@
 - name: animated_door
   total: 2
+  health: 1
   actions:
     - move: 1
   attack: 1
+  dragon_attack: true
 - name: cave_troll
   total: 1
+  health: 4
   actions:
-    - gold: 3
+    - coin: 3
       draw: 2
   conditionals:
     - type: environment
       logic: "depths == true"
-  attack: 4
 - name: kobold
   total: 2
-  attack: 2
-  immediate_actions:
-    - clank_cube: 1
+  health: 2
+  dragon_attack: true
+  extra_cube: 1
   actions:
-    - victory_points: 1
+    - skill_points: 1
 - name: ogre
   actions:
-    - gold: 5
-  attack: 3
+    - coin: 5
+  health: 3
+  dragon_attack: true
   total: 2

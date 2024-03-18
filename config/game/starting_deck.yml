@@ -1,17 +1,17 @@
 - name: burgle
   total: 6
   actions:
-    - add_skill_points: 1
+    - skill_points: 1
 - name: scramble
   actions:
-    - add_move_points: 1
-    - add_ skill_points: 1
+    - move_points: 1
+    - skill_points: 1
   total: 1
 - name: sidestep
   actions:
-    - add_move_points: 1
+    - move_points: 1
   total: 1
 - name: stumble
   actions:
-    - add_clank: 1
+    - clank: 1
   total: 2

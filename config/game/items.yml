@@ -1,13 +1,15 @@
 - name: pickaxe
-  attack: 2
   cost: 4
+  victory_points: 2
   actions:
-    - gold: 2
+    - coin: 2
+    - attack_points: 2
   total: 2
 - name: boots_of_swiftness
   total: 1
   cost: 5
+  victory_points: 2
   actions:
     - move: 3
-  immediate_actions:
+  aquire:
     - move: 1

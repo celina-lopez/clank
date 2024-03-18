@@ -1,19 +1,19 @@
 - name: explore
   total: 15
-  victory_points: 2
-  cost: 2
+  cost: 3
   actions:
-    - move: 1
+    - move_points: 1
+    - skill_points: 2
 - name: goblin
   total: 1
+  health: 2
   actions:
-    - gold: 1
-      danger: 2
+    - coin: 1
 - name: mercenary
   total: 15
-  victory_points: 1
   actions:
     - attack: 2
+    - skill_points: 1
   cost: 2
 - name: secret_tome
   victory_points: 7
