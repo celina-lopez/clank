@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class Model::Game
-  attr_accessor :players, :current_player_index, :deck, :marketplace_deck, :map,
+  attr_accessor :players, :current_player_index, :deck, :marketplace, :map,
                 :dragon_clank
 
   def self.from_json(json)
     Model::Game.new(
       dragon_clank: json['dragon_clank'],
       deck: Model::Deck.from_json(json['deck']),
-      marketplace_deck: json['marketplace_deck'],
+      marketplace: json['marketplace'],
       map: Model::Map.from_json(json['map']),
       players: json['players'].map { |p| Model::Player.from_json(p) },
       current_player_index: json['current_player_index']
@@ -18,13 +18,13 @@ class Model::Game
   def initialize(num_players: nil, dragon_clank: 0, deck: Model::Deck.new( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
     Base::MISC_DECK + Base::MONSTER_CARDS,
     num_of_active_cards: 6
-  ), marketplace_deck: Base::RESERVE_CARDS, map: Model::Map.new, players: nil,
+  ), marketplace: Base::MARKETPLACE, map: Model::Map.new, players: nil,
                  current_player_index: 0)
     @dragon_clank = dragon_clank
     @current_player_index = current_player_index
     @map = map
     @deck = deck
-    @marketplace_deck = marketplace_deck
+    @marketplace = marketplace
     @players = if num_players.present?
                  num_players.times.map do |i|
                    Model::Player.new(i)

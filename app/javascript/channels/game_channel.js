@@ -15,6 +15,8 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
 
   received(data) {
     console.log(data)
-    document.querySelector("#messages").innerHTML += `<p>${data.message}</p>`;
+    // document.querySelector("#messages").innerHTML += `<p>${data.message}</p>`;
+    // rebuild entire game.... 
+    // don't send back all data (don't want them looking into the deck)
   }
 });

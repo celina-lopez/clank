@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="flex-auto">
       <div class="flex">
-        <%= render 'players/partials/current_hand', player: @player %>
+        <%= render 'players/partials/current_hand', player: @player, game: @game %>
         <%= render 'players/partials/stats', player: @player %> 
       </div>
       <%= render 'players/partials/chat', player: @player %> 
