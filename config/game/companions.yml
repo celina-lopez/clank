@@ -3,7 +3,7 @@
   cost: 2
   total: 2
   actions:
-    - draw: 1
+    - add_cards: 1
   conditionals:
     - type: item
       value:
@@ -13,13 +13,13 @@
   cost: 4
   total: 1
   actions:
-    - teleport: 1
-      clank: 1
+    - add_teleport: 1
+      add_clank: 1
 - name: master_burglar
   cost: 3
   total: 2
   victory_points: 2
   actions:
-    - trash:
+    - add_trash:
         burgle: 1
       skill_points: 2

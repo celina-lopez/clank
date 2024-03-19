@@ -11,7 +11,7 @@
   Active Deck 
   <div class='grid grid-cols-6 gap-1' id='active-cards'>
     <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
-      <div class="bg-red-100 h-[150px]" id='card-<%= index %>' data-name="<%= card['name'] %>"> 
+      <div class="bg-red-100 h-[150px]" id='active-card-<%= index %>' data-name="<%= card['name'] %>"> 
         <%= card['name'] %>
         <%= card['actions'] %>
       </div>
@@ -34,6 +34,16 @@
   document.querySelectorAll('[id^="player-card-"]').forEach((card) => {
     card.addEventListener('click', (e) => {
       window.app.action.send({ type: e.target.dataset.name, player_index: <%= player.dig('index') %> });
+    });
+  });
+  document.querySelectorAll('[id^="active-card-"]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      window.app.action.send({ type: 'buy_card', value: e.target.dataset.name, player_index: <%= player.dig('index') %> });
+    });
+  });
+  document.querySelectorAll('[id^="marketplace-card-"]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      window.app.action.send({ type: 'buy_card', value: e.target.dataset.name, player_index: <%= player.dig('index') %> });
     });
   });
 </script>

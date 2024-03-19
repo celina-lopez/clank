@@ -10,6 +10,10 @@ class Validation::Player < Validation::Base
     current_player.coins >= value && current_player.position.marketplace?
   end
 
+  def buy_card?
+    current_player.skill_points >= value
+  end
+
   def move?
     # TODO: still need to check locks
     # TODO: health

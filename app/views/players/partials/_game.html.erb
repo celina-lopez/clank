@@ -43,13 +43,13 @@
       let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'];
       let tile = thiz.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
       tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
-      tile.setAlpha(.5);
+      tile.setAlpha(0.8);
       tile.setInteractive(); 
       tile.on('pointerover', function () {
         this.setAlpha(1); // Full opacity on hover
       });
       tile.on('pointerout', function () {
-        this.setAlpha(0.5); // Restore transparency
+        this.setAlpha(0.8); // Restore transparency
       });
       tile.on('pointerdown', function () {
         window.app.action.send({ type:"move", value:`${tileData.tile}`, player_index: <%= player.dig('index') %>});
