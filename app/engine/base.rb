@@ -11,6 +11,9 @@ class Base
   STARTING_DECK_CARDS = config_yaml('starting_deck').freeze
   CARDS = [MISC_DECK, MONSTER_CARDS, MARKETPLACE, STARTING_DECK_CARDS].flatten
   CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
+  MINOR_ITEMS = config_yaml('minor_items').freeze
+  MAJOR_ITEMS = config_yaml('major_items').freeze
+  DEFAULT_MAP = YAML.load_file('config/game/maps.yml')['map_1']
 
   attr_accessor :gameplay_data
 

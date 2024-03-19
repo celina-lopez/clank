@@ -1,0 +1,11 @@
+- name: health
+  health: 1
+  total: 3
+  type: minor
+- name: move
+  move: 1
+  total: 3
+  type: minor
+- name: victory_points
+  move: 2
+  total: 3

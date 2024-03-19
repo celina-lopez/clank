@@ -1,0 +1,12 @@
+- name: health
+  health: 3
+  total: 1
+- name: chalice
+  victory_points: 7
+  total: 1
+- name: coin
+  total: 2
+  coin: 5
+- name: victory
+  total: 2
+  victory_points: 5

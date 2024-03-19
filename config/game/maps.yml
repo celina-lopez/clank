@@ -24,16 +24,14 @@ map_1:
       player_x: -5
       player_y: -1
   - tile: 4
-    items:
-      - big_mystery_token
+    type: minor_item
     frontend_data:
       x: -17
       y: -1.7
       player_x: -7
       player_y: -1
   - tile: 5
-    items:
-      - big_mystery_token
+    type: major_item
     frontend_data:
       x: -23
       y: -1.5
@@ -67,10 +65,28 @@ map_1:
       player_x: -7
       player_y: -3.5
   - tile: 10
-    items:
-      - health
+    type: health
     frontend_data:
       x: -23
       y: -6
       player_x: -9
       player_y: -2.5
+  - tile: 27
+    frontend_data:
+      x: 0
+      y: -15
+      player_x: -0.5
+      player_y: -5
+    items:
+      - name: monkey_idol_hear
+        victory_points: 5
+        total: 1
+        type: monkey
+      - name: monkey_idol_see
+        victory_points: 5
+        total: 1
+        type: monkey
+      - name: monkey_idol_speak
+        victory_points: 5
+        total: 1
+        type: monkey
