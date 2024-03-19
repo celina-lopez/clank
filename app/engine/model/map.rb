@@ -8,13 +8,13 @@ class Model::Map
   end
 
   def generate_new_map # rubocop:disable Metrics/MethodLength
-    major_tokens = BASE::MAJOR_ITEMS.dup.shuffle
-    minor_tokens = BASE::MINOR_ITEMS.dup.shuffle
-    BASE::DEFAULT_MAP.map do |tile|
-      case tile['type']
-      when 'major_item'
+    major_tokens = Base::MAJOR_ITEMS.dup.shuffle
+    minor_tokens = Base::MINOR_ITEMS.dup.shuffle
+    Base::DEFAULT_MAP.map do |tile|
+      tags = tile.fetch('tags', [])
+      if tags.include?('major_item')
         tile['items'] = major_tokens.pop(1)
-      when 'minor_item'
+      elsif tags.include?('minor_item')
         tile['items'] = minor_tokens.pop(2)
       end
       tile
@@ -22,7 +22,7 @@ class Model::Map
   end
 
   def remove_item(position, item)
-    items = tiles.find { |tile| tile['tile'] == position }['items']
+    items = tiles.find { |tile| tile['tile'] == position }.fetch('items', [])
     items.delete_at(items.index(item))
   end
 

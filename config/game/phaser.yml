@@ -1,10 +1,16 @@
 tiles:
   default:
     size: 20
-    color: 0xffffff
+    color: 0xe7116c
   cave:
     size: 20
-    color: 0xff3232
+    color: 0x00a9ac
+  minor_item:
+    size: 20
+    color: 0xe4a3b7
+  major_item:
+    size: 20
+    color: 0xbd6826
 preload_images:
   background: "/images/sample_game.png"
   player: "/images/pawn.png"

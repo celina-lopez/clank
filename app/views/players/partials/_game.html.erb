@@ -40,7 +40,7 @@
 
   function generateTileMap(thiz) {
     mapTiles.forEach((tileData) => {
-      let config = typeOfTileConfig[tileData.type || 'default'];
+      let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'];
       let tile = thiz.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
       tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
       tile.setAlpha(.5);

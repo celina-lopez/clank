@@ -18,34 +18,41 @@ map_1:
       player_x: -2.5
       player_y: -1
   - tile: 3
+    tags:
+      - minor_item
     frontend_data:
       x: -12
       y: -1.7
       player_x: -5
       player_y: -1
   - tile: 4
-    type: minor_item
+    tags:
+      - major_item
     frontend_data:
       x: -17
       y: -1.7
       player_x: -7
       player_y: -1
   - tile: 5
-    type: major_item
+    tags:
+      - major_item
     frontend_data:
       x: -23
       y: -1.5
       player_x: -9
       player_y: -.5
   - tile: 6
-    type: cave
+    tags:
+      - cave
+      - major_item
     frontend_data:
       x: 0
       y: -6
       player_x: -.5
       player_y: -2
   - tile: 7
-    type: cave
+    tags:
+      - cave
     frontend_data:
       x: -7
       y: -6
@@ -58,14 +65,16 @@ map_1:
       player_x: -5
       player_y: -3
   - tile: 9
-    type: cave
+    tags:
+      - cave
     frontend_data:
       x: -17
       y: -7
       player_x: -7
       player_y: -3.5
   - tile: 10
-    type: health
+    tags:
+      - health
     frontend_data:
       x: -23
       y: -6
