@@ -2,7 +2,7 @@
   total: 2
   health: 1
   actions:
-    - move: 1
+    - move_points: 1
   attack: 1
   dragon_attack: true
 - name: cave_troll

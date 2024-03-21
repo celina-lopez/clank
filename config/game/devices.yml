@@ -1,7 +1,7 @@
 - name: teleporter
   cost: 4
   actions:
-    - add_teleport: 1
+    - teleport: 1
   total: 2
 - name: the_vault
   conditionals:
@@ -9,14 +9,14 @@
   cost: 3
   dragon_attack: true
   actions:
-    - add_coins: 5
-      add_clank: 3
+    - coins: 5
+      clank: 3
   total: 1
 - name: shrine
   immediate_action:
-    - add_dragon_cubes: 3
+    - dragon_clank: 3
   actions:
-    - add_health: 1
-    - add_coins: 1
+    - health: 1
+    - coins: 1
   cost: 2
   total: 3

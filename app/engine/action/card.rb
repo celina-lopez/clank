@@ -16,23 +16,17 @@ class Action::Card < Action::Base
 
   %i[cards health attack_points move_points coins
      clank teleport skill_points].each do |type|
-    define_method("add_#{type}") do
+    define_method(type) do
       current_player.public_send("#{type}=", current_player.public_send(type) + value)
     end
   end
 
-  def add_dragon_cubes
-    gameplay_data[:dragon_cubes] += value
+  def dragon_clank
+    gameplay_data.dragon_clank += value
   end
 
-  def add_trash
+  def trash
     # test
     current_player.rewards << value
-  end
-
-  %i[clank].each do |type|
-    define_method("remove_#{type}") do
-      current_player.public_send("#{type}=", current_player.public_send(type) - value)
-    end
   end
 end

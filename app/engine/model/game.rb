@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Model::Game
-  attr_accessor :players, :current_player_index, :deck, :marketplace, :map,
-                :dragon_clank
+  attr_accessor :players, :current_player_index, :deck, :marketplace, :map
+  attr_reader :dragon_clank
 
   def self.from_json(json)
     Model::Game.new(
@@ -15,7 +15,7 @@ class Model::Game
     )
   end
 
-  def initialize(num_players: nil, dragon_clank: 0, deck: Model::Deck.new( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
+  def initialize(num_players: nil, dragon_clank: 24, deck: Model::Deck.new( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
     Base::MISC_DECK + Base::MONSTER_CARDS,
     num_of_active_cards: 6
   ), marketplace: Base::MARKETPLACE, map: Model::Map.new, players: nil,
@@ -47,5 +47,9 @@ class Model::Game
 
   def current_player
     players[current_player_index]
+  end
+
+  def dragon_clank=(value)
+    @dragon_clank = [value, Base::MAX_DRAGON_CLANK].max
   end
 end

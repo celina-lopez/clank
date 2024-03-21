@@ -10,6 +10,6 @@
   cost: 5
   victory_points: 2
   actions:
-    - move: 3
+    - move_points: 3
   aquire:
-    - move: 1
+    - move_points: 1

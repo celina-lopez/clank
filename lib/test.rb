@@ -6,3 +6,6 @@ end
 player = new_engine.gameplay_data.current_player
 new_engine.execute(type: 'move', value: '1') if player.move_points > 0
 new_engine.execute(type: 'end_turn', value: '3')
+
+# new game
+Game.last.update(data: Engine.new.execute(type: 'start_game', value: '3'))
