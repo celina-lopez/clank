@@ -3,16 +3,16 @@
 class Model::Position
   EDGES = YAML.load_file('config/game/edges.yml')['map_1']
   MAP = YAML.load_file('config/game/maps.yml')['map_1']
-  attr_accessor :current_position, :graph
+  attr_accessor :current_position
+  attr_reader :graph
 
   def initialize(current_position = 0, graph = Hash.new { |h, k| h[k] = {} if k.is_a?(Integer) })
     @current_position = current_position.to_i
-    # TODO: fill this in
-    @graph = graph
+    @graph = graph.deep_transform_keys(&:to_i).presence || build_graph(graph)
   end
 
   def self.from_json(json)
-    Model::Position.new(json['current_position'])
+    Model::Position.new(json['current_position'], json['graph'])
   end
 
   def distance_to(goal)
@@ -39,7 +39,7 @@ class Model::Position
 
   private
 
-  def build_graph
+  def build_graph(graph)
     EDGES.each do |edge|
       from = edge['x']
       to = edge['y']
@@ -47,6 +47,7 @@ class Model::Position
       graph[from][to] = weight
       graph[to][from] = weight
     end
+    graph
   end
 
   def calculate_distance_with_queue(queue, distances, goal)
