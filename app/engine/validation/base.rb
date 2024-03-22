@@ -28,4 +28,9 @@ class Validation::Base < Base
   def error_messages
     errors.join(', ')
   end
+
+  def add_error_if_error(message, result = false)
+    errors << message unless result
+    result
+  end
 end
