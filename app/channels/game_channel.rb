@@ -12,8 +12,8 @@ class GameChannel < ApplicationCable::Channel
     new_game_data = game.engine.execute(type:, value:, player_index:)
     game.update!(data: new_game_data)
     ActionCable.server.broadcast("game_channel_#{game.id}", new_game_data)
-    # rescue StandardError => e
-    # ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
+  rescue StandardError => e
+    ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
   end
 
   def unsubscribed
