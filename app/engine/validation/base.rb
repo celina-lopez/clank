@@ -22,10 +22,15 @@ class Validation::Base < Base
   def valid?
     return true if valid_player_index? && public_send("#{type}?")
 
-    raise InvalidMoveError, type
+    raise InvalidMoveError, (error_messages || type)
   end
 
   def error_messages
     errors.join(', ')
+  end
+
+  def add_error_if_error(message, result = false)
+    errors << message unless result
+    result
   end
 end

@@ -17,9 +17,14 @@ class Action::Player < Action::Base
 
   def buy_card
     card = take_card
-    current_player.skill_points -= card['cost']
-    current_player.discard_deck << card
-    card.fetch('acquire', []).each { |action, action_value| action_card(action, action_value) }
+    if card['cost'].present?
+      current_player.skill_points -= card['cost']
+    elsif card['health'].present?
+      current_player.attack_points -= card['health']
+    end
+    current_player.deck.discarded << card
+    # TODO: fix
+    card.fetch('acquire', []).each { |action| action.each { |t, v| action_card(t, v) } }
   end
 
   def move
@@ -42,7 +47,7 @@ class Action::Player < Action::Base
   end
 
   def action_card(action_type, action_value)
-    Action::Card.new(gameplay_data, type: action_type, value: action_value).execute
+    Action::Card.new(gameplay_data, type: nil, value: action_value).send(action_type)
   end
 
   def redeem_monster_reward

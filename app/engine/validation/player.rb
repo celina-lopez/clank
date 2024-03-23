@@ -1,26 +1,64 @@
 # frozen_string_literal: true
 
 class Validation::Player < Validation::Base
+  ERRORS = {
+    attack: 'Not enough attack points',
+    buy: 'Not in marketplace',
+    buy_card: 'Card not found',
+    move: 'Not enough move points',
+    teleport: 'Not next to tile'
+  }.freeze
+
   def attack?
-    current_player.attack_points >= value
+    result = current_player.attack_points >= value
+    add_error_if_error('Not enough attack points', result)
   end
 
   def buy?
     # TODO: make this better for certain artificats
-    current_player.coins >= value && current_player.position.marketplace?
+    add_error_if_error('Not enough attack points', current_player.position.marketplace?)
+    result = current_player.coins >= value && current_player.position.marketplace?
+    add_error_if_error("Need #{current_player.coins - value} coins", result)
   end
 
   def buy_card?
-    current_player.skill_points >= value
+    add_error_if_error('Card not found', card)
+    if card['cost'].present?
+      validate_funds
+    elsif card['health'].present?
+      validate_health
+    else
+      false
+    end
   end
 
   def move?
     # TODO: still need to check locks
     # TODO: health
-    current_player.position.distance_to(value) <= current_player.move_points
+    distance_to = current_player.position.distance_to(value)
+    result = distance_to <= current_player.move_points
+    add_error_if_error("Need #{distance_to - current_player.move_points}", result)
   end
 
   def teleport?
-    current_player.position.next_to?(value) && current_player.teleport.positive?
+    add_error_if_error('Not next to tile', current_player.position.next_to?(value))
+    result = current_player.position.next_to?(value) && current_player.teleport.positive?
+    add_error_if_error('No teleport availabile', result)
+  end
+
+  private
+
+  def card
+    @card ||= CARDS.find { |x| x['name'] == value }
+  end
+
+  def validate_funds
+    result = current_player.skill_points >= card['cost'].to_i
+    add_error_if_error("Need #{card['cost'] - current_player.skill_points} more skill points", result)
+  end
+
+  def validate_health
+    result = current_player.attack_points >= card['health'].to_i
+    add_error_if_error("Need #{card['health'] - current_player.attack_points} more attack points", result)
   end
 end
