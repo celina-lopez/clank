@@ -53,6 +53,7 @@ class Model::Position
   def calculate_distance_with_queue(queue, distances, goal)
     until queue.empty?
       current_node = queue.shift
+      current_node = current_node.to_i
 
       break if current_node == goal
 
