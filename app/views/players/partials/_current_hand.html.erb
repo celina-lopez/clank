@@ -1,4 +1,7 @@
 <div class="grow bg-blue-100 h-[50vh] min-h-[200px]">
+  <div>
+    <button id='end-turn' class="btn">End Turn</button>
+  </div>
   Current Hand
   <div class='grid grid-cols-5 gap-1' id='active-player-cards'>
     <% player.dig('deck', 'active').each_with_index do |card, index| %>
@@ -17,7 +20,6 @@
       </div>
     <% end %>
   </div>
-
   Marketplace Cards
   <div class='grid grid-cols-4 gap-1' id='marketplace-cards'>
     <% game.data.dig('marketplace').each_with_index do |card, index| %>
@@ -45,5 +47,8 @@
     card.addEventListener('click', (e) => {
       window.app.action.send({ type: 'buy_card', value: e.target.dataset.name, player_index: <%= player.dig('index') %> });
     });
+  });
+  document.getElementById('end-turn').addEventListener('click', (e) => {
+    window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
   });
 </script>
