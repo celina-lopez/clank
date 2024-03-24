@@ -5,12 +5,12 @@
   actions:
     - draw: 1
   acquire:
-    - clank: 2
+    clank: 2
 - name: dragon_eye
   total: 1
   cost: 5
   acquire:
-    - clank: 2
+    clank: 2
   conditionals:
     - type: environment
       logic: "depths == true"
@@ -27,7 +27,7 @@
   actions:
     - draw: 1
   acquire:
-    - clank: 2
+    clank: 2
 - name: sapphire
   total: 3
   cost: 4
@@ -35,7 +35,7 @@
   actions:
     - draw: 1
   acquire:
-    - clank: 2
+    clank: 2
 - name: emerald
   total: 2
   cost: 5
@@ -43,4 +43,4 @@
   actions:
     - draw: 1
   acquire:
-    - clank: 2
+    clank: 2

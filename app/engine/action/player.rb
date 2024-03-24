@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 class Action::Player < Action::Base
-  def attack
-    # TODO: in validation, make sure card is active!
-    # TODO: for monster: again i named this differently, also some awards you can chose either or
-    current_player.attack_points = current_player.attack_points - monster['health']
-    monster['actions'].one? ? redeem_monster_reward : choose_reward
-    discard!(monster_card)
-  end
-
   def buy_artifact
     item = BUYABLE_ITEMS.find_by { |x| x['name'] }
     current_player.coins -= item['cost']
@@ -17,14 +9,7 @@ class Action::Player < Action::Base
 
   def buy_card
     card = take_card
-    if card['cost'].present?
-      current_player.skill_points -= card['cost']
-    elsif card['health'].present?
-      current_player.attack_points -= card['health']
-    end
-    current_player.deck.discarded << card
-    # TODO: fix
-    card.fetch('acquire', []).each { |action| action.each { |t, v| action_card(t, v) } }
+    redeem_card(card)
   end
 
   def move
@@ -32,42 +17,65 @@ class Action::Player < Action::Base
     current_player.move_points -= current_player.position.distance_to(value)
   end
 
-  def teleport
-    move
-  end
+  add_alias :teleport, :move
 
   private
 
-  def take_card # rubocop:disable Metrics/AbcSize
+  def reedem_cost(card)
+    current_player.skill_points -= card['cost'] if card['cost'].present?
+  end
+
+  def reedeem_health(card)
+    current_player.attack_points -= card['health'] if card['health'].present?
+  end
+
+  def take_card
     card = gameplay_data.deck.active.find { |x| x['name'] == value }
-    gameplay_data.deck.destroy!(card) if card.present?
-    card = gameplay_data.marketplace.find { |x| x['name'] == value } if card.nil?
-    card['total'] -= 1
+    discard_from_deck(card)
+    if card.nil?
+      card = gameplay_data.marketplace.find { |x| x['name'] == value }
+      card['total'] -= 1 if card.present?
+    end
     card
   end
 
-  def action_card(action_type, action_value)
+  def redeem_card(card)
+    reedeem_health(card)
+    reedem_cost(card)
+    card.fetch('acquire', {}).each do |action_type, action_value|
+      redeem_action_on_card(action_type, action_value)
+    end
+    if card['health'].present?
+
+      card['actions'].one? ? redeem_monster_reward : add_reward_options
+    else
+      current_player.deck.discarded << card
+    end
+  end
+
+  def redeem_action_on_card(action_type, action_value)
     Action::Card.new(gameplay_data, type: nil, value: action_value).send(action_type)
   end
 
   def redeem_monster_reward
     (rewards = monster.fetch('actions', []).first).each_key do |key|
-      action_card(key, rewards[key])
+      redeem_action_on_card(key, rewards[key])
     end
   end
 
-  def choose_reward
+  def add_reward_options
+    # TODO: choose rewards?
     current_player.rewards = monster.fetch('actions', [])
-    # need to think about this one...
   end
 
   def monster
     @monster ||= Validation::MONSTER_CARDS.find { |card| card['name'] == value }
   end
 
-  def discard!(card)
+  def discard_from_deck(card)
+    return unless card.present?
     return if goblin?(card)
 
-    gameplay_data.deck.discard(card)
+    gameplay_data.deck.destroy!(card)
   end
 end
