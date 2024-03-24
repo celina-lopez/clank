@@ -29,9 +29,8 @@ class Validation::Player < Validation::Base
   end
 
   def teleport?
-    add_error_if_error('Not next to tile', current_player.position.next_to?(value))
-    result = current_player.position.next_to?(value) && current_player.teleport.positive?
-    add_error_if_error('No teleport availabile', result)
+    next_to = add_error_if_error('Not next to tile', current_player.position.next_to?(value))
+    next_to && add_error_if_error('No teleport availabile', current_player.teleport.positive?)
   end
 
   private
