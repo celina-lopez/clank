@@ -17,7 +17,7 @@ class Action::Player < Action::Base
     current_player.move_points -= current_player.position.distance_to(value)
   end
 
-  add_alias :teleport, :move
+  alias teleport move
 
   private
 
