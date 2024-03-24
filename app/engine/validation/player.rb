@@ -2,22 +2,18 @@
 
 class Validation::Player < Validation::Base
   def attack?
-    result = current_player.attack_points >= value
-    add_error_if_error('Not enough attack points', result)
+    add_error_if_error('Not enough attack points', current_player.attack_points >= value)
   end
 
   def buy?
     result = add_error_if_error('Not in marketplace', current_player.position.marketplace?)
-    result &= current_player.coins >= value
-    add_error_if_error("Need #{current_player.coins - value} coins", current_player.coins >= value)
-    result
+    result && add_error_if_error("Need #{current_player.coins - value} coins", current_player.coins >= value)
   end
 
   def buy_card?
     result = add_error_if_error('Card not found', card)
     result &= validate_funds
-    result &= validate_health
-    result
+    result && validate_health
   end
 
   def move?
