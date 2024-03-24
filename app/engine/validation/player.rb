@@ -15,10 +15,10 @@ class Validation::Player < Validation::Base
   end
 
   def buy?
-    # TODO: make this better for certain artificats
-    add_error_if_error('Not enough attack points', current_player.position.marketplace?)
-    result = current_player.coins >= value && current_player.position.marketplace?
-    add_error_if_error("Need #{current_player.coins - value} coins", result)
+    result = add_error_if_error('Not in marketplace', current_player.position.marketplace?)
+    result &= current_player.coins >= value
+    add_error_if_error("Need #{current_player.coins - value} coins", current_player.coins >= value)
+    result
   end
 
   def buy_card?

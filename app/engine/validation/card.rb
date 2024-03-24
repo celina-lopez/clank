@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: this file needs some work
 class Validation::Card < Validation::Base
   LOGIC_OPERATORS = ['==', '!=', '>', '>=', '<', '<='].freeze
   LOGIC_VALUES = ['true', 'false', /\d+/].freeze
