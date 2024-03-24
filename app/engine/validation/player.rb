@@ -14,14 +14,10 @@ class Validation::Player < Validation::Base
   end
 
   def buy_card?
-    add_error_if_error('Card not found', card)
-    if card['cost'].present?
-      validate_funds
-    elsif card['health'].present?
-      validate_health
-    else
-      false
-    end
+    result = add_error_if_error('Card not found', card)
+    result &= validate_funds
+    result &= validate_health
+    result
   end
 
   def move?
@@ -45,11 +41,15 @@ class Validation::Player < Validation::Base
   end
 
   def validate_funds
+    return true unless card['cost'].present?
+
     result = current_player.skill_points >= card['cost'].to_i
     add_error_if_error("Need #{card['cost'] - current_player.skill_points} more skill points", result)
   end
 
   def validate_health
+    return true unless card['health'].present?
+
     result = current_player.attack_points >= card['health'].to_i
     add_error_if_error("Need #{card['health'] - current_player.attack_points} more attack points", result)
   end
