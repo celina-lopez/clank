@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 class Validation::Player < Validation::Base
-  ERRORS = {
-    attack: 'Not enough attack points',
-    buy: 'Not in marketplace',
-    buy_card: 'Card not found',
-    move: 'Not enough move points',
-    teleport: 'Not next to tile'
-  }.freeze
-
   def attack?
     result = current_player.attack_points >= value
     add_error_if_error('Not enough attack points', result)
