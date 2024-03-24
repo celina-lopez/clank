@@ -26,10 +26,10 @@ class Validation::Base < Base
   end
 
   def error_messages
-    errors.join(', ')
+    errors.join(', ') if errors.any?
   end
 
-  def add_error_if_error(message, result = false)
+  def add_error_if_error(message, result = false) # rubocop:disable Style/OptionalBooleanParameter
     errors << message unless result
     result
   end

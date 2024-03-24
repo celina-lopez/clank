@@ -2,10 +2,15 @@
 
 class Validation::Game < Validation::Base
   def end_turn?
-    current_player.deck.active.empty? && current_player.rewards.empty?
+    result = current_player.deck.active.empty?
+    add_error_if_error('You must play all your cards in your hand', result)
+    result &= current_player.rewards.empty?
+    add_error_if_error('You must collect all your rewards', current_player.rewards.empty?)
+    result
   end
 
   def start_game?
+    # TODO: maybe if game is empty?
     true
   end
 end
