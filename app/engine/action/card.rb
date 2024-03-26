@@ -2,9 +2,12 @@
 
 class Action::Card < Action::Base
   def execute!
+    # TODO: clean this up plz
     card.fetch('actions', []).each do |action|
-      self.value = action.values.first
-      send(action.keys.first)
+      action.each do |k, v|
+        self.value = v
+        send(k)
+      end
     end
     current_player.deck.discard(card)
     gameplay_data

@@ -3,51 +3,37 @@
     <button id='end-turn' class="btn">End Turn</button>
   </div>
   Current Hand
-  <div class='grid grid-cols-5 gap-1' id='active-player-cards'>
+  <div class='grid grid-cols-5 gap-1' id='player-cards'>
     <% player.dig('deck', 'active').each_with_index do |card, index| %>
-      <div class="bg-red-100 h-[150px]" id='player-card-<%= index %>' data-name="<%= card['name'] %>"> 
-        <%= card['name'] %>
-        <%= card['actions'] %>
-      </div>
+      <%= render 'players/components/card', card:, id: "player-card-#{index}", current_hand: true %>
     <% end %>
   </div>
   Active Deck 
   <div class='grid grid-cols-6 gap-1' id='active-cards'>
     <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
-      <div class="bg-red-100 h-[150px]" id='active-card-<%= index %>' data-name="<%= card['name'] %>"> 
-        <%= card['name'] %>
-        <%= card['actions'] %>
-      </div>
+      <%= render 'players/components/card', card:, id: "active-card-#{index}" %>
     <% end %>
   </div>
   Marketplace Cards
   <div class='grid grid-cols-4 gap-1' id='marketplace-cards'>
     <% game.data.dig('marketplace').each_with_index do |card, index| %>
-      <div class="bg-red-100 h-[150px]" id='marketplace-card-<%= index %>' data-name="<%= card['name'] %>"> 
-        <%= card['name'] %>
-        <%= card['actions'] %>
-        <%# Subtract total in marketplace deck, also rename %>
-        <%= card['total'] %>
-      </div>
+      <%= render 'players/components/card', card:, id: "marketplace-card-#{index}" %>
     <% end %>
   </div>
 </div>
+
+<template id='card-template'>
+  <%= render 'players/components/card', card: {}, id: "" %>
+</template >
 <script>
-  document.querySelectorAll('[id^="player-card-"]').forEach((card) => {
-    card.addEventListener('click', (e) => {
-      window.app.action.send({ type: e.target.dataset.name, player_index: <%= player.dig('index') %> });
-    });
-  });
-  document.querySelectorAll('[id^="active-card-"]').forEach((card) => {
-    card.addEventListener('click', (e) => {
-      window.app.action.send({ type: 'buy_card', value: e.target.dataset.name, player_index: <%= player.dig('index') %> });
-    });
-  });
-  document.querySelectorAll('[id^="marketplace-card-"]').forEach((card) => {
-    card.addEventListener('click', (e) => {
-      window.app.action.send({ type: 'buy_card', value: e.target.dataset.name, player_index: <%= player.dig('index') %> });
-    });
-  });
+  // TODO: delete console log below
+  console.log("<%= @player['index'] %>")
+  function executeCard(e){
+    window.app.action.send({ type: e.dataset.name, player_index: <%= player.dig('index') %> });
+  }
+  function executeCard(e){
+    window.app.action.send({ type: e.dataset.name, player_index: <%= player.dig('index') %> });
+  }
   document.getElementById('end-turn').addEventListener('click', (e) => {
     window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
   });

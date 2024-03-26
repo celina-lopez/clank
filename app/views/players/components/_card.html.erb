@@ -1,0 +1,10 @@
+<% current_hand = false if local_assigns[:current_hand].nil? %>
+<div
+  class="bg-red-100 h-[150px]"
+  onclick='<%= current_hand ? 'executeCard(this)' : 'buyCard(this)' %>'
+  id='<%= id %>'
+  data-name="<%= card['name'] %>"
+> 
+  <%= card['name'] %>
+  <%= card['actions'] %>
+</div>
