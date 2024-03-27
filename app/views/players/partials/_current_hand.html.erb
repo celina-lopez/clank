@@ -28,8 +28,8 @@
 <script>
   // TODO: delete console log below
   console.log("<%= @player['index'] %>")
-  function executeCard(e){
-    window.app.action.send({ type: e.dataset.name, player_index: <%= player.dig('index') %> });
+  function buyCard(e){
+    window.app.action.send({ type: 'buy_card', value: e.dataset.name, player_index: <%= player.dig('index') %> });
   }
   function executeCard(e){
     window.app.action.send({ type: e.dataset.name, player_index: <%= player.dig('index') %> });

@@ -28,7 +28,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
         cardClone.id =`${prefix}-card-${index}`;
         cardClone.setAttribute('data-name', card['name']);
         if (playerHand) cardClone.setAttribute('onclick', 'executeCard(this)');
-        cardClone.innerHTML = `${card['name']} <br/> ${card['actions']}`;
+        cardClone.innerHTML = `${card['name']} <br/> ${JSON.stringify(card['actions'])}`;
         document.querySelector(`#${prefix}-cards`).appendChild(cardClone);
         index += 1;
       })
