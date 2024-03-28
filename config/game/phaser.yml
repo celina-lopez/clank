@@ -15,7 +15,7 @@ tiles:
     size: 20
     color: 0xbd6826
 preload_images:
-  background: "/images/sample_game.png"
+  background: "/images/basic.png"
   player: "/images/pawn.png"
 config:
   height: 710
