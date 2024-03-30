@@ -1,4 +1,3 @@
-<div class="grow bg-blue-100 h-[50vh] min-h-[200px]">
   <div>
     <button id='end-turn' class="btn">End Turn</button>
   </div>
@@ -20,7 +19,6 @@
       <%= render 'players/components/card', card:, id: "marketplace-card-#{index}" %>
     <% end %>
   </div>
-</div>
 
 <template id='card-template'>
   <%= render 'players/components/card', card: {}, id: "" %>
