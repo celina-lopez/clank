@@ -21,11 +21,11 @@ class Action::Player < Action::Base
 
   private
 
-  def reedem_cost(card)
+  def redeem_cost(card)
     current_player.skill_points -= card['cost'] if card['cost'].present?
   end
 
-  def reedeem_health(card)
+  def redeem_health(card)
     current_player.attack_points -= card['health'] if card['health'].present?
   end
 
@@ -40,16 +40,20 @@ class Action::Player < Action::Base
   end
 
   def redeem_card(card)
-    reedeem_health(card)
-    reedem_cost(card)
-    card.fetch('acquire', {}).each do |action_type, action_value|
-      redeem_action_on_card(action_type, action_value)
-    end
+    redeem_health(card)
+    redeem_cost(card)
+    card_on_acquire(card)
     if card['health'].present?
 
       card['actions'].one? ? redeem_monster_reward : add_reward_options
     else
-      current_player.deck.discarded << card
+      current_player.deck.discarded << card unless Base::DEVICE_CARD_NAMES.include?(card['name'])
+    end
+  end
+
+  def card_on_acquire(card)
+    card.fetch('acquire', {}).each do |action_type, action_value|
+      redeem_action_on_card(action_type, action_value)
     end
   end
 

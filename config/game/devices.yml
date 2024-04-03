@@ -1,22 +1,22 @@
 - name: teleporter
   cost: 4
-  actions:
-    - teleport: 1
+  acquire:
+    teleport: 1
   total: 2
 - name: the_vault
   conditionals:
     - environment: depths
   cost: 3
   dragon_attack: true
-  actions:
-    - coins: 5
-      clank: 3
+  acquire:
+    coins: 5
+    clank: 3
   total: 1
 - name: shrine
   immediate_action:
     - dragon_clank: 3
-  actions:
-    - health: 1
-    - coins: 1
+  acquire:
+    health: 1
+    coins: 1
   cost: 2
   total: 3
