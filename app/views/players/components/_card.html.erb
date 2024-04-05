@@ -4,7 +4,15 @@
   onclick='<%= current_hand ? 'executeCard(this)' : 'buyCard(this)' %>'
   id='<%= id %>'
   data-name="<%= card['name'] %>"
-> 
-  <%= card['name'] %>
-  <%= card['actions'] %>
+>
+  <%= card['name']&.capitalize %>
+  <br/>
+  <% card.fetch('actions', []).each_with_index do |action, index| %>
+    <% action.each do |key, value| %>
+      <%= key %>: <%= value %>
+      <br/>
+    <% end %>
+    <%= (card.fetch('actions', []).size > 1 && index == 0) ? "OR" : nil %>
+    <br/>
+  <% end %>
 </div>
