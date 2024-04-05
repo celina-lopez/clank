@@ -1,11 +1,4 @@
 <div class="mx-2 overflow-hidden">
-  <div class="flex">
-    <div class="flex-auto">
-      <div class="flex">
         <%= render 'players/partials/stats', player: @player %> 
-      </div>
-      <%= render 'players/partials/chat', player: @player %> 
-    </div>
     <%= render 'players/partials/game', game: @game, player: @player %> 
-  </div>
 </div>
