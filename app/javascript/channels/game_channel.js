@@ -18,7 +18,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     let player = data['players'][playerId];
     console.log(`player ${playerId}`, data['players'][playerId]);
     let cardTemplate =  document.getElementById('card-template');
-
+    // TODO: fix populate cards function when i get final cards
     function populateCards(prefix, cards, playerHand=false) {
       document.getElementById(`${prefix}-cards`).innerHTML = ""
       let index = 0;
