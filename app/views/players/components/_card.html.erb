@@ -8,14 +8,25 @@
   <%= card['name']&.humanize %>
   <br/>
   <% card.fetch('actions', []).each_with_index do |action, index| %>
+    Rewards:
+    <br>
     <% action.each do |key, value| %>
-      <%= key.humanize %>: <%= value %>
+      - <%= key.humanize %>: <%= value %>
       <br/>
     <% end %>
-    <%= (card.fetch('actions', []).size > 1 && index == 0) ? "OR" : nil %>
-    <br/>
+    <% if (card.fetch('actions', []).size > 1 && index == 0) %>
+      OR
+      <br/>
+    <% end%>
   <% end %>
   <% if card['victory_points'].present? %>
     Victory Points: <%= card['victory_points'] %>
+    <br/>
+  <% end %>
+  <% if card['cost'].present? %>
+    Skill points: <%= card['cost'] %>
+  <% end %>
+  <% if card['health'].present? %>
+    Health: <%= card['health'] %>
   <% end %>
 </div>

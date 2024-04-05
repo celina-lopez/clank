@@ -78,7 +78,7 @@ class Action::Player < Action::Base
 
   def discard_from_deck(card)
     return unless card.present?
-    return if goblin?(card)
+    return if card['name'] == 'goblin'
 
     gameplay_data.deck.destroy!(card)
   end

@@ -32,6 +32,6 @@ class Validation::Base < Base
   def add_error_if_error(message, result = false) # rubocop:disable Style/OptionalBooleanParameter
     # TODO: maybe redo this method name?
     errors << message unless result
-    result
+    result.present?
   end
 end
