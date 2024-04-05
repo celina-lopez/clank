@@ -19,7 +19,7 @@ class Model::Player
       position: Model::Position.from_json(json['position']),
       deck: Model::Deck.from_json(json['deck']),
       attack_points: json['attack_points'],
-      move_points: json['move_points'],
+      move_points: json.fetch('move_points', 0),
       teleport: json['teleport'],
       coins: json['coins'],
       rewards: json['rewards'],
@@ -49,7 +49,7 @@ class Model::Player
     @inventory = inventory
     @attack_points = attack_points
     @health = health
-    @move_points = move_points
+    @move_points = move_points || 0
     @teleport = teleport
     @coins = coins
     @rewards = rewards
