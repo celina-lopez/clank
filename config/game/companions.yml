@@ -130,10 +130,10 @@
     - attack_points: 2
       skill_points: 2
   conditionals:
-    - type: item
+    - type: victory
       value:
-        draw: 1
-      logic: coins / 5
+        victory: 1
+      logic: (coins / 5) *
 - name: the_mountain_king
   cost: 6
   total: 1
@@ -175,7 +175,7 @@
   actions:
     - skill_points: 3
   conditionals:
-    - type: item
+    - type: victory
       value:
         victory_points: 2
       logic: secret_tome *

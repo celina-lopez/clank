@@ -1,0 +1,42 @@
+character:
+  name: string
+  victory_points: number
+  cost: number
+  total: number
+  actions: array
+  acquire: array
+  conditionals: array
+conditionals:
+  types:
+    - item
+    - action
+    - victory
+  value: object
+  logic:
+    - has objects chalice, dragon, egg, monkey idol
+    - has companion
+    - has action clank *
+    - has crown
+    - has environment depths
+    - has mastery_token
+    - in crystal cave
+
+trash:
+  - burgle (card name)
+  - any
+actions:
+  trash: object
+  skill_points: number
+  ignore_monsters_path: boolean
+  skip_crystal_cave: boolean
+  move_points: number
+  replace_card: number
+  teleport: number
+  clank: number
+  draw: number
+  attack_points: number
+  coins: number
+  other_clank: number
+  dragon_attack: boolean
+  spend_to_two_secret_tomes: number
+  take_secret_adjacent: number
