@@ -5,10 +5,10 @@
   actions:
     - cards: 1
   conditionals:
-    - type: item
+    - type: action
       value:
         skill_points: 2
-      logic: monkey_idol == true
+      has: monkey_idol
 - name: cleric_of_the_sun
   cost: 3
   total: 2
@@ -25,10 +25,13 @@
     - coins: 2
       move_points: 1
   conditionals:
-    - type: item
+    - type: victory
       value:
         victory_points: 4
-      logic: chalice,dragon_egg,monkey_idol >= 2 fix this...
+      two_of:
+        - chalice
+        - dragon_egg
+        - monkey_idol
 - name: gem_collector
   cost: 4
   total: 1
@@ -44,10 +47,10 @@
     - coins: 2
   victory_points: 1
   conditionals:
-    - type: item
+    - type: action
       value:
         skill_points: 2
-      logic: artifact == true
+      has: artifact
 - name: master_burglar
   cost: 3
   total: 2
@@ -78,10 +81,10 @@
   actions:
     - skill_points: 2
   conditionals:
-    - type: item
+    - type: action
       value:
         draw: 1
-      logic: companion == true
+      has_in_hand: companion
   victory_points: 1
 - name: invoker_of_the_ancients
   cost: 4
@@ -96,10 +99,10 @@
   actions:
     - coins: 2
   conditionals:
-    - type: item
+    - type: action
       value:
         draw: 1
-      logic: companion == true
+      has_in_hand: companion
   victory_points: 1
 - name: rebel_scout
   cost: 3
@@ -107,10 +110,10 @@
   actions:
     - move_points: 2
   conditionals:
-    - type: item
+    - type: action
       value:
         draw: 1
-      logic: companion == true
+      has_in_hand: companion
   victory_points: 1
 - name: rebel_soldier
   cost: 2
@@ -118,10 +121,10 @@
   actions:
     - attack_points: 2
   conditionals:
-    - type: item
+    - type: action
       value:
         draw: 1
-      logic: companion == true
+      has_in_hand: companion
   victory_points: 1
 - name: the_duke
   cost: 5
@@ -133,21 +136,21 @@
     - type: victory
       value:
         victory: 1
-      logic: (coins / 5) *
+      custom: for_every_5_coins_add_victory_point
 - name: the_mountain_king
   cost: 6
   total: 1
   actions:
     - skill_points: 2
   conditionals:
-    - type: item
+    - type: action
       value:
         attack_points: 1
-      logic: crown == true
+      has: crown
     - type: item
       value:
         move_points: 1
-      logic: crown == true
+      has: crown
   victory_points: 3
 - name: the_queen_of_hearts
   cost: 6
@@ -156,10 +159,10 @@
     - skill_points: 3
       attack_points: 1
   conditionals:
-    - type: item
+    - type: action
       value:
         health: 1
-      logic: crown == true
+      has: crown
   victory_points: 3
 - name: treasure_hunter
   cost: 3
@@ -178,7 +181,7 @@
     - type: victory
       value:
         victory_points: 2
-      logic: secret_tome *
+      custom: for_every_secret_tome_add_victory_point
 - name: tunnel_guide
   cost: 1
   total: 2

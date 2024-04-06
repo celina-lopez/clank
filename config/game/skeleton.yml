@@ -6,23 +6,35 @@ character:
   actions: array
   acquire: array
   conditionals: array
+item_enum:
+  - artifact
+  - monkey_idol
+  - chalice
+  - dragon_egg
+  - companion
+  - crown
+is_in:
+  - depths
+  - crystal_cave
+custom:
+  - for_every_5_coins_add_victory_point: "(coins / 5) *"
+  - for_every_secret_tome_add_victory_point: "secret_tome  *"
+  - for_every_clank_this_turn: clank *
+  - pick_card_to_discard: "current deck"
 conditionals:
   types:
-    - item
+    - can_buy
     - action
     - victory
-  value: object
-  logic:
-    - has objects chalice, dragon, egg, monkey idol
-    - has companion
-    - has action clank *
-    - has crown
-    - has environment depths
-    - has mastery_token
-    - in crystal cave
-
+    - after_action_trigger
+  reward: object
+  has: string
+  has_in_hand: string
+  two_of: array
+  is_in: string
+  for_each: string
 trash:
-  - burgle (card name)
+  - (card name)
   - any
 actions:
   trash: object
@@ -33,6 +45,7 @@ actions:
   replace_card: number
   teleport: number
   clank: number
+  discardable: number
   draw: number
   attack_points: number
   coins: number

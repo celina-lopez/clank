@@ -14,12 +14,12 @@
   acquire:
     clank: 2
   conditionals:
-    - type: environment
-      logic: "depths == true"
+     - type: can_buy
+      is_in: depths
     - type: victory
       value:
         victory_points: 10
-      logic: "mastery_token == true"
+      has: mastery_token
   actions:
     - draw: 1
 - name: diamond

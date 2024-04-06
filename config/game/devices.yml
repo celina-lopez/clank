@@ -5,7 +5,8 @@
   total: 2
 - name: the_vault
   conditionals:
-    - environment: depths
+    - type: can_buy
+      is_in: depths
   cost: 3
   dragon_attack: true
   acquire:
@@ -34,7 +35,8 @@
   total: 2
 - name: the_vault
   conditionals:
-    - environment: depths
+     - type: can_buy
+      is_in: depths
   cost: 3
   dragon_attack: true
   acquire:

@@ -81,10 +81,10 @@
   actions:
     - move_points: 1
   conditionals:
-    - type: action 
+    - type: after_action_trigger 
       value:
         skill_points: 1
-      logic: clank *
+      custom: for_every_clank_this_turn
 - name: scepter_of_the_ape_lord
   total: 1
   cost: 3 
@@ -115,10 +115,10 @@
   total: 2
   cost: 2 
   conditionals:
-    - type: action
+    - type: after_action_trigger
       value:
         draw: 2
-      logic: discard_card 
+      custom: pick_card_to_discard
 - name: flying_carpet
   total: 1
   cost: 6 
@@ -167,7 +167,7 @@
     - type: action
       value:
         teleport: 1
-      logic: artifact == true 
+      has: artifact
 - name: wand_of_wind
   total: 1
   cost: 6

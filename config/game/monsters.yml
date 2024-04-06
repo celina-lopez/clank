@@ -13,8 +13,8 @@
     - coin: 3
       draw: 2
   conditionals:
-    - type: environment
-      logic: "depths == true"
+    - type: action
+      is_in: depths
 - name: kobold
   total: 3
   health: 1
@@ -56,8 +56,8 @@
   acquire:
     - skill_points: 3
   conditionals:
-    - type: environment
-      logic: "depths == true"
+    - type: action
+      is_in: crystal_cave
 - name: orc_grunt
   total: 3
   health: 2
