@@ -14,7 +14,7 @@
   acquire:
     clank: 2
   conditionals:
-     - type: can_buy
+    - type: can_buy
       is_in: depths
     - type: victory
       value:

@@ -27,7 +27,7 @@ class Model::Position
     graph[current_position].keys.include?(goal.to_i)
   end
 
-  %w[marketplace depths].each do |key|
+  %w[marketplace depths crystal_cave].each do |key|
     define_method "#{key}?" do
       metadata[key].present?
     end

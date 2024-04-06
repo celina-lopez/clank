@@ -45,11 +45,11 @@ actions:
   replace_card: number
   teleport: number
   clank: number
-  discardable: number
+  discard_number: number
   draw: number
   attack_points: number
   coins: number
   other_clank: number
   dragon_attack: boolean
-  spend_to_two_secret_tomes: number
-  take_secret_adjacent: number
+  spend_seven_for_two_secret_tomes: boolean
+  take_secret_adjacent: boolean

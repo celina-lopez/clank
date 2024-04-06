@@ -35,7 +35,7 @@
   total: 2
 - name: the_vault
   conditionals:
-     - type: can_buy
+    - type: can_buy
       is_in: depths
   cost: 3
   dragon_attack: true

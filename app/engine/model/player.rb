@@ -2,7 +2,9 @@
 
 class Model::Player
   attr_accessor :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
-                :clank, :position, :rewards, :skill_points
+                :clank, :position, :rewards, :skill_points, :trash, :ignore_monster_path, :skip_crystal_cave,
+                :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
+                :take_secret_adjacent
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
@@ -10,50 +12,56 @@ class Model::Player
   MAX_CLANK = 30
   START_COINS = 7
 
-  def self.from_json(json) # rubocop:disable Metrics/MethodLength
+  def self.from_json(json)
     Model::Player.new(
       json['index'],
-      health: json['health'],
-      clank: json['clank'],
-      inventory: json['inventory'],
       position: Model::Position.from_json(json['position']),
       deck: Model::Deck.from_json(json['deck']),
-      attack_points: json['attack_points'],
-      move_points: json.fetch('move_points', 0),
-      teleport: json['teleport'],
-      coins: json['coins'],
-      rewards: json['rewards'],
-      skill_points: json['skill_points']
+      **json.symbolize_keys.reject { |k, _v| %i[index position deck].include?(k) }
     )
   end
 
-  def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
+  def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     index = 0,
-    health: MAX_HEALTH,
-    clank: STARTING_CLANK_CUBES[index],
+    health: nil,
+    clank: nil,
     inventory: [],
-    position: Model::Position.new,
-    deck: Model::Deck.new(Base::STARTING_DECK_CARDS),
+    position: nil,
+    deck: nil,
     attack_points: 0,
     move_points: 0,
     teleport: 0,
-    coins: START_COINS,
+    coins: nil,
     skill_points: 0,
-    rewards: []
+    rewards: [],
+    trash: [], # TODO: array of types?
+    ignore_monster_path: false,
+    skip_crystal_cave: false,
+    replace_card_in_market: false,
+    discard_number: 0,
+    spend_seven_for_two_secret_tomes: false,
+    take_secret_adjacent: false
   )
-    @index = index
-    @inventory = inventory
-    @position = position
-    @deck = deck
-    @clank = clank
-    @inventory = inventory
-    @attack_points = attack_points
-    @health = health
+    @index = index || 0
+    @inventory = inventory || []
+    @position = position || Model::Position.new
+    @deck = deck || Model::Deck.new
+    @clank = clank || 0
+    @inventory = inventory || []
+    @attack_points = attack_points || 0
+    @health = health || MAX_HEALTH
     @move_points = move_points || 0
-    @teleport = teleport
-    @coins = coins
-    @rewards = rewards
-    @skill_points = skill_points
+    @teleport = teleport || 0
+    @coins = coins || START_COINS
+    @rewards = rewards || []
+    @skill_points = skill_points || 0
+    @trash = trash || []
+    @ignore_monster_path = ignore_monster_path || false
+    @skip_crystal_cave = skip_crystal_cave || false
+    @replace_card_in_market = replace_card_in_market || false
+    @discard_number = discard_number || 0
+    @spend_seven_for_two_secret_tomes = spend_seven_for_two_secret_tomes || false
+    @take_secret_adjacent = take_secret_adjacent || false
   end
 
   def health=(value)
