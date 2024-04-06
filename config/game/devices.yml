@@ -16,7 +16,28 @@
   immediate_action:
     - dragon_clank: 3
   acquire:
-    health: 1
-    coins: 1
+    - health: 1
+    - coins: 1
   cost: 2
   total: 3
+- name: ladder
+  acquire:
+    move_points: 2
+  cost: 3
+  total: 2
+- name: dragon_shrine
+  additonal_cube: 1
+  acquire:
+    - trash: 1
+    - coins: 2
+  cost: 4
+  total: 2
+- name: the_vault
+  conditionals:
+    - environment: depths
+  cost: 3
+  dragon_attack: true
+  acquire:
+    - coins: 5
+      clank: 3
+  total: 1

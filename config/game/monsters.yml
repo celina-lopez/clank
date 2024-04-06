@@ -1,13 +1,14 @@
 - name: animated_door
   total: 2
   health: 1
-  actions:
+  acquire:
     - move_points: 1
   attack: 1
   dragon_attack: true
 - name: cave_troll
   total: 1
   health: 4
+  dragon_attack: true
   actions:
     - coin: 3
       draw: 2
@@ -15,11 +16,11 @@
     - type: environment
       logic: "depths == true"
 - name: kobold
-  total: 2
-  health: 2
+  total: 3
+  health: 1
   dragon_attack: true
   extra_cube: 1
-  actions:
+  acquire:
     - skill_points: 1
 - name: ogre
   actions:
@@ -27,3 +28,39 @@
   health: 3
   dragon_attack: true
   total: 2
+- name: overlord
+  health: 2
+  total: 2
+  arrive:
+    - clank: 1
+  acquire:
+    - draw: 2
+- name: watcher
+  total: 3
+  health: 3
+  arrive:
+    - clank: 1
+  acquire:
+    - coins: 2
+      other_clank: 1
+- name: belcher
+  total: 2
+  health: 2
+  dragon_attack: true
+  acquire:
+    - coins: 4
+      clank: 2
+- name: crystal_golem
+  total: 2
+  health: 3
+  acquire:
+    - skill_points: 3
+  conditionals:
+    - type: environment
+      logic: "depths == true"
+- name: orc_grunt
+  total: 3
+  health: 2
+  dragon_attack: true
+  acquire:
+    - coins: 3
