@@ -9,12 +9,45 @@
       value:
         skill_points: 2
       logic: monkey_idol == true
-- name: invoker_of_the_ancients
+- name: cleric_of_the_sun
+  cost: 3
+  total: 2
+  acquire:
+    - health: 1
+  actions:
+    - attack_points: 1
+      skill_points: 2
+  victory_points: 1
+- name: dwarven_peddlar
+  cost: 2
+  total: 1
+  actions:
+    - coins: 2
+      move_points: 1
+  conditionals:
+    - type: item
+      value:
+        victory_points: 4
+      logic: chalice,dragon_egg,monkey_idol >= 2 fix this...
+- name: gem_collector
   cost: 4
   total: 1
   actions:
-    - teleport: 1
-      clank: 1
+    - clank: -2
+      gems: -2 # TODO: uh oh
+      skill_points: 2
+  victory_points: 2
+- name: kobold_merchant
+  cost: 3
+  total: 1
+  actions:
+    - coins: 2
+  victory_points: 1
+  conditionals:
+    - type: item
+      value:
+        skill_points: 2
+      logic: artifact == true
 - name: master_burglar
   cost: 3
   total: 2
@@ -23,3 +56,132 @@
     - trash:
         burgle: 1
       skill_points: 2
+- name: mister_whiskers
+  cost: 1
+  dragon_attack: true
+  total: 1
+  actions:
+    - clank: -2
+    - dragon_attack: true
+  victory_points: 1
+- name: monkey_bot_3000
+  cost: 5
+  total: 1
+  actions:
+    - clank: 3
+      draw: 3
+  dragon_attack: true
+  victory_points: 1
+- name: rebel_captain
+  cost: 3
+  total: 1
+  actions:
+    - skill_points: 2
+  conditionals:
+    - type: item
+      value:
+        draw: 1
+      logic: companion == true
+  victory_points: 1
+- name: invoker_of_the_ancients
+  cost: 4
+  total: 1
+  actions:
+    - clank: 1
+      teleport: 1
+  victory_points: 1
+- name: rebel_miner
+  cost: 2
+  total: 1
+  actions:
+    - coins: 2
+  conditionals:
+    - type: item
+      value:
+        draw: 1
+      logic: companion == true
+  victory_points: 1
+- name: rebel_scout
+  cost: 3
+  total: 1
+  actions:
+    - move_points: 2
+  conditionals:
+    - type: item
+      value:
+        draw: 1
+      logic: companion == true
+  victory_points: 1
+- name: rebel_soldier
+  cost: 2
+  total: 1
+  actions:
+    - attack_points: 2
+  conditionals:
+    - type: item
+      value:
+        draw: 1
+      logic: companion == true
+  victory_points: 1
+- name: the_duke
+  cost: 5
+  total: 1
+  actions:
+    - attack_points: 2
+      skill_points: 2
+  conditionals:
+    - type: item
+      value:
+        draw: 1
+      logic: coins / 5
+- name: the_mountain_king
+  cost: 6
+  total: 1
+  actions:
+    - skill_points: 2
+  conditionals:
+    - type: item
+      value:
+        attack_points: 1
+      logic: crown == true
+    - type: item
+      value:
+        move_points: 1
+      logic: crown == true
+  victory_points: 3
+- name: the_queen_of_hearts
+  cost: 6
+  total: 1
+  actions:
+    - skill_points: 3
+      attack_points: 1
+  conditionals:
+    - type: item
+      value:
+        health: 1
+      logic: crown == true
+  victory_points: 3
+- name: treasure_hunter
+  cost: 3
+  total: 2
+  actions:
+    - skill_points: 2
+      attack_points: 2
+      replace_card: 1
+  victory_points: 1
+- name: wizard
+  cost: 6
+  total: 1
+  actions:
+    - skill_points: 3
+  conditionals:
+    - type: item
+      value:
+        victory_points: 2
+      logic: secret_tome *
+- name: tunnel_guide
+  cost: 1
+  total: 2
+  actions:
+    - move_points: 1
+      attack_points: 1
