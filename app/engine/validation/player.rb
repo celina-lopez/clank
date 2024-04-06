@@ -56,8 +56,8 @@ class Validation::Player < Validation::Base
       if condition['type'] == 'can_buy'
         if condition['has'].present?
           current_player.inventory.any? { |x| x['name'] == condition['has'] } # TODO: double check item theme all
-        elsif condition['has_in_hand'].present?
-          current_player.deck.active.any? { |x| x['name'] == condition['has_in_hand'] }
+        elsif condition['has_companion'].present?
+          current_player.deck.active.any? { |x| Base::COMPANION_NAMES.include?(x['name']) }
         elsif condition['two_of'].present?
           current_player.inventory.select { |x| x['name'] == condition['two_of'] }.count >= 2
         elsif condition['is_in'].present?

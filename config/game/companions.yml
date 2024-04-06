@@ -84,7 +84,7 @@
     - type: action
       value:
         draw: 1
-      has_in_hand: companion
+      has_companion: true
   victory_points: 1
 - name: invoker_of_the_ancients
   cost: 4
@@ -102,7 +102,7 @@
     - type: action
       value:
         draw: 1
-      has_in_hand: companion
+      has_companion: true
   victory_points: 1
 - name: rebel_scout
   cost: 3
@@ -113,7 +113,7 @@
     - type: action
       value:
         draw: 1
-      has_in_hand: companion
+      has_companion: true
   victory_points: 1
 - name: rebel_soldier
   cost: 2
@@ -124,7 +124,7 @@
     - type: action
       value:
         draw: 1
-      has_in_hand: companion
+      has_companion: true
   victory_points: 1
 - name: the_duke
   cost: 5

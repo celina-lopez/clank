@@ -5,13 +5,16 @@ def config_yaml(name)
 end
 
 class Base
-  MISC_DECK = %w[companions gems items].flat_map { |name| config_yaml(name) }.freeze
+  COMPANION_CARDS = config_yaml('companions').freeze
+  COMPANION_NAMES = COMPANION_CARDS.map { |c| c['name'] }.freeze
+  MISC_DECK = %w[gems items].flat_map { |name| config_yaml(name) }.freeze
   DEVICE_CARDS = config_yaml('devices').freeze
   DEVICE_CARD_NAMES = DEVICE_CARDS.map { |c| c['name'] }.freeze
   MONSTER_CARDS = config_yaml('monsters').freeze
   MARKETPLACE = config_yaml('reserves').freeze
   STARTING_DECK_CARDS = config_yaml('starting_deck').freeze
-  CARDS = [MISC_DECK, DEVICE_CARDS, MONSTER_CARDS, MARKETPLACE, STARTING_DECK_CARDS].flatten
+  STARTING_GAME_CARDS = [COMPANION_CARDS, DEVICE_CARDS, MISC_DECK, MONSTER_CARDS].flatten
+  CARDS = [COMPANION_CARDS, MISC_DECK, DEVICE_CARDS, MONSTER_CARDS, MARKETPLACE, STARTING_DECK_CARDS].flatten
   CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
   MINOR_ITEMS = config_yaml('minor_items').freeze
   MAJOR_ITEMS = config_yaml('major_items').freeze

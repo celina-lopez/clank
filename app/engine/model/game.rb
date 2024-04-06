@@ -16,7 +16,7 @@ class Model::Game
   end
 
   def initialize(num_players: nil, dragon_clank: 24, deck: Model::Deck.new( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
-    Base::MISC_DECK + Base::MONSTER_CARDS,
+    Base::STARTING_GAME_CARDS,
     num_of_active_cards: 6
   ), marketplace: Base::MARKETPLACE, map: Model::Map.new, players: nil,
                  current_player_index: 0)

@@ -27,9 +27,9 @@ conditionals:
     - action
     - victory
     - after_action_trigger
-  reward: object
+  value: object
   has: string
-  has_in_hand: string
+  has_companion: boolean
   two_of: array
   is_in: string
   for_each: string
