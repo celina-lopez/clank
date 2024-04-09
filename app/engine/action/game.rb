@@ -5,6 +5,8 @@ class Action::Game < Action::Base
     gameplay_data.next_player!
     drawn_cards = gameplay_data.deck.reload_active_deck
     fullfill_immediate_actions(drawn_cards)
+    if end_game?
+    end
   end
 
   def start_game
@@ -13,7 +15,12 @@ class Action::Game < Action::Base
 
   private
 
+  def end_game?
+    # player has certain position metadata
+  end
+
   def fullfill_immediate_actions(newly_drawn_cards)
+    # TODO: dragon attack?
     immediate_actions = newly_drawn_cards.flat_map do |card|
       card.fetch('immediate_actions', [])
     end
