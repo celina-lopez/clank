@@ -3,6 +3,8 @@
 class Action::Game < Action::Base
   def end_turn
     gameplay_data.next_player!
+    # TODO: advance player if they are in a certain position
+    # then next player if they are in a certain position
     return end_game! if end_game?
 
     drawn_cards = gameplay_data.deck.reload_active_deck

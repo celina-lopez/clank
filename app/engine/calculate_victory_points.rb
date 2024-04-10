@@ -4,6 +4,7 @@ class CalculateVictoryPoints < Base
   def execute!
     gameplay_data.players.each do |player|
       player.victory_points = calculate_victory_points(player)
+      # TODO: player.is_dead = player.position.depths?
     end
     gameplay_data
   end
