@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class Action::Game < Action::Base
-  def end_turn
-    gameplay_data.next_player!
-    # TODO: advance player if they are in a certain position
-    # then next player if they are in a certain position
-    return end_game! if end_game?
+  def end_turn # rubocop:disable Metrics/AbcSize
+    loop do
+      gameplay_data.next_player!
+      break unless current_player.position.escape_tile?
 
+      current_player.position.current_position = current_player.position.current_position - 1
+      # TODO: make escape tiles minus on Map
+      # TODO: dragon attack and progress
+      return end_game! if current_player.position.end_tile?
+    end
     drawn_cards = gameplay_data.deck.reload_active_deck
     fullfill_immediate_actions(drawn_cards)
   end
@@ -19,12 +23,6 @@ class Action::Game < Action::Base
 
   def end_game!
     CalculateVictoryPoints.new(gameplay_data).execute!
-  end
-
-  def end_game?
-    false
-    # player has certain position metadata
-    # gameplay_data.current_player.position == [0, 0]
   end
 
   def fullfill_immediate_actions(newly_drawn_cards)

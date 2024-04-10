@@ -26,15 +26,15 @@ class Model::Position
   def next_to?(goal)
     graph[current_position].keys.include?(goal.to_i)
   end
-
-  %w[marketplace depths crystal_cave].each do |key|
+  # TODO: end tile, escape tile
+  %w[marketplace depths crystal_cave end_tile escape_tile].each do |key|
     define_method "#{key}?" do
       metadata[key].present?
     end
   end
 
   def metadata
-    @metadata ||= MAP.find { |x| x == current_position }.fetch('metadata', {})
+    @metadata ||= MAP.find { |x| x['tile'] == current_position }.fetch('metadata', {})
   end
 
   private
