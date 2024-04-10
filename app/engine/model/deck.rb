@@ -61,6 +61,10 @@ class Model::Deck
     draw(num_of_active_cards - active.length)
   end
 
+  def full_deck
+    deck + discarded + active
+  end
+
   private
 
   def reload_deck

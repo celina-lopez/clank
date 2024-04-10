@@ -4,7 +4,7 @@ class Model::Player
   attr_accessor :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
                 :clank, :position, :rewards, :skill_points, :trash, :ignore_monster_path, :skip_crystal_cave,
                 :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
-                :take_secret_adjacent
+                :take_secret_adjacent, :victory_points
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
@@ -41,6 +41,7 @@ class Model::Player
     discard_number: 0,
     spend_seven_for_two_secret_tomes: false,
     take_secret_adjacent: false
+    victory_points: 0
   )
     @index = index || 0
     @inventory = inventory || []
@@ -62,6 +63,7 @@ class Model::Player
     @discard_number = discard_number || 0
     @spend_seven_for_two_secret_tomes = spend_seven_for_two_secret_tomes || false
     @take_secret_adjacent = take_secret_adjacent || false
+    @victory_points = victory_points
   end
 
   def health=(value)

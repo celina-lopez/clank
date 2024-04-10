@@ -3,6 +3,10 @@
 class Action::Game < Action::Base
   def end_turn
     gameplay_data.next_player!
+    # TODO: advance player if they are in a certain position
+    # then next player if they are in a certain position
+    return end_game! if end_game?
+
     drawn_cards = gameplay_data.deck.reload_active_deck
     fullfill_immediate_actions(drawn_cards)
   end
@@ -13,7 +17,18 @@ class Action::Game < Action::Base
 
   private
 
+  def end_game!
+    CalculateVictoryPoints.new(gameplay_data).execute!
+  end
+
+  def end_game?
+    false
+    # player has certain position metadata
+    # gameplay_data.current_player.position == [0, 0]
+  end
+
   def fullfill_immediate_actions(newly_drawn_cards)
+    # TODO: dragon attack?
     immediate_actions = newly_drawn_cards.flat_map do |card|
       card.fetch('immediate_actions', [])
     end
