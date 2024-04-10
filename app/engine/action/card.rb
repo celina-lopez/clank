@@ -2,12 +2,8 @@
 
 class Action::Card < Action::Base
   def execute!
-    # TODO: clean this up plz
     card.fetch('actions', []).each do |action|
-      action.each do |k, v|
-        self.value = v
-        send(k)
-      end
+      action.each { |k, v| send(k, v) }
     end
     current_player.deck.discard(card)
     gameplay_data
@@ -19,8 +15,8 @@ class Action::Card < Action::Base
 
   %i[cards health attack_points move_points coins
      clank teleport skill_points].each do |type|
-    define_method(type) do
-      current_player.public_send("#{type}=", current_player.public_send(type) + value)
+    define_method(type) do |v|
+      current_player.public_send("#{type}=", current_player.public_send(type) + v)
     end
   end
 

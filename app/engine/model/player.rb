@@ -40,7 +40,7 @@ class Model::Player
     replace_card_in_market: false,
     discard_number: 0,
     spend_seven_for_two_secret_tomes: false,
-    take_secret_adjacent: false
+    take_secret_adjacent: false,
     victory_points: 0
   )
     @index = index || 0
