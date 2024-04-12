@@ -1,4 +1,12 @@
 map_1:
+  - x: -3
+    y: -4
+  - x: -2
+    y: -3
+  - x: -1
+    y: -2
+  - x: 0
+    y: -1
   - x: 0
     y: 1
   - x: 1
@@ -45,3 +53,214 @@ map_1:
     y: 6
     metadata:
       danger: 1
+  - x: 7
+    y: 2
+  - x: 7
+    y: 12
+    metadata:
+      move: 2
+  - x: 7
+    y: 13
+    metadata:
+      danger: 1
+  - x: 12
+    y: 7
+    metadata:
+      move: 2
+  - x: 13
+    y: 7
+    metadata:
+      danger: 1
+  - x: 8
+    y: 3
+    metadata:
+      locked: true
+  - x: 3
+    y: 8
+    metadata:
+      locked: true
+  - x: 8
+    y: 13
+    metadata:
+      locked: true
+  - x: 13
+    y: 8
+    metadata:
+      locked: true
+  - x: 9
+    y: 3
+  - x: 9
+    y: 4
+    metadata:
+      danger: 1
+  - x: 4
+    y: 9
+    metadata:
+      danger: 1
+  - x: 9
+    y: 10
+    metadata:
+      move: 2
+  - x: 10
+    y: 9
+    metadata:
+      move: 2
+  - x: 10
+    y: 15
+  - x: 12
+    y: 16
+    metadata:
+      danger: 1
+  - x: 16
+    y: 12
+    metadata:
+      danger: 1
+  - x: 12
+    y: 17
+  - x: 13
+    y: 14
+  - x: 14
+    y: 13
+  - x: 14
+    y: 9
+    metadata:
+      danger: 1
+  - x: 9
+    y: 14
+    metadata:
+      danger: 1
+  - x: 14
+    y: 15
+  - x: 15
+    y: 14
+  - x: 14
+    y: 20
+    metadata:
+      locked: true
+  - x: 20
+    y: 14
+    metadata:
+      locked: true
+  - x: 15
+    y: 20
+  - x: 20
+    y: 15
+  - x: 15
+    y: 10
+  - x: 16
+    y: 21
+  - x: 21
+    y: 16
+  - x: 16
+    y: 17
+  - x: 17
+    y: 16
+  - x: 16
+    y: 22
+  - x: 22
+    y: 16
+  - x: 16
+    y: 27
+    metadata:
+      danger: 1
+  - x: 16
+    y: 11
+    metadata:
+      move: 1
+  - x: 11
+    y: 16
+    metadata:
+      move: 1
+  - x: 17
+    y: 12
+  - x: 17
+    y: 13
+    metadata:
+      move: 1
+  - x: 13
+    y: 17
+    metadata:
+      move: 1
+  - x: 17
+    y: 23
+  - x: 23
+    y: 17
+  - x: 17
+    y: 28
+    metadata:
+      danger: 1
+      move: 1
+  - x: 28
+    y: 17
+    metadata:
+      danger: 1
+      move: 1
+  - x: 18
+    y: 13
+    metadata:
+      danger: 2
+  - x: 13
+    y: 18
+    metadata:
+      danger: 2
+  - x: 18
+    y: 23
+  - x: 23
+    y: 18
+  - x: 19
+    y: 20
+  - x: 20
+    y: 19
+  - x: 19
+    y: 24
+  - x: 24
+    y: 19
+  - x: 19
+    y: 25
+    metadata:
+      danger: 1
+  - x: 25
+    y: 19
+    metadata:
+      danger: 1
+  - x: 20
+    y: 21
+  - x: 21
+    y: 20
+  - x: 21
+    y: 26
+    metadata:
+      locked: true
+  - x: 26
+    y: 21
+    metadata:
+      locked: true
+  - x: 23
+    y: 24
+  - x: 24
+    y: 23
+  - x: 23
+    y: 28
+    metadata:
+      locked: true
+  - x: 28
+    y: 23
+    metadata:
+      locked: true
+  - x: 23
+    y: 31
+    metadata:
+      move: 2
+  - x: 31
+    y: 23
+    metadata:
+      move: 2
+  - x: 23
+    y: 32
+    metadata:
+      danger: 2
+  - x: 32
+    y: 23
+    metadata:
+      danger: 2
+      # start on 24
