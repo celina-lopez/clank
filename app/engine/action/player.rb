@@ -19,14 +19,23 @@ class Action::Player < Action::Base
 
   alias teleport move
 
+  def redeem_reward
+    # TODO: value should be index
+    reward = current_player.rewards[value]
+    reward.each do |action_key, action_value|
+      redeem_action_on_card(action_key, action_value)
+    end
+    current_player.rewards = []
+  end
+
   private
 
   def redeem_cost(card)
     current_player.skill_points -= card['cost'] if card['cost'].present?
   end
 
-  def redeem_health(card)
-    current_player.attack_points -= card['health'] if card['health'].present?
+  def pay_with_attack_points(card)
+    current_player.attack_points -= card['health']
   end
 
   def take_card
@@ -40,15 +49,13 @@ class Action::Player < Action::Base
   end
 
   def redeem_card(card)
-    redeem_health(card)
+    pay_with_attack_points(card) if card['health'].present?
+    pay_with_attack_points(card) if card['health'].present?
     redeem_cost(card)
     card_on_acquire(card)
-    if card['health'].present?
+    return if card['health'].present?
 
-      card['actions'].one? ? redeem_monster_reward : add_reward_options
-    else
-      current_player.deck.discarded << card unless Base::DEVICE_CARD_NAMES.include?(card['name'])
-    end
+    current_player.deck.discarded << card unless Base::DEVICE_CARD_NAMES.include?(card['name'])
   end
 
   def card_on_acquire(card)
@@ -61,14 +68,8 @@ class Action::Player < Action::Base
     Action::Card.new(gameplay_data, type: nil, value: action_value).send(action_type)
   end
 
-  def redeem_monster_reward
-    (rewards = monster.fetch('actions', []).first).each_key do |key|
-      redeem_action_on_card(key, rewards[key])
-    end
-  end
-
   def add_reward_options
-    # TODO: choose rewards?
+    # TODO: choose rewards, also could be anything
     current_player.rewards = monster.fetch('actions', [])
   end
 

@@ -2,16 +2,16 @@
   total: 2
   health: 1
   acquire:
-    - move_points: 1
+    move_points: 1
   attack: 1
   dragon_attack: true
 - name: cave_troll
   total: 1
   health: 4
   dragon_attack: true
-  actions:
-    - coin: 3
-      draw: 2
+  acquire:
+    coin: 3
+    draw: 2
   conditionals:
     - type: action
       is_in: depths
@@ -21,7 +21,7 @@
   dragon_attack: true
   extra_cube: 1
   acquire:
-    - skill_points: 1
+    skill_points: 1
 - name: ogre
   actions:
     - coin: 5
@@ -34,27 +34,27 @@
   arrive:
     - clank: 1
   acquire:
-    - draw: 2
+    draw: 2
 - name: watcher
   total: 3
   health: 3
   arrive:
     - clank: 1
   acquire:
-    - coins: 2
-      other_clank: 1
+    coins: 2
+    other_clank: 1
 - name: belcher
   total: 2
   health: 2
   dragon_attack: true
   acquire:
-    - coins: 4
-      clank: 2
+    coins: 4
+    clank: 2
 - name: crystal_golem
   total: 2
   health: 3
   acquire:
-    - skill_points: 3
+    skill_points: 3
   conditionals:
     - type: action
       is_in: crystal_cave
@@ -63,4 +63,4 @@
   health: 2
   dragon_attack: true
   acquire:
-    - coins: 3
+    coins: 3
