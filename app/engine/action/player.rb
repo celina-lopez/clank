@@ -8,7 +8,13 @@ class Action::Player < Action::Base
   end
 
   def buy_card
-    card = take_card
+    card = gameplay_data.deck.active.find { |x| x['name'] == value }
+    if card.present?
+      discard_from_deck(card)
+    else
+      card = gameplay_data.marketplace.find { |x| x['name'] == value }
+      card['total'] -= 1
+    end
     redeem_card(card)
   end
 
@@ -31,31 +37,20 @@ class Action::Player < Action::Base
   private
 
   def redeem_cost(card)
-    current_player.skill_points -= card['cost'] if card['cost'].present?
+    current_player.skill_points -= card['cost']
   end
 
   def pay_with_attack_points(card)
     current_player.attack_points -= card['health']
   end
 
-  def take_card
-    card = gameplay_data.deck.active.find { |x| x['name'] == value }
-    discard_from_deck(card)
-    if card.nil?
-      card = gameplay_data.marketplace.find { |x| x['name'] == value }
-      card['total'] -= 1 if card.present?
-    end
-    card
-  end
-
   def redeem_card(card)
     pay_with_attack_points(card) if card['health'].present?
-    pay_with_attack_points(card) if card['health'].present?
-    redeem_cost(card)
+    redeem_cost(card) if card['cost'].present?
     card_on_acquire(card)
-    return if card['health'].present?
+    return if card['health'].present? || !Base::DEVICE_CARD_NAMES.include?(card['name'])
 
-    current_player.deck.discarded << card unless Base::DEVICE_CARD_NAMES.include?(card['name'])
+    current_player.deck.discarded << card
   end
 
   def card_on_acquire(card)
@@ -68,17 +63,7 @@ class Action::Player < Action::Base
     Action::Card.new(gameplay_data, type: nil, value: action_value).send(action_type)
   end
 
-  def add_reward_options
-    # TODO: choose rewards, also could be anything
-    current_player.rewards = monster.fetch('actions', [])
-  end
-
-  def monster
-    @monster ||= Validation::MONSTER_CARDS.find { |card| card['name'] == value }
-  end
-
   def discard_from_deck(card)
-    return unless card.present?
     return if card['name'] == 'goblin'
 
     gameplay_data.deck.destroy!(card)
