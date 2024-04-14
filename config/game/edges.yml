@@ -263,4 +263,114 @@ map_1:
     y: 23
     metadata:
       danger: 2
-      # start on 24
+  - x: 24
+    y: 33
+    metadata:
+      locked: true
+  - x: 33
+    y: 24
+    metadata:
+      locked: true
+  - x: 29
+    y: 25
+  - x: 26
+    y: 30
+    metadata:
+      danger: 1
+  - x: 30
+    y: 26
+    metadata:
+      danger: 1
+  - x: 27
+    y: 22
+  - x: 31
+    y: 27
+    metadata:
+      move: 2
+  - x: 27
+    y: 36
+  - x: 29
+    y: 34
+    metadata:
+      danger: 1
+      move: 2
+  - x: 34
+    y: 29
+    metadata:
+      danger: 1
+      move: 2
+  - x: 31
+    y: 32
+    metadata:
+      danger: 2
+  - x: 32
+    y: 31
+    metadata:
+      danger: 2
+  - x: 31
+    y: 36
+  - x: 36
+    y: 31
+  - x: 32
+    y: 33
+    metadata:
+      locked: true
+  - x: 33
+    y: 32
+    metadata:
+      locked: true
+  - x: 32
+    y: 37
+    metadata:
+      danger: 1
+  - x: 37
+    y: 32
+    metadata:
+      danger: 1
+  - x: 32
+    y: 38
+    metadata:
+      move: 2
+  - x: 38
+    y: 32
+    metadata:
+      move: 2
+  - x: 33
+    y: 34
+    metadata:
+      danger: 2
+  - x: 34
+    y: 33
+    metadata:
+      danger: 2
+  - x: 34
+    y: 35
+  - x: 35
+    y: 34
+  - x: 34
+    y: 38
+    metadata:
+      danger: 2
+  - x: 38
+    y: 34
+    metadata:
+      danger: 2
+  - x: 35
+    y: 38
+    metadata:
+      move: 2
+      danger: 1
+  - x: 38
+    y: 35
+    metadata:
+      move: 2
+      danger: 1
+  - x: 36
+    y: 37
+    metadata:
+      locked: true
+  - x: 37
+    y: 36
+    metadata:
+      locked: true
+      # TODO: double check
