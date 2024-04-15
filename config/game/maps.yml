@@ -1,27 +1,28 @@
 map_1:
   - tile: -1
     frontend_data:
-      x: 0
-      y: 0
-      player_x: -.5
+      x: -6
+      y: 0.9
+      player_x: -2.5
       player_y: 0
   - tile: -2
     frontend_data:
-      x: 0
-      y: 0
-      player_x: -.5
+      x: -12
+      y: 0.9
+      player_x: -5
       player_y: 0
   - tile: -3
     frontend_data:
-      x: 0
-      y: 0
-      player_x: -.5
+      x: -17
+      y: 0.9
+      player_x: -7
       player_y: 0
   - tile: -4
     frontend_data:
-      x: 0
-      y: 0
-      player_x: -.5
+      x: -23
+      y: 0.9
+      player_x: -9
+      player_y: 0
   - tile: 0
     frontend_data:
       x: 0
@@ -108,149 +109,134 @@ map_1:
     tags:
       - health
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: 0
+      y: -10
+      player_x: -.5
+      player_y: -4
   - tile: 12
     tags:
       - minor_item
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -7
+      y: -10
+      player_x: -3
+      player_y: -4
   - tile: 13
     tags:
       - cave
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -12
+      y: -10
+      player_x: -5
+      player_y: -4
   - tile: 14
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -17
+      y: -10
+      player_x: -7
+      player_y: -4
   - tile: 15
     tags:
       - minor_item
     frontend_data:
       x: -23
-      y: -6
+      y: -10
       player_x: -9
-      player_y: -2.5
+      player_y: -4
   - tile: 16
-    tags:
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: 0
+      y: -15
+      player_x: -.5
+      player_y: -7
   - tile: 17
     tags:
       - cave
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -7
+      y: -15
+      player_x: -3
+      player_y: -7
   - tile: 18
     tags:
       - market
       - minor_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
+      x: -12
+      y: -15
       player_x: -9
-      player_y: -2.5
+      player_y: -7
   - tile: 19
     tags:
       - market
       - minor_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -17
+      y: -15
+      player_x: -7
+      player_y: -7
   - tile: 20
-    tags:
-      - depths
     frontend_data:
       x: -23
-      y: -6
+      y: -15
       player_x: -9
-      player_y: -2.5
+      player_y: -7
   - tile: 21
     tags:
       - cave
       - minor_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -28
+      y: -15
+      player_x: -10
+      player_y: -7
   - tile: 22
     tags:
       - cave
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -4
+      y: -18
+      player_x: -3
+      player_y: -8
   - tile: 23
     tags:
       - market
-      - depths
     frontend_data:
-      x: -23
-      y: -6
+      x: -12
+      y: -18
       player_x: -9
-      player_y: -2.5
+      player_y: -8
   - tile: 24
     tags:
       - market
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -17
+      y: -18
+      player_x: -7
+      player_y: -8
   - tile: 25
     tags:
       - cave
       - major_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -21.5
+      y: -18.5
+      player_x: -8
+      player_y: -8.3
   - tile: 26
     tags:
       - major_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -29
+      y: -19
+      player_x: -10
+      player_y: -8
   - tile: 27
-    tags:
-      - depths
     frontend_data:
       x: 0
-      y: -15
+      y: -22
       player_x: -0.5
-      player_y: -5
+      player_y: -10
     items:
       - name: monkey_idol_hear
         victory_points: 5
@@ -267,12 +253,11 @@ map_1:
   - tile: 28
     tags:
       - major_item
-      - depths
     frontend_data:
-      x: -23
-      y: -6
-      player_x: -9
-      player_y: -2.5
+      x: -3
+      y: -22
+      player_x: -0.5
+      player_y: -10
   - tile: 29
     tags:
       - health

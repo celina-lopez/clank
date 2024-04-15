@@ -14,6 +14,9 @@ tiles:
   health:
     size: 20
     color: 0xbd6826
+  market:
+    size: 20
+    color: 0xbd6826
 preload_images:
   background: "/images/basic.png"
   player: "/images/pawn.png"

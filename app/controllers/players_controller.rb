@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
 
   def show
     @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'phaser.yml'))
+    @temp_map_hack = YAML.load_file(Rails.root.join('config', 'game', 'maps.yml'))['map_1']
   end
 
   private
