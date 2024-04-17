@@ -55,13 +55,14 @@
 
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
   // var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
+  const mapEdges = <%= @map_edges.to_json.html_safe %>;
   // TODO: remove this map hack
   var mapTiles = <%= @temp_map_hack.to_json.html_safe %>;
 
   function generateTileMap(thiz) {
     mapTiles.forEach((tileData) => {
-      let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'];
-      let tile = thiz.add.rectangle(config.size + 20, config.size, config.size, config.size, config.color);
+      let configTile = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'];
+      let tile = thiz.add.rectangle(configTile.size + 20, configTile.size, configTile.size, configTile.size, configTile.color);
       tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
       tile.setAlpha(0.8);
       tile.setInteractive(); 
@@ -76,6 +77,34 @@
       });
     });
   }
+function createArrow(thiz, edge) {
+    var x_tile = mapTiles.find((tile) => tile.tile === edge.x).frontend_data;
+    var y_tile = mapTiles.find((tile) => tile.tile === edge.y).frontend_data;
+    var line = new Phaser.Geom.Line(x_tile.x , x_tile.y, y_tile.x, y_tile.y);
+
+    var graphics = thiz.add.graphics({ lineStyle: { width: 3, color: 0x00ff00 } });
+    graphics.strokeLineShape(line);
+
+    var arrowSize = 10;
+    var angle = Phaser.Math.Angle.Between(x_tile.x, x_tile.y, y_tile.x, y_tile.y);
+    var arrowEndX = 3 - Math.cos(angle) * arrowSize;
+    var arrowEndY = 2 - Math.sin(angle) * arrowSize;
+
+    var arrowLeftX = arrowEndX + Math.cos(angle + Math.PI / 8) * arrowSize;
+    var arrowLeftY = arrowEndY + Math.sin(angle + Math.PI / 8) * arrowSize;
+
+    var arrowRightX = arrowEndX + Math.cos(angle - Math.PI / 8) * arrowSize;
+    var arrowRightY = arrowEndY + Math.sin(angle - Math.PI / 8) * arrowSize;
+
+    graphics.strokeLineShape(new Phaser.Geom.Line(arrowLeftX, arrowLeftY, 100, 50));
+    graphics.strokeLineShape(new Phaser.Geom.Line(arrowRightX, arrowRightY, 100, 50));
+}
+
+function createEdges(thiz) {
+    mapEdges.forEach((edge) => {
+      createArrow(thiz, edge);
+    });
+  }
 
   function addPlayerToMap(thiz){
     var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
@@ -88,5 +117,6 @@
     this.add.image(0, 0, 'background').setOrigin(0).setScale(.87);
     generateTileMap(this);
     addPlayerToMap(this);
+    createEdges(this);
   }
 </script>

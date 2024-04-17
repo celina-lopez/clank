@@ -7,6 +7,8 @@ class PlayersController < ApplicationController
 
   def show
     @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'phaser.yml'))
+    # TODO: update game to have the map type and load the correct map
+    @map_edges = YAML.load_file(Rails.root.join('config', 'game', 'edges.yml'))['map_1']
     @temp_map_hack = YAML.load_file(Rails.root.join('config', 'game', 'maps.yml'))['map_1']
   end
 
