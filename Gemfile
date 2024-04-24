@@ -30,6 +30,7 @@ gem 'bootstrap', '~> 5.3.2'
 gem 'font-awesome-sass'
 gem 'importmap-rails', '~> 2.0'
 gem 'light-service'
+gem 'react_on_rails'
 gem 'tailwindcss-rails', '~> 2.3'
 
 group :development, :test do

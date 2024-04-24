@@ -15,7 +15,7 @@
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Map" checked />
   <div role="tabpanel" class="tab-content border-base-300 rounded-box p-6">
     <div class="overflow-y-scroll h-[100vh]">
-      <div id="boardgame"></div>
+      <%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
     </div>
   </div>
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Dragon" />
@@ -32,77 +32,3 @@
   </div>
 </div>
 
-<script>
-  var config = {
-    type: Phaser.AUTO,
-    height: <%= @phaser_config.dig('config','height') %>,
-    width: <%= @phaser_config.dig('config','width') %>,
-    parent: 'boardgame',
-    scene: {
-        preload: preload,
-        create: create
-    },
-    transparent: true,
-  };
-
-  var game = new Phaser.Game(config);
-
-  function preload() {
-    <% @phaser_config['preload_images'].each do |name, source| %>
-      this.load.image("<%= name %>", "<%= source %>");
-    <% end %>
-  }
-
-  const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
-  // var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
-  const mapEdges = <%= @map_edges.to_json.html_safe %>;
-  // TODO: remove this map hack
-  var mapTiles = <%= @temp_map_hack.to_json.html_safe %>;
-
-  function generateTileMap(thiz) {
-    mapTiles.forEach((tileData) => {
-      let configTile = typeOfTileConfig[tileData.tags && tileData.tags[0]] || typeOfTileConfig.default;
-      let tile = thiz.add.rectangle(configTile.size + 20, configTile.size, configTile.size, configTile.size, configTile.color);
-      tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
-      tile.setAlpha(0.8);
-      tile.setInteractive(); 
-      tile.on('pointerover', function () {
-        this.setAlpha(1); // Full opacity on hover
-      });
-      tile.on('pointerout', function () {
-        this.setAlpha(0.8); // Restore transparency
-      });
-      tile.on('pointerdown', function () {
-        window.app.action.send({ type:"move", value:`${tileData.tile}`, player_index: <%= player.dig('index') %>});
-      });
-    });
-  }
-function createArrow(thiz, edge) {
-    var x_tile = mapTiles.find((tile) => tile.tile === edge.x).frontend_data;
-    var y_tile = mapTiles.find((tile) => tile.tile === edge.y).frontend_data;
-    var line = new Phaser.Geom.Line(x_tile.x + 20 , x_tile.y, y_tile.x, y_tile.y);
-
-    var graphics = thiz.add.graphics({ lineStyle: { width: 3, color: 0x00ff00 } });
-    graphics.strokeLineShape(line);
-
-}
-  function createEdges(thiz) {
-    mapEdges.forEach((edge) => {
-      createArrow(thiz, edge);
-    });
-  }
-
-  function addPlayerToMap(thiz){
-    var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
-    var player = thiz.add.image(0,0, 'player')
-    player.setOrigin(playerPosition.frontend_data.player_x, playerPosition.frontend_data.player_y);
-    player.setScale(.1);
-  }
-
-  function create() {
-    this.add.image(0, 0, 'background').setOrigin(0).setScale(.87);
-    generateTileMap(this);
-    addPlayerToMap(this);
-    createEdges(this);
-  }
-</script>
