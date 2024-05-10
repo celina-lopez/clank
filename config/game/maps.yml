@@ -39,8 +39,8 @@ map_1:
     frontend_data:
       x: -1.68
       y: -.57
-      player_x: -2.5
-      player_y: -1
+      player_x: -3.5
+      player_y: -1.3
   - tile: 3
     tags:
       - minor_item
