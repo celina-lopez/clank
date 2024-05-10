@@ -1,24 +1,27 @@
 tiles:
   default:
-    size: 20
+    size: 60
     color: 0xe7116c
   cave:
-    size: 20
+    size: 63
     color: 0x00a9ac
   minor_item:
-    size: 20
+    size: 60
     color: 0xe4a3b7
   major_item:
-    size: 20
+    size: 60
     color: 0xbd6826
   health:
-    size: 20
+    size: 60
     color: 0xbd6826
   market:
-    size: 20
+    size: 60
+    color: 0xbd6826
+  monkey:
+    size: 130
     color: 0xbd6826
 preload_images:
-  background: "/images/basic.png"
+  background: "/images/game_with_tiles.png"
   player: "/images/pawn.png"
 config:
   height: 710
