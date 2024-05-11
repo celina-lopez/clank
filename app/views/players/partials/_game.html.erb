@@ -77,13 +77,14 @@
         window.app.action.send({ type:"move", value:`${tileData.tile}`, player_index: <%= player.dig('index') %>});
       });
     });
-  }
+  };
 
   function addPlayerToMap(thiz){
     var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
-    var player = thiz.add.image(0,0, 'player')
-    player.setOrigin(playerPosition.frontend_data.player_x, playerPosition.frontend_data.player_y);
-    player.setScale(.1);
+    let config = typeOfTileConfig[playerPosition.tags && playerPosition.tags[0] || 'default'] || typeOfTileConfig['default'];
+    let size = config.size || 20;
+    var player = thiz.add.image(size + 20, size, 'player')
+    player.setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
 
   function create() {

@@ -22,7 +22,7 @@ tiles:
     color: 0xbd6826
 preload_images:
   background: "/images/game_with_tiles.png"
-  player: "/images/pawn.png"
+  player: "/images/player1.png"
 config:
   height: 710
   width: 700
