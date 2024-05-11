@@ -52,6 +52,9 @@
     <% @phaser_config['preload_images'].each do |name, source| %>
       this.load.image("<%= name %>", "<%= source %>");
     <% end %>
+    <% @game.data['players'].each do |player| %>
+      this.load.image("player<%= player['index'].to_i %>", "/images/player<%= player['index'].to_i %>.png");
+    <% end %>
   }
 
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
@@ -79,16 +82,20 @@
     });
   };
 
-  function addPlayerToMap(thiz){
-    var playerPosition = mapTiles.find((tile) => tile.tile === <%= player.dig('position', 'current_position').to_i %>);
+  function addPlayerToMap(thiz, position, index){
+    var playerPosition = mapTiles.find((tile) => tile.tile === position);
     let config = typeOfTileConfig[playerPosition.tags && playerPosition.tags[0] || 'default'] || typeOfTileConfig['default'];
     let size = config.size || 20;
-    var player = thiz.add.image(size + 20, size, 'player')
+    console.log("player" + index)
+    var player = thiz.add.image(size + 20, size, "player" + index)
     player.setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
 
   function create() {
     generateTileMap(this);
-    addPlayerToMap(this);
+    <% @game.data['players'].each do |player| %>
+      addPlayerToMap(this, <%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
+      console.log( <%= player['position']['current_position'].to_i %>, <%= player['index'] %>);
+    <% end %>
   }
 </script>
