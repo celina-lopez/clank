@@ -95,7 +95,6 @@
     generateTileMap(this);
     <% @game.data['players'].each do |player| %>
       addPlayerToMap(this, <%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
-      console.log( <%= player['position']['current_position'].to_i %>, <%= player['index'] %>);
     <% end %>
   }
 </script>
