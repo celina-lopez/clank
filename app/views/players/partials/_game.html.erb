@@ -34,6 +34,7 @@
 </div>
 
 <script>
+  // TODO: get rid of console.log
   console.log(<%= raw @game.data.to_json %>)
   var config = {
     type: Phaser.AUTO,
@@ -82,12 +83,13 @@
       });
     });
   };
-
+  const gamePlayers = {}
   function addPlayerToMap(thiz, position, index){
     var playerPosition = mapTiles.find((tile) => tile.tile === position);
     let config = typeOfTileConfig[playerPosition.tags && playerPosition.tags[0] || 'default'] || typeOfTileConfig['default'];
     let size = config.size || 20;
     var player = thiz.add.image(size + 20, size, "player" + index)
+    gamePlayers[index] = player;
     player.setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
 

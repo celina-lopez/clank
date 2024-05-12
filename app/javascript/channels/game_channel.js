@@ -16,7 +16,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
 
   received(data) {
     let player = data['players'][playerId];
-    console.log(`player ${playerId}`, data['players'][playerId]);
+    console.log(`player ${playerId}`, player) 
     let cardTemplate =  document.getElementById('card-template');
     // TODO: fix populate cards function when i get final cards
     function populateCards(prefix, cards, playerHand=false) {
@@ -36,5 +36,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     populateCards('player', player['deck']['active'], true);
     populateCards('active', data['deck']['active']);
     populateCards('marketplace', data['marketplace']);
+    var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
+    gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
 });
