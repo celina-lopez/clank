@@ -46,7 +46,7 @@ class Model::Player
     @index = index || 0
     @inventory = inventory || []
     @position = position || Model::Position.new
-    @deck = deck || Model::Deck.new
+    @deck = deck || Model::Deck.new(Base::STARTING_DECK_CARDS)
     @clank = clank || 0
     @inventory = inventory || []
     @attack_points = attack_points || 0

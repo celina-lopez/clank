@@ -15,7 +15,7 @@ class Model::Game
     )
   end
 
-  def initialize(num_players: nil, dragon_clank: 24, deck: Model::Deck.new( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists
+  def initialize(num_players: nil, dragon_clank: 24, deck: Model::Deck.new( # rubocop:disable Metrics/ParameterLists
     Base::STARTING_GAME_CARDS,
     num_of_active_cards: 6
   ), marketplace: Base::MARKETPLACE, map: Model::Map.new, players: nil,
@@ -26,9 +26,7 @@ class Model::Game
     @deck = deck
     @marketplace = marketplace
     @players = if num_players.present?
-                 num_players.times.map do |i|
-                   Model::Player.new(i)
-                 end
+                 initialize_players(num_players)
                else
                  players
                end
