@@ -21,7 +21,7 @@ class Action::Card < Action::Base
   end
 
   def dragon_clank
-    gameplay_data.dragon_clank += value
+    gameplay_data.dragon.clank += value
   end
 
   def trash

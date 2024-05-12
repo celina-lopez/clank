@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Model::Dragon
-  attr_accessor :position, :clank
+  attr_accessor :position
+  attr_reader :clank
 
-  MAX_CLANK = 28
+  MAX_CLANK = 24
   MAX_POSITION = 6
 
   def self.from_json(json)
@@ -21,5 +22,9 @@ class Model::Dragon
                   position
                 end
     @clank = clank
+  end
+
+  def clank=(value)
+    @clank = [value, MAX_CLANK].max
   end
 end
