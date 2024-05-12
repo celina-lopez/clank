@@ -29,7 +29,10 @@
   </div>
    <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="History" />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    TODO:  add history
+    TODO:  add history, see how a full game performs...
+    <% @game.history.each do |history| %>
+      <div><%= raw history.to_json %></div>
+    <% end %>
   </div>
 </div>
 
