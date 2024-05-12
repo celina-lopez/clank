@@ -6,8 +6,9 @@ class GamesController < ApplicationController
   end
 
   def create
+    # TODO: create frontend for new game
     engine = Engine.new.execute(type: 'start_game', value: '3')
-    game = Game.create!(gameplay_data: engine.gameplay_data)
+    game = Game.create!(data: engine.gameplay_data, history: engine.history)
     redirect_to game_path(game)
   end
 
@@ -15,5 +16,11 @@ class GamesController < ApplicationController
     game = Game.find(params[:id])
     engine = Engine.new(game.data)
     engine.execute(type: params[:type], value: params[:value])
+  end
+
+  private
+
+  def create_game_params
+    params.require(:game).permit(:num_of_players)
   end
 end

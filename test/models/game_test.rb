@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  data       :json             not null
+#  history    :json             not null
 #  password   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

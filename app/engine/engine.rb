@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 class Engine < Base
-  def self.from_json(json)
+  attr_accessor :history
+
+  def self.from_json(json, history: [])
     data = Model::Game.from_json(json)
-    new(data)
+    new(data, history:)
+  end
+
+  def initialize(gameplay_data = nil, history: [])
+    @history = history
+    super(gameplay_data)
   end
 
   def execute(type:, value: nil, player_index: nil)
@@ -11,6 +18,7 @@ class Engine < Base
     validation_klass = Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
 
+    history << { type:, value:, player_index: }
     self.gameplay_data = Action.const_get(klass).new(gameplay_data, type:, value:).execute!
   end
 
