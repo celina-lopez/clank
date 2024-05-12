@@ -36,6 +36,8 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     populateCards('player', player['deck']['active'], true);
     populateCards('active', data['deck']['active']);
     populateCards('marketplace', data['marketplace']);
+    // move player 
+    // TODO: test for current player 
     var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
     gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
