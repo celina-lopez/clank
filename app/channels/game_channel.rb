@@ -10,7 +10,7 @@ class GameChannel < ApplicationCable::Channel
     game = Game.find(params[:game_id])
     type, value, player_index = data.values_at('type', 'value', 'player_index')
     new_game_data = game.engine.execute(type:, value:, player_index:)
-    game.update!(data: new_game_data)
+    game.update!(data: JSON.parse(new_game_data.to_json))
     ActionCable.server.broadcast("game_channel_#{game.id}", new_game_data)
     # rescue StandardError => e
     # ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
