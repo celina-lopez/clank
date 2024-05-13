@@ -35,6 +35,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     };
 
     function updateStats(player) {
+      // TODO: update inventory if needed???
       ['health', 'move_points', 'attack_points', 'clank', 'skill_points'].forEach(function(stat) {
         document.getElementById(stat).innerHTML = player[stat];
       });
