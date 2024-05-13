@@ -21,7 +21,7 @@
   </div>
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Dragon" />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    TODO: add dragon
+    Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
   </div>
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Chat" />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">

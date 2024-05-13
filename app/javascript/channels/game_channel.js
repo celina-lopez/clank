@@ -33,9 +33,16 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
         index += 1;
       })
     };
+
+    function updateStats(player) {
+      ['health', 'move_points', 'attack_points', 'clank', 'skill_points'].forEach(function(stat) {
+        document.getElementById(stat).innerHTML = player[stat];
+      });
+    }
     populateCards('player', player['deck']['active'], true);
     populateCards('active', data['deck']['active']);
     populateCards('marketplace', data['marketplace']);
+    updateStats(player);
     // move player 
     // TODO: test for current player 
     var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
