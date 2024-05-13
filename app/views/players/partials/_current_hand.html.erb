@@ -24,8 +24,6 @@
   <%= render 'players/components/card', card: {}, id: "" %>
 </template >
 <script>
-  // TODO: delete console log below
-  console.log("<%= @player['index'] %>")
   function buyCard(e){
     window.app.action.send({ type: 'buy_card', value: e.dataset.name, player_index: <%= player.dig('index') %> });
   }
@@ -34,6 +32,14 @@
   }
   document.getElementById('end-turn').addEventListener('click', (e) => {
     window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
+  });
+  document.querySelectorAll('.card-parent').forEach((card) => {
+    card.addEventListener('mouseover', (e) => {
+      card.querySelector('.action-card').classList.remove('invisible');
+    });
+    card.addEventListener('mouseout', (e) => {
+      card.querySelector('.action-card').classList.add('invisible');
+    });
   });
 </script>
 <%# 🛎 💰 ❤🗱  %>

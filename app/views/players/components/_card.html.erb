@@ -1,32 +1,37 @@
 <% current_hand = false if local_assigns[:current_hand].nil? %>
-<div
-  class="bg-red-100 h-[150px]"
-  onclick='<%= current_hand ? 'executeCard(this)' : 'buyCard(this)' %>'
-  id='<%= id %>'
-  data-name="<%= card['name'] %>"
->
-  <%= card['name']&.humanize %>
-  <br/>
-  <% card.fetch('actions', []).each_with_index do |action, index| %>
-    Rewards:
-    <br>
-    <% action.each do |key, value| %>
-      - <%= key.humanize %>: <%= value %>
+<div id="card-<%= id %>" class="card-parent relative">
+  <div class="action-card invisible absolute z-10 w-[300px] left-[100px] bg-white">
+    <img src='/images/<%= card['name'] %>.jpeg' />
+    <% card.fetch('actions', []).each_with_index do |action, index| %>
+      Rewards:
+      <br>
+      <% action.each do |key, value| %>
+        - <%= key.humanize %>: <%= value %>
+        <br/>
+      <% end %>
+      <% if (card.fetch('actions', []).size > 1 && index == 0) %>
+        OR
+        <br/>
+      <% end%>
+    <% end %>
+    <% if card['victory_points'].present? %>
+      Victory Points: <%= card['victory_points'] %>
       <br/>
     <% end %>
-    <% if (card.fetch('actions', []).size > 1 && index == 0) %>
-      OR
-      <br/>
-    <% end%>
-  <% end %>
-  <% if card['victory_points'].present? %>
-    Victory Points: <%= card['victory_points'] %>
-    <br/>
-  <% end %>
-  <% if card['cost'].present? %>
-    Skill points: <%= card['cost'] %>
-  <% end %>
-  <% if card['health'].present? %>
-    Health: <%= card['health'] %>
-  <% end %>
+    <% if card['cost'].present? %>
+      Skill points: <%= card['cost'] %>
+    <% end %>
+    <% if card['health'].present? %>
+      Health: <%= card['health'] %>
+    <% end %>
+  </div>
+  <div
+    class="bg-red-100 h-[150px] w-[127px] cursor-pointer"
+    onclick='<%= current_hand ? 'executeCard(this)' : 'buyCard(this)' %>'
+    id='<%= id %>'
+    data-name="<%= card['name'] %>"
+  >
+    <img src='/images/<%= card['name'] %>.jpeg' height="127"/>
+    <%= card['name']&.humanize %>
+  </div>
 </div>
