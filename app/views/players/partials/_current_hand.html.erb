@@ -33,13 +33,16 @@
   document.getElementById('end-turn').addEventListener('click', (e) => {
     window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
   });
-  document.querySelectorAll('.card-parent').forEach((card) => {
-    card.addEventListener('mouseover', (e) => {
-      card.querySelector('.action-card').classList.remove('invisible');
+  function addListeningFunctionsToCards () {
+    document.querySelectorAll('.card-parent').forEach((card) => {
+      card.addEventListener('mouseover', (e) => {
+        card.querySelector('.action-card').classList.remove('invisible');
+      });
+      card.addEventListener('mouseout', (e) => {
+        card.querySelector('.action-card').classList.add('invisible');
+      });
     });
-    card.addEventListener('mouseout', (e) => {
-      card.querySelector('.action-card').classList.add('invisible');
-    });
-  });
+  };
+  addListeningFunctionsToCards()
 </script>
 <%# 🛎 💰 ❤🗱  %>

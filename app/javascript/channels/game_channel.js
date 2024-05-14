@@ -24,12 +24,16 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
       let index = 0;
       cards.forEach(function(card) { 
         let clone= document.importNode(cardTemplate.content, true),
-        cardClone = clone.children[0];
+          cardParent = clone.children[0],
+          cardPopup = cardParent.children[0],
+          cardClone = cardParent.children[1];
         cardClone.id =`${prefix}-card-${index}`;
+        cardPopup.children[0].src = `/images/${card['name']}.jpeg` 
+        cardClone.children[0].src = `/images/${card['name']}.jpeg` 
         cardClone.setAttribute('data-name', card['name']);
         if (playerHand) cardClone.setAttribute('onclick', 'executeCard(this)');
-        cardClone.innerHTML = `${card['name']} <br/> ${JSON.stringify(card['actions'])}`;
-        document.querySelector(`#${prefix}-cards`).appendChild(cardClone);
+        // cardPopup.innerHTML = `${card['name']} <br/> ${JSON.stringify(card['actions'])}`;
+        document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
         index += 1;
       })
     };
@@ -44,6 +48,8 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     populateCards('active', data['deck']['active']);
     populateCards('marketplace', data['marketplace']);
     updateStats(player);
+
+    addListeningFunctionsToCards();
     // move player 
     // TODO: test for current player 
     var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));

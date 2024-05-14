@@ -1,5 +1,5 @@
 <% current_hand = false if local_assigns[:current_hand].nil? %>
-<div id="card-<%= id %>" class="card-parent relative">
+<div class="card-parent relative">
   <div class="action-card invisible absolute z-10 w-[300px] left-[100px] bg-white">
     <img src='/images/<%= card['name'] %>.jpeg' />
     <% card.fetch('actions', []).each_with_index do |action, index| %>
