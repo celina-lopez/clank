@@ -32,7 +32,15 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
         cardClone.children[0].src = `/images/${card['name']}.jpeg` 
         cardClone.setAttribute('data-name', card['name']);
         if (playerHand) cardClone.setAttribute('onclick', 'executeCard(this)');
-        // cardPopup.innerHTML = `${card['name']} <br/> ${JSON.stringify(card['actions'])}`;
+        cardPopup.innerHTML += `${card['name']} <br/>`;
+        console.log(card['actions'])
+        card['actions'] && card['actions'].forEach(function (action) {
+          Object.keys(action).forEach(function(key) {
+            let value = action[key];
+            cardPopup.innerHTML += `${key}: ${value}`
+          });
+          // TODO: if another action add or 
+        });
         document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
         index += 1;
       })
