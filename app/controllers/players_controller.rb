@@ -17,8 +17,8 @@ class PlayersController < ApplicationController
   end
 
   def set_player
-    # TODO: remove hACK!
-    # @player = @game.data['players'].find { |player| player['index'] == params[:id].to_i }
-    @player = @game.data['players'].find { |player| player['index'] == @game.data['current_player_index'].to_i }
+    @player = @game.data['players'].find { |player| player['index'] == params[:id].to_i }
+    # TODO: remove hACK comment!
+    # @player = @game.data['players'].find { |player| player['index'] == @game.data['current_player_index'].to_i }
   end
 end

@@ -7,8 +7,7 @@ class Action::Game < Action::Base
       break unless current_player.position.escape_tile?
 
       current_player.position.current_position = current_player.position.current_position - 1
-      # TODO: make escape tiles minus on Map
-      # TODO: dragon attack and progress
+      # TODO: dragon attack and progress based on player position
       return end_game! if current_player.position.end_tile?
     end
     drawn_cards = gameplay_data.deck.reload_active_deck

@@ -17,11 +17,21 @@ class Validation::Player < Validation::Base
   end
 
   def move?
-    # TODO: still need to check locks
-    # TODO: health
-    distance_to = current_player.position.distance_to(value)
-    result = distance_to <= current_player.move_points
-    add_error_if_error("Need #{distance_to - current_player.move_points}", result)
+    # distance_to = current_player.position.distance_to(value)
+    next_to = current_player.position.next_to?(value)
+    add_error_if_error('Cant go to tile', next_to)
+    edge = Model::Position::EDGES.find do |x|
+      x['x'] == current_player.position.current_position && x['y'] == value.to_i
+    end
+    metadata = edge.fetch('metadata', {})
+    move_points = metadata.fetch('move', 1)
+    add_error_if_error('Not enough move points', move_points > current_player.move_points)
+    locked = metadata['locked']
+    # TODO: fix lock logic
+    add_error_if_error("Player doesn't have lock", locked && current_player.inventory.find { |x| x == 'lock' })
+    danger = metadata.fetch('danger', 0)
+    # TODO: check this
+    add_error_if_error("Player doesn't have enough health", (current_player.health - danger).positive?)
   end
 
   def teleport?

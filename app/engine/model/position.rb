@@ -33,6 +33,10 @@ class Model::Position
     end
   end
 
+  def goal_metadata(value)
+    MAP.find { |x| x['tile'] == value.to_i }.fetch('metadata', {})
+  end
+
   def metadata
     @metadata ||= MAP.find { |x| x['tile'] == current_position }.fetch('metadata', {})
   end
@@ -50,20 +54,20 @@ class Model::Position
     graph
   end
 
-  def calculate_distance_with_queue(queue, distances, goal)
-    until queue.empty?
-      current_node = queue.shift
-      current_node = current_node.to_i
+  # def calculate_distance_with_queue(queue, distances, goal)
+  #   until queue.empty?
+  #     current_node = queue.shift
+  #     current_node = current_node.to_i
 
-      break if current_node == goal
+  #     break if current_node == goal
 
-      graph[current_node].each do |neighbor, edge_weight|
-        total_distance = distances[current_node] + edge_weight
-        distances[neighbor] = total_distance
-        queue << neighbor
-      end
-      # Sort the queue based on the distances to ensure nodes with the shortest distance are explored first
-      queue.sort_by! { |node| distances[node] }
-    end
-  end
+  #     graph[current_node].each do |neighbor, edge_weight|
+  #       total_distance = distances[current_node] + edge_weight
+  #       distances[neighbor] = total_distance
+  #       queue << neighbor
+  #     end
+  #     # Sort the queue based on the distances to ensure nodes with the shortest distance are explored first
+  #     queue.sort_by! { |node| distances[node] }
+  #   end
+  # end
 end

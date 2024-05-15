@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    # TODO: create frontend for new game
+    # TODO: create frontend for new game, form
     engine = Engine.new.execute(type: 'start_game', value: '3')
     game = Game.create!(data: engine.gameplay_data, history: engine.history)
     redirect_to game_path(game)
