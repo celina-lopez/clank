@@ -32,4 +32,8 @@ class Model::Dragon
   def position=(value)
     @position = [value, POSTION_ARRAY.length - 1].min
   end
+
+  def num_of_hits
+    POSTION_ARRAY[position]
+  end
 end
