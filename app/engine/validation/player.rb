@@ -16,7 +16,7 @@ class Validation::Player < Validation::Base
     result && validate_health
   end
 
-  def move?
+  def move? # rubocop:disable Metrics/AbcSize
     next_to = current_player.position.next_to?(value)
     add_error_if_error('Cant go to tile', next_to)
     edge_metadata = current_player.position.edge_metadata(value)
