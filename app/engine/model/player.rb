@@ -79,4 +79,8 @@ class Model::Player
   def depths?
     position.depths?
   end
+
+  def dead?
+    health.negative?
+  end
 end
