@@ -34,7 +34,6 @@ class Action::Game < Action::Base
       if hit == -1
         gameplay_data.dragon.clank -= 1
       else
-        # TODO: if player dead scenario
         gameplay_data.players[hit].health -= 1
       end
     end
