@@ -26,6 +26,7 @@ class Model::Position
   def next_to?(goal)
     graph[current_position].keys.include?(goal.to_i)
   end
+
   # TODO: end tile, escape tile
   %w[marketplace depths crystal_cave end_tile escape_tile].each do |key|
     define_method "#{key}?" do
