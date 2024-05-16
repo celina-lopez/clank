@@ -10,7 +10,6 @@ class Validation::Game < Validation::Base
   end
 
   def start_game?
-    # TODO: maybe if game is empty?
     true
   end
 end

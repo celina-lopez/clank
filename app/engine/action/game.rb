@@ -46,7 +46,6 @@ class Action::Game < Action::Base
   end
 
   def fullfill_immediate_actions(newly_drawn_cards)
-    # TODO: dragon attack?
     immediate_actions = newly_drawn_cards.flat_map do |card|
       card.fetch('immediate_actions', [])
     end
