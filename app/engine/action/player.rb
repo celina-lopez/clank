@@ -39,6 +39,13 @@ class Action::Player < Action::Base
     current_player.rewards = []
   end
 
+  def redeem_inventory_item
+    inventory_item = current_player.inventory.find { |x| x == value }
+    # TODO; do inventory yaml
+    # public_send(inventory_item)
+    current_player.inventory.delete_at(current_player.inventory.index(inventory_item))
+  end
+
   private
 
   def redeem_cost(card)
@@ -53,7 +60,7 @@ class Action::Player < Action::Base
     pay_with_attack_points(card) if card['health'].present?
     redeem_cost(card) if card['cost'].present?
     card_on_acquire(card)
-    return if card['health'].present? || !Base::DEVICE_CARD_NAMES.include?(card['name'])
+    return if card['health'].present? || Base::DEVICE_CARD_NAMES.include?(card['name'])
 
     current_player.deck.discarded << card
   end

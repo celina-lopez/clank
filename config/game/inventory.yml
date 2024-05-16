@@ -1,0 +1,49 @@
+- name: greater_healing
+  total: 2
+  action:
+    - health: 2
+- name: greater_skill_points
+  total: 2
+  action:
+    - skill_points: 5
+- name: greater_treasure
+  total: 2
+  action:
+    - coins: 5
+- name: chalice
+  total: 3
+  victory_points: 7
+- name: draw_three
+  total: 2
+  action:
+    - draw: 3
+- name: healing
+  total: 3
+  action:
+    - health: 1
+- name: swiftness
+  total: 3
+  action:
+    - move_points: 1
+- name: strength
+  total: 3
+  action:
+    - attack_points: 2
+- name: skill_boost
+  total: 3
+  action:
+    - skill_points: 2
+- name: treasure
+  total: 3
+  action:
+    - coins: 2
+- name: magic_spring
+  total: 3
+  action:
+    - trash: 1
+- name: dragon_egg
+  total: 3
+  TODO: fix increase dragon, and also make sure i have the totals right
+  immediate_action:
+    - increase_dragon: 1
+  victory_points: 3
