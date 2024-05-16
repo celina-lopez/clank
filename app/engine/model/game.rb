@@ -39,6 +39,9 @@ class Model::Game
 
   def next_player!
     current_player.deck.reload_active_deck
+    current_player.move_points = 0
+    current_player.skill_points = 0
+    current_player.attack_points = 0
     self.current_player_index = (current_player_index + 1) % players.length
   end
 

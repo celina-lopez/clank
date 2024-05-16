@@ -19,9 +19,9 @@ class Action::Player < Action::Base
   end
 
   def move
+    edge_metadata = current_player.position.edge_metadata(value)
     current_player.position.current_position = value
     # TODO: if certain cards are active, then some stuff is ignored
-    edge_metadata = current_player.position.edge_metadata(value)
     current_player.move_points -= edge_metadata.fetch('move', 1)
     current_player.health -= edge_metadata.fetch('danger', 0)
   end
