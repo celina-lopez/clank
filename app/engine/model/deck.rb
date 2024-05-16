@@ -31,7 +31,7 @@ class Model::Deck
   end
 
   def discard(card)
-    active.delete_at(active.index(card))
+    active.delete_at(active.index { |x| x['name'] == card['name'] })
     discarded << card
   end
 
