@@ -23,8 +23,7 @@ class Validation::Player < Validation::Base
     move_points = edge_metadata.fetch('move', 1)
     add_error_if_error('Not enough move points', current_player.move_points >= move_points)
     locked = edge_metadata.fetch('locked', false)
-    # TODO: fix lock logic, inventory
-    add_error_if_error("Player doesn't have lock", current_player.inventory.find { |x| x == 'lock' }) if locked
+    add_error_if_error("Player doesn't have lock", current_player.inventory.find { |x| x['name'] == 'key' }) if locked
     danger = edge_metadata.fetch('danger', 0)
     add_error_if_error("Player doesn't have enough health", (current_player.health - danger).positive?)
   end
