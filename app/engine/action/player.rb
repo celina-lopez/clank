@@ -20,10 +20,15 @@ class Action::Player < Action::Base
 
   def move
     current_player.position.current_position = value
-    current_player.move_points -= current_player.position.distance_to(value)
+    # TODO: if certain cards are active, then some stuff is ignored
+    edge_metadata = current_player.position.edge_metadata(value)
+    current_player.move_points -= edge_metadata.fetch('move', 1)
+    current_player.health -= edge_metadata.fetch('danger', 0)
   end
 
-  alias teleport move
+  def teleport
+    current_player.position.current_position = value
+  end
 
   def redeem_reward
     # TODO: value should be index

@@ -15,14 +15,6 @@ class Model::Position
     Model::Position.new(json['current_position'], json['graph'])
   end
 
-  def distance_to(goal)
-    distances = Hash.new(Float::INFINITY)
-    distances[current_position] = 0
-    queue = [current_position]
-    calculate_distance_with_queue(queue, distances, goal.to_i)
-    distances[goal.to_i]
-  end
-
   def next_to?(goal)
     graph[current_position].keys.include?(goal.to_i)
   end
@@ -39,10 +31,6 @@ class Model::Position
     define_method "#{key}?" do
       metadata[key].present?
     end
-  end
-
-  def goal_metadata(value)
-    MAP.find { |x| x['tile'] == value.to_i }.fetch('metadata', {})
   end
 
   def metadata
