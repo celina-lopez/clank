@@ -8,8 +8,12 @@ class Model::Map
   end
 
   def generate_new_map # rubocop:disable Metrics/MethodLength
-    major_tokens = Base::MAJOR_ITEMS.dup.shuffle
-    minor_tokens = Base::MINOR_ITEMS.dup.shuffle
+    major_tokens = Base::MAJOR_ITEMS.dup.flat_map do |item|
+      item['total'].times.map { item }
+    end.shuffle
+    minor_tokens = Base::MINOR_ITEMS.dup.shuffle.flat_map do |item|
+      item['total'].times.map { item }
+    end.shuffle
     Base::DEFAULT_MAP.map do |tile|
       tags = tile.fetch('tags', [])
       if tags.include?('major_item')

@@ -1,12 +1,19 @@
-- name: health
-  health: 3
-  total: 1
+- name: greater_healing
+  total: 2
+  action:
+    - health: 2
+- name: greater_skill_points
+  total: 2
+  action:
+    - skill_points: 5
+- name: greater_treasure
+  total: 2
+  action:
+    - coins: 5
 - name: chalice
+  total: 3
   victory_points: 7
-  total: 1
-- name: coin
+- name: draw_three
   total: 2
-  coin: 5
-- name: victory
-  total: 2
-  victory_points: 5
+  action:
+    - draw: 3

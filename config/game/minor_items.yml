@@ -1,11 +1,30 @@
-- name: health
-  health: 1
+- name: healing
   total: 3
-  type: minor
-- name: move
-  move_points: 1
+  action:
+    - health: 1
+- name: swiftness
   total: 3
-  type: minor
-- name: victory_points
-  move_points: 2
+  action:
+    - move_points: 1
+- name: strength
   total: 3
+  action:
+    - attack_points: 2
+- name: skill_boost
+  total: 3
+  action:
+    - skill_points: 2
+- name: treasure
+  total: 3
+  action:
+    - coins: 2
+- name: magic_spring
+  total: 3
+  action:
+    - trash: 1
+- name: dragon_egg
+  total: 3
+  TODO: fix increase dragon, and also make sure i have the totals right
+  immediate_action:
+    - increase_dragon: 1
+  victory_points: 3
