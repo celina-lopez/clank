@@ -4,11 +4,13 @@
   acquire:
     move_points: 1
   attack: 1
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
 - name: cave_troll
   total: 1
   health: 4
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   acquire:
     coin: 3
     draw: 2
@@ -18,27 +20,29 @@
 - name: kobold
   total: 3
   health: 1
-  dragon_attack: true
   extra_cube: 1
   acquire:
     skill_points: 1
+  immediate_actions:
+    - dragon_attack: true
 - name: ogre
   actions:
     - coin: 5
   health: 3
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   total: 2
 - name: overlord
   health: 2
   total: 2
-  arrive:
+  immediate_action:
     - clank: 1
   acquire:
     draw: 2
 - name: watcher
   total: 3
   health: 3
-  arrive:
+  immediate_action:
     - clank: 1
   acquire:
     coins: 2
@@ -46,7 +50,8 @@
 - name: belcher
   total: 2
   health: 2
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   acquire:
     coins: 4
     clank: 2
@@ -61,6 +66,7 @@
 - name: orc_grunt
   total: 3
   health: 2
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   acquire:
     coins: 3

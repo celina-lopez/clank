@@ -1,7 +1,8 @@
 - name: ruby
   total: 2
   cost: 6
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   actions:
     - draw: 1
   acquire:
@@ -10,7 +11,8 @@
 - name: dragon_eye
   total: 1
   cost: 5
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   acquire:
     clank: 2
   conditionals:
@@ -26,7 +28,8 @@
   total: 1
   cost: 8
   victory_points: 8
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   actions:
     - draw: 1
   acquire:
@@ -34,7 +37,8 @@
 - name: sapphire
   total: 3
   cost: 4
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   victory_points: 4
   actions:
     - draw: 1
@@ -43,7 +47,8 @@
 - name: emerald
   total: 2
   cost: 5
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   victory_points: 5
   actions:
     - draw: 1

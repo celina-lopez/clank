@@ -8,14 +8,15 @@
     - type: can_buy
       is_in: depths
   cost: 3
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   acquire:
     coins: 5
     clank: 3
   total: 1
 - name: shrine
   immediate_action:
-    - dragon_clank: 3
+    - dragon_clank: -3
   acquire:
     - health: 1
     - coins: 1

@@ -61,8 +61,9 @@
       skill_points: 2
 - name: mister_whiskers
   cost: 1
-  dragon_attack: true
   total: 1
+  immediate_actions:
+    - dragon_attack: true
   actions:
     - clank: -2
     - dragon_attack: true
@@ -73,7 +74,8 @@
   actions:
     - clank: 3
       draw: 3
-  dragon_attack: true
+  immediate_actions:
+    - dragon_attack: true
   victory_points: 1
 - name: rebel_captain
   cost: 3
