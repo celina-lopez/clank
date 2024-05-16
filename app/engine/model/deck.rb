@@ -54,7 +54,7 @@ class Model::Deck
   end
 
   def destroy!(card)
-    active.delete_at(active.index(card))
+    active.delete_at(active.index { |x| x['name'] == card['name'] })
   end
 
   def reload_active_deck

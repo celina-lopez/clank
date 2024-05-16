@@ -21,11 +21,6 @@ class Model::Map
     end
   end
 
-  def remove_item(position, item)
-    items = tiles.find { |tile| tile['tile'] == position }.fetch('items', [])
-    items.delete_at(items.index(item))
-  end
-
   def self.from_json(json)
     Model::Map.new(json['tiles'])
   end
