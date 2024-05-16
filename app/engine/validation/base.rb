@@ -20,7 +20,9 @@ class Validation::Base < Base
   end
 
   def valid?
-    return true if valid_player_index? && public_send("#{type}?")
+    public_send("#{type}?")
+
+    return true if valid_player_index? && errors.empty?
 
     raise InvalidMoveError, (error_messages || type)
   end

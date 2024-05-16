@@ -17,20 +17,15 @@ class Validation::Player < Validation::Base
   end
 
   def move?
-    # distance_to = current_player.position.distance_to(value)
     next_to = current_player.position.next_to?(value)
     add_error_if_error('Cant go to tile', next_to)
-    edge = Model::Position::EDGES.find do |x|
-      x['x'] == current_player.position.current_position && x['y'] == value.to_i
-    end
-    metadata = edge.fetch('metadata', {})
-    move_points = metadata.fetch('move', 1)
-    add_error_if_error('Not enough move points', move_points > current_player.move_points)
-    locked = metadata['locked']
+    edge_metadata = current_player.position.edge_metadata(value)
+    move_points = edge_metadata.fetch('move', 1)
+    add_error_if_error('Not enough move points', current_player.move_points >= move_points)
+    locked = edge_metadata.fetch('locked', false)
     # TODO: fix lock logic
     add_error_if_error("Player doesn't have lock", locked && current_player.inventory.find { |x| x == 'lock' })
-    danger = metadata.fetch('danger', 0)
-    # TODO: check this
+    danger = edge_metadata.fetch('danger', 0)
     add_error_if_error("Player doesn't have enough health", (current_player.health - danger).positive?)
   end
 

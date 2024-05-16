@@ -27,6 +27,13 @@ class Model::Position
     graph[current_position].keys.include?(goal.to_i)
   end
 
+  def edge_metadata(goal)
+    edge = Model::Position::EDGES.find do |x|
+      x['x'] == current_position && x['y'] == goal.to_i
+    end
+    edge.fetch('metadata', {})
+  end
+
   # TODO: end tile, escape tile
   %w[marketplace depths crystal_cave end_tile escape_tile].each do |key|
     define_method "#{key}?" do
