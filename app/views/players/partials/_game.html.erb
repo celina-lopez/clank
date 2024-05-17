@@ -40,8 +40,6 @@
 </div>
 
 <script>
-  // TODO: get rid of console.log
-  console.log(<%= raw @game.data.to_json %>)
   var config = {
     type: Phaser.AUTO,
     height: <%= @phaser_config.dig('config','height') %>,
