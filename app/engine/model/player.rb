@@ -35,6 +35,7 @@ class Model::Player
     skill_points: 0,
     rewards: [],
     trash: [], # TODO: array of types?
+    # TODO: Temp model for below?
     ignore_monster_path: false,
     skip_crystal_cave: false,
     replace_card_in_market: false,

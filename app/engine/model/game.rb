@@ -37,16 +37,16 @@ class Model::Game
     end
   end
 
-  def next_player! # rubocop:disable Metrics/AbcSize
+  def next_player!
     current_player.deck.reload_active_deck
-    current_player.move_points = 0
-    current_player.skill_points = 0
-    current_player.attack_points = 0
-    current_player.moved_to_crystal_cave = false
-    current_player.take_secret_adjacent = false
-    current_player.spend_seven_for_two_secret_tomes = false
-    current_player.replace_card_in_market = false
-    current_player.ignore_monster_path = false
+    %w[attack_points move_points skill_points discard_number].each do |attr|
+      current_player.send("#{attr}=", 0)
+    end
+    %w[ignore_monster_path skip_crystal_cave
+       replace_card_in_market spend_seven_for_two_secret_tomes
+       take_secret_adjacent moved_to_crystal_cave].each do |attr|
+      current_player.send("#{attr}=", false)
+    end
     self.current_player_index = (current_player_index + 1) % players.length
   end
 
