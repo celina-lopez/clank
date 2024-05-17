@@ -52,7 +52,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
         document.getElementById(stat).innerHTML = player[stat];
       });
     }
-    
+
     if (playerId == data['current_player_index']) {
       populateCards('player', player['deck']['active'], true);
       updateStats(player);
@@ -61,8 +61,6 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     populateCards('marketplace', data['marketplace']);
 
     addListeningFunctionsToCards();
-    // move player 
-    // TODO: test for current player 
     var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
     gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
   }
