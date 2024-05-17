@@ -41,6 +41,7 @@ class Model::Player
     discard_number: 0,
     spend_seven_for_two_secret_tomes: false,
     take_secret_adjacent: false,
+    moved_to_crystal_cave: false,
     victory_points: 0
   )
     @index = index || 0
@@ -63,6 +64,7 @@ class Model::Player
     @discard_number = discard_number || 0
     @spend_seven_for_two_secret_tomes = spend_seven_for_two_secret_tomes || false
     @take_secret_adjacent = take_secret_adjacent || false
+    @moved_to_crystal_cave = moved_to_crystal_cave || false
     @victory_points = victory_points
   end
 

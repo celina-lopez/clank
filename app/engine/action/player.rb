@@ -18,12 +18,15 @@ class Action::Player < Action::Base
     redeem_card(card)
   end
 
-  def move
+  def move # rubocop:disable Metrics/AbcSize
     edge_metadata = current_player.position.edge_metadata(value)
     current_player.position.current_position = value
     # TODO: if certain cards are active, then some stuff is ignored
     current_player.move_points -= edge_metadata.fetch('move', 1)
     current_player.health -= edge_metadata.fetch('danger', 0)
+    return unless current_player.position.tags(value).include?('crystal_cave')
+
+    current_player.moved_to_crystal_cave = true
   end
 
   def teleport
