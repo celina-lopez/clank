@@ -19,6 +19,8 @@ class Validation::Player < Validation::Base
   def move? # rubocop:disable Metrics/AbcSize
     next_to = current_player.position.next_to?(value)
     add_error_if_error('Cant go to tile', next_to)
+    # TODO: certain cards negate this effect below
+    add_error_if_error('Cant move if you been in a crystal cave', current_player.moved_to_crystal_cave)
     edge_metadata = current_player.position.edge_metadata(value)
     move_points = edge_metadata.fetch('move', 1)
     add_error_if_error('Not enough move points', current_player.move_points >= move_points)
