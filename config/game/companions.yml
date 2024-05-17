@@ -37,7 +37,6 @@
   total: 1
   actions:
     - clank: -2
-      gems: -2 # TODO: uh oh
       skill_points: 2
   victory_points: 2
 - name: kobold_merchant

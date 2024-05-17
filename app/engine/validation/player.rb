@@ -44,7 +44,9 @@ class Validation::Player < Validation::Base
   def validate_funds
     return true unless card['cost'].present?
 
-    result = current_player.skill_points >= card['cost'].to_i
+    cost = card['cost'].to_i
+    cost -= 2 if gem_card_conditional?
+    result = current_player.skill_points >= cost
     add_error_if_error("Need #{card['cost'] - current_player.skill_points} more skill points", result)
   end
 
@@ -75,5 +77,12 @@ class Validation::Player < Validation::Base
         true
       end
     end
+  end
+
+  def gem_card_conditional?
+    has_gem_collector = current_player.deck.active.find { |x| x['name'] == 'gem_collector' }
+    return false unless has_gem_collector
+
+    GEM_CARD_NAMES.include?(value)
   end
 end

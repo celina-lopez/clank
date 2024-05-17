@@ -2,7 +2,8 @@
 
 class Action::Player < Action::Base
   def buy_artifact
-    item = BUYABLE_ITEMS.find_by { |x| x['name'] }
+    item = BUYABLE_ITEMS.find_by { |x| x['name'] == value }
+    # TODO: if player has active card and this is a gem card
     current_player.coins -= item['cost']
     current_player.inventory << item
   end
@@ -53,7 +54,9 @@ class Action::Player < Action::Base
   private
 
   def redeem_cost(card)
-    current_player.skill_points -= card['cost']
+    cost = card['cost'].to_i
+    cost -= 2 if gem_card_conditional?
+    current_player.skill_points -= cost
   end
 
   def pay_with_attack_points(card)
@@ -83,5 +86,12 @@ class Action::Player < Action::Base
     return if card['name'] == 'goblin'
 
     gameplay_data.deck.destroy!(card)
+  end
+
+  def gem_card_conditional?
+    has_gem_collector = current_player.deck.active.find { |x| x['name'] == 'gem_collector' }
+    return false unless has_gem_collector
+
+    GEM_CARD_NAMES.include?(value)
   end
 end
