@@ -39,14 +39,7 @@ class Model::Game
 
   def next_player!
     current_player.deck.reload_active_deck
-    %w[attack_points move_points skill_points discard_number].each do |attr|
-      current_player.send("#{attr}=", 0)
-    end
-    %w[ignore_monster_path skip_crystal_cave
-       replace_card_in_market spend_seven_for_two_secret_tomes
-       take_secret_adjacent moved_to_crystal_cave].each do |attr|
-      current_player.send("#{attr}=", false)
-    end
+    current_player.reset!
     self.current_player_index = (current_player_index + 1) % players.length
   end
 

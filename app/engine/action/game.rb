@@ -7,8 +7,9 @@ class Action::Game < Action::Base
       if current_player.position.escape_tile?
 
         current_player.position.current_position = current_player.position.current_position - 1
-        # TODO: dragon attack and progress based on player position
         return end_game! if current_player.position.end_tile?
+
+        dragon_attack
 
         break
       end
@@ -22,7 +23,7 @@ class Action::Game < Action::Base
     self.gameplay_data = Model::Game.new(num_players: value.to_i)
   end
 
-  def dragon_attack
+  def dragon_attack # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     bag = gameplay_data.players.flat_map do |player|
       player.clank.times.map { player.index }
     end

@@ -86,4 +86,20 @@ class Model::Player
   def dead?
     health.negative?
   end
+
+  def reset! # rubocop:disable Metrics/MethodLength
+    @attack_points = 0
+    @move_points = 0
+    @teleport = 0
+    @skill_points = 0
+    @rewards = []
+    @trash = []
+    @ignore_monster_path = false
+    @skip_crystal_cave = false
+    @replace_card_in_market = false
+    @discard_number = 0
+    @spend_seven_for_two_secret_tomes = false
+    @take_secret_adjacent = false
+    @moved_to_crystal_cave = false
+  end
 end

@@ -3,7 +3,6 @@
 class Action::Player < Action::Base
   def buy_artifact
     item = BUYABLE_ITEMS.find_by { |x| x['name'] == value }
-    # TODO: if player has active card and this is a gem card
     current_player.coins -= item['cost']
     current_player.inventory << item
   end
