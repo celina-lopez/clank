@@ -52,10 +52,13 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
         document.getElementById(stat).innerHTML = player[stat];
       });
     }
-    populateCards('player', player['deck']['active'], true);
+    
+    if (playerId == data['current_player_index']) {
+      populateCards('player', player['deck']['active'], true);
+      updateStats(player);
+    }
     populateCards('active', data['deck']['active']);
     populateCards('marketplace', data['marketplace']);
-    updateStats(player);
 
     addListeningFunctionsToCards();
     // move player 
