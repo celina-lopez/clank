@@ -1,0 +1,10 @@
+<% @player['inventory'].each do |inventory| %>
+  <%
+    inventory_name = if inventory['name'].start_with?('greater')
+      inventory['name'].split('greater_').first
+    else
+      inventory['name']
+    end
+  %>
+  <img src="/images/<%= inventory_name %>.jpg" width="70" class="rounded-full" />
+<% end %>

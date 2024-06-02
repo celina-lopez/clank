@@ -10,7 +10,7 @@
   total: 3
   action:
     - attack_points: 2
-- name: skill_boost
+- name: skill_points
   total: 3
   action:
     - skill_points: 2

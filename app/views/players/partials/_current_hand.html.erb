@@ -7,6 +7,11 @@
       <%= render 'players/components/card', card:, id: "player-card-#{index}", current_hand: true %>
     <% end %>
   </div>
+  #TODO: inventory
+  <div id="inventory-id" class="hidden">
+    Inventory
+    <%= render 'players/partials/inventory', player: @player %> 
+  </div>
   Active Deck 
   <div class='grid grid-cols-6 gap-1' id='active-cards'>
     <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
