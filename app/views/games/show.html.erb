@@ -1,5 +1,4 @@
-TODO: links to all players
-<br/>
+<h1><%= @game.title %></h1>
 <% @game.data['players'].each do |player| %>
   <%= link_to "Player #{player['index']}", game_player_path(@game, player['index']) %>
   <br/>
