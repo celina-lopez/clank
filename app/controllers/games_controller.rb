@@ -20,12 +20,6 @@ class GamesController < ApplicationController
     redirect_to game_path(game)
   end
 
-  def update
-    game = Game.find(params[:id])
-    engine = Engine.new(game.data)
-    engine.execute(type: params[:type], value: params[:value])
-  end
-
   private
 
   def game_params
