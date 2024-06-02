@@ -5,10 +5,18 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
   def create
-    # TODO: create frontend for new game, form
-    engine = Engine.new.execute(type: 'start_game', value: '3')
-    game = Game.create!(data: engine.gameplay_data, history: engine.history)
+    engine = Engine.new
+    gameplay_data = engine.execute(type: 'start_game', value: game_params[:number_of_players])
+    game = Game.create!(
+      data: JSON.parse(gameplay_data.to_json),
+      history: engine.history,
+      title: game_params[:title]
+    )
     redirect_to game_path(game)
   end
 
@@ -20,7 +28,7 @@ class GamesController < ApplicationController
 
   private
 
-  def create_game_params
-    params.require(:game).permit(:num_of_players)
+  def game_params
+    params.require(:game).permit(:number_of_players, :title)
   end
 end

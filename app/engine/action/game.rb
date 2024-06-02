@@ -29,7 +29,6 @@ class Action::Game < Action::Base
     end
 
     bag += gameplay_data.dragon.clank.times.map { -1 }
-    # TODO: randomoness needs a seed
     hits = bag.sample(gameplay_data.dragon.num_of_hits)
     hits.each do |hit|
       if hit == -1

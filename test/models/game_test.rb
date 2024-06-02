@@ -6,6 +6,7 @@
 #  data       :json             not null
 #  history    :json             not null
 #  password   :string
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
