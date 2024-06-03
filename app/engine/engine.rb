@@ -19,7 +19,9 @@ class Engine < Base
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
 
     history << { type:, value:, player_index: }
-    self.gameplay_data = Action.const_get(klass).new(gameplay_data, type:, value:).execute!
+    action_klass = Action.const_get(klass).new(gameplay_data, type:, value:)
+    history.concat(action_klass.history)
+    self.gameplay_data = action_klass.execute!
   end
 
   def klass_type(type)

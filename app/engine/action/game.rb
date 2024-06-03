@@ -36,12 +36,14 @@ class Action::Game < Action::Base
       else
         gameplay_data.players[hit].health -= 1
       end
+      history << { type: 'dragon_clank', value: hit }
     end
   end
 
   private
 
   def end_game!
+    history << { type: 'end_game' }
     CalculateVictoryPoints.new(gameplay_data).execute!
   end
 
@@ -52,6 +54,7 @@ class Action::Game < Action::Base
     immediate_actions.each do |action|
       klass_type = Engine.klass_type(action['type'])
       Action.const_get(klass_type).new(gameplay_data, type: action['type'], value: action['value']).execute!
+      history << { type: action['type'], value: action['value'] }
     end
   end
 end
