@@ -40,6 +40,10 @@ class Action::Game < Action::Base
     end
   end
 
+  def increase_dragon
+    gameplay_data.dragon.position = gameplay_data.dragon.position + 1
+  end
+
   private
 
   def end_game!
