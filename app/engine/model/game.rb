@@ -37,18 +37,23 @@ class Model::Game
     end
   end
 
-  def next_player! # rubocop:disable Metrics/AbcSize
+  def next_player!
     current_player.reset!
     current_player.deck.reload_active_deck
-    # TODO: 😔
-    active_actions = current_player.deck.active.map do |x|
-      x['actions'].first.keys
-    end & %w[ignore_monsters_path skip_crystal_cave spend_seven_for_two_secret_tomes]
-    active_actions.each { |action| current_player.send("#{action}=", true) } if active_actions.any?
+    activate_current_player_actions
     self.current_player_index = (current_player_index + 1) % players.length
   end
 
   def current_player
     players[current_player_index]
+  end
+
+  private
+
+  def activate_current_player_actions
+    active_actions = current_player.deck.active.map do |x|
+      x['actions'].first.keys
+    end & %w[ignore_monsters_path skip_crystal_cave spend_seven_for_two_secret_tomes]
+    active_actions.each { |action| current_player.send("#{action}=", true) } if active_actions.any?
   end
 end
