@@ -51,6 +51,7 @@ export function updateInventory(player) {
   if (player['inventory']) {
     let inventory = document.getElementById('inventory-id');
     inventory.innerHTML = "";
+    inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
       let itemElement = document.createElement('img'),
           inventoryName = item['name'].replace(/greater_/g, '');
