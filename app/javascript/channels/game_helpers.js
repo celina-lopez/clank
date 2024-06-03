@@ -15,13 +15,15 @@ function createCardPopup(cardParent, card) {
   const cardPopup = cardParent.children[0];
   cardPopup.children[0].src = `/images/${card['name']}.jpeg` 
   cardPopup.innerHTML += `${card['name']} <br/>`;
-  card['actions'] && card['actions'].forEach(function (action) {
+  if (!card['actions']) return cardPopup;
+  for (let i = 0; i < card['actions'].length; i++) {
+    let action = card['actions'][i];
     Object.keys(action).forEach(function(key) {
       let value = action[key];
       cardPopup.innerHTML += `${key}: ${value}`
     });
-    // TODO: if another action add or 
-  });
+    if (i < card['actions'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+  }
   return cardPopup;
 };
 
