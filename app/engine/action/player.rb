@@ -73,7 +73,7 @@ class Action::Player < Action::Base
 
   def card_on_acquire(card)
     card.fetch('acquire', {}).each do |action_type, action_value|
-      history << { type: action_type, value: action_value }
+      history << { type: action_type, value: action_value, player_index: current_player.index }
       redeem_action_on_card(action_type, action_value)
     end
   end
