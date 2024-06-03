@@ -1,9 +1,4 @@
 
-window.app = {}
-let hrefParts = document.location.href.split("/"),
-gameId = hrefParts[4], // Game param
-playerId = hrefParts[hrefParts.length - 1]; // Player id
-
 // CARD FUNCTIONS
 function createCardClone(prefix, cardParent, index, card) {
   const cardClone = cardParent.children[1];
@@ -47,10 +42,24 @@ export function populateCards(prefix, cards, playerHand=false) {
 
 // PLAYER FUNCTIONS
 export function updateStats(player) {
-  // TODO: update inventory if needed???
   ['health', 'move_points', 'attack_points', 'clank', 'skill_points'].forEach(function(stat) {
     document.getElementById(stat).innerHTML = player[stat];
   });
+}
+
+export function updateInventory(player) {
+  if (player['inventory']) {
+    let inventory = document.getElementById('inventory-id');
+    inventory.innerHTML = "";
+    player['inventory'].forEach(function(item) {
+      let itemElement = document.createElement('img'),
+          inventoryName = item['name'].replace(/greater_/g, '');
+      itemElement.src = '/images/' + inventoryName + '.jpg';
+      itemElement.width = 70;
+      itemElement.classList.add('rounded-full');
+      inventory.appendChild(itemElement);
+    });
+  }
 }
 
 export function updatePlayerPosition(player, playerId) {

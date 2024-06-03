@@ -7,8 +7,7 @@
       <%= render 'players/components/card', card:, id: "player-card-#{index}", current_hand: true %>
     <% end %>
   </div>
-  #TODO: inventory
-  <div id="inventory-id" class="hidden">
+  <div id="inventory-id" class="<%= @player['inventory'].empty? && 'hidden' %>">
     Inventory
     <%= render 'players/partials/inventory', player: @player %> 
   </div>
