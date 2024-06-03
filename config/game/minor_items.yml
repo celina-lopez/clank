@@ -24,7 +24,6 @@
     - trash: 1
 - name: dragon_egg
   total: 3
-  TODO: fix increase dragon, and also make sure i have the totals right
   immediate_action:
     - increase_dragon: 1
   victory_points: 3
