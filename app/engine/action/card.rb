@@ -15,7 +15,7 @@ class Action::Card < Action::Base
 
   %i[cards health attack_points move_points coins
      clank teleport skill_points].each do |type|
-    define_method(type) do |v|
+    define_method(type) do |v = value|
       current_player.public_send("#{type}=", current_player.public_send(type) + v)
     end
   end

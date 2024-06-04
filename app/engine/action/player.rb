@@ -76,15 +76,15 @@ class Action::Player < Action::Base
   end
 
   def card_on_acquire(card)
-    card.fetch('acquire', {}).each do |action_type, action_value|
-      history << { type: action_type, value: action_value, player_index: current_player.index }
-      redeem_action_on_card(action_type, action_value)
+    card.fetch('acquire', {}).each do |data|
+      acquire_action = data.to_a.first
+      redeem_action_on_card(acquire_action[0], acquire_action[1])
     end
   end
 
   def redeem_action_on_card(action_type, action_value)
     history << { type: action_type, value: action_value, player_index: current_player.index }
-    Action::Card.new(gameplay_data, type: nil, value: action_value).send(action_type)
+    Action::Card.new(gameplay_data, type: action_type, value: action_value).send(action_type)
   end
 
   def discard_from_deck(card)

@@ -4,7 +4,7 @@ class Action::Game < Action::Base
   def end_turn # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     loop do
       gameplay_data.next_player!
-      if current_player.position.escape_tile?
+      if current_player.position.escape_tile? && current_player.artifact?
 
         current_player.position.current_position = current_player.position.current_position - 1
         return end_game! if current_player.position.end_tile?
@@ -56,9 +56,10 @@ class Action::Game < Action::Base
       card.fetch('immediate_actions', [])
     end
     immediate_actions.each do |action|
-      klass_type = Engine.klass_type(action['type'])
-      Action.const_get(klass_type).new(gameplay_data, type: action['type'], value: action['value']).execute!
-      history << { type: action['type'], value: action['value'] }
+      action_data = action.to_a.first
+      klass_type = Engine.klass_type(action_data[0])
+      Action.const_get(klass_type).new(gameplay_data, type: action_data[0], value: action_data[1]).execute!
+      history << { type: action_data[0], value: action_data[1] }
     end
   end
 end

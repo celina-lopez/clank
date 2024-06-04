@@ -49,7 +49,6 @@ class Model::Player
     @position = position || Model::Position.new
     @deck = deck || Model::Deck.new(Base::STARTING_DECK_CARDS)
     @clank = clank || STARTING_CLANK_CUBES[index]
-    @inventory = inventory || []
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @move_points = move_points || 0
@@ -84,6 +83,10 @@ class Model::Player
 
   def dead?
     health.negative?
+  end
+
+  def artifact?
+    inventory.any? { |item| item['artifact'] }
   end
 
   def reset! # rubocop:disable Metrics/MethodLength
