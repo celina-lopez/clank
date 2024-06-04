@@ -1,6 +1,6 @@
 <div class="flex">
   <%# TODO: on click events %>
   <% @game.data['marketplace_items'].each do |item| %>
-    <%= render 'players/components/circle', inventory: item, onclick: "buyArtifact(this)", id: "marketplace-#{item['name']}"  %>
+    <%= render 'players/components/circle', inventory: item, action_type: "buy_artifact", id: "marketplace-#{item['name']}"  %>
   <% end %>
 </div>

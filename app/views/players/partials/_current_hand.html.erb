@@ -37,6 +37,9 @@
   <%= render 'players/components/card', card: {}, id: "" %>
 </template >
 <script>
+  function executeAction(e) {
+    window.app.action.send({ type: e.dataset.type, value: e.dataset.name, player_index: <%= player.dig('index') %> });
+  }
   function buyCard(e){
     window.app.action.send({ type: 'buy_card', value: e.dataset.name, player_index: <%= player.dig('index') %> });
   }

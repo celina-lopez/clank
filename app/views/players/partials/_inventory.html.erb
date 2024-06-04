@@ -7,6 +7,6 @@
         inventory['name']
       end
     %>
-    <%= render 'players/components/circle', inventory_name:, inventory:, onclick: "redeem_inventory_item(this)", id: "inventory-#{inventory['name']}"  %>
+    <%= render 'players/components/circle', inventory_name:, inventory:, action_type: "redeem_inventory_item", id: "inventory-#{inventory['name']}"  %>
   <% end %>
 </div>
