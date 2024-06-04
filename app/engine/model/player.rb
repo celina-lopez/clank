@@ -4,7 +4,7 @@ class Model::Player
   attr_accessor :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
                 :clank, :position, :rewards, :skill_points, :trash, :ignore_monster_path, :skip_crystal_cave,
                 :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
-                :take_secret_adjacent, :victory_points
+                :take_secret_adjacent, :victory_points, :moved_to_crystal_cave
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze

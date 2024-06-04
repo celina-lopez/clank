@@ -20,7 +20,7 @@ class Validation::Player < Validation::Base
     next_to = current_player.position.next_to?(value)
     add_error_if_error('Cant go to tile', next_to)
     unless current_player.skip_crystal_cave
-      add_error_if_error('Cant move if you been in a crystal cave', current_player.moved_to_crystal_cave)
+      add_error_if_error('Cant move if you been in a crystal cave', !current_player.moved_to_crystal_cave)
     end
     edge_metadata = current_player.position.edge_metadata(value)
     move_points = edge_metadata.fetch('move', 1)
