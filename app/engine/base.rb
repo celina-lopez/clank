@@ -14,6 +14,7 @@ class Base
   DEVICE_CARD_NAMES = DEVICE_CARDS.map { |c| c['name'] }.freeze
   MONSTER_CARDS = config_yaml('monsters').freeze
   MARKETPLACE = config_yaml('reserves').freeze
+  MARKETPLACE_ITEMS = config_yaml('marketplace')['map_1'].freeze
   STARTING_DECK_CARDS = config_yaml('starting_deck').freeze
   STARTING_GAME_CARDS = [GEM_CARDS, COMPANION_CARDS, DEVICE_CARDS, MISC_DECK, MONSTER_CARDS].flatten
   CARDS = [GEM_CARDS, COMPANION_CARDS, MISC_DECK, DEVICE_CARDS, MONSTER_CARDS, MARKETPLACE, STARTING_DECK_CARDS].flatten

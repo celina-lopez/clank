@@ -1,5 +1,5 @@
 map_1:
-  key:
+  - name: key
     total: 3
     victory_points: 5
     tiles:
@@ -7,23 +7,15 @@ map_1:
       - 19
       - 23
       - 24
-  crown_1:
-    total: 1
-    victory_points: 8
+  - name: crown
+    total: 3
+    victory_points: 9
     tiles:
       - 18
       - 19
       - 23
       - 24
-  crown_2:
-    total: 1
-    victory_points: 10
-    tiles:
-      - 18
-      - 19
-      - 23
-      - 24
-  backpack:
+  - name: backpack
     total: 2
     victory_points: 5
     tiles:

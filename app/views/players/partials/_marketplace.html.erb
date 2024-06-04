@@ -1,0 +1,6 @@
+<div class="flex">
+  <%# TODO: on click events %>
+  <% @game.data['marketplace_items'].each do |item| %>
+    <img src="/images/<%= item['name'] %>.jpg" width="70" class="rounded-full" />
+  <% end %>
+</div>

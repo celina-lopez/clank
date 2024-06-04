@@ -1,29 +1,37 @@
 # frozen_string_literal: true
 
 class Model::Game
-  attr_accessor :players, :current_player_index, :deck, :marketplace, :map, :dragon
+  attr_accessor :players, :current_player_index, :deck, :marketplace, :map, :dragon,
+                :marketplace_items
 
   def self.from_json(json)
     Model::Game.new(
       dragon: Model::Dragon.from_json(json['dragon']),
       deck: Model::Deck.from_json(json['deck']),
       marketplace: json['marketplace'],
+      marketplace_items: json['marketplace_items'],
       map: Model::Map.from_json(json['map']),
       players: json['players'].map { |p| Model::Player.from_json(p) },
       current_player_index: json['current_player_index']
     )
   end
 
-  def initialize(num_players: nil, dragon: Model::Dragon.new, deck: Model::Deck.new( # rubocop:disable Metrics/ParameterLists
-    Base::STARTING_GAME_CARDS,
-    num_of_active_cards: 6
-  ), marketplace: Base::MARKETPLACE, map: Model::Map.new, players: nil,
-                 current_player_index: 0)
+  def initialize(
+    num_players: nil,
+    dragon: Model::Dragon.new,
+    deck: Model::Deck.new(Base::STARTING_GAME_CARDS, num_of_active_cards: 6),
+    marketplace: Base::MARKETPLACE,
+    map: Model::Map.new,
+    players: nil,
+    current_player_index: 0,
+    marketplace_items: Base::MARKETPLACE_ITEMS
+  )
     @dragon = dragon
     @current_player_index = current_player_index
     @map = map
     @deck = deck
     @marketplace = marketplace
+    @marketplace_items = marketplace_items
     @players = if num_players.present?
                  initialize_players(num_players)
                else

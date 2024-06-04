@@ -9,8 +9,17 @@
   </div>
   <div id="inventory-id" class="<%= @player['inventory'].empty? && 'hidden' %>">
     Inventory
-    <%= render 'players/partials/inventory', player: @player %> 
+    <%= render 'players/partials/inventory', player: @player  %> 
   </div>
+  <% 
+    active_tile = @game.data['map']['tiles'].find { |x| x['tile'] == @player['position']['current_position'] }
+    is_marketplace = active_tile.fetch('tags', []).include?('marketplace')
+  %>
+  <div id='marketplace-id' class='<%= !is_marketplace && 'hidden' %>'>
+    <div>Marketplace Active</div>
+    <%= render 'players/partials/marketplace', player: @player %> 
+  </div>
+
   Active Deck 
   <div class='grid grid-cols-6 gap-1' id='active-cards'>
     <% game.data.dig('deck', 'active').each_with_index do |card, index| %>

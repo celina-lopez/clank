@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class Action::Player < Action::Base
-  def buy_artifact
-    item = BUYABLE_ITEMS.find_by { |x| x['name'] == value }
-    current_player.coins -= item['cost']
+  def buy_artifact # rubocop:disable Metrics/AbcSize
+    item = gameplay_data.marketplace_items.find_by { |x| x['name'] == value }
+    current_player.coins -= 7
     current_player.inventory << item
+    item['total'] -= 1
+    return unless item['total'].zero?
+
+    gameplay_data.marketplace_items.delete_at(gameplay_data.marketplace_items.index(item))
   end
 
   def buy_card

@@ -1,4 +1,5 @@
 <% @player['inventory'].each do |inventory| %>
+  <%# TODO: on click events %>
   <%
     inventory_name = if inventory['name'].start_with?('greater')
       inventory['name'].split('greater_').first
