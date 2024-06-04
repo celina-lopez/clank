@@ -1,0 +1,17 @@
+<% inventory_name ||= inventory['name'] %>
+<div class="card-parent relative">
+  <div class="bg-white w-[150px] action-card invisible absolute z-10 left-[50px]">
+    <div class="rounded-t-lg bg-white"><%= inventory_name&.humanize %></div>
+    <img src='/images/<%= inventory_name %>.jpg'/>
+    <div><%= inventory['total'] %> left</div>
+    <div><%= inventory['victory_points'] %> VP</div>
+  </div>
+  <div
+    class="rounded-full bg-red-100 border-black border-2 rounded h-[70px] w-[70px] cursor-pointer"
+    onclick='<%= onclick %>'
+    id='<%= id %>'
+    data-name="<%= inventory['name'] %>"
+  >
+    <img src='/images/<%= inventory_name %>.jpg' width="70" class="rounded-full"/>
+  </div>
+</div>

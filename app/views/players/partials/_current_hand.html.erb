@@ -15,7 +15,7 @@
     active_tile = @game.data['map']['tiles'].find { |x| x['tile'] == @player['position']['current_position'] }
     is_marketplace = active_tile.fetch('tags', []).include?('marketplace')
   %>
-  <div id='marketplace-id' class='<%= !is_marketplace && 'hidden' %>'>
+  <div id='marketplace-id' class='<%= !is_marketplace && 'hidden'%>'>
     <div>Marketplace Active</div>
     <%= render 'players/partials/marketplace', player: @player %> 
   </div>

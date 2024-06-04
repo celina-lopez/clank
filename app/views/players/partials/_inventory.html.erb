@@ -1,11 +1,12 @@
-<% @player['inventory'].each do |inventory| %>
-  <%# TODO: on click events %>
-  <%
-    inventory_name = if inventory['name'].start_with?('greater')
-      inventory['name'].split('greater_').first
-    else
-      inventory['name']
-    end
-  %>
-  <img src="/images/<%= inventory_name %>.jpg" width="70" class="rounded-full" />
-<% end %>
+<div class="flex">
+  <% @player['inventory'].each do |inventory| %>
+    <%
+      inventory_name = if inventory['name'].start_with?('greater')
+        inventory['name'].split('greater_').first
+      else
+        inventory['name']
+      end
+    %>
+    <%= render 'players/components/circle', inventory_name:, inventory:, onclick: "redeem_inventory_item(this)", id: "inventory-#{inventory['name']}"  %>
+  <% end %>
+</div>
