@@ -8,7 +8,7 @@
   total: 1
   health: 2
   actions:
-    - coin: 1
+    - coins: 1
 - name: mercenary
   total: 15
   actions:

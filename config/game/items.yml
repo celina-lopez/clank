@@ -2,7 +2,7 @@
   cost: 4
   victory_points: 2
   actions:
-    - coin: 2
+    - coins: 2
       attack_points: 2
   total: 2
 - name: boots_of_swiftness
@@ -34,7 +34,7 @@
   actions:
     - skill_points: 2
       move_points: 1
-      gain_coins: 1
+      coins: 1
 - name: elven_dagger
   total: 1
   cost: 4

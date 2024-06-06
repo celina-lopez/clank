@@ -12,7 +12,7 @@
   immediate_actions:
     - dragon_attack: true
   acquire:
-    coin: 3
+    coins: 3
     draw: 2
   conditionals:
     - type: action
@@ -27,7 +27,7 @@
     - dragon_attack: true
 - name: ogre
   actions:
-    - coin: 5
+    - coins: 5
   health: 3
   immediate_actions:
     - dragon_attack: true
