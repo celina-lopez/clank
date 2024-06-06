@@ -171,7 +171,8 @@
   actions:
     - skill_points: 2
       attack_points: 2
-      replace_card: 1
+      replace_card_points: 1
+  TODO: replace_card function
   victory_points: 1
 - name: wizard
   cost: 6
