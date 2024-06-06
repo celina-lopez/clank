@@ -81,7 +81,6 @@ class Action::Player < Action::Base
   end
 
   def card_on_acquire(card)
-    binding.pry
     card.fetch('acquire', {}).each do |k, v|
       redeem_action_on_card(k, v)
     end
