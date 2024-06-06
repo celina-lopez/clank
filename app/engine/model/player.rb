@@ -7,7 +7,7 @@ class Model::Player
                 :take_secret_adjacent, :victory_points, :moved_to_crystal_cave, :replace_card_points
   attr_reader :health, :index
 
-  STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1, 3 => 0 }.freeze
+  STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
   MAX_HEALTH = 10
   MAX_CLANK = 30
   START_COINS = 7
