@@ -20,8 +20,20 @@ class Action::Card < Action::Base
     end
   end
 
+  %i[ignore_monster_path skip_crystal_cave].each do |type|
+    define_method(type) do |v = value|
+      current_player.public_send("#{type}=", v)
+    end
+  end
+
   def draw(val = value)
     current_player.deck.draw(val)
+  end
+
+  def other_clank(val = value)
+    gameplay_data.players.each do |player|
+      player.clank += val if player != current_player
+    end
   end
 
   def dragon_clank

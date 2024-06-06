@@ -126,7 +126,7 @@
   actions:
     - move_points: 2
       skip_crystal_cave: true
-      ignore_monsters_path: true
+      ignore_monster_path: true
 - name: elven_boots
   total: 1
   cost: 4

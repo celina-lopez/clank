@@ -39,7 +39,7 @@ trash:
 actions:
   trash: object
   skill_points: number
-  ignore_monsters_path: boolean
+  ignore_monster_path: boolean
   skip_crystal_cave: boolean
   move_points: number
   replace_card: number
