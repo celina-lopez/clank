@@ -43,7 +43,7 @@ class Model::Player
     take_secret_adjacent: false,
     moved_to_crystal_cave: false,
     victory_points: 0,
-    replace_card_points: 0,
+    replace_card_points: 0
   )
     @index = index || 0
     @inventory = inventory || []
