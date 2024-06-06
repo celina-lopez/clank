@@ -79,6 +79,7 @@ class Action::Player < Action::Base
 
     current_player.deck.discarded << card
   end
+  # TODO: player can still move in crystal cave...
 
   def card_on_acquire(card)
     card.fetch('acquire', {}).each do |k, v|

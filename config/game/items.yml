@@ -54,7 +54,7 @@
   actions:
     - attack_points: 3
   acquire:
-    - attack_points: 1
+    attack_points: 1
 - name: bracers_of_agility
   total: 2
   cost: 5
