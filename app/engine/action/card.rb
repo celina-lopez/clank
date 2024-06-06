@@ -20,6 +20,10 @@ class Action::Card < Action::Base
     end
   end
 
+  def draw(val = value)
+    current_player.deck.draw(val)
+  end
+
   def dragon_clank
     gameplay_data.dragon.clank += value
   end
