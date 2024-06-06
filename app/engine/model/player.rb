@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Model::Player
-  attr_accessor :attack_points, :move_points, :teleport, :coins, :inventory, :deck,
+  attr_accessor :attack_points, :move_points, :teleport_points, :coins, :inventory, :deck,
                 :clank, :position, :rewards, :skill_points, :trash, :ignore_monster_path, :skip_crystal_cave,
                 :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
                 :take_secret_adjacent, :victory_points, :moved_to_crystal_cave
@@ -30,7 +30,7 @@ class Model::Player
     deck: nil,
     attack_points: 0,
     move_points: 0,
-    teleport: 0,
+    teleport_points: 0,
     coins: nil,
     skill_points: 0,
     rewards: [],
@@ -52,7 +52,7 @@ class Model::Player
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @move_points = move_points || 0
-    @teleport = teleport || 0
+    @teleport_points = teleport_points || 0
     @coins = coins || START_COINS
     @rewards = rewards || []
     @skill_points = skill_points || 0
@@ -92,7 +92,7 @@ class Model::Player
   def reset! # rubocop:disable Metrics/MethodLength
     @attack_points = 0
     @move_points = 0
-    @teleport = 0
+    @teleport_points = 0
     @skill_points = 0
     @rewards = []
     @trash = []

@@ -43,7 +43,7 @@ actions:
   skip_crystal_cave: boolean
   move_points: number
   replace_card: number
-  teleport: number
+  teleport_points: number
   clank: number
   discard_number: number
   draw: number

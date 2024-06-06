@@ -1,7 +1,8 @@
 - name: teleporter
   cost: 4
   acquire:
-    teleport: 1
+    teleport_points: 1
+  TODO: delete these cards from deck one used
   total: 2
 - name: the_vault
   conditionals:

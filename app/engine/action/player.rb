@@ -35,6 +35,11 @@ class Action::Player < Action::Base
 
   def teleport
     current_player.position.current_position = value
+    current_player.teleport -= 1
+    return unless current_player.position.tags(value).include?('crystal_cave')
+    return unless current_player.skip_crystal_cave
+
+    current_player.moved_to_crystal_cave = true
   end
 
   def redeem_reward
