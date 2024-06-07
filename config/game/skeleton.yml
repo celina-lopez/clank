@@ -33,11 +33,11 @@ conditionals:
   two_of: array
   is_in: string
   for_each: string
-trash:
+trash_options:
   - (card name)
   - any
 actions:
-  trash: object
+  trash_options: object
   skill_points: number
   ignore_monster_path: boolean
   skip_crystal_cave: boolean

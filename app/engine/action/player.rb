@@ -82,8 +82,12 @@ class Action::Player < Action::Base
   # TODO: player can still move in crystal cave...
 
   def card_on_acquire(card)
-    card.fetch('acquire', {}).each do |k, v|
-      redeem_action_on_card(k, v)
+    if (acquire = card.fetch('acquire', [])).one?
+      acquire.first.each do |k, v|
+        redeem_action_on_card(k, v)
+      end
+    elsif acquire.present?
+      current_player.rewards << acquire
     end
   end
 

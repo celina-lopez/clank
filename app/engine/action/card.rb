@@ -12,7 +12,7 @@ class Action::Card < Action::Base
   def card
     @card ||= Base::CARDS.find { |data| data['name'] == type }
   end
-
+  x
   %i[cards health attack_points move_points coins
      clank teleport_points skill_points replace_card_points].each do |type|
     define_method(type) do |v = value|
@@ -40,8 +40,7 @@ class Action::Card < Action::Base
     gameplay_data.dragon.clank += value
   end
 
-  def trash
-    # test
-    current_player.rewards << value
+  def trash_options(_val = value)
+    current_player.trash_options << value
   end
 end

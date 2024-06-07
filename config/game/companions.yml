@@ -55,7 +55,7 @@
   total: 2
   victory_points: 2
   actions:
-    - trash:
+    - trash_options:
         burgle: 1
       skill_points: 2
 - name: mister_whiskers

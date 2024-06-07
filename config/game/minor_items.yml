@@ -21,7 +21,7 @@
 - name: magic_spring
   total: 3
   action:
-    - trash: 1
+    - trash_options: 1
 - name: dragon_egg
   total: 3
   immediate_action:

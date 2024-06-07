@@ -6,7 +6,7 @@
   actions:
     - draw: 1
   acquire:
-    clank: 2
+    - clank: 2
   victory_points: 6
 - name: dragon_eye
   total: 1
@@ -14,7 +14,7 @@
   immediate_actions:
     - dragon_attack: true
   acquire:
-    clank: 2
+    - clank: 2
   conditionals:
     - type: can_buy
       is_in: depths
@@ -33,7 +33,7 @@
   actions:
     - draw: 1
   acquire:
-    clank: 2
+    - clank: 2
 - name: sapphire
   total: 3
   cost: 4
@@ -43,7 +43,7 @@
   actions:
     - draw: 1
   acquire:
-    clank: 2
+    - clank: 2
 - name: emerald
   total: 2
   cost: 5
@@ -53,4 +53,4 @@
   actions:
     - draw: 1
   acquire:
-    clank: 2
+    - clank: 2

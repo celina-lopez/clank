@@ -2,7 +2,7 @@
 
 class Model::Player
   attr_accessor :attack_points, :move_points, :teleport_points, :coins, :inventory, :deck,
-                :clank, :position, :rewards, :skill_points, :trash, :ignore_monster_path, :skip_crystal_cave,
+                :clank, :position, :rewards, :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
                 :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
                 :take_secret_adjacent, :victory_points, :moved_to_crystal_cave, :replace_card_points
   attr_reader :health, :index
@@ -34,7 +34,7 @@ class Model::Player
     coins: nil,
     skill_points: 0,
     rewards: [],
-    trash: [], # TODO: array of types?
+    trash_options: [], # TODO: array of types?
     ignore_monster_path: false,
     skip_crystal_cave: false,
     replace_card_in_market: false,
@@ -57,7 +57,7 @@ class Model::Player
     @coins = coins || START_COINS
     @rewards = rewards || []
     @skill_points = skill_points || 0
-    @trash = trash || []
+    @trash_options = trash_options || []
     @ignore_monster_path = ignore_monster_path || false
     @skip_crystal_cave = skip_crystal_cave || false
     @replace_card_in_market = replace_card_in_market || false
@@ -97,7 +97,7 @@ class Model::Player
     @teleport_points = 0
     @skill_points = 0
     @rewards = []
-    @trash = []
+    @trash_options = []
     @ignore_monster_path = false
     @skip_crystal_cave = false
     @replace_card_in_market = false
