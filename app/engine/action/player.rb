@@ -18,6 +18,7 @@ class Action::Player < Action::Base
     else
       card = gameplay_data.marketplace.find { |x| x['name'] == value }
       card['total'] -= 1
+      gameplay_data.marketplace.delete(card) if card['total'].zero? && card['name'] != 'goblin'
     end
     redeem_card(card)
   end

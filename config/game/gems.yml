@@ -2,7 +2,7 @@
   total: 2
   cost: 6
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   actions:
     - draw: 1
   acquire:
@@ -12,7 +12,7 @@
   total: 1
   cost: 5
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   acquire:
     - clank: 2
   conditionals:
@@ -29,7 +29,7 @@
   cost: 8
   victory_points: 8
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   actions:
     - draw: 1
   acquire:
@@ -38,7 +38,7 @@
   total: 3
   cost: 4
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   victory_points: 4
   actions:
     - draw: 1
@@ -48,7 +48,7 @@
   total: 2
   cost: 5
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   victory_points: 5
   actions:
     - draw: 1

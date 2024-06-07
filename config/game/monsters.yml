@@ -5,12 +5,12 @@
     - move_points: 1
   attack: 1
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
 - name: cave_troll
   total: 1
   health: 4
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   acquire:
     - coins: 3
       draw: 2
@@ -24,13 +24,13 @@
   acquire:
     - skill_points: 1
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
 - name: ogre
   actions:
     - coins: 5
   health: 3
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   total: 2
 - name: overlord
   health: 2
@@ -51,7 +51,7 @@
   total: 2
   health: 2
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   acquire:
     - coins: 4
       clank: 2
@@ -67,6 +67,6 @@
   total: 3
   health: 2
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   acquire:
     - coins: 3

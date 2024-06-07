@@ -2,6 +2,10 @@
 
 class Action::Card < Action::Base
   def execute!
+    if card.nil?
+      send(type)
+      return gameplay_data
+    end
     card.fetch('actions', []).each do |action|
       action.each { |k, v| send(k, v) }
     end
@@ -14,7 +18,8 @@ class Action::Card < Action::Base
   end
 
   %i[cards health attack_points move_points coins
-     clank teleport_points skill_points replace_card_points].each do |type|
+     clank teleport_points skill_points replace_card_points
+     discard_number].each do |type|
     define_method(type) do |v = value|
       current_player.public_send("#{type}=", current_player.public_send(type) + v)
     end

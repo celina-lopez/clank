@@ -62,10 +62,10 @@
   cost: 1
   total: 1
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   actions:
     - clank: -2
-    - dragon_attack: true
+    - dragon_attack: 1
   victory_points: 1
 - name: monkey_bot_3000
   cost: 5
@@ -74,7 +74,7 @@
     - clank: 3
       draw: 3
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   victory_points: 1
 - name: rebel_captain
   cost: 3

@@ -10,7 +10,7 @@
       is_in: depths
   cost: 3
   immediate_actions:
-    - dragon_attack: true
+    - dragon_attack: 1
   acquire:
     - coins: 5
       clank: 3
