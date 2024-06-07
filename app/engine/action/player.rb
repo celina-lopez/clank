@@ -43,8 +43,8 @@ class Action::Player < Action::Base
   end
 
   def redeem_reward
-    # TODO: value should be index
-    reward = current_player.rewards[value]
+    indexes = value.split(',').map(&:to_i)
+    reward = current_player.rewards.dig(*indexes)
     reward.each do |action_key, action_value|
       redeem_action_on_card(action_key, action_value)
     end

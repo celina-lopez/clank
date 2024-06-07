@@ -5,6 +5,10 @@ class Validation::Player < Validation::Base
     add_error_if_error('Not enough attack points', current_player.attack_points >= value)
   end
 
+  def redeem_reward?
+    add_error_if_error('Invalid format', current_player.rewards.dig(*value.split(',').map(&:to_i)).present?)
+  end
+
   def buy?
     result = add_error_if_error('Not in marketplace', current_player.position.marketplace?)
     result && add_error_if_error("Need #{current_player.coins - value} coins", current_player.coins >= value)

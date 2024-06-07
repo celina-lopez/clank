@@ -3,7 +3,7 @@
   cost: 2
   total: 2
   actions:
-    - cards: 1
+    - draw: 1
   conditionals:
     - type: action
       value:

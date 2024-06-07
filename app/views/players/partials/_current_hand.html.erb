@@ -1,6 +1,21 @@
   <div>
     <button id='end-turn' class="btn">End Turn</button>
   </div>
+  <div class="<%= @player['rewards'].empty? && "hidden" %>" id="rewards-id">
+    Rewards
+    <% @player['rewards'].each_with_index do |reward_options, reward_options_index| %>
+      <div>Choose Rewards:</div>
+      <% reward_options.each_with_index do |reward, index| %>
+        <div
+          onclick="executeAction(this)"
+          data-type="redeem_reward"
+          data-name="<%= reward_options_index %>,<%= index %>"
+        >
+          <%= reward %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
   Current Hand
   <div class='grid grid-cols-5 gap-1' id='player-cards'>
     <% player.dig('deck', 'active').each_with_index do |card, index| %>

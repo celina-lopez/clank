@@ -27,7 +27,7 @@
   actions:
     - move_points: 2
       clank: 2
-      crystal_cave_bypass: true
+      skip_crystal_cave: true
 - name: search
   total: 2
   cost: 4
@@ -156,7 +156,7 @@
   cost: 1
   actions:
     - coins: 1
-    - spend_seven_for_two_secret_tomes: 7
+    - spend_seven_for_two_secret_tomes: true
 - name: wand_of_recall
   total: 2
   cost: 3

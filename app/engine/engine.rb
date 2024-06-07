@@ -20,8 +20,9 @@ class Engine < Base
 
     history << { type:, value:, player_index: }
     action_klass = Action.const_get(klass).new(gameplay_data, type:, value:)
-    history.concat(action_klass.history)
     self.gameplay_data = action_klass.execute!
+    history.concat(action_klass.history)
+    gameplay_data
   end
 
   def klass_type(type)
