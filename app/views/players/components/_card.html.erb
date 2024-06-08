@@ -1,7 +1,8 @@
 <% current_hand = false if local_assigns[:current_hand].nil? %>
 <div class="card-parent relative">
-  <div class="action-card invisible absolute z-10 w-[300px] left-[100px] bg-white">
-    <img src='/images/<%= card['name'] %>.jpeg' />
+  <div class="action-card invisible border absolute border-black rounded border-2 z-10 w-[300px] left-[100px] bg-white">
+    <div class="text-center rounded-t-lg bg-white"><%= card['name']&.humanize %></div>
+    <img src='/images/<%= card['name'] %>.jpeg' /> 
     <% card.fetch('actions', []).each_with_index do |action, index| %>
       Rewards:
       <br>
