@@ -7,6 +7,8 @@
   background-image: url(<%= @phaser_config['preload_images']['background'] %>);
 }
 </style>
+<%= render 'players/partials/templates' %>
+
 <% if game.data['current_player_index'] == player['index'] %>
   CURRENT_PLAYER: <%= player['index'] %>
 <% end %>

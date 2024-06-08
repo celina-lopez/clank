@@ -1,0 +1,28 @@
+<template id='card-template'>
+  <%= render 'players/components/card', card: {}, id: "" %>
+</template>
+<template id='walking-icon'>
+  <div class='rounded-full bg-amber-600 text-center px-1'>
+    <i class='text-white fa-solid fa-person-walking'></i>
+  </div>
+</template>
+<template id='shield-icon'>
+  <div class='rounded-full px-1 text-center bg-red-700'>
+    <i class='text-white fa-solid fa-shield-halved'></i>
+  </div>
+</template>
+<template id='rewards-parent'>
+  <div>Choose Rewards:</div>
+    <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
+    </div>
+  </div>
+</template>
+<template id='rewards-option'>
+  <div
+    onclick="executeAction(this)"
+    class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
+    data-type="redeem_reward"
+    data-name="0,0"
+  >
+  </div>
+</template>
