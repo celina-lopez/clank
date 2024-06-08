@@ -29,7 +29,11 @@ function createCardClone(prefix, cardParent, index, card) {
 
 function createCardPopup(cardParent, card) {
   const cardPopup = cardParent.children[0];
-  cardPopup.children[0].src = `/images/${card['name']}.jpeg` 
+  cardPopup.children[0].innerHTML = card['name'].
+    replace(/_/g, ' ').
+    replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
+
+  cardPopup.children[1].src = `/images/${card['name']}.jpeg` 
   cardPopup.innerHTML += `${card['name']} <br/>`;
   if (!card['actions']) return cardPopup;
   for (let i = 0; i < card['actions'].length; i++) {
