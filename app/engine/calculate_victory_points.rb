@@ -2,7 +2,6 @@
 
 class CalculateVictoryPoints < Base
   def execute!
-    # TODO: test victory points
     gameplay_data.players.each do |player|
       player.victory_points = calculate_victory_points(player) unless player.position.depths?
       player.victory_points += 20 if player.position.current_position <= 0
