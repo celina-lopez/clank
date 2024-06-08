@@ -1,64 +1,12 @@
-  <div>
-    <button id='end-turn' class="btn">End Turn</button>
-  </div>
-  <div class="<%= @player['rewards'].empty? && "hidden" %>" id="rewards-id">
-    <% @player['rewards'].each_with_index do |reward_options, reward_options_index| %>
-      <div>Choose Rewards:</div>
-      <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
-        <% reward_options.each_with_index do |reward, index| %>
-          <div
-            onclick="executeAction(this)"
-            class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
-            data-type="redeem_reward"
-            data-name="<%= reward_options_index %>,<%= index %>"
-          >
-            <% reward.each do |k, v| %>
-              <% if k == 'discard_number' %>
-                Discard <%= v %> card(s)
-              <% elsif k == 'spend_seven_for_two_secret_tomes' %>
-                Spend 7 coins for 2 secret tome this turn
-              <% elsif %w[health coins attack_points move_points].include?(k) %>
-                Gain <%= v %>  <%= k.humanize(capitalize: false).singularize %>
-              <% else %>
-                <%= k.humanize %>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-  Current Hand
-  <div class='grid grid-cols-5 gap-1' id='player-cards'>
-    <% player.dig('deck', 'active').each_with_index do |card, index| %>
-      <%= render 'players/components/card', card:, id: "player-card-#{index}", current_hand: true %>
-    <% end %>
-  </div>
-  <div id="inventory-id" class="<%= @player['inventory'].empty? && 'hidden' %>">
-    Inventory
-    <%= render 'players/partials/inventory', player: @player  %> 
-  </div>
-  <% 
-    active_tile = @game.data['map']['tiles'].find { |x| x['tile'].to_i == @player['position']['current_position'].to_i }
-    is_marketplace = active_tile.fetch('tags', []).include?('marketplace')
-  %>
-  <div id='marketplace-id' class='<%= !is_marketplace && 'hidden'%>'>
-    <div>Marketplace Active</div>
-    <%= render 'players/partials/marketplace', player: @player %> 
-  </div>
-
-  Active Deck 
-  <div class='grid grid-cols-6 gap-1' id='active-cards'>
-    <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
-      <%= render 'players/components/card', card:, id: "active-card-#{index}" %>
-    <% end %>
-  </div>
-  Marketplace Cards
-  <div class='grid grid-cols-4 gap-1' id='marketplace-cards'>
-    <% game.data.dig('marketplace').each_with_index do |card, index| %>
-      <%= render 'players/components/card', card:, id: "marketplace-card-#{index}" %>
-    <% end %>
-  </div>
+<div>
+  <button id='end-turn' class="btn">End Turn</button>
+</div>
+<%= render 'players/partials/rewards', player: %> 
+<%= render 'players/partials/hand', player: %> 
+<%= render 'players/partials/inventory', player: @player  %> 
+<%= render 'players/partials/shop', player:, game: %> 
+<%= render 'players/partials/active_deck', game:  %> 
+<%= render 'players/partials/reserves', game:  %> 
 
 <script>
   function executeAction(e) {

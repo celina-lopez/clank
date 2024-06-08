@@ -1,0 +1,6 @@
+Current Hand
+<div class='grid grid-cols-5 gap-1' id='player-cards'>
+  <% player.dig('deck', 'active').each_with_index do |card, index| %>
+    <%= render 'players/components/card', card:, id: "player-card-#{index}", current_hand: true %>
+  <% end %>
+</div>
