@@ -29,29 +29,7 @@
   </div>
    <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="History" checked />
   <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    <% @game.history.reverse.each do |history| %>
-      <% if history['type'] == 'move' %>
-        <div>Player <%= history['player_index'] %> moved to tile <%= history['value'] %></div>
-      <% elsif history['type'] == 'buy_card' %>
-        <div>Player <%= history['player_index'] %> acquired <%= history['value'].humanize %> card</div>
-      <% elsif history['type'] == 'coins' %>
-        <div>Player <%= history['player_index'] %> gained <%= history['value'] %> coins</div>
-      <% elsif history['type'] == 'end_turn' %>
-        <div>Player <%= history['player_index'] %> ended their turn</div>
-      <% elsif history['type'] == 'dragon_attack' %>
-        <div>Dragon attacked!</div>
-      <% elsif history['type'] == 'redeemed_reward' %>
-        <div>Player <%= history['player_index'] %> redeemed a reward</div>
-      <% elsif history['type'] == 'move_points' %>
-        <div>Player <%= history['player_index'] %> gained  <%= history['value'] %> movement</div>
-      <% elsif history['type'] == 'health' %>
-        <div>Player <%= history['player_index'] %> gained  <%= history['value'] %> health</div>
-      <% elsif history['type'] == 'start_game' %>
-        <div>Started game with <%= history['value'] %> player(s)</div>
-      <% else %>
-        <div>Player <%= history['player_index'] %> used <%= history['type']&.humanize %> card</div>
-      <% end %>
-    <% end %>
+    <%= render 'players/partials/history', game: %> 
   </div>
 </div>
 
