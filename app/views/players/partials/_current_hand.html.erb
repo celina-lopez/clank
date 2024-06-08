@@ -17,7 +17,7 @@
                 Discard <%= v %> card(s)
               <% elsif k == 'spend_seven_for_two_secret_tomes' %>
                 Spend 7 coins for 2 secret tome this turn
-              <% elsif %w[health coins attack_points].include?(k) %>
+              <% elsif %w[health coins attack_points move_points].include?(k) %>
                 Gain <%= v %>  <%= k.humanize(capitalize: false).singularize %>
               <% else %>
                 <%= k.humanize %>

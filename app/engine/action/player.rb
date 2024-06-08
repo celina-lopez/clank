@@ -49,7 +49,7 @@ class Action::Player < Action::Base
     reward.each do |action_key, action_value|
       redeem_action_on_card(action_key, action_value)
     end
-    current_player.rewards = []
+    current_player.rewards.delete_at(indexes.first)
   end
 
   def redeem_inventory_item

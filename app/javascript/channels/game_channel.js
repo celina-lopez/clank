@@ -1,5 +1,5 @@
 import consumer from "channels/consumer"
-import { populateCards, updateStats, updatePlayerPosition, updateInventory } from "channels/game_helpers"
+import { populateCards, updateStats, updatePlayerPosition, updateInventory, addRewards } from "channels/game_helpers"
 
 window.app = {}
 let hrefParts = document.location.href.split("/"),
@@ -23,6 +23,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     updateStats(player);
     updateInventory(player);
     updatePlayerPosition(player, playerId);
+    addRewards(player);
     populateCards('player', player['deck']['active'], true);
 
     populateCards('active', data['deck']['active']);
