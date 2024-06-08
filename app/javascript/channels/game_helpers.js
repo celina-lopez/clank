@@ -23,6 +23,12 @@ function createCardClone(prefix, cardParent, index, card) {
     });
   }
   cardClone.children[2].src = `/images/${card['name']}.jpeg` 
+  if (card['cost']) {
+    let costIndicator = document.createElement('div');
+    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-0', 'right-0');
+    costIndicator.innerHTML = card['cost'];
+    cardClone.appendChild(costIndicator);
+  }
   cardClone.setAttribute('data-name', card['name']);
   return cardClone;
 };
