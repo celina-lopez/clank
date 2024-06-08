@@ -35,14 +35,32 @@ function createCardPopup(cardParent, card) {
 
   cardPopup.children[1].src = `/images/${card['name']}.jpeg` 
   cardPopup.innerHTML += `${card['name']} <br/>`;
-  if (!card['actions']) return cardPopup;
-  for (let i = 0; i < card['actions'].length; i++) {
-    let action = card['actions'][i];
-    Object.keys(action).forEach(function(key) {
-      let value = action[key];
-      cardPopup.innerHTML += `${key}: ${value}`
-    });
-    if (i < card['actions'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+  if (card['actions']) {
+    for (let i = 0; i < card['actions'].length; i++) {
+      let action = card['actions'][i];
+      Object.keys(action).forEach(function(key) {
+        let value = action[key];
+        cardPopup.innerHTML += `<div>- ${key}: ${value}</div>`
+      });
+      if (i < card['actions'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+    }
+  }
+  if (card['acquire']) {
+    cardPopup.innerHTML += `<div>On Acquire:</div>`
+    for (let i = 0; i < card['acquire'].length; i++) {
+      let action = card['acquire'][i];
+      Object.keys(action).forEach(function(key) {
+        let value = action[key];
+        cardPopup.innerHTML += `<div>- ${key}: ${value}</div>`
+      });
+      if (i < card['acquire'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+    }
+  }
+  if (card['cost']) {
+    cardPopup.innerHTML += `<div>Skill points: ${card['cost']} </div>`;
+  }
+  if (card['health']) {
+    cardPopup.innerHTML += `<div>Health: ${card['health']} </div>`;
   }
   return cardPopup;
 };
