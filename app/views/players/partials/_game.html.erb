@@ -13,7 +13,7 @@
   CURRENT_PLAYER: <%= player['index'] %>
 <% end %>
 <div role="tablist" class="tabs tabs-lifted bg-base-100 h-100 w-[700px]">
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" checked />
+  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
     <%= render 'players/partials/current_hand', player:, game: %>
   </div>
@@ -27,14 +27,30 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
     Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
   </div>
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Chat" />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    <%= render 'players/partials/chat', player: %>
-  </div>
-   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="History" />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    <% @game.history.each do |history| %>
-      <div><%= raw history.to_json %></div>
+   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="History" checked />
+  <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
+    <% @game.history.reverse.each do |history| %>
+      <% if history['type'] == 'move' %>
+        <div>Player <%= history['player_index'] %> moved to tile <%= history['value'] %></div>
+      <% elsif history['type'] == 'buy_card' %>
+        <div>Player <%= history['player_index'] %> acquired <%= history['value'].humanize %> card</div>
+      <% elsif history['type'] == 'coins' %>
+        <div>Player <%= history['player_index'] %> gained <%= history['value'] %> coins</div>
+      <% elsif history['type'] == 'end_turn' %>
+        <div>Player <%= history['player_index'] %> ended their turn</div>
+      <% elsif history['type'] == 'dragon_attack' %>
+        <div>Dragon attacked!</div>
+      <% elsif history['type'] == 'redeemed_reward' %>
+        <div>Player <%= history['player_index'] %> redeemed a reward</div>
+      <% elsif history['type'] == 'move_points' %>
+        <div>Player <%= history['player_index'] %> gained  <%= history['value'] %> movement</div>
+      <% elsif history['type'] == 'health' %>
+        <div>Player <%= history['player_index'] %> gained  <%= history['value'] %> health</div>
+      <% elsif history['type'] == 'start_game' %>
+        <div>Started game with <%= history['value'] %> player(s)</div>
+      <% else %>
+        <div>Player <%= history['player_index'] %> used <%= history['type']&.humanize %> card</div>
+      <% end %>
     <% end %>
   </div>
 </div>
