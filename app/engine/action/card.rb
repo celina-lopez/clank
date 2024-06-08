@@ -6,11 +6,7 @@ class Action::Card < Action::Base
       send(type)
       return gameplay_data
     end
-    card.fetch('actions', []).each do |action|
-      action.each { |k, v| send(k, v) }
-    end
-    current_player.deck.discard(card)
-    gameplay_data
+    redeem_card_rewards
   end
 
   def card
@@ -57,5 +53,17 @@ class Action::Card < Action::Base
 
   def trash_options(_val = value)
     current_player.trash_options << value
+  end
+
+  private
+
+  def redeem_card_rewards
+    if (actions = card.fetch('actions', [])).one?
+      actions.first.each { |k, v| send(k, v) }
+    elsif actions.any?
+      current_player.rewards << actions
+    end
+    current_player.deck.discard(card)
+    gameplay_data
   end
 end
