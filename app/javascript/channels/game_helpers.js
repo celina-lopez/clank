@@ -1,11 +1,27 @@
 
 // CARD FUNCTIONS
 function createCardClone(prefix, cardParent, index, card) {
+  const walkingIcon = document.getElementById('walking-icon'),
+        shieldIcon = document.getElementById('shield-icon');
   const cardClone = cardParent.children[1];
   cardClone.id =`${prefix}-card-${index}`;
   cardClone.children[0].innerHTML = card['name'].
     replace(/_/g, ' ').
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
+  if (card['actions']?.length == 1) {
+    Object.keys(card['actions'][0]).forEach(function(key) {
+      if (key == 'move_points') {
+        for (let i = 0; i < card['actions'][0][key]; i++) {
+          cardClone.children[1].appendChild(document.importNode(walkingIcon.content, true));
+        }
+      }
+      if (key == 'attack_points') {
+        for (let i = 0; i < card['actions'][0][key]; i++) {
+          cardClone.children[1].appendChild(document.importNode(shieldIcon.content, true));
+        }
+      }
+    });
+  }
   cardClone.children[2].src = `/images/${card['name']}.jpeg` 
   cardClone.setAttribute('data-name', card['name']);
   return cardClone;
@@ -28,7 +44,7 @@ function createCardPopup(cardParent, card) {
 };
 
 export function populateCards(prefix, cards, playerHand=false) {
-  let cardTemplate =  document.getElementById('card-template');
+  let cardTemplate = document.getElementById('card-template');
   document.getElementById(`${prefix}-cards`).innerHTML = ""
   let index = 0;
   cards.forEach(function(card) { 

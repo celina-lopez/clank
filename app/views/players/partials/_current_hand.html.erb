@@ -50,6 +50,16 @@
 
 <template id='card-template'>
   <%= render 'players/components/card', card: {}, id: "" %>
+</template>
+<template id='walking-icon'>
+  <div class='rounded-full bg-amber-600 text-center px-1'>
+    <i class='text-white fa-solid fa-person-walking'></i>
+  </div>
+</template>
+<template id='shield-icon'>
+  <div class='rounded-full px-1 text-center bg-red-700'>
+    <i class='text-white fa-solid fa-shield-halved'></i>
+  </div>
 </template >
 <script>
   function executeAction(e) {

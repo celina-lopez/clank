@@ -51,8 +51,8 @@ class Action::Card < Action::Base
     gameplay_data.dragon.clank += value
   end
 
-  def trash_options(_val = value)
-    current_player.trash_options << value
+  def trash_options(val = value)
+    current_player.trash_options << val
   end
 
   private
