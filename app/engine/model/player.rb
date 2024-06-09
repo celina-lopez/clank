@@ -3,8 +3,8 @@
 class Model::Player
   attr_accessor :attack_points, :move_points, :teleport_points, :coins, :inventory, :deck,
                 :clank, :position, :rewards, :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
-                :replace_card_in_market, :discard_number, :spend_seven_for_two_secret_tomes,
-                :take_secret_adjacent, :victory_points, :moved_to_crystal_cave, :replace_card_points
+                :discard_number, :spend_seven_for_two_secret_tomes, :take_secret_adjacent,
+                :victory_points, :moved_to_crystal_cave, :replace_card_points
   attr_reader :health, :index
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
@@ -34,10 +34,9 @@ class Model::Player
     coins: nil,
     skill_points: 0,
     rewards: [],
-    trash_options: [], # TODO: array of types?
+    trash_options: [],
     ignore_monster_path: false,
     skip_crystal_cave: false,
-    replace_card_in_market: false,
     discard_number: 0,
     spend_seven_for_two_secret_tomes: false,
     take_secret_adjacent: false,
@@ -60,7 +59,6 @@ class Model::Player
     @trash_options = trash_options || []
     @ignore_monster_path = ignore_monster_path || false
     @skip_crystal_cave = skip_crystal_cave || false
-    @replace_card_in_market = replace_card_in_market || false
     @discard_number = discard_number || 0
     @spend_seven_for_two_secret_tomes = spend_seven_for_two_secret_tomes || false
     @take_secret_adjacent = take_secret_adjacent || false
@@ -100,7 +98,6 @@ class Model::Player
     @trash_options = []
     @ignore_monster_path = false
     @skip_crystal_cave = false
-    @replace_card_in_market = false
     @discard_number = 0
     @spend_seven_for_two_secret_tomes = false
     @take_secret_adjacent = false

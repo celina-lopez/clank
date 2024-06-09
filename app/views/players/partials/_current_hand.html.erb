@@ -2,6 +2,7 @@
   <button id='end-turn' class="btn">End Turn</button>
 </div>
 <%= render 'players/partials/rewards', player: %> 
+<%= render 'players/partials/replace_card', player:, game: %> 
 <%= render 'players/partials/trash_options', player: %>
 <%= render 'players/partials/hand', player: %> 
 <%= render 'players/partials/inventory', player: @player  %> 

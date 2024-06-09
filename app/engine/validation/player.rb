@@ -54,6 +54,12 @@ class Validation::Player < Validation::Base
     add_error_if_error('Card not found', card_index.present?)
   end
 
+  def replace_card?
+    add_error_if_error('Not enough replace_card points', current_player.replace_card_points.positive?)
+    replace_card = gameplay_data.deck.active.find { |x| x['name'] == value }
+    add_error_if_error('Card not found', replace_card.present?)
+  end
+
   private
 
   def validate_trash_options(card_name)

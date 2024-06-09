@@ -71,7 +71,7 @@ function createCardPopup(cardParent, card) {
   return cardPopup;
 };
 
-export function populateCards(prefix, cards, playerHand=false) {
+function populateCards(prefix, cards, playerHand=false) {
   let cardTemplate = document.getElementById('card-template');
   document.getElementById(`${prefix}-cards`).innerHTML = ""
   let index = 0;
@@ -92,13 +92,13 @@ export function populateCards(prefix, cards, playerHand=false) {
 };
 
 // PLAYER FUNCTIONS
-export function updateStats(player) {
+function updateStats(player) {
   ['health', 'move_points', 'attack_points', 'clank', 'skill_points'].forEach(function(stat) {
     document.getElementById(stat).innerHTML = player[stat];
   });
 }
 
-export function updateInventory(player) {
+function updateInventory(player) {
   if (player['inventory']) {
     let inventory = document.getElementById('inventory-id');
     inventory.innerHTML = "";
@@ -114,7 +114,7 @@ export function updateInventory(player) {
   }
 }
 
-export function addRewards(player) {
+function addRewards(player) {
   if (player['rewards'].length > 0) {
     let rewardParent = document.getElementById('rewards-parent').content,
         rewardTemplate = document.getElementById('rewards-option').content;
@@ -151,12 +151,12 @@ export function addRewards(player) {
   }
 }
 
-export function updatePlayerPosition(player, playerId) {
+function updatePlayerPosition(player, playerId) {
   var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
   gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
 }
 
-export function addTrashOptions(player) {
+function addTrashOptions(player) {
   document.getElementById("trash-options-id").innerHTML = '';
   if (player['trash_options'].length > 0) {
     let trashOptionOne = document.getElementById('trash-option-1').content,
@@ -201,9 +201,49 @@ export function addTrashOptions(player) {
   }
 }
 
+function replaceCard(player, cards) {
+  document.getElementById("replace-card-id").innerHTML = '';
+  if (player['replace_card_points'] > 0) {
+    let replaceCardElm = document.getElementById('replace-cards').content,
+        replaceClone = document.importNode(replaceCardElm, true);
+    document.getElementById("replace-card-id").classList.remove('hidden');
+    let cardTemplate = document.getElementById('card-template').content;
+    let index = 0;
+    cards.forEach(function(card) { 
+      let clone = document.importNode(cardTemplate, true),
+        cardParent = clone.children[0],
+        cardClone = createCardClone("replace-active-card-", cardParent, index, card);
+      cardClone.dataset.type = 'replace_card';
+      cardClone.dataset.name = card['name'];
+      createCardPopup(cardParent, card)
+      replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
+      index += 1;
+    })
+    document.getElementById("replace-card-id").appendChild(replaceClone);
+  } else {
+    document.getElementById("replace-card-id").classList.add('hidden');
+  }
+}
+
+export function updatePlayerData(player, playerId, data) {
+  updateStats(player);
+  updateInventory(player);
+  updatePlayerPosition(player, playerId); 
+  addRewards(player);
+  addTrashOptions(player);
+  replaceCard(player, data['deck']['active']);
+  populateCards('player', player['deck']['active'], true);
+}
 // GAME FUNCTIONS
 
-export function updateLogs(history) {
+export function updateGameData(data) {
+  populateCards('active', data['deck']['active']);
+  populateCards('marketplace', data['marketplace']);
+  addListeningFunctionsToCards();
+  updateLogs(data['last_log']);
+}
+
+function updateLogs(history) {
   let logsParent = document.getElementById('logs-parent'),
       log = document.createElement('div');
   log.innerHTML = logLabel(history);

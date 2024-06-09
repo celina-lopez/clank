@@ -72,6 +72,12 @@ class Action::Player < Action::Base
     current_player.inventory.delete_at(current_player.inventory.index(inventory_item))
   end
 
+  def replace_card
+    current_player.replace_card_points -= 1
+    card_index = gameplay_data.deck.active.index { |x| x['name'] == value }
+    gameplay_data.deck.active.delete_at(card_index)
+  end
+
   private
 
   def remove_trashed_option(card_name)
