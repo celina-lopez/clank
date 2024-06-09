@@ -26,3 +26,25 @@
   >
   </div>
 </template>
+<template id='trash-option-1'>
+  <div>Trash</div>
+  <% %w[active discarded].each do |key| %>
+    <button
+      onclick="executeAction(this)"
+      class="btn btn-primary"
+      data-type="trash"
+    >
+      Trash from <%= key.humanize %> Deck
+    </button>
+  <% end %>
+</template>
+<template id='trash-option-2'>
+  <div>Choose a card to Trash from your Active or Discarded Deck:</div>
+  <div>Active:</div>
+  <div class='grid grid-cols-5 gap-1' id='active-trash-cards'>
+  </div>
+  <div>Discarded:</div>
+  <div class='grid grid-cols-5 gap-1' id='discarded-trash-cards'>
+  </div>
+</template>
+

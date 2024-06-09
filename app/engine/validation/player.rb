@@ -58,7 +58,11 @@ class Validation::Player < Validation::Base
 
   def validate_trash_options(card_name)
     trash_index = current_player.trash_options.find { |x| x.keys.first == card_name if x.is_a?(Hash) }
-    trash_index = current_player.trash_options.find { |x| x.to_i.positive? } unless trash_index.present?
+    unless trash_index.present?
+      trash_index = current_player.trash_options.find do |x|
+        !x.is_a?(Hash) && x.to_i.positive?
+      end
+    end
     add_error_if_error('Trash option not found', trash_index.present?)
   end
 

@@ -5,7 +5,8 @@ import {
   updatePlayerPosition,
   updateInventory,
   addRewards,
-  updateLogs
+  updateLogs,
+  addTrashOptions
 } from "channels/game_helpers"
 
 window.app = {}
@@ -31,6 +32,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     updateInventory(player);
     updatePlayerPosition(player, playerId);
     addRewards(player);
+    addTrashOptions(player);
     populateCards('player', player['deck']['active'], true);
 
     populateCards('active', data['deck']['active']);

@@ -156,6 +156,51 @@ export function updatePlayerPosition(player, playerId) {
   gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
 }
 
+export function addTrashOptions(player) {
+  document.getElementById("trash-options-id").innerHTML = '';
+  if (player['trash_options'].length > 0) {
+    let trashOptionOne = document.getElementById('trash-option-1').content,
+        trashOptionTwo = document.getElementById('trash-option-2').content;
+    document.getElementById("trash-options-id").classList.remove('hidden');
+    for (let i = 0; i < player['trash_options'].length; i++) {
+      let trash = player['trash_options'][i];
+      if (trash instanceof Object) {
+        let trashClone = document.importNode(trashOptionOne, true);
+        trashClone.children[1].dataset.name = `${Object.keys(player['trash_options'][i])[0]},active`
+        trashClone.children[2].dataset.name = `${Object.keys(player['trash_options'][i])[0]},discarded`
+        document.getElementById("trash-options-id").appendChild(trashClone);
+      } else {
+        let trashClone = document.importNode(trashOptionTwo, true);
+        let cardTemplate = document.getElementById('card-template').content;
+        let index = 0;
+        player['deck']['active'].forEach(function(card) { 
+          let clone = document.importNode(cardTemplate, true),
+            cardParent = clone.children[0],
+            cardClone = createCardClone("trash-active-card-", cardParent, index, card);
+          cardClone.dataset.type = 'trash';
+          cardClone.dataset.name = `${card['name']},active`;
+          createCardPopup(cardParent, card)
+          trashClone.querySelector("#active-trash-cards").appendChild(cardParent);
+          index += 1;
+        })
+        player['deck']['discarded'].forEach(function(card) { 
+          let clone = document.importNode(cardTemplate, true),
+            cardParent = clone.children[0],
+            cardClone = createCardClone("trash-discarded-card-", cardParent, index, card);
+          cardClone.dataset.type = 'trash';
+          cardClone.dataset.name = `${card['name']},discarded`;
+          createCardPopup(cardParent, card)
+          trashClone.querySelector("#discarded-trash-cards").appendChild(cardParent);
+          index += 1;
+        })
+        document.getElementById("trash-options-id").appendChild(trashClone);
+      }
+    }
+  } else {
+    document.getElementById("trash-options-id").classList.add('hidden');
+  }
+}
+
 // GAME FUNCTIONS
 
 export function updateLogs(history) {

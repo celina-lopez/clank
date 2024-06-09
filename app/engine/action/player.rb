@@ -75,9 +75,15 @@ class Action::Player < Action::Base
   private
 
   def remove_trashed_option(card_name)
-    trash_index = current_player.trash_options.index { |x| x.keys.first == card_name if x.is_a?(Hash) }
-    trash_index = current_player.trash_options.index { |x| x.to_i.positive? } unless trash_index.present?
-    current_player.trash_options.delete_at(trash_index)
+    current_player.trash_options = current_player.trash_options.map do |x|
+      if x.is_a?(Hash) && x.keys.first == card_name
+        nil
+      elsif x.is_a?(Hash)
+        x
+      elsif x.to_i > 1
+        x - 1
+      end
+    end.compact
   end
 
   def redeem_cost(card)

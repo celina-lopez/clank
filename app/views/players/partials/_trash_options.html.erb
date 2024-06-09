@@ -15,7 +15,7 @@
     <% else %>
       <div>Choose a card to Trash from your Active or Discarded Deck:</div>
       Active:
-      <div class='grid grid-cols-5 gap-1' id='player-cards'>
+      <div class='grid grid-cols-5 gap-1' id='active-trash-cards'>
         <% player.dig('deck', 'active').each_with_index do |card, index| %>
           <%= render(
             'players/components/card',
@@ -27,7 +27,7 @@
         <% end %>
       </div>
       Discarded:
-      <div class='grid grid-cols-5 gap-1' id='active-cards'>
+      <div class='grid grid-cols-5 gap-1' id='discarded-trash-cards'>
         <% player.dig('deck', 'discarded').each_with_index do |card, index| %>
           <%= render(
             'players/components/card',
