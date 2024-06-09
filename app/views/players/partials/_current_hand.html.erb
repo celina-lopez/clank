@@ -2,6 +2,7 @@
   <button id='end-turn' class="btn">End Turn</button>
 </div>
 <%= render 'players/partials/rewards', player: %> 
+<%= render 'players/partials/trash_options', player: %>
 <%= render 'players/partials/hand', player: %> 
 <%= render 'players/partials/inventory', player: @player  %> 
 <%= render 'players/partials/shop', player:, game: %> 
@@ -10,13 +11,9 @@
 
 <script>
   function executeAction(e) {
-    window.app.action.send({ type: e.dataset.type, value: e.dataset.name, player_index: <%= player.dig('index') %> });
-  }
-  function buyCard(e){
-    window.app.action.send({ type: 'buy_card', value: e.dataset.name, player_index: <%= player.dig('index') %> });
-  }
-  function executeCard(e){
-    window.app.action.send({ type: e.dataset.name, player_index: <%= player.dig('index') %> });
+    let data = { type: e.dataset.type, player_index: <%= player.dig('index') %> }
+    if (!!e.dataset.name) data.value = e.dataset.name
+    window.app.action.send(data);
   }
   document.getElementById('end-turn').addEventListener('click', (e) => {
     window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });

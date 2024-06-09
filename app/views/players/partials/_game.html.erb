@@ -14,7 +14,7 @@
 <% end %>
 <div role="tablist" class="tabs tabs-lifted bg-base-100 h-100 w-[700px]">
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" checked />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
+  <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
     <%= render 'players/partials/current_hand', player:, game: %>
   </div>
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Map" />
@@ -52,6 +52,7 @@
     <% @phaser_config['preload_images'].each do |name, source| %>
       this.load.image("<%= name %>", "<%= source %>");
     <% end %>
+    // TODO: add color sprites if more than 6 players
     <% @game.data['players'].each do |player| %>
       this.load.image("player<%= player['index'].to_i %>", "/images/player<%= player['index'].to_i %>.png");
     <% end %>

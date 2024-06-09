@@ -34,6 +34,18 @@ class Action::Player < Action::Base
     current_player.moved_to_crystal_cave = true
   end
 
+  def trash
+    card_name, card_deck = value.split(',')
+    remove_trashed_option(card_name)
+
+    %w[active discarded].each do |deck|
+      next unless card_deck == deck || card_deck.nil?
+
+      card_index = current_player.deck.send(deck).index { |x| x['name'] == card_name }
+      current_player.deck.send(deck).delete_at(card_index) if card_index.present?
+    end
+  end
+
   def teleport
     current_player.position.current_position = value
     current_player.teleport -= 1
@@ -61,6 +73,12 @@ class Action::Player < Action::Base
   end
 
   private
+
+  def remove_trashed_option(card_name)
+    trash_index = current_player.trash_options.index { |x| x.keys.first == card_name if x.is_a?(Hash) }
+    trash_index = current_player.trash_options.index { |x| x.to_i.positive? } unless trash_index.present?
+    current_player.trash_options.delete_at(trash_index)
+  end
 
   def redeem_cost(card)
     cost = card['cost'].to_i

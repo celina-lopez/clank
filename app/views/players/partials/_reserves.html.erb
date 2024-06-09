@@ -1,6 +1,13 @@
+<%# TODO: maybe dont rebuild this if you dont need to %>
 Marketplace Cards
 <div class='grid grid-cols-5 gap-1' id='marketplace-cards'>
   <% game.data.dig('marketplace').each_with_index do |card, index| %>
-    <%= render 'players/components/card', card:, id: "marketplace-card-#{index}" %>
+    <%= render(
+      'players/components/card',
+      card:,
+      id: "marketplace-card-#{index}",
+      data_type: 'buy_card',
+      data_name: card['name']
+    ) %>
   <% end %>
 </div>

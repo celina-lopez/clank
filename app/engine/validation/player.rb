@@ -42,7 +42,25 @@ class Validation::Player < Validation::Base
     next_to && add_error_if_error('No teleport availabile', current_player.teleport.positive?)
   end
 
+  def trash?
+    card_name, card_deck = value.split(',')
+    validate_trash_options(card_name)
+    card_index = nil
+    %w[active discarded].each do |deck|
+      next unless card_deck == deck || card_deck.nil?
+
+      card_index = current_player.deck.send(deck).index { |x| x['name'] == card_name }
+    end
+    add_error_if_error('Card not found', card_index.present?)
+  end
+
   private
+
+  def validate_trash_options(card_name)
+    trash_index = current_player.trash_options.find { |x| x.keys.first == card_name if x.is_a?(Hash) }
+    trash_index = current_player.trash_options.find { |x| x.to_i.positive? } unless trash_index.present?
+    add_error_if_error('Trash option not found', trash_index.present?)
+  end
 
   def card
     @card ||= CARDS.find { |x| x['name'] == value }

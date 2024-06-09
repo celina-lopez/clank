@@ -1,6 +1,12 @@
 Active Deck 
 <div class='grid grid-cols-5 gap-1' id='active-cards'>
   <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
-    <%= render 'players/components/card', card:, id: "active-card-#{index}" %>
+    <%= render(
+      'players/components/card',
+      card:,
+      id: "active-card-#{index}",
+      data_type: 'buy_card',
+      data_name: card['name']
+    ) %>
   <% end %>
 </div>

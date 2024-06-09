@@ -79,7 +79,12 @@ export function populateCards(prefix, cards, playerHand=false) {
     let clone = document.importNode(cardTemplate.content, true),
       cardParent = clone.children[0],
       cardClone = createCardClone(prefix, cardParent, index, card);
-    if (playerHand) cardClone.setAttribute('onclick', 'executeCard(this)');
+    if (playerHand) {
+      cardClone.dataset.type = card['name'];
+    } else {
+      cardClone.dataset.type = 'buy_card';
+      cardClone.dataset.name = card['name'];
+    }
     createCardPopup(cardParent, card)
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
