@@ -10,8 +10,10 @@ class GameChannel < ApplicationCable::Channel
     game = Game.find(params[:game_id])
     type, value, player_index = data.values_at('type', 'value', 'player_index')
     new_game_data = game.engine.execute(type:, value:, player_index:)
-    game.update!(data: JSON.parse(new_game_data.to_json))
-    ActionCable.server.broadcast("game_channel_#{game.id}", new_game_data)
+    json_data = JSON.parse(new_game_data.to_json)
+    game.update!(data: json_data)
+    ActionCable.server.broadcast("game_channel_#{game.id}", json_data.merge(last_log: game.history.last))
+    # TODO: figure out how these logs work wtf and uncomment below
     # rescue StandardError => e
     # ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
   end

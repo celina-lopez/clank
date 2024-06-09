@@ -150,3 +150,37 @@ export function updatePlayerPosition(player, playerId) {
   var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
   gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
 }
+
+// GAME FUNCTIONS
+
+export function updateLogs(history) {
+  let logsParent = document.getElementById('logs-parent'),
+      log = document.createElement('div');
+  log.innerHTML = logLabel(history);
+  logsParent.prepend(log);
+}
+
+function logLabel(history) {
+  switch(history) {
+  case 'move':
+    return `Player ${history['player_index']} moved to tile ${history['value']}`
+  case 'buy_card':
+    return `Player ${history['player_index']} acquired ${history['value'].replace(/_/g, ' ')} card`
+  case 'coins':
+    return `Player ${history['player_index']} gained ${history['value']} coin(s)`
+  case 'end_turn':
+    return `Player ${history['player_index']} ended their turn`
+  case 'dragon_attack':
+    return 'Dragon Attacked!'
+  case 'redeemed_reward':
+    return `Player ${history['player_index']} redeemed a reward`
+  case 'move_points':
+    return `Player ${history['player_index']} gained ${history['value']} move point(s)`
+  case 'health':
+    return `Player ${history['player_index']} gained ${history['value']} health`
+  case 'start_game':
+    return `Started game with ${history['value']} player(s)`
+  default:
+    return `Player ${history['player_index']} used ${history['type'].replace(/_/g, ' ')} card`
+  }
+}

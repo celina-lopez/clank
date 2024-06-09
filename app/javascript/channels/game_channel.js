@@ -1,5 +1,12 @@
 import consumer from "channels/consumer"
-import { populateCards, updateStats, updatePlayerPosition, updateInventory, addRewards } from "channels/game_helpers"
+import {
+  populateCards,
+  updateStats,
+  updatePlayerPosition,
+  updateInventory,
+  addRewards,
+  updateLogs
+} from "channels/game_helpers"
 
 window.app = {}
 let hrefParts = document.location.href.split("/"),
@@ -30,5 +37,6 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
     populateCards('marketplace', data['marketplace']);
 
     addListeningFunctionsToCards();
+    updateLogs(data['last_log']);
   }
 });
