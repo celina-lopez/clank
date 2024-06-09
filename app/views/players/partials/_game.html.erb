@@ -52,7 +52,6 @@
     <% @phaser_config['preload_images'].each do |name, source| %>
       this.load.image("<%= name %>", "<%= source %>");
     <% end %>
-    // TODO: add color sprites if more than 6 players
     <% @game.data['players'].each do |player| %>
       this.load.image("player<%= player['index'].to_i %>", "/images/player<%= player['index'].to_i %>.png");
     <% end %>
