@@ -1,5 +1,5 @@
 import consumer from "channels/consumer"
-import { updatePlayerData, updateGameData } from "channels/game_helpers"
+import { updatePlayerData, updateGameData, addError } from "channels/game_helpers"
 
 window.app = {}
 let hrefParts = document.location.href.split("/"),
@@ -17,6 +17,11 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
   },
 
   received(data) {
+    // TODO: game over state
+    if (data['error']) {
+      addError(data['error']);
+      return;
+    }
     let player = data['players'][playerId];
     console.log(`player ${playerId}`, player) 
 

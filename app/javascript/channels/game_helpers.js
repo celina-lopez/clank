@@ -280,3 +280,9 @@ function logLabel(history) {
     return `Player ${history['player_index']} used ${history['type'].replace(/_/g, ' ')} card`
   }
 }
+
+export function addError(err) {
+  let errElm = document.getElementById('alert-popup')
+  errElm.classList.remove('hidden');
+  errElm.children[1].innerHTML = err;
+}
