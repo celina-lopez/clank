@@ -29,6 +29,12 @@ function createCardClone(prefix, cardParent, index, card) {
     costIndicator.innerHTML = card['cost'];
     cardClone.appendChild(costIndicator);
   }
+  if (card['health']) {
+    let costIndicator = document.createElement('div');
+    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-0', 'right-0');
+    costIndicator.innerHTML = card['health'];
+    cardClone.appendChild(costIndicator);
+  }
   cardClone.setAttribute('data-name', card['name']);
   return cardClone;
 };

@@ -47,27 +47,28 @@
     data-name="<%= data_name %>"
   >
     <div class="text-center rounded-t-lg bg-white truncate"><%= card['name']&.humanize %></div>
-      <% if card['actions']&.one? %>
-        <div class="absolute">
-          <% if card.dig('actions', 0, 'attack_points').present? %>
-            <% card.dig('actions', 0, 'attack_points').times do %>
-              <div class="rounded-full px-1 text-center bg-red-700">
-                <i class="text-white fa-solid fa-shield-halved"></i>
-              </div>
-            <% end %>
-          <% end %>
-          <% if card.dig('actions', 0, 'move_points').present? %>
-            <% card.dig('actions', 0, 'move_points').times do %>
-              <div class="rounded-full bg-amber-600 text-center px-1">
-                <i class="text-white fa-solid fa-person-walking"></i>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+    <div class="absolute">
+      <% if card['actions']&.one? && card.dig('actions', 0, 'attack_points').present? %>
+        <% card.dig('actions', 0, 'attack_points').times do %>
+          <div class="rounded-full px-1 text-center bg-red-700">
+            <i class="text-white fa-solid fa-shield-halved"></i>
+          </div>
+        <% end %>
       <% end %>
+      <% if card['actions']&.one? && card.dig('actions', 0, 'move_points').present? %>
+        <% card.dig('actions', 0, 'move_points').times do %>
+          <div class="rounded-full bg-amber-600 text-center px-1">
+            <i class="text-white fa-solid fa-person-walking"></i>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
     <img src='/images/<%= card['name'] %>.jpeg' />
     <% if card['cost'].present? %>
       <div class="bg-sky-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['cost'] %></div>
+    <% end %>
+    <% if card['health'].present? %>
+      <div class="bg-red-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['health'] %></div>
     <% end %>
   </div>
 </div>
