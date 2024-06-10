@@ -17,7 +17,8 @@ class Validation::Player < Validation::Base
   def buy_card?
     result = add_error_if_error('Card not found', card)
     result &= validate_funds
-    result && validate_health
+    result &= validate_health
+    result && validate_buy_conditions
   end
 
   def move? # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -98,7 +99,7 @@ class Validation::Player < Validation::Base
     card['conditions'].all? do |condition|
       if condition['type'] == 'can_buy'
         if condition['has'].present?
-          current_player.inventory.any? { |x| x['name'] == condition['has'] } # TODO: double check item theme all
+          current_player.inventory.any? { |x| x['name'] == condition['has'] }
         elsif condition['has_companion'].present?
           current_player.deck.active.any? { |x| Base::COMPANION_NAMES.include?(x['name']) }
         elsif condition['two_of'].present?
