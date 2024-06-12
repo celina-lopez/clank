@@ -29,7 +29,7 @@ class Action::Player < Action::Base
     current_player.move_points -= edge_metadata.fetch('move', 1)
     current_player.health -= edge_metadata.fetch('danger', 0) unless current_player.ignore_monster_path
     return unless current_player.position.tags(value).include?('crystal_cave')
-    return unless current_player.skip_crystal_cave
+    return if current_player.skip_crystal_cave
 
     current_player.moved_to_crystal_cave = true
   end
