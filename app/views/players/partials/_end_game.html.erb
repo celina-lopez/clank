@@ -1,0 +1,6 @@
+<h1>Results</h1>
+<% @game.data['players'].sort {|x| x['victory_points'] }.each_with_index do |player, index| %>
+  <div>
+    Player <%= player['index'] %>: <%= player['victory_points'] %> victory points <%= index == 0 ? "(Winner)" : "" %>
+  </div>
+<% end %>
