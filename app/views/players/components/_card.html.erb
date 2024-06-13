@@ -2,10 +2,39 @@
   data_name = nil if local_assigns[:data_name].nil?
   data_type = nil if local_assigns[:data_type].nil?
 %>
-<div class="card-parent relative">
-  <div class="action-card invisible border absolute border-black rounded border-2 z-10 w-[300px] left-[100px] bg-white">
-    <div class="text-center rounded-t-lg bg-white"><%= card['name']&.humanize %></div>
-    <img src='/images/<%= card['name'] %>.jpeg' /> 
+<div 
+  class="card-parent relative flip-card"
+  onclick='executeAction(this)'
+  id='<%= id %>'
+  data-type="<%= data_type %>"
+  data-name="<%= data_name %>"
+>
+  <div class="flip-card-inner">
+  <div
+    class="flip-card-front rounded border-black border-2 rounded h-[150px] w-[127px] cursor-pointer"
+  >
+    <img src='/images/<%= card['name'] %>.jpeg' class="rounded-full text-center border-red-400 border h-[100px] mx-auto" />
+    <div class="absolute w-[100%] bottom-[38px]">
+      <div class="text-center mx-2 truncate rounded-t-lg border-red-500 border text-white bg-black"><%= card['name']&.humanize %></div>
+    </div>
+    <div class="font-bold mt-3 flex gap-1 justify-center">
+      <% if card['actions']&.one? && card.dig('actions', 0, 'attack_points').present? %>
+        <div>
+          <i class="text-red-700 fa-solid fa-shield-halved"></i> <%= card.dig('actions', 0, 'attack_points') %>
+        </div>
+      <% end %>
+      <% if card['actions']&.one? && card.dig('actions', 0, 'move_points').present? %>
+        <i class="text-amber-600 fa-solid fa-person-walking"></i><%= card.dig('actions', 0, 'move_points') %>
+      <% end %>
+    </div>
+    <% if card['cost'].present? %>
+      <div class="bg-sky-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['cost'] %></div>
+    <% end %>
+    <% if card['health'].present? %>
+      <div class="bg-red-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['health'] %></div>
+    <% end %>
+  </div>
+  <div class="action-card flip-card-back border absolute border-black rounded border-2 h-[150px] w-[127px] ">
     <% card.fetch('actions', []).each_with_index do |action, index| %>
       <% action.each do |key, value| %>
         - <%= key.humanize %>: <%= value %>
@@ -39,36 +68,5 @@
       Health: <%= card['health'] %>
     <% end %>
   </div>
-  <div
-    class="rounded bg-red-100 border-black border-2 rounded h-[150px] w-[127px] cursor-pointer"
-    onclick='executeAction(this)'
-    id='<%= id %>'
-    data-type="<%= data_type %>"
-    data-name="<%= data_name %>"
-  >
-    <div class="text-center rounded-t-lg bg-white truncate"><%= card['name']&.humanize %></div>
-    <div class="absolute">
-      <% if card['actions']&.one? && card.dig('actions', 0, 'attack_points').present? %>
-        <% card.dig('actions', 0, 'attack_points').times do %>
-          <div class="rounded-full px-1 text-center bg-red-700">
-            <i class="text-white fa-solid fa-shield-halved"></i>
-          </div>
-        <% end %>
-      <% end %>
-      <% if card['actions']&.one? && card.dig('actions', 0, 'move_points').present? %>
-        <% card.dig('actions', 0, 'move_points').times do %>
-          <div class="rounded-full bg-amber-600 text-center px-1">
-            <i class="text-white fa-solid fa-person-walking"></i>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-    <img src='/images/<%= card['name'] %>.jpeg' />
-    <% if card['cost'].present? %>
-      <div class="bg-sky-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['cost'] %></div>
-    <% end %>
-    <% if card['health'].present? %>
-      <div class="bg-red-600 px-1 rounded text-white absolute bottom-0 right-0"><%= card['health'] %></div>
-    <% end %>
   </div>
 </div>
