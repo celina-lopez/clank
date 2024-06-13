@@ -19,6 +19,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
   received(data) {
     // TODO: game over state
     if (data['error']) {
+      // TODO: remove error after some time
       addError(data['error']);
       return;
     }
