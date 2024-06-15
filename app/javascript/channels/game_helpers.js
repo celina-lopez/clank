@@ -43,28 +43,30 @@ function createCardPopup(cardParent, card) {
     for (let i = 0; i < card['actions'].length; i++) {
       let action = card['actions'][i];
       Object.keys(action).forEach(function(key) {
-      let actionElm = document.getElementById('template-' + key);
-      if (!!actionElm) {
-        let actionTemplate = document.importNode(actionElm.content, true).children[0];
-        actionParentElm.innerHTML += `<div>${actionTemplate.children[0]}`;
-      }
+        let actionElm = document.getElementById('template-' + key);
+        actionParentElm.innerHTML += `<div>`;
+        if (!!actionElm) {
+          let actionTemplate = document.importNode(actionElm.content, true).children[0];
+          actionParentElm.appendChild(actionTemplate);
+        }
         let value = action[key];
         if (Number.isInteger(value) && value > 0) {
           actionParentElm.innerHTML += `+${value} `;
         } else {
           actionParentElm.innerHTML += value;
         }
-        switch(key) {
-          case 'attack_points':
-            actionParentElm.innerHTML += 'Attack';
-          case 'move_points':
-            actionParentElm.innerHTML += 'Move';
-          case 'coins':
-            actionParentElm.innerHTML += 'Coins';
-          case 'skill_points':
-            actionParentElm.innerHTML += 'Skill';
-          case 'clank':
-            actionParentElm.innerHTML += 'Clank';
+        if (key == 'attack_points') { 
+          actionParentElm.innerHTML += 'Attack';
+        } else if (key == 'move_points') {
+          actionParentElm.innerHTML += 'Move';
+        } else if (key == 'coins') {
+          actionParentElm.innerHTML += 'Coins';
+        } else if (key == 'skill_points') {
+          actionParentElm.innerHTML += 'Skill';
+        } else if (key == 'clank') {
+          actionParentElm.innerHTML += 'Clank';
+        } else {
+          actionParentElm.innerHTML += key.replace(/_/g, ' ');
         }
         actionParentElm.innerHTML += '</div>';
       });
