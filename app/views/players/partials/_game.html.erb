@@ -68,7 +68,8 @@
       let size = config.size || 20;
       let tile = thiz.add.rectangle(size  + 20, size, size, size, config.color);
       tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
-      tile.setAlpha(1); 
+      // TODO: add ending tiles on canva 
+      tile.setAlpha(0.1); 
       tile.setInteractive(); 
 
       tile.on('pointerover', function () {

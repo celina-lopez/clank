@@ -7,6 +7,7 @@ tiles:
     color: 0xc1a05a
   monkey:
     size: 130
+    color: 0xc1a05a
 preload_images:
   background: "/images/basic.png"
 config:
