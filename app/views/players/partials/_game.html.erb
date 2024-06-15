@@ -13,11 +13,11 @@
   CURRENT_PLAYER: <%= player['index'] %>
 <% end %>
 <div role="tablist" class="tabs tabs-lifted bg-base-100 h-100 w-[700px]">
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" />
+  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" checked />
   <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
     <%= render 'players/partials/current_hand', player:, game: %>
   </div>
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Map" checked />
+  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Map" />
   <div role="tabpanel" class="tab-content border-base-300 rounded-box p-6">
     <div class="overflow-y-scroll h-[100vh]">
       <div id="boardgame"></div>

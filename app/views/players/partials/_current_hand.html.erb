@@ -16,19 +16,30 @@
     if (!!e.dataset.name) data.value = e.dataset.name
     window.app.action.send(data);
   }
-  document.getElementById('end-turn').addEventListener('click', (e) => {
+  document.getElementById('end-turn').addEventListener('click', function (e) {
     window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
   });
-  function addListeningFunctionsToCards () {
-    document.querySelectorAll('.card-parent').forEach((card) => {
-      card.addEventListener('mouseover', (e) => {
-        card.querySelector('.action-card').classList.remove('invisible');
-      });
-      card.addEventListener('mouseout', (e) => {
-        card.querySelector('.action-card').classList.add('invisible');
+  function addCardTriggers() {
+    document.querySelectorAll(".trigger-button").forEach(function (button) {
+      button.addEventListener("click", function() {
+        this.parentElement.parentElement.querySelector('.modal-card').classList.remove('hidden');
       });
     });
-  };
-  addListeningFunctionsToCards();
+
+    document.querySelectorAll('.closeButton').forEach(function(button) {
+      button.addEventListener('click', function() {
+        this.parentElement.parentElement.classList.add('hidden');
+      });
+    });
+
+    document.querySelectorAll('.modal-card').forEach(function (button) {
+      button.addEventListener('click', function (e) {
+        if (e.target.classList.contains('modal-card')) {
+          e.target.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  addCardTriggers();
 </script>
-<%# 🛎 💰 ❤🗱  %>
