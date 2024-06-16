@@ -1,27 +1,25 @@
 tiles:
+  ending:
+    size: 60
+    color: 0x264859
   default:
     size: 60
-    color: 0xe7116c
-  crystal_cave:
-    size: 63
-    color: 0x00a9ac
-  minor_item:
-    size: 60
-    color: 0xe4a3b7
-  major_item:
-    size: 60
-    color: 0xbd6826
-  health:
-    size: 60
-    color: 0xbd6826
-  market:
-    size: 60
-    color: 0xbd6826
+    color: 0xc1a05a
   monkey:
     size: 130
-    color: 0xbd6826
+    color: 0xc1a05a
 preload_images:
-  background: "/images/game_with_tiles.png"
+  background: "/images/basic.png"
 config:
   height: 710
   width: 700
+player_colors:
+  - red
+  - blue
+  - green
+  - pink
+  - yellow
+  - teal
+  - orange
+  - cyan
+  - violet

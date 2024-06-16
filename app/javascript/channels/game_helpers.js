@@ -1,80 +1,108 @@
 
 // CARD FUNCTIONS
-function createCardClone(prefix, cardParent, index, card) {
-  const walkingIcon = document.getElementById('walking-icon'),
-        shieldIcon = document.getElementById('shield-icon');
-  const cardClone = cardParent.children[1];
-  cardClone.id =`${prefix}-card-${index}`;
-  cardClone.children[0].innerHTML = card['name'].
+function createCardClone(cardParent, card) {
+  const cardClone = cardParent.children[0];
+  cardClone.querySelector('img').src = `/images/${card['name']}.jpeg`
+  cardClone.querySelector('.card_name').innerHTML = card['name'].
     replace(/_/g, ' ').
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
   if (card['actions']?.length == 1) {
     Object.keys(card['actions'][0]).forEach(function(key) {
-      if (key == 'move_points') {
-        for (let i = 0; i < card['actions'][0][key]; i++) {
-          cardClone.children[1].appendChild(document.importNode(walkingIcon.content, true));
-        }
-      }
-      if (key == 'attack_points') {
-        for (let i = 0; i < card['actions'][0][key]; i++) {
-          cardClone.children[1].appendChild(document.importNode(shieldIcon.content, true));
-        }
+      let actionElm = document.getElementById('template-' + key);
+      if (!!actionElm) {
+        let actionTemplate = document.importNode(actionElm.content, true);
+        cardClone.querySelector('.card_actions_parent').appendChild(actionTemplate.children[0]);
+        cardClone.querySelector('.card_actions_parent').innerHTML += card['actions'][0][key]; 
       }
     });
   }
-  cardClone.children[2].src = `/images/${card['name']}.jpeg` 
   if (card['cost']) {
     let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-0', 'right-0');
+    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
     costIndicator.innerHTML = card['cost'];
     cardClone.appendChild(costIndicator);
   }
   if (card['health']) {
     let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-0', 'right-0');
+    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
     costIndicator.innerHTML = card['health'];
     cardClone.appendChild(costIndicator);
   }
-  cardClone.setAttribute('data-name', card['name']);
   return cardClone;
 };
 
 function createCardPopup(cardParent, card) {
-  const cardPopup = cardParent.children[0];
-  cardPopup.children[0].innerHTML = card['name'].
+  const cardPopup = cardParent.children[2];
+  cardPopup.querySelector('h3').innerHTML = card['name'].
     replace(/_/g, ' ').
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
 
-  cardPopup.children[1].src = `/images/${card['name']}.jpeg` 
-  cardPopup.innerHTML += `${card['name']} <br/>`;
+  cardPopup.querySelector('img').src = `/images/${card['name']}.jpeg` 
+  let actionParentElm = cardPopup.querySelector('.action_parent');
   if (card['actions']) {
     for (let i = 0; i < card['actions'].length; i++) {
       let action = card['actions'][i];
       Object.keys(action).forEach(function(key) {
+        let actionElm = document.getElementById('template-' + key);
+        actionParentElm.innerHTML += `<div>`;
+        if (!!actionElm) {
+          let actionTemplate = document.importNode(actionElm.content, true).children[0];
+          actionParentElm.appendChild(actionTemplate);
+        }
         let value = action[key];
-        cardPopup.innerHTML += `<div>- ${key}: ${value}</div>`
+        if (Number.isInteger(value) && value > 0) {
+          actionParentElm.innerHTML += `+${value} `;
+        } else {
+          actionParentElm.innerHTML += value;
+        }
+        if (key == 'attack_points') { 
+          actionParentElm.innerHTML += 'Attack';
+        } else if (key == 'move_points') {
+          actionParentElm.innerHTML += 'Move';
+        } else if (key == 'coins') {
+          actionParentElm.innerHTML += 'Coins';
+        } else if (key == 'skill_points') {
+          actionParentElm.innerHTML += 'Skill';
+        } else if (key == 'clank') {
+          actionParentElm.innerHTML += 'Clank';
+        } else {
+          actionParentElm.innerHTML += key.replace(/_/g, ' ');
+        }
+        actionParentElm.innerHTML += '</div>';
       });
-      if (i < card['actions'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+      if (i < card['actions'].length - 1) actionParentElm.innerHTML += '<div>or</div>';
     }
   }
   if (card['acquire']) {
-    cardPopup.innerHTML += `<div>On Acquire:</div>`
+    actionParentElm.innerHTML += `<div>On Acquire</div><hr/>`
     for (let i = 0; i < card['acquire'].length; i++) {
       let action = card['acquire'][i];
       Object.keys(action).forEach(function(key) {
         let value = action[key];
-        cardPopup.innerHTML += `<div>- ${key}: ${value}</div>`
+        actionParentElm.innerHTML += `<div>- ${key}: ${value}</div>`
       });
-      if (i < card['acquire'].length - 1) cardPopup.innerHTML += '<div>or</div>';
+      if (i < card['acquire'].length - 1) actionParentElm.innerHTML += '<div>or</div>';
     }
   }
   if (card['cost']) {
-    cardPopup.innerHTML += `<div>Skill points: ${card['cost']} </div>`;
+    actionParentElm.innerHTML += `<div>Skill points: ${card['cost']} </div>`;
   }
   if (card['health']) {
-    cardPopup.innerHTML += `<div>Health: ${card['health']} </div>`;
+    actionParentElm.innerHTML += `<div>Health: ${card['health']} </div>`;
   }
   return cardPopup;
+};
+
+function createCardButton(cardParent, card, playerHand=false) {
+  const cardButton = cardParent.children[1].children[0];
+  if (playerHand) {
+    cardButton.dataset.type = card['name'];
+    cardButton.innerHTML = 'use';
+  } else {
+    cardButton.dataset.type = 'buy_card';
+    cardButton.dataset.name = card['name'];
+    cardButton.innerHTML = 'buy';
+  }
 };
 
 function populateCards(prefix, cards, playerHand=false) {
@@ -83,15 +111,11 @@ function populateCards(prefix, cards, playerHand=false) {
   let index = 0;
   cards.forEach(function(card) { 
     let clone = document.importNode(cardTemplate.content, true),
-      cardParent = clone.children[0],
-      cardClone = createCardClone(prefix, cardParent, index, card);
-    if (playerHand) {
-      cardClone.dataset.type = card['name'];
-    } else {
-      cardClone.dataset.type = 'buy_card';
-      cardClone.dataset.name = card['name'];
-    }
-    createCardPopup(cardParent, card)
+      cardParent = clone.children[0];
+    cardParent.id =`${prefix}-card-${index}`;
+    createCardClone(cardParent, card)
+    createCardButton(cardParent, card, playerHand) ;
+    createCardPopup(cardParent, card);
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
   })
@@ -245,7 +269,7 @@ export function updatePlayerData(player, playerId, data) {
 export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
-  addListeningFunctionsToCards();
+  addCardTriggers();
   updateLogs(data['last_log']);
 }
 
