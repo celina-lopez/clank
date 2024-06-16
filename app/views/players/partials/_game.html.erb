@@ -3,33 +3,35 @@
   overflow: scroll;
   background-size: 100% 100%;
   height: 710px;
+  width: 700px;
   overflow: auto; /* Enable scrolling for the game container */
   background-image: url(<%= @phaser_config['preload_images']['background'] %>);
 }
 </style>
 <%= render 'players/partials/templates' %>
+<div>
+  <div class="block xl:hidden mb-4">
+    <button class="tab-button bg-blue-500 text-white p-2 rounded-l-md" data-target="#panel1">Hand</button>
+    <button class="tab-button bg-gray-200 p-2" data-target="#panel2">Map</button>
+    <button class="tab-button bg-gray-200 p-2" data-target="#panel3">Dragon</button>
+    <button class="tab-button bg-gray-200 p-2 rounded-r-md" data-target="#panel4">Logs</button>
+  </div>
 
-<% if game.data['current_player_index'] == player['index'] %>
-  CURRENT_PLAYER: <%= player['index'] %>
-<% end %>
-<div role="tablist" class="tabs tabs-lifted bg-base-100 h-100 w-[700px]">
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Hand" checked />
-  <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    <%= render 'players/partials/current_hand', player:, game: %>
-  </div>
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Map" />
-  <div role="tabpanel" class="tab-content border-base-300 rounded-box p-6">
-    <div class="overflow-y-scroll h-[100vh]">
-      <div id="boardgame"></div>
+  <div class="grid xl:grid-cols-2">
+    <div id="panel1" class="panel">
+      <%= render 'players/partials/current_hand', player:, game: %>
     </div>
-  </div>
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Dragon" />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
-  </div>
-   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="History" />
-  <div role="tabpanel" class="tab-content overflow-auto bg-base-100 border-base-300 rounded-box p-6 w-[700px] h-[100vh]">
-    <%= render 'players/partials/history', game: %> 
+    <div id="panel2" class="panel hidden xl:block">
+      <div class="overflow-y-scroll">
+        <div id="boardgame"></div>
+      </div>
+    </div>
+    <div id="panel3" class="panel hidden xl:block bg-white">
+      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
+    </div>
+    <div id="panel4" class="panel hidden xl:block bg-white">
+      <%= render 'players/partials/history', game: %> 
+    </div>
   </div>
 </div>
 
@@ -99,4 +101,26 @@
       addPlayerToMap(this, <%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
     <% end %>
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.panel');
+    buttons.forEach(button => {
+      button.addEventListener('click', function () {
+        const targetPanel = document.querySelector(button.getAttribute('data-target'));
+        // Hide all panels
+        panels.forEach(function(panel) { panel.classList.add('hidden') });
+        // Remove active class from all buttons
+        buttons.forEach(function(btn) {
+          btn.classList.remove('bg-blue-500', 'text-white');
+          btn.classList.add('bg-gray-200');
+        });
+        // Show the target panel
+        targetPanel.classList.remove('hidden');
+        // Add active class to the clicked button
+        button.classList.remove('bg-gray-200');
+        button.classList.add('bg-blue-500', 'text-white');
+      });
+    });
+  });
 </script>
