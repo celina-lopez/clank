@@ -1,6 +1,3 @@
-<div>
-  <button id='end-turn' class="btn">End Turn</button>
-</div>
 <%= render 'players/partials/rewards', player: %> 
 <%= render 'players/partials/replace_card', player:, game: %> 
 <%= render 'players/partials/trash_options', player: %>
@@ -16,9 +13,6 @@
     if (!!e.dataset.name) data.value = e.dataset.name
     window.app.action.send(data);
   }
-  document.getElementById('end-turn').addEventListener('click', function (e) {
-    window.app.action.send({ type: 'end_turn', player_index: <%= player.dig('index') %> });
-  });
   function addCardTriggers() {
     document.querySelectorAll(".trigger-button").forEach(function (button) {
       button.addEventListener("click", function() {

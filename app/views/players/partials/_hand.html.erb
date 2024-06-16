@@ -8,4 +8,7 @@ Current Hand
       data_type: card['name'],
     ) %>
   <% end %>
+  <% if player.dig('deck', 'active').empty? %>
+    <button class="btn" onclick='executeAction(this)' data-type='end_turn'>End Turn</button>
+  <% end %>
 </div>
