@@ -18,13 +18,13 @@ function createCardClone(cardParent, card) {
   }
   if (card['cost']) {
     let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-[41px]', 'right-0');
+    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
     costIndicator.innerHTML = card['cost'];
     cardClone.appendChild(costIndicator);
   }
   if (card['health']) {
     let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded', 'text-white', 'absolute', 'bottom-[41px]', 'right-0');
+    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
     costIndicator.innerHTML = card['health'];
     cardClone.appendChild(costIndicator);
   }
@@ -94,12 +94,14 @@ function createCardPopup(cardParent, card) {
 };
 
 function createCardButton(cardParent, card, playerHand=false) {
-  const cardButton = cardParent.children[1];
+  const cardButton = cardParent.children[1].children[0];
   if (playerHand) {
     cardButton.dataset.type = card['name'];
+    cardButton.innerHTML = 'use';
   } else {
     cardButton.dataset.type = 'buy_card';
     cardButton.dataset.name = card['name'];
+    cardButton.innerHTML = 'buy';
   }
 };
 
