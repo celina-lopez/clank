@@ -60,9 +60,7 @@
   }
 
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
-  // var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
-  // TODO: remove this eventually
-  var mapTiles = <%= @temp_map.html_safe %>;
+  var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
 
   function generateTileMap(thiz) {
     mapTiles.forEach((tileData) => {
