@@ -270,6 +270,7 @@ export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addCardTriggers();
+  addListeningFunctionsToCards();
   updateLogs(data['last_log']);
 }
 

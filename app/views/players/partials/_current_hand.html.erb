@@ -35,5 +35,16 @@
     });
   }
 
+  function addListeningFunctionsToCards () {
+    document.querySelectorAll('.card-parent').forEach((card) => {
+      card.addEventListener('mouseover', (e) => {
+        card.querySelector('.action-card').classList.remove('invisible');
+      });
+      card.addEventListener('mouseout', (e) => {
+        card.querySelector('.action-card').classList.add('invisible');
+      });
+    });
+  };
+  addListeningFunctionsToCards();
   addCardTriggers();
 </script>
