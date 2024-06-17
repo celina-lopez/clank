@@ -23,5 +23,13 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
     require("daisyui"),
+  ],
+  safelist: [
+    {
+      pattern: /text-(amber|red|yellow|sky|green)-600/,
+    },
+    {
+      pattern: /bg-(red|yellow|blue|green|pink|teal|orange|cyan|violet)-400/,
+    }
   ]
 }
