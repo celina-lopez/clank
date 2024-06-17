@@ -2,6 +2,7 @@ map_1:
   - tile: -1
     tags:
       - ending
+    TODO: add the mystery tokens and such
     frontend_data:
       x: -3
       y: .5
