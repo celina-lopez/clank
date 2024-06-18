@@ -68,9 +68,7 @@ class Model::Player
   end
 
   def health=(value)
-    return unless value > MAX_HEALTH
-
-    self.health = MAX_HEALTH
+    @health = [value, MAX_HEALTH].min
   end
 
   def inactive_clank
