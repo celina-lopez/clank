@@ -26,6 +26,9 @@ class Action::Player < Action::Base
   def move # rubocop:disable Metrics/AbcSize
     edge_metadata = current_player.position.edge_metadata(value)
     current_player.position.current_position = value
+
+    pick_up_item(value)
+
     current_player.move_points -= edge_metadata.fetch('move', 1)
     current_player.health -= edge_metadata.fetch('danger', 0) unless current_player.ignore_monster_path
     return unless current_player.position.tags(value).include?('crystal_cave')
@@ -46,9 +49,10 @@ class Action::Player < Action::Base
     end
   end
 
-  def teleport
+  def teleport # rubocop:disable Metrics/AbcSize
     current_player.position.current_position = value
     current_player.teleport -= 1
+    pick_up_item(value)
     return unless current_player.position.tags(value).include?('crystal_cave')
     return unless current_player.skip_crystal_cave
 
@@ -79,6 +83,12 @@ class Action::Player < Action::Base
   end
 
   private
+
+  def pick_up_item(tile)
+    tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile }
+    item = tile_data.fetch('items', []).pop
+    current_player.inventory << item if item.present?
+  end
 
   def remove_trashed_option(card_name)
     current_player.trash_options = current_player.trash_options.map do |x|
