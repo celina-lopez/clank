@@ -1,5 +1,7 @@
 
 // CARD FUNCTIONS
+const cardTemplate = document.getElementById('card-template').content;
+
 function createCardClone(cardParent, card) {
   const cardClone = cardParent.children[0];
   cardClone.querySelector('img').src = `/images/${card['name']}.jpeg`
@@ -93,29 +95,33 @@ function createCardPopup(cardParent, card) {
   return cardPopup;
 };
 
-function createCardButton(cardParent, card, playerHand=false) {
-  const cardButton = cardParent.children[1].children[0];
-  if (playerHand) {
-    cardButton.dataset.type = card['name'];
-    cardButton.innerHTML = 'use';
-  } else {
-    cardButton.dataset.type = 'buy_card';
-    cardButton.dataset.name = card['name'];
-    cardButton.innerHTML = 'buy';
-  }
+function findCardButton(cardParent) {
+  return cardParent.children[1].children[0];
 };
 
+function createCard(card){
+  let clone = document.importNode(cardTemplate, true),
+      cardParent = clone.children[0];
+  createCardClone(cardParent, card);
+  createCardPopup(cardParent, card);
+  return cardParent; 
+}
+
 function populateCards(prefix, cards, playerHand=false) {
-  let cardTemplate = document.getElementById('card-template');
   document.getElementById(`${prefix}-cards`).innerHTML = ""
   let index = 0;
   cards.forEach(function(card) { 
-    let clone = document.importNode(cardTemplate.content, true),
-      cardParent = clone.children[0];
+    let cardParent = createCard(card)
     cardParent.id =`${prefix}-card-${index}`;
-    createCardClone(cardParent, card)
-    createCardButton(cardParent, card, playerHand) ;
-    createCardPopup(cardParent, card);
+    let cardButton = findCardButton(cardParent);
+    if (playerHand) {
+      cardButton.dataset.type = card['name'];
+      cardButton.innerHTML = 'use';
+    } else {
+      cardButton.dataset.type = 'buy_card';
+      cardButton.dataset.name = card['name'];
+      cardButton.innerHTML = 'buy';
+    }
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
   })
@@ -201,25 +207,22 @@ function addTrashOptions(player) {
         document.getElementById("trash-options-id").appendChild(trashClone);
       } else {
         let trashClone = document.importNode(trashOptionTwo, true);
-        let cardTemplate = document.getElementById('card-template').content;
         let index = 0;
         player['deck']['active'].forEach(function(card) { 
-          let clone = document.importNode(cardTemplate, true),
-            cardParent = clone.children[0],
-            cardClone = createCardClone("trash-active-card-", cardParent, index, card);
-          cardClone.dataset.type = 'trash';
-          cardClone.dataset.name = `${card['name']},active`;
-          createCardPopup(cardParent, card)
+          let cardParent = createCard(card),
+              button = findCardButton(cardParent);
+          button.innerHTML = 'trash';
+          button.dataset.type  = 'trash';
+          button.dataset.name = `${card['name']},active`;
           trashClone.querySelector("#active-trash-cards").appendChild(cardParent);
           index += 1;
         })
         player['deck']['discarded'].forEach(function(card) { 
-          let clone = document.importNode(cardTemplate, true),
-            cardParent = clone.children[0],
-            cardClone = createCardClone("trash-discarded-card-", cardParent, index, card);
-          cardClone.dataset.type = 'trash';
-          cardClone.dataset.name = `${card['name']},discarded`;
-          createCardPopup(cardParent, card)
+          let cardParent = createCard(card),
+              button = findCardButton(cardParent);
+          button.innerHTML = 'trash';
+          button.dataset.type  = 'trash';
+          button.dataset.name = `${card['name']},discarded`;
           trashClone.querySelector("#discarded-trash-cards").appendChild(cardParent);
           index += 1;
         })
@@ -237,15 +240,13 @@ function replaceCard(player, cards) {
     let replaceCardElm = document.getElementById('replace-cards').content,
         replaceClone = document.importNode(replaceCardElm, true);
     document.getElementById("replace-card-id").classList.remove('hidden');
-    let cardTemplate = document.getElementById('card-template').content;
     let index = 0;
     cards.forEach(function(card) { 
-      let clone = document.importNode(cardTemplate, true),
-        cardParent = clone.children[0],
-        cardClone = createCardClone("replace-active-card-", cardParent, index, card);
-      cardClone.dataset.type = 'replace_card';
-      cardClone.dataset.name = card['name'];
-      createCardPopup(cardParent, card)
+      let cardParent = createCard(card),
+          button = findCardButton(cardParent);
+      button.innerHTML = 'replace_card';
+      button.dataset.type  = 'replace';
+      button.dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
       index += 1;
     })
