@@ -1,13 +1,22 @@
 
 // CARD FUNCTIONS
-const cardTemplate = document.getElementById('card-template').content;
+const cardTemplate = document.getElementById('card-template').content,
+      rewardParent = document.getElementById('rewards-parent').content,
+      rewardTemplate = document.getElementById('rewards-option').content,
+      trashOptionOne = document.getElementById('trash-option-1').content,
+      trashOptionTwo = document.getElementById('trash-option-2').content;
+
+
+function displayName(name) {
+  return name.
+    replace(/_/g, ' ').
+    replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
+}
 
 function createCardClone(cardParent, card) {
   const cardClone = cardParent.children[0];
   cardClone.querySelector('img').src = `/images/${card['name']}.jpeg`
-  cardClone.querySelector('.card_name').innerHTML = card['name'].
-    replace(/_/g, ' ').
-    replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
+  cardClone.querySelector('.card_name').innerHTML = displayName(card['name'])
   if (card['actions']?.length == 1) {
     Object.keys(card['actions'][0]).forEach(function(key) {
       let actionElm = document.getElementById('template-' + key);
@@ -18,80 +27,47 @@ function createCardClone(cardParent, card) {
       }
     });
   }
-  if (card['cost']) {
-    let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-sky-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
-    costIndicator.innerHTML = card['cost'];
-    cardClone.appendChild(costIndicator);
-  }
-  if (card['health']) {
-    let costIndicator = document.createElement('div');
-    costIndicator.classList.add('bg-red-600', 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
-    costIndicator.innerHTML = card['health'];
-    cardClone.appendChild(costIndicator);
-  }
+
+  ['cost', 'health'].forEach(function(key) {
+    if (card[key]) {
+      let div = document.createElement('div');
+      div.classList.add(`bg-${key == 'cost' ? 'sky' : 'red'}-600`, 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
+      div.innerHTML = card[key];
+      cardClone.appendChild(div);
+    }
+  });
   return cardClone;
 };
 
+function addPopUpActions(actions, actionParentElm){
+  for (let i = 0; i < actions.length; i++) {
+    let action = actions[i];
+    Object.keys(action).forEach(function(key) {
+      let actionElm = document.getElementById('template-' + key);
+      if (!!actionElm) {
+        let actionTemplate = document.importNode(actionElm.content, true).children[0];
+        actionParentElm.appendChild(actionTemplate);
+      }
+      let value = action[key];
+      if (Number.isInteger(value) && value > 0) value = `+${value}`;
+      actionParentElm.innerHTML += `${value} ${displayName(key.split('_points')[0])}<br/>`;
+    });
+    if (i < actions.length - 1) actionParentElm.innerHTML += '<div>or</div>';
+  }
+}
+
 function createCardPopup(cardParent, card) {
   const cardPopup = cardParent.children[2];
-  cardPopup.querySelector('h3').innerHTML = card['name'].
-    replace(/_/g, ' ').
-    replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
-
+  cardPopup.querySelector('h3').innerHTML = displayName(card['name'])
   cardPopup.querySelector('img').src = `/images/${card['name']}.jpeg` 
   let actionParentElm = cardPopup.querySelector('.action_parent');
-  if (card['actions']) {
-    for (let i = 0; i < card['actions'].length; i++) {
-      let action = card['actions'][i];
-      Object.keys(action).forEach(function(key) {
-        let actionElm = document.getElementById('template-' + key);
-        actionParentElm.innerHTML += `<div>`;
-        if (!!actionElm) {
-          let actionTemplate = document.importNode(actionElm.content, true).children[0];
-          actionParentElm.appendChild(actionTemplate);
-        }
-        let value = action[key];
-        if (Number.isInteger(value) && value > 0) {
-          actionParentElm.innerHTML += `+${value} `;
-        } else {
-          actionParentElm.innerHTML += value;
-        }
-        if (key == 'attack_points') { 
-          actionParentElm.innerHTML += 'Attack';
-        } else if (key == 'move_points') {
-          actionParentElm.innerHTML += 'Move';
-        } else if (key == 'coins') {
-          actionParentElm.innerHTML += 'Coins';
-        } else if (key == 'skill_points') {
-          actionParentElm.innerHTML += 'Skill';
-        } else if (key == 'clank') {
-          actionParentElm.innerHTML += 'Clank';
-        } else {
-          actionParentElm.innerHTML += key.replace(/_/g, ' ');
-        }
-        actionParentElm.innerHTML += '</div>';
-      });
-      if (i < card['actions'].length - 1) actionParentElm.innerHTML += '<div>or</div>';
-    }
-  }
+  if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
   if (card['acquire']) {
     actionParentElm.innerHTML += `<div>On Acquire</div><hr/>`
-    for (let i = 0; i < card['acquire'].length; i++) {
-      let action = card['acquire'][i];
-      Object.keys(action).forEach(function(key) {
-        let value = action[key];
-        actionParentElm.innerHTML += `<div>- ${key}: ${value}</div>`
-      });
-      if (i < card['acquire'].length - 1) actionParentElm.innerHTML += '<div>or</div>';
-    }
+    addPopUpActions(card['acquire'], actionParentElm)
   }
-  if (card['cost']) {
-    actionParentElm.innerHTML += `<div>Skill points: ${card['cost']} </div>`;
-  }
-  if (card['health']) {
-    actionParentElm.innerHTML += `<div>Health: ${card['health']} </div>`;
-  }
+  if (card['cost']) actionParentElm.innerHTML += `<br/>Skill cost: ${card['cost']}`;
+  if (card['health']) actionParentElm.innerHTML += `<br/>Health: ${card['health']}`;
   return cardPopup;
 };
 
@@ -141,7 +117,7 @@ function updateInventory(player) {
     inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
       let itemElement = document.createElement('img'),
-          inventoryName = item['name'].replace(/greater_/g, '');
+          inventoryName = displayName(item['name'].replace(/greater_/g, ''));
       itemElement.src = '/images/' + inventoryName + '.jpg';
       itemElement.width = 70;
       itemElement.classList.add('rounded-full');
@@ -152,8 +128,6 @@ function updateInventory(player) {
 
 function addRewards(player) {
   if (player['rewards'].length > 0) {
-    let rewardParent = document.getElementById('rewards-parent').content,
-        rewardTemplate = document.getElementById('rewards-option').content;
     document.getElementById("rewards-id").innerHTML = '';
     document.getElementById("rewards-id").classList.remove('hidden');
     for (let i = 0; i < player['rewards'].length; i++) {
@@ -170,9 +144,9 @@ function addRewards(player) {
           } else if (label == 'spend_seven_for_two_secret_tomes') {
             label = 'Spend 7 coins for 2 secret tome this turn';
           } else if (['health', 'coins', 'attack_points', 'move_points'].includes(label)) {  
-            label = `Gain ${rewardOptionData[rewardOptionKeys[k]]} ${label}`;
+            label = `Gain ${rewardOptionData[rewardOptionKeys[k]]} ${displayName(label.split('_points')[0])}`;
           } else {
-            label = label.replace(/_/g, ' ');
+            label = displayName(label)
           }
           rewardOption.children[0].innerHTML = label
           rewardOption.children[0].setAttribute('data-name', `${i},${j}`);
@@ -195,8 +169,6 @@ function updatePlayerPosition(player, playerId) {
 function addTrashOptions(player) {
   document.getElementById("trash-options-id").innerHTML = '';
   if (player['trash_options'].length > 0) {
-    let trashOptionOne = document.getElementById('trash-option-1').content,
-        trashOptionTwo = document.getElementById('trash-option-2').content;
     document.getElementById("trash-options-id").classList.remove('hidden');
     for (let i = 0; i < player['trash_options'].length; i++) {
       let trash = player['trash_options'][i];
@@ -207,24 +179,15 @@ function addTrashOptions(player) {
         document.getElementById("trash-options-id").appendChild(trashClone);
       } else {
         let trashClone = document.importNode(trashOptionTwo, true);
-        let index = 0;
-        player['deck']['active'].forEach(function(card) { 
-          let cardParent = createCard(card),
-              button = findCardButton(cardParent);
-          button.innerHTML = 'trash';
-          button.dataset.type  = 'trash';
-          button.dataset.name = `${card['name']},active`;
-          trashClone.querySelector("#active-trash-cards").appendChild(cardParent);
-          index += 1;
-        })
-        player['deck']['discarded'].forEach(function(card) { 
-          let cardParent = createCard(card),
-              button = findCardButton(cardParent);
-          button.innerHTML = 'trash';
-          button.dataset.type  = 'trash';
-          button.dataset.name = `${card['name']},discarded`;
-          trashClone.querySelector("#discarded-trash-cards").appendChild(cardParent);
-          index += 1;
+        ['active', 'discarded'].forEach(function(type) {
+          player['deck'][type].forEach(function(card) {
+            let cardParent = createCard(card),
+                button = findCardButton(cardParent);
+            button.innerHTML = 'trash';
+            button.dataset.type  = 'trash';
+            button.dataset.name = `${card['name']},${type}`;
+            trashClone.querySelector(`#${type}-trash-cards`).appendChild(cardParent);
+          })
         })
         document.getElementById("trash-options-id").appendChild(trashClone);
       }
@@ -240,7 +203,6 @@ function replaceCard(player, cards) {
     let replaceCardElm = document.getElementById('replace-cards').content,
         replaceClone = document.importNode(replaceCardElm, true);
     document.getElementById("replace-card-id").classList.remove('hidden');
-    let index = 0;
     cards.forEach(function(card) { 
       let cardParent = createCard(card),
           button = findCardButton(cardParent);
@@ -249,7 +211,6 @@ function replaceCard(player, cards) {
       // TODO: fix frontend
       button.dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
-      index += 1;
     })
     document.getElementById("replace-card-id").appendChild(replaceClone);
   } else {
