@@ -85,9 +85,11 @@ class Action::Player < Action::Base
   private
 
   def pick_up_item(tile)
-    tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile }
+    tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile.to_i }
     item = tile_data.fetch('items', []).pop
-    current_player.inventory << item if item.present?
+    return unless item.present?
+
+    current_player.inventory << item
     history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
   end
 

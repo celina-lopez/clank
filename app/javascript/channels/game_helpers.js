@@ -182,7 +182,6 @@ function addRewards(player) {
 }
 
 function updatePlayerPosition(player, playerId) {
-  debugger
   var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
   gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
 }
@@ -275,7 +274,6 @@ export function updatePlayerData(player, playerId, data) {
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
-  // TODO: fetch for nil class
   if (player['deck']['active'].length == 0) addEndTurnButton();
 }
 // GAME FUNCTIONS
