@@ -256,13 +256,7 @@ function replaceCard(player, cards) {
 }
 
 function addEndTurnButton() {
-  document.getElementById('player-cards').innerHTML = '';
-  let endTurnButton = document.createElement('button');
-  endTurnButton.innerHTML = 'End Turn';
-  endTurnButton.classList.add('btn');
-  endTurnButton.addEventListener('click', executeAction);
-  endTurnButton.dataset.type = 'end_turn';
-  document.getElementById('player-cards').appendChild(endTurnButton);
+  document.getElementById('player-cards').innerHTML = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>';
 }
 
 

@@ -70,8 +70,10 @@ class Action::Player < Action::Base
 
   def redeem_inventory_item
     inventory_item = current_player.inventory.find { |x| x['name'] == value }
-    inventory_item['actions'].each do |action_type, action_value|
-      redeem_action_on_card(action_type, action_value)
+    inventory_item.fetch('action', []).each do |action|
+      action.each do |action_type, action_value|
+        redeem_action_on_card(action_type, action_value)
+      end
     end
     current_player.inventory.delete_at(current_player.inventory.index(inventory_item))
   end

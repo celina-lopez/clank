@@ -61,6 +61,10 @@ class Validation::Player < Validation::Base
     add_error_if_error('Card not found', replace_card.present?)
   end
 
+  def redeem_inventory_item?
+    current_player.inventory.find { |x| x['name'] == value }.present?
+  end
+
   private
 
   def validate_trash_options(card_name)
