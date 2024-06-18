@@ -251,6 +251,7 @@ function updateLogs(history) {
 }
 
 function logLabel(history) {
+  // TODO: make sure this works
   switch(history['type']) {
   case 'move':
     return `Player ${history['player_index']} moved to tile ${history['value']}`
