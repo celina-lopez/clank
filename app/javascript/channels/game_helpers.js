@@ -251,7 +251,7 @@ function updateLogs(history) {
 }
 
 function logLabel(history) {
-  switch(history) {
+  switch(history['type']) {
   case 'move':
     return `Player ${history['player_index']} moved to tile ${history['value']}`
   case 'buy_card':
@@ -271,7 +271,7 @@ function logLabel(history) {
   case 'start_game':
     return `Started game with ${history['value']} player(s)`
   default:
-    return `Player ${history['player_index']} used ${history['type'].replace(/_/g, ' ')} card`
+    return `Player ${history['player_index']} used ${displayName(history['type'])} card`
   }
 }
 
