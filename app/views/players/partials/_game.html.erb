@@ -10,15 +10,16 @@
 </style>
 <%= render 'players/partials/templates' %>
 <div>
-  <div class="block xl:hidden mb-4">
-    <button class="tab-button bg-blue-500 text-white p-2 rounded-l-md" data-target="#panel1">Hand</button>
-    <button class="tab-button bg-gray-200 p-2" data-target="#panel2">Map</button>
-    <button class="tab-button bg-gray-200 p-2" data-target="#panel3">Dragon</button>
-    <button class="tab-button bg-gray-200 p-2 rounded-r-md" data-target="#panel4">Logs</button>
+  <div class="block xl:hidden my-4 tabs tabs-bordered">
+    <div class="tab tab-active" data-target="#panel1">Hand</div>
+    <div class="tab" data-target="#panel2">Map</div>
+    <div class="tab" data-target="#panel3">Dragon</div>
+    <div class="tab" data-target="#panel4">Logs</div>
   </div>
 
   <div class="grid xl:grid-cols-2">
     <div id="panel1" class="panel xl:block">
+      <%= render 'players/partials/stats', player: %>
       <%= render 'players/partials/current_hand', player:, game: %>
     </div>
     <div id="panel2" class="panel hidden xl:block">
@@ -101,23 +102,17 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.tab-button');
+    const buttons = document.querySelectorAll('.tab');
     const panels = document.querySelectorAll('.panel');
     buttons.forEach(button => {
       button.addEventListener('click', function () {
         const targetPanel = document.querySelector(button.getAttribute('data-target'));
-        // Hide all panels
         panels.forEach(function(panel) { panel.classList.add('hidden') });
-        // Remove active class from all buttons
         buttons.forEach(function(btn) {
-          btn.classList.remove('bg-blue-500', 'text-white');
-          btn.classList.add('bg-gray-200');
+          btn.classList.remove('tab-active');
         });
-        // Show the target panel
         targetPanel.classList.remove('hidden');
-        // Add active class to the clicked button
-        button.classList.remove('bg-gray-200');
-        button.classList.add('bg-blue-500', 'text-white');
+        button.classList.add('tab-active');
       });
     });
   });

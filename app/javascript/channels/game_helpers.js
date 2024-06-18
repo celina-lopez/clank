@@ -182,6 +182,7 @@ function addRewards(player) {
 }
 
 function updatePlayerPosition(player, playerId) {
+  debugger
   var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
   gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
 }
@@ -255,6 +256,17 @@ function replaceCard(player, cards) {
   }
 }
 
+function addEndTurnButton() {
+  document.getElementById('player-cards').innerHTML = '';
+  let endTurnButton = document.createElement('button');
+  endTurnButton.innerHTML = 'End Turn';
+  endTurnButton.classList.add('btn');
+  endTurnButton.addEventListener('click', executeAction);
+  endTurnButton.dataset.type = 'end_turn';
+  document.getElementById('player-cards').appendChild(endTurnButton);
+}
+
+
 export function updatePlayerData(player, playerId, data) {
   updateStats(player);
   updateInventory(player);
@@ -263,6 +275,8 @@ export function updatePlayerData(player, playerId, data) {
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
+  // TODO: fetch for nil class
+  if (player['deck']['active'].length == 0) addEndTurnButton();
 }
 // GAME FUNCTIONS
 
@@ -270,7 +284,7 @@ export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addCardTriggers();
-  addListeningFunctionsToCards();
+  addHoverToStats();
   updateLogs(data['last_log']);
 }
 

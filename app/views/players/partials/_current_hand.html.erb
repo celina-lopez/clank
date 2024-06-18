@@ -35,16 +35,16 @@
     });
   }
 
-  function addListeningFunctionsToCards () {
-    document.querySelectorAll('.card-parent').forEach((card) => {
+  function addHoverToStats() {
+    document.querySelectorAll('.hover-parent').forEach((card) => {
       card.addEventListener('mouseover', (e) => {
-        card.querySelector('.action-card').classList.remove('invisible');
+        card.querySelector('.child').classList.remove('invisible');
       });
       card.addEventListener('mouseout', (e) => {
-        card.querySelector('.action-card').classList.add('invisible');
+        card.querySelector('.child').classList.add('invisible');
       });
     });
   };
-  addListeningFunctionsToCards();
+  addHoverToStats();
   addCardTriggers();
 </script>
