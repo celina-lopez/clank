@@ -2,7 +2,7 @@
 
 class Action::Player < Action::Base
   def buy_artifact # rubocop:disable Metrics/AbcSize
-    item = gameplay_data.marketplace_items.find_by { |x| x['name'] == value }
+    item = gameplay_data.marketplace_items.find { |x| x['name'] == value }
     current_player.coins -= 7
     current_player.inventory << item
     item['total'] -= 1

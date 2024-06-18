@@ -244,8 +244,9 @@ function replaceCard(player, cards) {
     cards.forEach(function(card) { 
       let cardParent = createCard(card),
           button = findCardButton(cardParent);
-      button.innerHTML = 'replace_card';
-      button.dataset.type  = 'replace';
+      button.innerHTML = 'replace';
+      button.dataset.type  = 'replace_card';
+      // TODO: fix frontend
       button.dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
       index += 1;

@@ -65,6 +65,10 @@ class Validation::Player < Validation::Base
     current_player.inventory.find { |x| x['name'] == value }.present?
   end
 
+  def buy_artifact?
+    gameplay_data.marketplace_items.find { |x| x['name'] == value } && current_player.coins >= 7
+  end
+
   private
 
   def validate_trash_options(card_name)
