@@ -4,7 +4,8 @@ const cardTemplate = document.getElementById('card-template').content,
       rewardParent = document.getElementById('rewards-parent').content,
       rewardTemplate = document.getElementById('rewards-option').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
-      trashOptionTwo = document.getElementById('trash-option-2').content;
+      trashOptionTwo = document.getElementById('trash-option-2').content,
+      endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>';
 
 
 function displayName(name) {
@@ -219,9 +220,8 @@ function replaceCard(player, cards) {
 }
 
 function addEndTurnButton() {
-  document.getElementById('player-cards').innerHTML = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>';
+  document.getElementById('player-cards').innerHTML = endButtonString;
 }
-
 
 export function updatePlayerData(player, playerId, data) {
   updateStats(player);
