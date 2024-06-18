@@ -4,7 +4,7 @@
     <% player['inventory'].each do |inventory| %>
       <%
         inventory_name = if inventory['name'].start_with?('greater')
-          inventory['name'].split('greater_').first
+          inventory['name'].split('greater_').join
         else
           inventory['name']
         end
