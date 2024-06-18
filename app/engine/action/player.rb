@@ -88,6 +88,7 @@ class Action::Player < Action::Base
     tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile }
     item = tile_data.fetch('items', []).pop
     current_player.inventory << item if item.present?
+    history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
   end
 
   def remove_trashed_option(card_name)
