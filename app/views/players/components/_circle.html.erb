@@ -17,7 +17,7 @@
     data-name="<%= inventory['name'] %>"
     data-type="<%= action_type %>"
   >
-    <img src='/images/<%= inventory_name %>.jpg' width="70" class="rounded-full"/>
+    <img src='<%= inventory_name && "/images/#{inventory_name}.jpg" %>' class="rounded-full w-[70px]" />
   </div>
   <div class="modal-card fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white px-8 py-4 rounded shadow-lg relative">

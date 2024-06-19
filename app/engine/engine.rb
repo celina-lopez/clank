@@ -17,10 +17,7 @@ class Engine < Base
     # TODO: backpack description on pop up and other inventory items
     # TODO: goblin text should say attack on card
     # TODO: i think i actually have to add the artificats
-    # TODO: apothecary card, when click choose options
-    # TODO: discard a card! to gain a health, we need to chose that jesus, apothecary
-    # TODO: sometimes the use card doesn't work
-    # TODO: coins not updating for some  reason
+    # TODO: hey baby!!!! apothetcary card i cheated 
     # TODO: can't move to negative tiles, once on 0 tile with an artifact, then turn is auto done
     super(gameplay_data)
   end

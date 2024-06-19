@@ -3,6 +3,7 @@
   data_type = nil if local_assigns[:data_type].nil?
   card = {} if local_assigns[:card].nil?
   id = '' if local_assigns[:id].nil?
+  button_text = local_assigns[:button_text].presence || data_name.nil? ? 'use' : 'buy'
 %>
 <div>
   <div
@@ -13,7 +14,7 @@
     >
       <i class="fa-regular fa-circle-question"></i>
     </div>
-    <img src='/images/<%= card['name'] %>.jpeg' class="mt-[6px] rounded-full text-center border-red-400 border h-[100px] mx-auto" />
+    <img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' class="mt-[6px] rounded-full text-center border-red-400 border h-[100px] mx-auto" />
     <div class="absolute w-[100%] top-[84px]">
       <div class="text-center mx-2 truncate rounded-t-lg border-red-500 border text-white bg-black card_name"><%= card['name']&.humanize %></div>
     </div>

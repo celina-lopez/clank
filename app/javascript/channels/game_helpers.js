@@ -6,7 +6,8 @@ const cardTemplate = document.getElementById('card-template').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
       endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>',
-      circleTemplate = document.getElementById('circle-template').content;
+      circleTemplate = document.getElementById('circle-template').content,
+      rewardContainer = document.getElementById('rewards-id');
 
 
 function displayName(name) {
@@ -95,7 +96,7 @@ function createCircle(card) {
       popUp = circleParent.children[2].children[0];
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
-  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' width="70" class="rounded-full"/>`
+  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' class="rounded-full w-[70px]"/>`
   popUp.children[1].innerHTML = displayName(card['name']);
   popUp.children[2].src = `/images/${card['name'].replace(/greater_/g, '')}.jpg`;
   popUp.children[3].innerHTML = ''
@@ -126,7 +127,7 @@ function populateCards(prefix, cards, playerHand=false) {
 
 // PLAYER FUNCTIONS
 function updateStats(player) {
-  ['health', 'move_points', 'attack_points', 'clank', 'skill_points'].forEach(function(stat) {
+  ['health', 'move_points', 'attack_points', 'clank', 'skill_points', 'coins'].forEach(function(stat) {
     document.getElementById(stat).innerHTML = player[stat];
   });
 }
@@ -144,16 +145,17 @@ function updateInventory(player) {
 }
 
 function addRewards(player) {
+  rewardContainer.innerHTML = '';
   if (player['rewards'].length > 0) {
-    document.getElementById("rewards-id").innerHTML = '';
-    document.getElementById("rewards-id").classList.remove('hidden');
+    rewardContainer.classList.remove('hidden');
     for (let i = 0; i < player['rewards'].length; i++) {
       let rewardClone = document.importNode(rewardParent, true),
           reward = player['rewards'][i];
       for (let j = 0; j < reward.length; j++) {
         let rewardOption = document.importNode(rewardTemplate, true),
             rewardOptionData = reward[j],
-            rewardOptionKeys = Object.keys(rewardOptionData);
+            rewardOptionKeys = Object.keys(rewardOptionData),
+            innerText = '';
         for (let k = 0; k < rewardOptionKeys.length; k++) {
           let label = rewardOptionKeys[k];
           if (label == 'discard_number') {
@@ -165,16 +167,16 @@ function addRewards(player) {
           } else {
             label = displayName(label)
           }
-          rewardOption.children[0].innerHTML = label
-          rewardOption.children[0].setAttribute('data-name', `${i},${j}`);
-          rewardClone.children[1].appendChild(rewardOption);
+          innerText += label + '<br/>';
         }
+        rewardOption.children[0].innerHTML += innerText
+        rewardOption.children[0].setAttribute('data-name', `${i},${j}`);
+        rewardClone.children[1].appendChild(rewardOption);
       }
-      document.getElementById("rewards-id").appendChild(rewardClone);
+      rewardContainer.appendChild(rewardClone);
     }
   } else {
-    document.getElementById("rewards-id").innerHTML = '';
-    document.getElementById("rewards-id").classList.add('hidden');
+    rewardContainer.classList.add('hidden');
   }
 }
 
@@ -244,7 +246,6 @@ export function updatePlayerData(player, playerId, data) {
   updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
-  // TODO: buying market items not decreasing coins 
   // TODO: marketplace pop up not working 
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
