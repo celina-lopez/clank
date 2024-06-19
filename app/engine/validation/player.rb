@@ -68,7 +68,9 @@ class Validation::Player < Validation::Base
   end
 
   def buy_artifact?
-    gameplay_data.marketplace_items.find { |x| x['name'] == value } && current_player.coins >= 7
+    item = gameplay_data.marketplace_items.find { |x| x['name'] == value }
+    ok = add_error_if_error('artifact not found', item.present?)
+    ok && add_error_if_error('Cant afford', current_player.coins >= 7)
   end
 
   private
