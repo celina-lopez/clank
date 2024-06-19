@@ -101,6 +101,11 @@ class Action::Player < Action::Base
     return unless item.present?
 
     current_player.inventory << item
+    if item['on_acquire'].present?
+      item['on_acquire'].each do |action_key, action_value|
+        redeem_action_on_card(action_key, action_value)
+      end
+    end
     history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
   end
 

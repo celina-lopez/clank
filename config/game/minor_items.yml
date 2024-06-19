@@ -24,6 +24,6 @@
     - trash_options: 1
 - name: dragon_egg
   total: 3
-  immediate_action:
-    - increase_dragon: 1
+  on_acquire:
+    increase_dragon: 1
   victory_points: 3

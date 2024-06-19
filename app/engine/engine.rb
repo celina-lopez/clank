@@ -10,7 +10,6 @@ class Engine < Base
 
   def initialize(gameplay_data = nil, history: [])
     @history = history
-    # TODO: when certain inventory, increase dragon position
     # TODO: on trash select, update status trash options
     # TODO: market place active in game_helpers
     # TODO: i think i actually have to add the artificats

@@ -56,6 +56,10 @@ class Action::Card < Action::Base
     current_player.trash_options << val
   end
 
+  def increase_dragon
+    gameplay_data.dragon.position += value
+  end
+
   private
 
   def redeem_card_rewards
