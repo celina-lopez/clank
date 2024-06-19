@@ -56,13 +56,15 @@ class Validation::Player < Validation::Base
   end
 
   def replace_card?
-    add_error_if_error('Not enough replace_card points', current_player.replace_card_points.positive?)
+    ok = add_error_if_error('Not enough replace_card points', current_player.replace_card_points.positive?)
     replace_card = gameplay_data.deck.active.find { |x| x['name'] == value }
-    add_error_if_error('Card not found', replace_card.present?)
+    ok && add_error_if_error('Card not found', replace_card.present?)
   end
 
   def redeem_inventory_item?
-    current_player.inventory.find { |x| x['name'] == value }.present?
+    item = current_player.inventory.find { |x| x['name'] == value }
+    ok = add_error_if_error('Card not found', item.present?)
+    ok && add_error_if_error('Card is not actionable', item['action'].present?)
   end
 
   def buy_artifact?

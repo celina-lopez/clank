@@ -245,6 +245,9 @@ export function updatePlayerData(player, playerId, data) {
   updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
+  // TODO: some inventory cannot be used 
+  // TODO: buying market items not decreasing coins 
+  // TODO: marketplace pop up not working 
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   if (player['deck']['active'].length == 0) addEndTurnButton();
