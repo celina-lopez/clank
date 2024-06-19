@@ -16,7 +16,7 @@
   function addCardTriggers() {
     document.querySelectorAll(".trigger-button").forEach(function (button) {
       button.addEventListener("click", function() {
-        this.parentElement.parentElement.querySelector('.modal-card').classList.remove('hidden');
+        this.parentElement.querySelector('.modal-card').classList.remove('hidden');
       });
     });
 
