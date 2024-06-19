@@ -12,7 +12,6 @@ class Engine < Base
     @history = history
     # TODO: chatgpt git commit
     # TODO: on trash select, update status trash options
-    # TODO: i think i actually have to add the artificats
     # TODO: hey baby!!!! apothetcary card i cheated
     super(gameplay_data)
   end

@@ -219,6 +219,7 @@ map_1:
       y: -6.2
   - tile: 27
     tags:
+      - monkey
       - depths
     frontend_data:
       x: 1.04
