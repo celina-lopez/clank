@@ -15,8 +15,7 @@ function displayName(name) {
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
 }
 
-function createCardClone(cardParent, card) {
-  const cardClone = cardParent.children[0];
+function createCardClone(cardClone, card) {
   cardClone.querySelector('img').src = `/images/${card['name']}.jpeg`
   cardClone.querySelector('.card_name').innerHTML = displayName(card['name'])
   if (card['actions']?.length == 1) {
@@ -63,7 +62,7 @@ function addPopUpActions(actions, actionParentElm){
 }
 
 function createCardPopup(cardParent, card) {
-  const cardPopup = cardParent.children[2];
+  const cardPopup = cardParent.children[0];
   cardPopup.querySelector('h3').innerHTML = displayName(card['name'])
   cardPopup.querySelector('img').src = `/images/${card['name']}.jpeg` 
   let actionParentElm = cardPopup.querySelector('.action_parent');
@@ -84,8 +83,8 @@ function findCardButton(cardParent) {
 function createCard(card){
   let clone = document.importNode(cardTemplate, true),
       cardParent = clone.children[0];
-  createCardClone(cardParent, card);
-  createCardPopup(cardParent, card);
+  createCardClone(cardParent.children[0], card);
+  createCardPopup(cardParent.children[0].querySelector('.modal-card'), card);
   return cardParent; 
 }
 
@@ -134,7 +133,7 @@ function updateStats(player) {
 
 function updateInventory(player) {
   if (player['inventory']) {
-    let inventory = document.getElementById('inventory-id');
+    let inventory = document.getElementById('inventory-id').children[1];
     inventory.innerHTML = "";
     inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
@@ -245,7 +244,6 @@ export function updatePlayerData(player, playerId, data) {
   updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
-  // TODO: some inventory cannot be used 
   // TODO: buying market items not decreasing coins 
   // TODO: marketplace pop up not working 
   replaceCard(player, data['deck']['active']);

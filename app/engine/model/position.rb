@@ -8,6 +8,7 @@ class Model::Position
 
   def initialize(current_position = 0, graph = Hash.new { |h, k| h[k] = {} if k.is_a?(Integer) })
     @current_position = current_position.to_i
+    # TODO: do you need graph here??? maybe move this to map
     @graph = graph.deep_transform_keys(&:to_i).presence || build_graph(graph)
   end
 

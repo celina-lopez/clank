@@ -4,12 +4,9 @@
   card = {} if local_assigns[:card].nil?
   id = '' if local_assigns[:id].nil?
 %>
-<div 
-  class="card-parent"
-  id='<%= id %>'
->
+<div>
   <div
-    class="rounded relative border-black border-2 rounded h-[150px] w-[127px] cursor-pointer"
+    class="card-parent rounded relative border-black border-2 rounded h-[150px] w-[127px] cursor-pointer"
   >
     <div
       class="trigger-button absolute right-1 rounded-full z-2 w-auto h-auto text-right hover:bg-blue-100"
@@ -35,6 +32,46 @@
     <% if card['health'].present? %>
       <div class="bg-red-600 px-1 text-white rounded-br-sm absolute bottom-0 right-0"><%= card['health'] %></div>
     <% end %>
+    <div class="modal-card fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
+      <div class="bg-white px-8 py-4 rounded shadow-lg relative">
+        <button class="closeButton absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
+          &times;
+        </button>
+        <h3 class="text-center"><%= card['name']&.humanize %></h3>
+        <img src='/images/<%= card['name'] %>.jpeg' class="rounded-full text-center border-red-400 border h-[200px] mx-auto" />
+        <div class="text-start action_parent">
+          <% card.fetch('actions', []).each_with_index do |action, index| %>
+            <% action.each do |key, value| %>
+              <%= render 'players/components/action', key:, value: %> 
+              <% if (card.fetch('actions', []).size > 1 && index == 0) %>
+                OR
+                <br/>
+              <% end%>
+            <% end%>
+          <% end %>
+          <% card.fetch('acquire', []).each_with_index do |action, index| %>
+            On Acquire:
+            <br>
+            <% action.each do |key, value| %>
+              <%= render 'players/components/action', key:, value: %> 
+            <% end %>
+            <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
+              OR
+              <br/>
+            <% end%>
+          <% end %>
+          <% if card['victory_points'].present? %>
+            <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
+          <% end %>
+          <% if card['cost'].present? %>
+            <%= render 'players/components/action', key: 'cost', value: card['cost'] %>
+          <% end %>
+          <% if card['health'].present? %>
+            <%= render 'players/components/action', key: 'health', value: card['health'] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
   <div class='w-100 text-center my-2'>
     <button
@@ -45,45 +82,5 @@
     >
     <%= data_name.nil? ? 'use' : 'buy' %>
     </button>
-  </div>
-  <div class="modal-card fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white px-8 py-4 rounded shadow-lg relative">
-      <button class="closeButton absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
-        &times;
-      </button>
-      <h3 class="text-center"><%= card['name']&.humanize %></h3>
-      <img src='/images/<%= card['name'] %>.jpeg' class="rounded-full text-center border-red-400 border h-[200px] mx-auto" />
-      <div class="text-start action_parent">
-        <% card.fetch('actions', []).each_with_index do |action, index| %>
-          <% action.each do |key, value| %>
-            <%= render 'players/components/action', key:, value: %> 
-            <% if (card.fetch('actions', []).size > 1 && index == 0) %>
-              OR
-              <br/>
-            <% end%>
-          <% end%>
-        <% end %>
-        <% card.fetch('acquire', []).each_with_index do |action, index| %>
-          On Acquire:
-          <br>
-          <% action.each do |key, value| %>
-            <%= render 'players/components/action', key:, value: %> 
-          <% end %>
-          <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
-            OR
-            <br/>
-          <% end%>
-        <% end %>
-        <% if card['victory_points'].present? %>
-          <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
-        <% end %>
-        <% if card['cost'].present? %>
-          <%= render 'players/components/action', key: 'cost', value: card['cost'] %>
-        <% end %>
-        <% if card['health'].present? %>
-          <%= render 'players/components/action', key: 'health', value: card['health'] %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

@@ -1,13 +1,15 @@
-<div>Inventory</div>
-<div id="inventory-id" class="<%= player['inventory'].empty? && 'hidden' %> flex">
-  <% player['inventory'].each do |inventory| %>
-    <%
-      inventory_name = if inventory['name'].start_with?('greater')
-        inventory['name'].split('greater_').join
-      else
-        inventory['name']
-      end
-    %>
-    <%= render 'players/components/circle', inventory_name:, inventory:, action_type: "redeem_inventory_item", id: "inventory-#{inventory['name']}"  %>
-  <% end %>
+<div id="inventory-id" class="<%= player['inventory'].empty? && 'hidden' %>">
+  <div>Inventory</div>
+  <div class="flex">
+    <% player['inventory'].each do |inventory| %>
+      <%
+        inventory_name = if inventory['name'].start_with?('greater')
+          inventory['name'].split('greater_').join
+        else
+          inventory['name']
+        end
+      %>
+      <%= render 'players/components/circle', inventory_name:, inventory:, action_type: "redeem_inventory_item", id: "inventory-#{inventory['name']}"  %>
+    <% end %>
+  </div>
 </div>

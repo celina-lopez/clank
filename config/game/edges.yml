@@ -91,6 +91,8 @@ map_1:
       locked: true
   - x: 9
     y: 3
+  - x: 3
+    y: 9
   - x: 9
     y: 4
     metadata:
