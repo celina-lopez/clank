@@ -29,4 +29,6 @@ class Model::Map
   def self.from_json(json)
     Model::Map.new(json['tiles'])
   end
+  # TODO: remove cost once in your hand
+  # TODO: could only take on artifact
 end
