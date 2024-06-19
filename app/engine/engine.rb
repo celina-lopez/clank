@@ -10,6 +10,7 @@ class Engine < Base
 
   def initialize(gameplay_data = nil, history: [])
     @history = history
+    # TODO: chatgpt git commit
     # TODO: on trash select, update status trash options
     # TODO: i think i actually have to add the artificats
     # TODO: hey baby!!!! apothetcary card i cheated
