@@ -6,7 +6,8 @@ Dungeon Row
       card:,
       id: "active-card-#{index}",
       data_type: 'buy_card',
-      data_name: card['name']
+      data_name: card['name'],
+      button_text: card['health'].present? ? 'attack' : 'buy',
     ) %>
   <% end %>
   <%# TODO: on acquire design %>

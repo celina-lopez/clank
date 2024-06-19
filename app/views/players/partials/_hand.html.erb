@@ -6,6 +6,7 @@ Current Hand
       card:,
       id: "player-card-#{index}",
       data_type: card['name'],
+      button_text: 'play'
     ) %>
   <% end %>
   <% if player.dig('deck', 'active').empty? %>

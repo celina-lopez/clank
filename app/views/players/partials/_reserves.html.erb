@@ -6,7 +6,8 @@ Marketplace Cards
       card:,
       id: "marketplace-card-#{index}",
       data_type: 'buy_card',
-      data_name: card['name']
+      data_name: card['name'],
+      button_text: card['health'].present? ? 'attack' : 'buy',
     ) %>
   <% end %>
 </div>

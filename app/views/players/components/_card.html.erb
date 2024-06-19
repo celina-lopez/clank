@@ -3,7 +3,7 @@
   data_type = nil if local_assigns[:data_type].nil?
   card = {} if local_assigns[:card].nil?
   id = '' if local_assigns[:id].nil?
-  button_text = local_assigns[:button_text].presence || data_name.nil? ? 'use' : 'buy'
+  button_text = 'buy' if local_assigns[:button_text].nil?
 %>
 <div>
   <div
@@ -81,7 +81,7 @@
     data-name="<%= data_name %>"
     class='btn btn-outline btn-xs'
     >
-    <%= data_name.nil? ? 'use' : 'buy' %>
+      <%= button_text %>
     </button>
   </div>
 </div>
