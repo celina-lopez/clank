@@ -114,30 +114,44 @@ map_1:
       x: -7.66
       y: -3.19
   - tile: 16
+    tags:
+      - depths
     frontend_data:
       x: 0.64
       y: -4.52
   - tile: 17
     tags:
       - crystal_cave
+      - artifact
+      - depths
     frontend_data:
       x: -2.33
       y: -4.24
+    items:
+      - name: artifact_crown
+        victory_points: 3
+        total: 1
+        is_artifact: true
   - tile: 18
     tags:
       - market
       - minor_item
+      - depths
     frontend_data:
       x: -4.2
       y: -5.22
   - tile: 19
     tags:
       - market
+      - depths
       - minor_item
     frontend_data:
       x: -5.36
       y: -5.55
   - tile: 20
+    tags:
+      - depths
+      - artifact
     frontend_data:
       x: -6.51
       y: -4.8
@@ -145,43 +159,61 @@ map_1:
     tags:
       - crystal_cave
       - minor_item
+      - depths
     frontend_data:
       x: -8.34
       y: -4.74
   - tile: 22
     tags:
       - crystal_cave
+      - artifact
+      - depths
     frontend_data:
       x: -1.2
       y: -5.1
+    items:
+      - name: artifact_banana
+        victory_points: 15
+        total: 1
+        is_artifact: true
   - tile: 23
     tags:
       - market
+      - depths
     frontend_data:
       x: -3.6
       y: -6.94
   - tile: 24
     tags:
       - market
+      - artifact
+      - depths
     frontend_data:
       x: -5.4
       y: -7.13
+    items:
+      - name: artifact_vase
+        victory_points: 10
+        total: 1
+        is_artifact: true
   - tile: 25
     tags:
       - crystal_cave
       - major_item
+      - depths
     frontend_data:
       x: -6.55
       y: -6.38
   - tile: 26
     tags:
       - major_item
+      - depths
     frontend_data:
       x: -8.81
       y: -6.2
   - tile: 27
     tags:
-      - monkey
+      - depths
     frontend_data:
       x: 1.04
       y: -2.42
@@ -201,6 +233,7 @@ map_1:
   - tile: 28
     tags:
       - major_item
+      - depths
     frontend_data:
       x: -2.27
       y: -6.32
@@ -214,9 +247,15 @@ map_1:
   - tile: 30
     tags:
       - depths
+      - artifact
     frontend_data:
       x: -8.83
       y: -7.97
+    items:
+      - name: artifact_chalice
+        victory_points: 30
+        total: 1
+        is_artifact: true
   - tile: 31
     tags:
       - minor_item
@@ -227,6 +266,7 @@ map_1:
   - tile: 32
     tags:
       - depths
+      - artifact
     frontend_data:
       x: -3.28
       y: -8.64
@@ -241,6 +281,7 @@ map_1:
   - tile: 34
     tags:
       - depths
+      - artifact
     frontend_data:
       x: -6.69
       y: -8.47
