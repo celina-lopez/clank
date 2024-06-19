@@ -270,6 +270,11 @@ map_1:
     frontend_data:
       x: -3.28
       y: -8.64
+    items:
+      - name: artifact_shield
+        victory_points: 20
+        total: 1
+        is_artifact: true
   - tile: 33
     tags:
       - crystal_cave
@@ -285,6 +290,11 @@ map_1:
     frontend_data:
       x: -6.69
       y: -8.47
+    items:
+      - name: artifact_armor
+        victory_points: 25
+        total: 1
+        is_artifact: true
   - tile: 35
     tags:
       - major_item
