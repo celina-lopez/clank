@@ -24,8 +24,6 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
       return;
     }
     let player = data['players'][playerId];
-    console.log(`player ${playerId}`, player) 
-
     updatePlayerData(player, playerId, data);
     updateGameData(data);
   }

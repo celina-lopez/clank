@@ -10,6 +10,10 @@ class Engine < Base
 
   def initialize(gameplay_data = nil, history: [])
     @history = history
+    # TODO: when certain inventory, increase dragon position
+    # TODO: on trash select, update status trash options
+    # TODO: market place active in game_helpers
+    # TODO: dont lose health if move with danger path
     super(gameplay_data)
   end
 
