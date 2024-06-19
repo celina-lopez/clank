@@ -35,6 +35,7 @@
         <% if inventory['victory_points'].present? %>
           <%= render 'players/components/action', key: 'victory_points', value: inventory['victory_points'] %> 
         <% end %>
+        <div><%= inventory['description'] %></div>
       </div>
     </div>
   </div>

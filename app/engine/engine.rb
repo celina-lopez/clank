@@ -13,12 +13,9 @@ class Engine < Base
     # TODO: when certain inventory, increase dragon position
     # TODO: on trash select, update status trash options
     # TODO: market place active in game_helpers
-    # TODO: dont lose health if move with danger path
-    # TODO: backpack description on pop up and other inventory items
-    # TODO: goblin text should say attack on card
     # TODO: i think i actually have to add the artificats
-    # TODO: hey baby!!!! apothetcary card i cheated
     # TODO: can't move to negative tiles, once on 0 tile with an artifact, then turn is auto done
+    # TODO: hey baby!!!! apothetcary card i cheated
     super(gameplay_data)
   end
 

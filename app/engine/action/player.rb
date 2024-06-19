@@ -30,7 +30,7 @@ class Action::Player < Action::Base
     pick_up_item(value)
 
     current_player.move_points -= edge_metadata.fetch('move', 1)
-    current_player.health -= edge_metadata.fetch('danger', 0) unless current_player.ignore_monster_path
+    remove_health(edge_metadata.fetch('danger', 0)) unless current_player.ignore_monster_path
     return unless current_player.position.tags(value).include?('crystal_cave')
     return if current_player.skip_crystal_cave
 
@@ -85,6 +85,15 @@ class Action::Player < Action::Base
   end
 
   private
+
+  def remove_health(danger)
+    if current_player.attack_points >= danger
+      danger -= current_player.attack_points
+      current_player.attack_points -= danger
+    end
+
+    current_player.health -= danger
+  end
 
   def pick_up_item(tile)
     tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile.to_i }

@@ -2,6 +2,7 @@ map_1:
   - name: key
     total: 3
     victory_points: 5
+    description: "Go through locked corridors"
     tiles:
       - 18
       - 19
@@ -18,6 +19,7 @@ map_1:
   - name: backpack
     total: 2
     victory_points: 5
+    description: "Hold an extra artifact"
     tiles:
       - 18
       - 19
