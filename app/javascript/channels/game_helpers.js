@@ -7,7 +7,8 @@ const cardTemplate = document.getElementById('card-template').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
       endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>',
       circleTemplate = document.getElementById('circle-template').content,
-      rewardContainer = document.getElementById('rewards-id');
+      rewardContainer = document.getElementById('rewards-id'),
+      marketplaceParent = document.getElementById('marketplace-id');
 
 
 function displayName(name) {
@@ -102,6 +103,7 @@ function createCircle(card) {
   popUp.children[3].innerHTML = ''
   if (card['action']) addPopUpActions(card['action'], popUp.children[3]);
   if (card['victory_points']) addActionElm(popUp.children[3], card, 'victory_points')
+  if (card['description']) popUp.children[4].innerHTML = card['description']
   return circleParent;
 }
 
@@ -240,13 +242,21 @@ function addEndTurnButton() {
   document.getElementById('player-cards').innerHTML = endButtonString;
 }
 
+function addMarketplace(items) {
+  marketplaceParent.children[0].classList.remove('hidden');
+  marketplaceParent.children[1].innerHTML = '';
+  items.forEach(function(item) {
+    let itemElement = createCircle(item);
+    marketplaceParent.children[1].appendChild(itemElement);
+  });
+}
+
 export function updatePlayerData(player, playerId, data) {
   updateStats(player);
   updateInventory(player);
   updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
-  // TODO: marketplace pop up not working 
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   if (player['deck']['active'].length == 0) addEndTurnButton();
@@ -256,6 +266,7 @@ export function updatePlayerData(player, playerId, data) {
 export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
+  addMarketplace(data['marketplace_items']);
   addCardTriggers();
   addHoverToStats();
   updateLogs(data['last_log']);
