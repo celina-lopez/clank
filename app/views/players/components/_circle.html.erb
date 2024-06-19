@@ -1,20 +1,17 @@
-<% inventory_name ||= inventory['name'] %>
+<% 
+  inventory = {} if local_assigns[:inventory].nil?
+  action_type = nil if local_assigns[:action_type].nil?
+  inventory_name ||= inventory['name']
+%>
 <div class="relative card-parent">
   <div
     class="trigger-button absolute right-1 rounded-full z-2 w-auto h-auto text-right hover:bg-blue-100"
   >
     <i class="fa-regular fa-circle-question"></i>
   </div>
-  <div class="bg-white w-[150px] action-inventory invisible absolute z-10 left-[50px]">
-    <div class="rounded-t-lg bg-white"><%= inventory_name&.humanize %></div>
-    <img src='/images/<%= inventory_name %>.jpg'/>
-    <div><%= inventory['total'] %> left</div>
-    <div><%= inventory['victory_points'] %> VP</div>
-  </div>
   <div
     class="rounded-full bg-red-100 border-black border-2 rounded h-[70px] w-[70px] cursor-pointer"
     onclick='executeAction(this)'
-    id='<%= id %>'
     data-name="<%= inventory['name'] %>"
     data-type="<%= action_type %>"
   >

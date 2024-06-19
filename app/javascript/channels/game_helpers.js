@@ -5,7 +5,8 @@ const cardTemplate = document.getElementById('card-template').content,
       rewardTemplate = document.getElementById('rewards-option').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
-      endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>';
+      endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>',
+      circleTemplate = document.getElementById('circle-template').content;
 
 
 function displayName(name) {
@@ -40,18 +41,22 @@ function createCardClone(cardParent, card) {
   return cardClone;
 };
 
+function addActionElm(parent, action, key){
+  let actionElm = document.getElementById('template-' + key);
+  if (!!actionElm) {
+    let actionTemplate = document.importNode(actionElm.content, true).children[0];
+    parent.appendChild(actionTemplate);
+  }
+  let value = action[key];
+  if (Number.isInteger(value) && value > 0) value = `+${value}`;
+  parent.innerHTML += `${value} ${displayName(key.split('_points')[0])}<br/>`;
+}
+
 function addPopUpActions(actions, actionParentElm){
   for (let i = 0; i < actions.length; i++) {
     let action = actions[i];
     Object.keys(action).forEach(function(key) {
-      let actionElm = document.getElementById('template-' + key);
-      if (!!actionElm) {
-        let actionTemplate = document.importNode(actionElm.content, true).children[0];
-        actionParentElm.appendChild(actionTemplate);
-      }
-      let value = action[key];
-      if (Number.isInteger(value) && value > 0) value = `+${value}`;
-      actionParentElm.innerHTML += `${value} ${displayName(key.split('_points')[0])}<br/>`;
+      addActionElm(actionParentElm, action, key)
     });
     if (i < actions.length - 1) actionParentElm.innerHTML += '<div>or</div>';
   }
@@ -82,6 +87,22 @@ function createCard(card){
   createCardClone(cardParent, card);
   createCardPopup(cardParent, card);
   return cardParent; 
+}
+
+function createCircle(card) {
+  let circleClone = document.importNode(circleTemplate, true),
+      circleParent = circleClone.children[0],
+      itemParent = circleParent.children[1],
+      popUp = circleParent.children[2].children[0];
+  itemParent.dataset.name = card['name'];
+  itemParent.dataset.type = 'redeem_inventory_item'; 
+  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' width="70" class="rounded-full"/>`
+  popUp.children[1].innerHTML = displayName(card['name']);
+  popUp.children[2].src = `/images/${card['name'].replace(/greater_/g, '')}.jpg`;
+  popUp.children[3].innerHTML = ''
+  if (card['action']) addPopUpActions(card['action'], popUp.children[3]);
+  if (card['victory_points']) addActionElm(popUp.children[3], card, 'victory_points')
+  return circleParent;
 }
 
 function populateCards(prefix, cards, playerHand=false) {
@@ -117,11 +138,7 @@ function updateInventory(player) {
     inventory.innerHTML = "";
     inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
-      let itemElement = document.createElement('img'),
-          inventoryName = displayName(item['name'].replace(/greater_/g, ''));
-      itemElement.src = '/images/' + inventoryName + '.jpg';
-      itemElement.width = 70;
-      itemElement.classList.add('rounded-full');
+      let itemElement = createCircle(item);
       inventory.appendChild(itemElement);
     });
   }
@@ -209,7 +226,6 @@ function replaceCard(player, cards) {
           button = findCardButton(cardParent);
       button.innerHTML = 'replace';
       button.dataset.type  = 'replace_card';
-      // TODO: fix frontend
       button.dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
     })

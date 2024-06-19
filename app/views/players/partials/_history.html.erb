@@ -1,4 +1,4 @@
-<div id="logs-parent">
+<div id="logs-parent" class="overflow-auto max-h-screen">
   <% game.history.reverse.each do |history| %>
     <%
       label = case history['type']
