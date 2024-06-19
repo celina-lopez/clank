@@ -11,9 +11,7 @@ class Engine < Base
   def initialize(gameplay_data = nil, history: [])
     @history = history
     # TODO: on trash select, update status trash options
-    # TODO: market place active in game_helpers
     # TODO: i think i actually have to add the artificats
-    # TODO: can't move to negative tiles, once on 0 tile with an artifact, then turn is auto done
     # TODO: hey baby!!!! apothetcary card i cheated
     super(gameplay_data)
   end
