@@ -118,7 +118,7 @@ function populateCards(prefix, cards, playerHand=false) {
     } else {
       cardButton.dataset.type = 'buy_card';
       cardButton.dataset.name = card['name'];
-      cardButton.innerHTML = 'buy';
+      cardButton.innerHTML = card['health'] ? 'attack' : 'buy';
     }
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
