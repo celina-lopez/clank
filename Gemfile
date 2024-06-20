@@ -8,6 +8,7 @@ gem 'rails', '~> 7.0.0'
 gem 'sqlite3', '~> 1.4' # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+gem 'redis'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
