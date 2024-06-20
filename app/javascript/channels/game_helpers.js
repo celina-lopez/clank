@@ -8,7 +8,8 @@ const cardTemplate = document.getElementById('card-template').content,
       endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>',
       circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
-      marketplaceParent = document.getElementById('marketplace-id');
+      marketplaceParent = document.getElementById('marketplace-id'),
+      gameContainer = document.getElementById('game-container');
 
 
 function displayName(name) {
@@ -308,4 +309,14 @@ export function addError(err) {
   let errElm = document.getElementById('alert-popup')
   errElm.classList.remove('hidden');
   errElm.children[1].innerHTML = err;
+}
+
+export function endGame(data){
+  gameContainer.innerHTML = '<h1>Game over!</h1>';
+  data['players'].sort((a, b) => a['victory_points'] - b['victory_points']).forEach(function(player, index) {
+    let playerElm = document.createElement('div');
+    playerElm.innerHTML = `Player ${index}: ${player['victory_points']} victory points`;
+    if (index == 0) playerElm.innerHTML += ' (Winner)';
+    gameContainer.appendChild(playerElm);
+  })
 }

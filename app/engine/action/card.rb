@@ -35,6 +35,7 @@ class Action::Card < Action::Base
     action_game = Action::Game.new(gameplay_data, type: 'dragon_attack', value: val)
     action_game.dragon_attack!
     history.concat(action_game.history)
+    # TODO: if person is dead, remove them from rotation, calculate victory points correctly
     self.gameplay_data = action_game.gameplay_data
   end
 
