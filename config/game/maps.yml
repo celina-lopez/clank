@@ -225,15 +225,15 @@ map_1:
       x: 1.04
       y: -2.42
     items:
-      - name: monkey_idol_hear
+      - name: monkey_idol
         victory_points: 5
         total: 1
         type: monkey
-      - name: monkey_idol_see
+      - name: monkey_idol
         victory_points: 5
         total: 1
         type: monkey
-      - name: monkey_idol_speak
+      - name: monkey_idol
         victory_points: 5
         total: 1
         type: monkey

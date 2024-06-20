@@ -102,8 +102,12 @@ class Action::Player < Action::Base
 
     if item['is_artifact']
       artifact_size = current_player.inventory.filter { |x| x['is_artifact'] }.size
-      backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
-      return unless backpack_size > artifact_size
+      unless artifact_size.zero?
+        backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
+
+        return unless backpack_size > artifact_size
+      end
+      # TODO: great now health isnt workkkinnggg??
     end
 
     current_player.inventory << item
@@ -143,8 +147,16 @@ class Action::Player < Action::Base
     card_on_acquire(card)
     return if card['health'].present? || Base::DEVICE_CARD_NAMES.include?(card['name'])
 
-    card.delete('cost')
-    current_player.deck.discarded << card
+    # TODO: inventory doesnt update if no inventory to begin with
+    # TODO: fix click on map bug where the popup doesnt prevent you from clicking on map
+    # TODO: position of monkey idol is way off on phaser, also it should costtwo more steps to go there perhpas
+    # TODO: add temp stats to the header
+    # TODO: when player has teleporter! they should move
+    # TODO: marketplace active when game updates in helpers
+    # TODO: coins still don't update on game_helpers
+    new_card = card.dup
+    new_card.delete('cost')
+    current_player.deck.discarded << new_card
   end
 
   def card_on_acquire(card)

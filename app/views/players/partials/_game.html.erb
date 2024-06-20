@@ -64,7 +64,7 @@
   var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
   function generateTileMap(thiz) {
     mapTiles.forEach((tileData) => {
-      if (tileData.tile <= 0) return;
+      if (tileData.tile < 0) return;
       let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'] || typeOfTileConfig['default'];
       let size = config.size || 20;
       let tile = thiz.add.rectangle(size  + 20, size, size, size, config.color);
