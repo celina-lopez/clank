@@ -100,6 +100,12 @@ class Action::Player < Action::Base
     item = tile_data.fetch('items', []).pop
     return unless item.present?
 
+    if item['is_artifact']
+      artifact_size = current_player.inventory.filter { |x| x['is_artifact'] }.size
+      backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
+      return unless backpack_size > artifact_size
+    end
+
     current_player.inventory << item
     if item['on_acquire'].present?
       item['on_acquire'].each do |action_key, action_value|
