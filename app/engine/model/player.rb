@@ -88,7 +88,7 @@ class Model::Player
   end
 
   def artifact?
-    inventory.any? { |item| item['artifact'] }
+    inventory.any? { |item| item['is_artifact'] }
   end
 
   def reset! # rubocop:disable Metrics/MethodLength

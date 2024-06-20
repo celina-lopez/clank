@@ -116,7 +116,7 @@ function populateCards(prefix, cards, playerHand=false) {
     let cardButton = findCardButton(cardParent);
     if (playerHand) {
       cardButton.dataset.type = card['name'];
-      cardButton.innerHTML = 'use';
+      cardButton.innerHTML = 'play';
     } else {
       cardButton.dataset.type = 'buy_card';
       cardButton.dataset.name = card['name'];

@@ -2,9 +2,11 @@
 
 class Action::Game < Action::Base
   def end_turn # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # TODO: make images for new trophys
     loop do
       gameplay_data.next_player!
       if current_player.position.escape_tile? && current_player.artifact?
+        return end_game! if gameplay_data.players.size == 1
 
         current_player.position.current_position = current_player.position.current_position - 1
         return end_game! if current_player.position.end_tile?
