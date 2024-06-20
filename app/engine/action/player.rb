@@ -143,6 +143,7 @@ class Action::Player < Action::Base
     card_on_acquire(card)
     return if card['health'].present? || Base::DEVICE_CARD_NAMES.include?(card['name'])
 
+    card.delete('cost')
     current_player.deck.discarded << card
   end
 
