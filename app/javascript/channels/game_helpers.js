@@ -91,8 +91,8 @@ function createCardPopup(cardParent, card) {
 function findCardButton(cardParent) {
   return cardParent.querySelector('.hidden_info_card')
                    .children[0]
-                   .querySelector('card-body')
-                   .querySelector('card-actions')
+                   .querySelector('.card-body')
+                   .querySelector('.card-actions')
                    .children[0];
 };
 
