@@ -1,5 +1,4 @@
-Dungeon Row
-<div class='grid grid-cols-5 grid-cols-3 sm:grid-cols-5 md:grid-cols-6 xl:md:grid-cols-5 gap-1' id='active-cards'>
+<div class='flex gap-3 flex-wrap items-strech' id='active-cards'>
   <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
     <%= render(
       'players/components/card',

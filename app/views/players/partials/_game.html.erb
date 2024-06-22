@@ -9,28 +9,49 @@
 }
 </style>
 <%= render 'players/partials/templates' %>
-<div>
+<div class="max-h-[50vh] overflow-auto mx-2">
   <%= render 'players/partials/stats', player: %>
-  <div class="block xl:hidden my-4 tabs tabs-bordered">
-    <div class="tab tab-active" data-target="#panel1">Hand</div>
-    <div class="tab" data-target="#panel2">Map</div>
-    <div class="tab" data-target="#panel3">Dragon</div>
-    <div class="tab" data-target="#panel4">Logs</div>
+  <div class="mt-2 mb-1">Currently selected</div>
+  <div id="infobox" class="mb-2">
+    <%= render(
+      'players/components/info_card',
+      card: player.dig('deck', 'active', 0),
+      data_type: player.dig('deck', 'active', 0, 'name'),
+      button_text: 'play'
+    ) %>
+  </div>
+  <%= render 'players/partials/rewards', player: %> 
+  <%= render 'players/partials/replace_card', player:, game: %> 
+  <%= render 'players/partials/trash_options', player: %>
+  <%= render 'players/partials/inventory', player: @player  %> 
+  <%= render 'players/partials/shop', player:, game: %> 
+</div>
+<div>
+  <div class="my-4 tabs p-0">
+    <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
+    <div class="tab" data-target="#panel2">Dungeon Row</div>
+    <div class="tab" data-target="#panel3">Reserves</div>
+    <div class="tab" data-target="#panel4">Map</div>
+    <div class="tab" data-target="#panel5">Logs</div>
   </div>
 
-  <div class="grid xl:grid-cols-2">
-    <div id="panel1" class="panel xl:block">
+  <div class="grid my-2">
+    <div id="panel1" class="panel">
       <%= render 'players/partials/current_hand', player:, game: %>
     </div>
-    <div id="panel2" class="panel hidden xl:block">
+    <div id="panel2" class="panel hidden">
+      <%= render 'players/partials/active_deck', game:  %> 
+    </div>
+    <div id="panel3" class="panel hidden">
+      <%= render 'players/partials/reserves', game:  %> 
+    </div>
+    <div id="panel4" class="panel hidden">
       <div class="overflow-y-scroll">
+      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
         <div id="boardgame"></div>
       </div>
     </div>
-    <div id="panel3" class="panel hidden xl:block bg-white">
-      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
-    </div>
-    <div id="panel4" class="panel hidden xl:block bg-white">
+    <div id="panel5" class="panel hidden">
       <%= render 'players/partials/history', game: %> 
     </div>
   </div>
@@ -109,11 +130,24 @@
         const targetPanel = document.querySelector(button.getAttribute('data-target'));
         panels.forEach(function(panel) { panel.classList.add('hidden') });
         buttons.forEach(function(btn) {
-          btn.classList.remove('tab-active');
+          btn.classList.remove('border-b-2', 'border-b-primary');
         });
+
         targetPanel.classList.remove('hidden');
-        button.classList.add('tab-active');
+        button.classList.add('border-b-2', 'border-b-primary');
       });
     });
   });
+
+  let infoBox = document.getElementById('infobox');
+
+  function toggleHiddenInfoCard(element) {
+    let parentElm = element.parentElement,
+        hiddenInfoCard = parentElm.querySelector('.hidden_info_card');
+    infoBox.innerHTML = hiddenInfoCard.innerHTML;
+    document.querySelectorAll('.infoselector').forEach(function(card) {
+      card.classList.add('invisible');
+    });
+    parentElm.querySelector('.infoselector').classList.remove('invisible');
+  }
 </script>

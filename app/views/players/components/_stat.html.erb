@@ -1,9 +1,9 @@
-<div class="hover-parent relative">
-  <div class="child invisible border absolute border-black rounded border-2 z-10 w-[300px] top-[20px] left-[30px] bg-white">
-    <div class="text-center rounded-t-lg bg-white"><%= player.fetch(stat, 0) %> <%= stat.humanize %></div>
+<% if player.fetch(stat, 0).positive? %>
+  <div class="stat">
+    <div class="stat-figure text-primary text-[25px]">
+    <i class="fa-solid fa-<%= icon %>"></i>
+    </div>
+    <div class="stat-title text-sm"><%= stat.gsub('points', '').humanize %></div>
+    <div class="stat-value text-primary text-base"><%= player.fetch(stat, 0) %></div>
   </div>
-  <div class="flex">
-    <div id="<%= stat %>"><%= player.fetch(stat, 0) %></div>
-    <div><i class="fa-solid fa-<%= icon %>"></i></div>
-  </div>
-</div>
+<% end %>
