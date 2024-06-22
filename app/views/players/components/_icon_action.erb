@@ -27,14 +27,10 @@
   when 'teleport_points'
     icon = 'bolt'
     color = 'blue'
-  when 'skill_points'
-    icon = 'wand-sparkles'
-    color = 'sky'
   else
     icon = nil
     color = nil
   end
-
 %>
 <% if icon %>
   <i class="text-<%= color %>-600 fa-solid fa-<%= icon %>"></i>
