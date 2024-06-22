@@ -5,7 +5,7 @@
     onclick="toggleHiddenInfoCard(this)"
   >
     <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="max-h-[150px]"/></figure>
-    <div class='p-3 relative h-[80px]'>
+    <div class='p-3 relative h-[80px] '>
       <div class="font-bold mt-2 flex gap-1 justify-center card_actions_parent">
         <% if card['actions']&.one? %>
           <% card.dig('actions', 0).each do |key, value| %>
