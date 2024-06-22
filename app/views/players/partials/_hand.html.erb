@@ -1,12 +1,11 @@
-Current Hand
-<div class='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 xl:md:grid-cols-5 gap-1' id='player-cards'>
+<div class='flex gap-3 flex-wrap items-strech' id='player-cards'>
   <% player.dig('deck', 'active').each_with_index do |card, index| %>
     <%= render(
       'players/components/card',
       card:,
-      id: "player-card-#{index}",
       data_type: card['name'],
-      button_text: 'play'
+      button_text: 'play',
+      selected: index.zero?
     ) %>
   <% end %>
   <% if player.dig('deck', 'active').empty? %>

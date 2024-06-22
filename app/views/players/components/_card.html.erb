@@ -1,87 +1,40 @@
-<%
-  data_name = nil if local_assigns[:data_name].nil?
-  data_type = nil if local_assigns[:data_type].nil?
-  card = {} if local_assigns[:card].nil?
-  id = '' if local_assigns[:id].nil?
-  button_text = 'buy' if local_assigns[:button_text].nil?
-%>
-<div>
+<% card = {} if local_assigns[:card].nil? %>
+<div> 
   <div
-    class="card-parent rounded relative border-black border-2 rounded h-[150px] w-[127px] cursor-pointer"
+    class="card card-compact glass cursor-pointer h-[230px]"
+    onclick="toggleHiddenInfoCard(this)"
   >
-    <div
-      class="trigger-button absolute right-1 rounded-full z-2 w-auto h-auto text-right hover:bg-blue-100"
-    >
-      <i class="fa-regular fa-circle-question"></i>
-    </div>
-    <img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' class="mt-[6px] rounded-full text-center border-red-400 border h-[100px] mx-auto" />
-    <div class="absolute w-[100%] top-[84px]">
-      <div class="text-center mx-2 truncate rounded-t-lg border-red-500 border text-white bg-black card_name"><%= card['name']&.humanize %></div>
-    </div>
-    <div class="font-bold mt-2 flex gap-1 justify-center card_actions_parent">
-      <% if card['actions']&.one? %>
-        <% card.dig('actions', 0).each do |key, value| %>
-          <div>
-            <%= render 'players/components/icon_action', key:, value: %>
-          </div>
+    <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="max-h-[150px]"/></figure>
+    <div class='p-3 relative h-[80px] '>
+      <div class="font-bold mt-2 flex gap-1 justify-center card_actions_parent">
+        <% if card['actions']&.one? %>
+          <% card.dig('actions', 0).each do |key, value| %>
+            <div>
+              <%= render 'players/components/icon_action', key:, value: %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <% if card['cost'].present? %>
-      <div class="bg-sky-600 px-1 text-white rounded-br-sm absolute bottom-0 right-0"><%= card['cost'] %></div>
-    <% end %>
-    <% if card['health'].present? %>
-      <div class="bg-red-600 px-1 text-white rounded-br-sm absolute bottom-0 right-0"><%= card['health'] %></div>
-    <% end %>
-    <div class="modal-card fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
-      <div class="bg-white px-8 py-4 rounded shadow-lg relative">
-        <button class="closeButton absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
-          &times;
-        </button>
-        <h3 class="text-center"><%= card['name']&.humanize %></h3>
-        <img src='/images/<%= card['name'] %>.jpeg' class="rounded-full text-center border-red-400 border h-[200px] mx-auto" />
-        <div class="text-start action_parent">
-          <% card.fetch('actions', []).each_with_index do |action, index| %>
-            <% action.each do |key, value| %>
-              <%= render 'players/components/action', key:, value: %> 
-              <% if (card.fetch('actions', []).size > 1 && index == 0) %>
-                OR
-                <br/>
-              <% end%>
-            <% end%>
-          <% end %>
-          <% card.fetch('acquire', []).each_with_index do |action, index| %>
-            On Acquire:
-            <br>
-            <% action.each do |key, value| %>
-              <%= render 'players/components/action', key:, value: %> 
-            <% end %>
-            <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
-              OR
-              <br/>
-            <% end%>
-          <% end %>
-          <% if card['victory_points'].present? %>
-            <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
-          <% end %>
-          <% if card['cost'].present? %>
-            <%= render 'players/components/action', key: 'cost', value: card['cost'] %>
-          <% end %>
-          <% if card['health'].present? %>
-            <%= render 'players/components/action', key: 'health', value: card['health'] %>
-          <% end %>
-        </div>
       </div>
+      <% if card['cost'].present? %>
+        <div class="bg-sky-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['cost'] %></div>
+      <% end %>
+      <% if card['health'].present? %>
+        <div class="bg-red-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['health'] %></div>
+      <% end %>
+      <div class="text-center card_name"><%= card['name']&.humanize %></div>
     </div>
   </div>
-  <div class='w-100 text-center my-2'>
-    <button
-    onclick='executeAction(this)'
-    data-type="<%= data_type %>"
-    data-name="<%= data_name %>"
-    class='btn btn-outline btn-xs'
-    >
-      <%= button_text %>
-    </button>
+  <div class="mt-3 <%= !local_assigns[:selected] && 'invisible' %> infoselector">
+    <div class="mx-auto border-x-[10px] border-x-transparent w-0 border-b-primary border-b-[10px] "></div>
+    <div class="bg-primary h-[5px] rounded shadow shadow-primary/40"></div>
+  </div>
+  <div class='hidden_info_card hidden'>
+    <%= render(
+      'players/components/info_card',
+      card:,
+      data_type: local_assigns[:data_type], 
+      data_value: local_assigns[:data_value],
+      button_text: local_assigns[:button_text] 
+    ) %>
   </div>
 </div>

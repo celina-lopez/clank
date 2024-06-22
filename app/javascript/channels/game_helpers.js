@@ -9,7 +9,9 @@ const cardTemplate = document.getElementById('card-template').content,
       circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
-      gameContainer = document.getElementById('game-container');
+      gameContainer = document.getElementById('game-container'),
+      playerStatContainer = document.getElementById('player-stats'),
+      statTemplate = document.getElementById('stat-template').content;
 
 
 function displayName(name) {
@@ -19,15 +21,19 @@ function displayName(name) {
 }
 
 function createCardClone(cardClone, card) {
-  cardClone.querySelector('img').src = `/images/${card['name']}.jpeg`
-  cardClone.querySelector('.card_name').innerHTML = displayName(card['name'])
+  let image = cardClone.querySelector('figure').children[0];
+  image.src = `/images/${card['name']}.jpeg`;
+  image.alt = card['name'];
+  let container = cardClone.children[1];
+  container.querySelector('.card_name').innerHTML = displayName(card['name'])
+  let actionParentElm = container.querySelector('.card_actions_parent');
   if (card['actions']?.length == 1) {
     Object.keys(card['actions'][0]).forEach(function(key) {
       let actionElm = document.getElementById('template-' + key);
       if (!!actionElm) {
         let actionTemplate = document.importNode(actionElm.content, true);
-        cardClone.querySelector('.card_actions_parent').appendChild(actionTemplate.children[0]);
-        cardClone.querySelector('.card_actions_parent').innerHTML += card['actions'][0][key]; 
+        actionParentElm.appendChild(actionTemplate.children[0]);
+        actionParentElm.innerHTML += card['actions'][0][key]; 
       }
     });
   }
@@ -35,9 +41,9 @@ function createCardClone(cardClone, card) {
   ['cost', 'health'].forEach(function(key) {
     if (card[key]) {
       let div = document.createElement('div');
-      div.classList.add(`bg-${key == 'cost' ? 'sky' : 'red'}-600`, 'px-1', 'rounded-br-sm', 'text-white', 'absolute', 'bottom-0', 'right-0');
+      div.classList.add(`bg-${key == 'cost' ? 'sky' : 'red'}-600`, 'px-1', 'rounded-br', 'text-white', 'absolute', 'bottom-0', 'right-0');
       div.innerHTML = card[key];
-      cardClone.appendChild(div);
+      container.appendChild(div);
     }
   });
   return cardClone;
@@ -65,9 +71,12 @@ function addPopUpActions(actions, actionParentElm){
 }
 
 function createCardPopup(cardParent, card) {
-  const cardPopup = cardParent.children[0];
-  cardPopup.querySelector('h3').innerHTML = displayName(card['name'])
-  cardPopup.querySelector('img').src = `/images/${card['name']}.jpeg` 
+  const cardPopup = cardParent.children[0],
+        image = cardPopup.querySelector('figure').children[0],
+        cardBody = cardPopup.querySelector('.card-body');
+  cardBody.querySelector('h3').innerHTML = displayName(card['name'])
+  image.src = `/images/${card['name']}.jpeg` 
+  image.alt = card['name'];
   let actionParentElm = cardPopup.querySelector('.action_parent');
   if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
   if (card['acquire']) {
@@ -80,14 +89,18 @@ function createCardPopup(cardParent, card) {
 };
 
 function findCardButton(cardParent) {
-  return cardParent.children[1].children[0];
+  return cardParent.querySelector('.hidden_info_card')
+                   .children[0]
+                   .querySelector('.card-body')
+                   .querySelector('.card-actions')
+                   .children[0];
 };
 
 function createCard(card){
   let clone = document.importNode(cardTemplate, true),
       cardParent = clone.children[0];
   createCardClone(cardParent.children[0], card);
-  createCardPopup(cardParent.children[0].querySelector('.modal-card'), card);
+  createCardPopup(cardParent.children[2], card);
   return cardParent; 
 }
 
@@ -130,8 +143,18 @@ function populateCards(prefix, cards, playerHand=false) {
 
 // PLAYER FUNCTIONS
 function updateStats(player) {
+  playerStatContainer.innerHTML = '';
   ['health', 'move_points', 'attack_points', 'clank', 'skill_points', 'coins'].forEach(function(stat) {
-    document.getElementById(stat).innerHTML = player[stat];
+    if (player[stat] > 0) {
+      let statClone = document.importNode(statTemplate, true),
+          statParent = statClone.children[0],
+          actionElm = document.getElementById('template-' + stat),
+          actionTemplate = document.importNode(actionElm.content, true).children[0];
+      statParent.children[0].appendChild(actionTemplate);
+      statParent.children[1].innerHTML = displayName(stat);
+      statParent.children[2].innerHTML = player[stat]; 
+      playerStatContainer.appendChild(statClone);
+    }
   });
 }
 

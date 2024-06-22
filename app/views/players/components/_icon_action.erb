@@ -21,11 +21,16 @@
   when 'victory_points'
     icon = 'face-smile'
     color = 'green'
+  when 'health'
+    icon = 'heart'
+    color = 'red'
+  when 'teleport_points'
+    icon = 'bolt'
+    color = 'blue'
   else
     icon = nil
     color = nil
   end
-
 %>
 <% if icon %>
   <i class="text-<%= color %>-600 fa-solid fa-<%= icon %>"></i>

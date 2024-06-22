@@ -4,7 +4,10 @@
 <template id='circle-template'>
   <%= render 'players/components/circle' %>
 </template>
-<% %w[attack_points move_points coins skill_points clank victory_points].each do |key| %>
+<template id='stat-template'>
+  <%= render 'players/components/stat', player: {'sample' => 1}, stat: 'sample' %>
+</template>
+<% %w[attack_points move_points coins skill_points clank victory_points health].each do |key| %>
   <template id='template-<%= key %>'>
     <%= render 'players/components/icon_action', key: %>
   </template>
