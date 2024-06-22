@@ -11,7 +11,8 @@ const cardTemplate = document.getElementById('card-template').content,
       marketplaceParent = document.getElementById('marketplace-id'),
       gameContainer = document.getElementById('game-container'),
       playerStatContainer = document.getElementById('player-stats'),
-      statTemplate = document.getElementById('stat-template').content;
+      statTemplate = document.getElementById('stat-template').content,
+      statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
 function displayName(name) {
@@ -144,7 +145,7 @@ function populateCards(prefix, cards, playerHand=false) {
 // PLAYER FUNCTIONS
 function updateStats(player) {
   playerStatContainer.innerHTML = '';
-  ['health', 'move_points', 'attack_points', 'clank', 'skill_points', 'coins'].forEach(function(stat) {
+  statKeys.forEach(function(stat) {
     if (player[stat] > 0) {
       let statClone = document.importNode(statTemplate, true),
           statParent = statClone.children[0],
