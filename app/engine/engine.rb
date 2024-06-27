@@ -15,7 +15,11 @@ class Engine < Base
     super(gameplay_data)
   end
 
-  def execute(type:, value: nil, player_index: nil)
+  def execute(type:, value: nil, player_index: nil) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    if player_index.present? && player_index != current_player_index
+      raise Validation::Base::InvalidMoveError,
+            'Not current player'
+    end
     klass = klass_type(type)
     validation_klass = Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
