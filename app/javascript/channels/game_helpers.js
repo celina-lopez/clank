@@ -290,6 +290,7 @@ export function updatePlayerData(player, playerId, data) {
   } else {
     document.getElementById('play_all_cards_button').classList.remove('hidden');
   }
+  document.getElementById('infobox').innerHTML = '';
 }
 // GAME FUNCTIONS
 
