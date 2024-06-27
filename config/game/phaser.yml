@@ -13,6 +13,12 @@ preload_images:
 config:
   height: 710
   width: 700
+tagable_descriptions:
+  - crystal_cave
+  - health
+  - depths
+  - market
+  - ending
 player_colors:
   - red
   - blue
