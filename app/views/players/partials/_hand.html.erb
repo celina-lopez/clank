@@ -1,3 +1,8 @@
+<% if player.dig('deck', 'active').empty? %>
+  <button class="btn" onclick='executeAction(this)' data-type='end_turn'>End Turn</button>
+<% else %>
+  <button onclick='executeAction(this)' class="btn" data-type='play_all_cards'>Play all</button>
+<% end %>
 <div class='flex gap-3 flex-wrap items-strech' id='player-cards'>
   <% player.dig('deck', 'active').each_with_index do |card, index| %>
     <%= render(
@@ -7,8 +12,5 @@
       button_text: 'play',
       selected: index.zero?
     ) %>
-  <% end %>
-  <% if player.dig('deck', 'active').empty? %>
-    <button class="btn" onclick='executeAction(this)' data-type='end_turn'>End Turn</button>
   <% end %>
 </div>

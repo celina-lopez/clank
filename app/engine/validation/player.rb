@@ -21,6 +21,10 @@ class Validation::Player < Validation::Base
     result && validate_buy_conditions
   end
 
+  def play_all_cards?
+    add_error_if_error('No cards to play', current_player.deck.active.present?)
+  end
+
   def move? # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     next_to = current_player.position.next_to?(value)
     ok = add_error_if_error('Please choose adjacent tile', next_to)

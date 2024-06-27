@@ -23,6 +23,19 @@ class Action::Player < Action::Base
     redeem_card(card)
   end
 
+  def play_all_cards
+    card_klass = Action::Card.new(gameplay_data, type: nil, value: nil)
+    active_cards = current_player.deck.active.dup
+    active_cards.each do |card|
+      if (actions = card.fetch('actions', [])).one?
+        actions.first.each { |k, v| card_klass.send(k, v) }
+      elsif actions.any?
+        current_player.rewards << actions
+      end
+      current_player.deck.discard(card)
+    end
+  end
+
   def move # rubocop:disable Metrics/AbcSize
     edge_metadata = current_player.position.edge_metadata(value)
     current_player.position.current_position = value
