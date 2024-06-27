@@ -265,6 +265,7 @@ function replaceCard(player, cards) {
 
 function addEndTurnButton() {
   document.getElementById('player-cards').innerHTML = endButtonString;
+  document.getElementById('play_all_cards_button').classList.add('hidden');
 }
 
 function addMarketplace(items) {
@@ -284,7 +285,11 @@ export function updatePlayerData(player, playerId, data) {
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
-  if (player['deck']['active'].length == 0) addEndTurnButton();
+  if (player['deck']['active'].length == 0) {
+    addEndTurnButton()
+  } else {
+    document.getElementById('play_all_cards_button').classList.remove('hidden');
+  }
 }
 // GAME FUNCTIONS
 
