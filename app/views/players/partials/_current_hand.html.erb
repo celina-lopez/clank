@@ -1,43 +1,15 @@
-<%= render 'players/partials/hand', player: %> 
-
-<script>
-  function executeAction(e) {
-    let data = { type: e.dataset.type, player_index: <%= player.dig('index') %> }
-    if (!!e.dataset.name) data.value = e.dataset.name
-    window.app.action.send(data);
-  }
-  function addCardTriggers() {
-    document.querySelectorAll(".trigger-button").forEach(function (button) {
-      button.addEventListener("click", function() {
-        this.parentElement.querySelector('.modal-card').classList.remove('hidden');
-      });
-    });
-
-    document.querySelectorAll('.closeButton').forEach(function(button) {
-      button.addEventListener('click', function() {
-        this.parentElement.parentElement.classList.add('hidden');
-      });
-    });
-
-    document.querySelectorAll('.modal-card').forEach(function (button) {
-      button.addEventListener('click', function (e) {
-        if (e.target.classList.contains('modal-card')) {
-          e.target.classList.add('hidden');
-        }
-      });
-    });
-  }
-
-  function addHoverToStats() {
-    document.querySelectorAll('.hover-parent').forEach((card) => {
-      card.addEventListener('mouseover', (e) => {
-        card.querySelector('.child').classList.remove('invisible');
-      });
-      card.addEventListener('mouseout', (e) => {
-        card.querySelector('.child').classList.add('invisible');
-      });
-    });
-  };
-  addHoverToStats();
-  addCardTriggers();
-</script>
+<% if player.dig('deck', 'active').empty? %>
+  <button class="btn" onclick='executeAction(this)' data-type='end_turn'>End Turn</button>
+<% else %>
+  <button onclick='executeAction(this)' class="btn" data-type='play_all_cards' id="play_all_cards_button">Play all</button>
+<% end %>
+<div class='flex gap-3 flex-wrap items-strech' id='player-cards'>
+  <% player.dig('deck', 'active').each do |card| %>
+    <%= render(
+      'players/components/card',
+      card:,
+      data_type: card['name'],
+      button_text: 'play',
+    ) %>
+  <% end %>
+</div>

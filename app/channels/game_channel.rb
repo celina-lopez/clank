@@ -13,8 +13,8 @@ class GameChannel < ApplicationCable::Channel
     json_data = JSON.parse(new_game_data.to_json)
     game.update!(data: json_data)
     ActionCable.server.broadcast("game_channel_#{game.id}", json_data.merge(last_log: game.history.last))
-    # rescue StandardError => e
-    # ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
+  rescue StandardError => e
+    ActionCable.server.broadcast("game_channel_#{game.id}", { error: e.message })
   end
 
   def unsubscribed

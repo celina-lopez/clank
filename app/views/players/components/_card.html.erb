@@ -2,7 +2,7 @@
 <div> 
   <div
     class="card card-compact glass cursor-pointer h-[230px]"
-    onclick="toggleHiddenInfoCard(this)"
+    onclick="HtmlActions.toggleHiddenInfoCard(this)"
   >
     <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="max-h-[150px]"/></figure>
     <div class='p-3 relative h-[80px] '>

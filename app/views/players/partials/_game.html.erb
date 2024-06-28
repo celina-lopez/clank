@@ -30,7 +30,7 @@
   </div>
 
   <div class="grid my-2">
-    <div id="panel1" class="panel hidden">
+    <div id="panel1" class="panel">
       <%= render 'players/partials/current_hand', player:, game: %>
     </div>
     <div id="panel2" class="panel hidden">
@@ -39,7 +39,7 @@
     <div id="panel3" class="panel hidden">
       <%= render 'players/partials/reserves', game:  %> 
     </div>
-    <div id="panel4" class="panel ">
+    <div id="panel4" class="panel hidden">
       <div class="overflow-y-scroll">
       Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
         <div id="boardgame"></div>
@@ -54,8 +54,8 @@
 <script>
   var config = {
     type: Phaser.AUTO,
-    height: <%= @phaser_config.dig('config','height') %>,
-    width: <%= @phaser_config.dig('config','width') %>,
+    height: 710,
+    width: 700,
     parent: 'boardgame',
     scene: {
         preload: preload,
@@ -73,23 +73,9 @@
     <% @game.data['players'].each do |player| %>
       this.load.image("player<%= player['index'].to_i %>", "/images/player<%= player['index'].to_i %>.png");
     <% end %>
-  }
+  };
+
   const descriptionArray = <%= @phaser_config['tagable_descriptions'].to_json.html_safe %>;
-  function createDescriptionForTile(tileData) {
-    let description = `Tile Info: ${tileData.tile}\n`;
-    tileData.tags && tileData.tags.forEach((tag) => {
-      if (['artifact', 'major_item', 'minor_item', 'monkey'].includes(tag)) {
-        description += `${tileData.items.length} ${tag.replace(/_/g, ' ')}(s)\n`;
-      } else if (descriptionArray.includes(tag)) { 
-        description += tag.
-        replace(/_/g, ' ').
-        replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() }) + '\n';
-      }
-    });
-    return description;
-  }
-
-
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
   var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
   function generateTileMap(thiz) {
@@ -117,8 +103,7 @@
 
       tile.on('pointerover', function (pointer) {
         this.setAlpha(0.3);
-        console.log(tileData)
-        let info = createDescriptionForTile(tileData);
+        let info = Game.createDescriptionForTile(tileData);
         infoText.setText(info);
         popup.setVisible(true);
         infoText.setVisible(true);
@@ -153,32 +138,15 @@
     <% end %>
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.tab');
-    const panels = document.querySelectorAll('.panel');
-    buttons.forEach(button => {
-      button.addEventListener('click', function () {
-        const targetPanel = document.querySelector(button.getAttribute('data-target'));
-        panels.forEach(function(panel) { panel.classList.add('hidden') });
-        buttons.forEach(function(btn) {
-          btn.classList.remove('border-b-2', 'border-b-primary');
-        });
-
-        targetPanel.classList.remove('hidden');
-        button.classList.add('border-b-2', 'border-b-primary');
-      });
-    });
-  });
-
-  let infoBox = document.getElementById('infobox');
-
-  function toggleHiddenInfoCard(element) {
-    let parentElm = element.parentElement,
-        hiddenInfoCard = parentElm.querySelector('.hidden_info_card');
-    infoBox.innerHTML = hiddenInfoCard.innerHTML;
-    document.querySelectorAll('.infoselector').forEach(function(card) {
-      card.classList.add('invisible');
-    });
-    parentElm.querySelector('.infoselector').classList.remove('invisible');
+  function executeAction(e) {
+    let data = { type: e.dataset.type, player_index: <%= player.dig('index') %> }
+    if (!!e.dataset.name) data.value = e.dataset.name
+    window.app.action.send(data);
   }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    HtmlActions.tabActions();
+    HtmlActions.addHoverToStats();
+    HtmlActions.addCardTriggers();
+  });
 </script>

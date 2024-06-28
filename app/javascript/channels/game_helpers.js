@@ -15,18 +15,12 @@ const cardTemplate = document.getElementById('card-template').content,
       statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
-function displayName(name) {
-  return name.
-    replace(/_/g, ' ').
-    replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
-}
-
 function createCardClone(cardClone, card) {
   let image = cardClone.querySelector('figure').children[0];
   image.src = `/images/${card['name']}.jpeg`;
   image.alt = card['name'];
   let container = cardClone.children[1];
-  container.querySelector('.card_name').innerHTML = displayName(card['name'])
+  container.querySelector('.card_name').innerHTML = Utils.displayName(card['name'])
   let actionParentElm = container.querySelector('.card_actions_parent');
   if (card['actions']?.length == 1) {
     Object.keys(card['actions'][0]).forEach(function(key) {
@@ -58,7 +52,7 @@ function addActionElm(parent, action, key){
   }
   let value = action[key];
   if (Number.isInteger(value) && value > 0) value = `+${value}`;
-  parent.innerHTML += `${value} ${displayName(key.split('_points')[0])}<br/>`;
+  parent.innerHTML += `${value} ${Utils.displayName(key.split('_points')[0])}<br/>`;
 }
 
 function addPopUpActions(actions, actionParentElm){
@@ -75,7 +69,7 @@ function createCardPopup(cardParent, card) {
   const cardPopup = cardParent.children[0],
         image = cardPopup.querySelector('figure').children[0],
         cardBody = cardPopup.querySelector('.card-body');
-  cardBody.querySelector('h3').innerHTML = displayName(card['name'])
+  cardBody.querySelector('h3').innerHTML = Utils.displayName(card['name'])
   image.src = `/images/${card['name']}.jpeg` 
   image.alt = card['name'];
   let actionParentElm = cardPopup.querySelector('.action_parent');
@@ -113,7 +107,7 @@ function createCircle(card) {
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
   itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' class="rounded-full w-[70px]"/>`
-  popUp.children[1].innerHTML = displayName(card['name']);
+  popUp.children[1].innerHTML = Utils.displayName(card['name']);
   popUp.children[2].src = `/images/${card['name'].replace(/greater_/g, '')}.jpg`;
   popUp.children[3].innerHTML = ''
   if (card['action']) addPopUpActions(card['action'], popUp.children[3]);
@@ -152,7 +146,7 @@ function updateStats(player) {
           actionElm = document.getElementById('template-' + stat),
           actionTemplate = document.importNode(actionElm.content, true).children[0];
       statParent.children[0].appendChild(actionTemplate);
-      statParent.children[1].innerHTML = displayName(stat);
+      statParent.children[1].innerHTML = Utils.displayName(stat);
       statParent.children[2].innerHTML = player[stat]; 
       playerStatContainer.appendChild(statClone);
     }
@@ -190,9 +184,9 @@ function addRewards(player) {
           } else if (label == 'spend_seven_for_two_secret_tomes') {
             label = 'Spend 7 coins for 2 secret tome this turn';
           } else if (['health', 'coins', 'attack_points', 'move_points'].includes(label)) {  
-            label = `Gain ${rewardOptionData[rewardOptionKeys[k]]} ${displayName(label.split('_points')[0])}`;
+            label = `Gain ${rewardOptionData[rewardOptionKeys[k]]} ${Utils.displayName(label.split('_points')[0])}`;
           } else {
-            label = displayName(label)
+            label = Utils.displayName(label)
           }
           innerText += label + '<br/>';
         }
@@ -331,7 +325,7 @@ function logLabel(history) {
   case 'start_game':
     return `Started game with ${history['value']} player(s)`
   default:
-    return `Player ${history['player_index']} used ${displayName(history['type'])} card`
+    return `Player ${history['player_index']} used ${Utils.displayName(history['type'])} card`
   }
 }
 
