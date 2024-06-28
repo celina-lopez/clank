@@ -11,7 +11,6 @@ class Engine < Base
   def initialize(gameplay_data = nil, history: [])
     @history = history
     # TODO: on trash select, update status trash options
-    # TODO: hey baby!!!! apothetcary card i cheated
     super(gameplay_data)
   end
 
