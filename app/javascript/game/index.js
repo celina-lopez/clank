@@ -39,10 +39,6 @@ HtmlActions.toggleHiddenInfoCard = function(element) {
   let parentElm = element.parentElement,
       hiddenInfoCard = parentElm.querySelector('.hidden_info_card');
   infoBox.innerHTML = hiddenInfoCard.innerHTML;
-  document.querySelectorAll('.infoselector').forEach(function(card) {
-    card.classList.add('invisible');
-  });
-  parentElm.querySelector('.infoselector').classList.remove('invisible');
 };
 
 Utils.displayName = function (name) {

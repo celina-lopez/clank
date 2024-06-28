@@ -102,8 +102,8 @@ function createCard(card){
 function createCircle(card) {
   let circleClone = document.importNode(circleTemplate, true),
       circleParent = circleClone.children[0],
-      itemParent = circleParent.children[1],
-      popUp = circleParent.children[2].children[0];
+      itemParent = circleParent.children[0],
+      popUp = circleParent.children[1].children[0];
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
   itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' class="rounded-full w-[70px]"/>`
