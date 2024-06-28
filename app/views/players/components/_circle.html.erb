@@ -6,15 +6,7 @@
 %>
 <div class="relative card-parent">
   <div
-    class="trigger-button absolute right-1 rounded-full z-2 w-auto h-auto text-right hover:bg-blue-100"
-  >
-    <i class="fa-regular fa-circle-question"></i>
-  </div>
-  <div
-    class="rounded-full bg-red-100 border-black border-2 rounded h-[70px] w-[70px] cursor-pointer"
-    onclick='executeAction(this)'
-    data-name="<%= inventory['name'] %>"
-    data-type="<%= action_type %>"
+    class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[70px] w-[70px] cursor-pointer"
   >
     <img src='<%= inventory_name && "/images/#{inventory_name}.jpg" %>' class="rounded-full w-[70px]" />
   </div>
@@ -36,6 +28,14 @@
         <% end %>
       </div>
       <div><%= inventory['description'] %></div>
+      <button
+        onclick='executeAction(this)'
+        data-name="<%= inventory['name'] %>"
+        data-type="<%= action_type %>"
+        class="btn btn-sm"
+      >
+      Play
+        <button>
     </div>
   </div>
 </div>

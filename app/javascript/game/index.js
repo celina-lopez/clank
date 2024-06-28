@@ -60,6 +60,7 @@ HtmlActions.addCardTriggers = function() {
 
   document.querySelectorAll('.closeButton').forEach(function(button) {
     button.addEventListener('click', function() {
+      console.log(this.parentElement.parentElement)
       this.parentElement.parentElement.classList.add('hidden');
     });
   });
