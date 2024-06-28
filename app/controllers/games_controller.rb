@@ -7,6 +7,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'phaser.yml'))
   end
 
   def create

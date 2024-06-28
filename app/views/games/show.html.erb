@@ -1,5 +1,8 @@
 <h1><%= @game.title %></h1>
+<p>Send your friends the links! (No peaking!)</p>
 <% @game.data['players'].each do |player| %>
-  <%= link_to "Player #{player['index']}", game_player_path(@game, player['index']) %>
-  <br/>
+  <div class="flex" style="align-items: center;">
+    <div class="h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', player['index'].to_i) %>-400"></div>
+    <%= link_to "Player #{player['index']}", game_player_path(@game, player['index']), class: "btn btn-link" %>
+  </div>
 <% end %>
