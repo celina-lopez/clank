@@ -64,8 +64,6 @@ function addTempDescription(player) {
   }
 }
 
-}
-
 function addActionElm(parent, action, key){
   let actionElm = document.getElementById('template-' + key);
   if (!!actionElm) {
