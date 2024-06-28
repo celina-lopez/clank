@@ -11,8 +11,8 @@
 <%= render 'players/partials/templates' %>
 <div class="max-h-[50vh] overflow-auto mx-2">
   <%= render 'players/partials/stats', player: %>
+  <%= render 'players/partials/instructions', player: %>
   <div id="infobox" class="mb-2">
-    <h3 class="mt-3">Select a card</h3>
   </div>
   <%= render 'players/partials/rewards', player: %> 
   <%= render 'players/partials/replace_card', player:, game: %> 

@@ -12,6 +12,7 @@ const cardTemplate = document.getElementById('card-template').content,
       gameContainer = document.getElementById('game-container'),
       playerStatContainer = document.getElementById('player-stats'),
       statTemplate = document.getElementById('stat-template').content,
+      perksElm = document.getElementById('perks'),
       statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
@@ -43,6 +44,27 @@ function createCardClone(cardClone, card) {
   });
   return cardClone;
 };
+
+function addTempDescription(player) {
+  perksElm.innerHTML = '';
+  if (player['ignore_monster_path']) { 
+    perksElm.innerHTML += '<div> You can ignore monsters in your way</div>';
+  }
+  if (player['ignore_monster_path']) {
+    perksElm.innerHTML += '<div> You can ignore monsters in your way</div>';
+  } 
+  if (player['skip_crystal_cave']) {
+    perksElm.innerHTML += '<div> You dont have to stop at crystal caves</div>';
+  }
+  if (player['spend_seven_for_two_secret_tomes']) {
+    perksElm.innerHTML += '<div> Spend 7 coins for two Secret Tomes</div>';
+  }
+  if (player['take_secret_adjacent']) {
+    perksElm.innerHTML += '<div> Take a secret adjacent</div>';
+  }
+}
+
+}
 
 function addActionElm(parent, action, key){
   let actionElm = document.getElementById('template-' + key);
@@ -273,6 +295,7 @@ function addMarketplace(items) {
 
 export function updatePlayerData(player, playerId, data) {
   updateStats(player);
+  addTempDescription(player);
   updateInventory(player);
   updatePlayerPosition(player, playerId); 
   addRewards(player);
