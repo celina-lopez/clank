@@ -16,11 +16,10 @@ class Model::Map
     end.shuffle
     Base::DEFAULT_MAP.map do |tile|
       tags = tile.fetch('tags', [])
-      tile['items'] ||= []
       if tags.include?('major_item')
-        tile['items'].concat(major_tokens.pop(1))
+        tile['items'] = major_tokens.pop(1)
       elsif tags.include?('minor_item')
-        tile['items'].concat(minor_tokens.pop(2))
+        tile['items'] = minor_tokens.pop(2)
       end
       tile
     end
