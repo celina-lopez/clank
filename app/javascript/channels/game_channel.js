@@ -1,5 +1,6 @@
 import consumer from "channels/consumer"
-import { updatePlayerData, updateGameData, addError, endGame } from "channels/game_helpers"
+import 'jquery'
+import { updatePlayerData, updateGameData, endGame } from "channels/game_helpers"
 
 window.app = {}
 let hrefParts = document.location.href.split("/"),
@@ -18,9 +19,13 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
 
   received(data) {
     if (data['error']) {
-      // TODO: remove error after some time
-      addError(data['error']);
-      return;
+      if (data['error'] === 'Not current player' && data['current_player_index'] != playerId) {
+        toastr.error(data['error']);
+      }
+      if (data['error'] != 'Not current player' && data['current_player_index'] === playerId) {
+        toastr.error(data['error']);
+      }
+      return
     }
     if (data['end_game']) {
       endGame(data);

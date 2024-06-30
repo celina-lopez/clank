@@ -350,12 +350,6 @@ function logLabel(history) {
   }
 }
 
-export function addError(err) {
-  let errElm = document.getElementById('alert-popup')
-  errElm.classList.remove('hidden');
-  errElm.children[1].innerHTML = err;
-}
-
 export function endGame(data){
   gameContainer.innerHTML = '<h1>Game over!</h1>';
   data['players'].sort((a, b) => a['victory_points'] - b['victory_points']).forEach(function(player, index) {

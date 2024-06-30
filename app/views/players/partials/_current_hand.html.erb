@@ -3,7 +3,7 @@
 <% else %>
   <button onclick='executeAction(this)' class="btn" data-type='play_all_cards' id="play_all_cards_button">Play all</button>
 <% end %>
-<div class='flex gap-3 flex-wrap items-strech' id='player-cards'>
+<div class='my-3 flex gap-3 flex-wrap items-strech' id='player-cards'>
   <% player.dig('deck', 'active').each do |card| %>
     <%= render(
       'players/components/card',

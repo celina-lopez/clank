@@ -6,3 +6,5 @@ pin_all_from 'app/javascript/channels', under: 'channels'
 pin_all_from 'app/javascript/game', under: 'game'
 pin 'trix'
 pin 'actioncable', to: '/assets/actioncable.js'
+pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js', preload: true
+pin 'toastr', to: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'
