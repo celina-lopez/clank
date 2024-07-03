@@ -26,7 +26,7 @@
     <div class="tab" data-target="#panel2">Dungeon Row</div>
     <div class="tab" data-target="#panel3">Reserves</div>
     <div class="tab" data-target="#panel4">Map</div>
-    <div class="tab" data-target="#panel5">Logs</div>
+    <div class="tab" data-target="#panel5">Status/Info</div>
   </div>
 
   <div class="grid my-2">
@@ -41,11 +41,14 @@
     </div>
     <div id="panel4" class="panel hidden">
       <div class="overflow-y-scroll">
-      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)
         <div id="boardgame"></div>
       </div>
     </div>
     <div id="panel5" class="panel hidden">
+      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
+      Player Rankings (Approximate): TODO: CALCULATE POINTS APPROX<br/>
+      Rules/FAQ  <br/>
+      Logs
       <%= render 'players/partials/history', game: %> 
     </div>
   </div>
