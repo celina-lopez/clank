@@ -13,6 +13,7 @@ const cardTemplate = document.getElementById('card-template').content,
       playerStatContainer = document.getElementById('player-stats'),
       statTemplate = document.getElementById('stat-template').content,
       perksElm = document.getElementById('perks'),
+      playerBannerElm = document.getElementById('player-banner').children[0],
       statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
@@ -291,6 +292,14 @@ function addMarketplace(items) {
   });
 }
 
+function updateBanner(data, playerId) {
+  if (data.current_player_index == playerId) {
+    playerBannerElm.innerHTML = 'Your Turn'
+  } else {
+    playerBannerElm.innerHTML = `Player ${data.current_player_index}'s Turn`
+  }
+}
+
 export function updatePlayerData(player, playerId, data) {
   updateStats(player);
   addTempDescription(player);
@@ -300,6 +309,7 @@ export function updatePlayerData(player, playerId, data) {
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
+  updateBanner(data, playerId)
   if (player['deck']['active'].length == 0) {
     addEndTurnButton()
   } else {
