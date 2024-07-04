@@ -5,7 +5,6 @@ const cardTemplate = document.getElementById('card-template').content,
       rewardTemplate = document.getElementById('rewards-option').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
-      endButtonString = '<button class="btn" onclick="executeAction(this)" data-type="end_turn">End Turn</button>',
       circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
@@ -14,6 +13,8 @@ const cardTemplate = document.getElementById('card-template').content,
       statTemplate = document.getElementById('stat-template').content,
       perksElm = document.getElementById('perks'),
       playerBannerElm = document.getElementById('player-banner').children[0],
+      endTurnElm = document.getElementById('end_turn_button'),
+      playAllElm = document.getElementById('play_all_cards_button'),
       statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
@@ -71,9 +72,12 @@ function addActionElm(parent, action, key){
     let actionTemplate = document.importNode(actionElm.content, true).children[0];
     parent.appendChild(actionTemplate);
   }
-  let value = action[key];
-  if (Number.isInteger(value) && value > 0) value = `+${value}`;
-  parent.innerHTML += `${value} ${Utils.displayName(key.split('_points')[0])}<br/>`;
+  let value = action[key],
+      label = Utils.displayName(key.replace(/_points|_options/g, '')),
+      description = `${value} ${label}`; 
+  if (Number.isInteger(value) && value > 0) description = `+${value} ${label}`;
+  if (typeof(value) == 'object') description = `${label} ${Object.keys(value)[0]}`;
+  parent.innerHTML += `${description}<br/>`;
 }
 
 function addPopUpActions(actions, actionParentElm){
@@ -278,9 +282,14 @@ function replaceCard(player, cards) {
   }
 }
 
-function addEndTurnButton() {
-  document.getElementById('player-cards').innerHTML = endButtonString;
-  document.getElementById('play_all_cards_button').classList.add('hidden');
+function addEndTurnButton(endTurn) {
+  if (endTurn) {
+    endTurnElm.classList.remove('hidden');
+    playAllElm.classList.add('hidden');
+  } else {
+    endTurnElm.classList.add('hidden');
+    playAllElm.classList.remove('hidden');
+  }
 }
 
 function addMarketplace(items) {
@@ -310,11 +319,7 @@ export function updatePlayerData(player, playerId, data) {
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId)
-  if (player['deck']['active'].length == 0) {
-    addEndTurnButton()
-  } else {
-    document.getElementById('play_all_cards_button').classList.remove('hidden');
-  }
+  addEndTurnButton(player['deck']['active'].length == 0)
   document.getElementById('infobox').innerHTML = '';
 }
 // GAME FUNCTIONS
@@ -323,8 +328,8 @@ export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items']);
-  addCardTriggers();
-  addHoverToStats();
+  HtmlActions.addCardTriggers();
+  HtmlActions.addHoverToStats();
   updateLogs(data['last_log']);
 }
 

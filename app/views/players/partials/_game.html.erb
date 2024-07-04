@@ -8,27 +8,26 @@
   background-image: url(<%= @phaser_config['preload_images']['background'] %>);
 }
 </style>
-<%= render 'players/partials/templates' %>
-<div class="max-h-[50vh] overflow-auto mx-2">
-  <%= render 'players/partials/stats', player: %>
-  <%= render 'players/partials/instructions', player: %>
-  <div id="infobox" class="mb-2">
-  </div>
-  <%= render 'players/partials/rewards', player: %> 
-  <%= render 'players/partials/replace_card', player:, game: %> 
-  <%= render 'players/partials/trash_options', player: %>
-  <%= render 'players/partials/inventory', player: @player  %> 
-  <%= render 'players/partials/shop', player:, game: %> 
-</div>
-<div>
+<div class="grid grid-cols-2 lg:auto-cols-min">
+  <div id='col-1' class="col-span-2 lg:col-span-1">
+    <div>
+      <%= render 'players/partials/stats', player: %>
+      <%= render 'players/partials/instructions', player: %>
+      <div id="infobox" class="mb-2">
+      </div>
+      <%= render 'players/partials/rewards', player: %> 
+      <%= render 'players/partials/replace_card', player:, game: %> 
+      <%= render 'players/partials/trash_options', player: %>
+      <%= render 'players/partials/inventory', player: @player  %> 
+      <%= render 'players/partials/shop', player:, game: %> 
+    </div>
+    <div>
   <div class="my-4 tabs p-0">
     <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
     <div class="tab" data-target="#panel2">Dungeon Row</div>
     <div class="tab" data-target="#panel3">Reserves</div>
-    <div class="tab" data-target="#panel4">Map</div>
     <div class="tab" data-target="#panel5">Status/Info</div>
   </div>
-
   <div class="grid my-2">
     <div id="panel1" class="panel">
       <%= render 'players/partials/current_hand', player:, game: %>
@@ -39,11 +38,6 @@
     <div id="panel3" class="panel hidden">
       <%= render 'players/partials/reserves', game:  %> 
     </div>
-    <div id="panel4" class="panel hidden">
-      <div class="overflow-y-scroll">
-        <div id="boardgame"></div>
-      </div>
-    </div>
     <div id="panel5" class="panel hidden">
       Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
       Player Rankings (Approximate): TODO: CALCULATE POINTS APPROX<br/>
@@ -53,6 +47,13 @@
     </div>
   </div>
 </div>
+  </div>
+  <div id='col-2'>
+    <div id="boardgame"></div>
+  </div>
+</div>
+<%= render 'players/partials/templates' %>
+
 
 <script>
   var config = {
