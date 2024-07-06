@@ -32,6 +32,7 @@ function createCardClone(cardClone, card, playerHand=false) {
   container.querySelector('.card_name').innerHTML = Utils.displayName(card['name'])
   let actionParentElm = container.querySelector('.card_actions_parent');
   if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
+  if (card['action']) addPopUpActions(card['action'], actionParentElm)
   if (card['acquire']) {
     actionParentElm.innerHTML += `<div>On Acquire</div>`
     addPopUpActions(card['acquire'], actionParentElm)
@@ -108,7 +109,7 @@ function createCircle(card) {
       popUp = circleParent.children[1].children[0];
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
-  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpeg' class="rounded-full w-[70px]"/>`
+  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpeg' class="rounded-full w-[50px]"/>`
   createCardClone(popUp, card);
   return circleParent;
 }

@@ -19,6 +19,14 @@
           <% end %>
         <% end%>
       <% end %>
+      <% card.fetch('action', []).each_with_index do |action, index| %>
+        <% action.each do |key, value| %>
+          <div><%= render 'players/components/action', key:, value: %></div>
+          <% if (card.fetch('actions', []).size > 1 && index == 0) %>
+            <div>OR</div>
+          <% end %>
+        <% end%>
+      <% end %>
       <% card.fetch('acquire', []).each_with_index do |action, index| %>
         <div>On Acquire:</div>
         <% action.each do |key, value| %>
