@@ -163,10 +163,7 @@ class Action::Player < Action::Base
     # TODO: inventory doesnt update if no inventory to begin with
     # TODO: fix click on map bug where the popup doesnt prevent you from clicking on map
     # TODO: position of monkey idol is way off on phaser, also it should costtwo more steps to go there perhpas
-    # TODO: add temp stats to the header
     # TODO: when player has teleporter! they should move
-    # TODO: marketplace active when game updates in helpers
-    # TODO: coins still don't update on game_helpers
     new_card = card.dup
     new_card.delete('cost')
     current_player.deck.discarded << new_card
