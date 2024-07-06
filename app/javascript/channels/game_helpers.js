@@ -285,7 +285,6 @@ export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items']);
-  HtmlActions.addHoverToStats();
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['last_log']);
 }

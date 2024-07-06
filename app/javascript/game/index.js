@@ -68,17 +68,6 @@ Utils.displayName = function (name) {
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
 }
 
-HtmlActions.addHoverToStats = function () {
-  document.querySelectorAll('.hover-parent').forEach((card) => {
-    card.addEventListener('mouseover', (e) => {
-      card.querySelector('.child').classList.remove('invisible');
-    });
-    card.addEventListener('mouseout', (e) => {
-      card.querySelector('.child').classList.add('invisible');
-    });
-  });
-};
-
 window.HtmlActions = HtmlActions;
 window.Game = Game;
 window.Utils = Utils;
