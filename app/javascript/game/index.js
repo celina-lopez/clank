@@ -68,29 +68,6 @@ Utils.displayName = function (name) {
     replace(/(?: |\b)(\w)/g, function(key, _p1) { return key.toUpperCase() });
 }
 
-HtmlActions.addCardTriggers = function() {
-  document.querySelectorAll(".trigger-button").forEach(function (button) {
-    button.addEventListener("click", function() {
-      this.parentElement.querySelector('.modal-card').classList.remove('hidden');
-    });
-  });
-
-  document.querySelectorAll('.closeButton').forEach(function(button) {
-    button.addEventListener('click', function() {
-      console.log(this.parentElement.parentElement)
-      this.parentElement.parentElement.classList.add('hidden');
-    });
-  });
-
-  document.querySelectorAll('.modal-card').forEach(function (button) {
-    button.addEventListener('click', function (e) {
-      if (e.target.classList.contains('modal-card')) {
-        e.target.classList.add('hidden');
-      }
-    });
-  });
-}
-
 HtmlActions.addHoverToStats = function () {
   document.querySelectorAll('.hover-parent').forEach((card) => {
     card.addEventListener('mouseover', (e) => {

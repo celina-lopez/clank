@@ -108,13 +108,8 @@ function createCircle(card) {
       popUp = circleParent.children[1].children[0];
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
-  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpg' class="rounded-full w-[70px]"/>`
-  popUp.children[1].innerHTML = Utils.displayName(card['name']);
-  popUp.children[2].src = `/images/${card['name'].replace(/greater_/g, '')}.jpg`;
-  popUp.children[3].innerHTML = ''
-  if (card['action']) addPopUpActions(card['action'], popUp.children[3]);
-  if (card['victory_points']) addActionElm(popUp.children[3], card, 'victory_points')
-  if (card['description']) popUp.children[4].innerHTML = card['description']
+  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpeg' class="rounded-full w-[70px]"/>`
+  createCardClone(popUp, card);
   return circleParent;
 }
 
@@ -290,7 +285,6 @@ export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items']);
-  HtmlActions.addCardTriggers();
   HtmlActions.addHoverToStats();
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['last_log']);
