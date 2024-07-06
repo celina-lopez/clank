@@ -24,18 +24,14 @@
     <div>
   <div class="my-4 tabs p-0">
     <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
-    <div class="tab" data-target="#panel2">Dungeon Row</div>
-    <div class="tab" data-target="#panel3">Reserves</div>
     <div class="tab" data-target="#panel5">Status/Info</div>
   </div>
   <div class="grid my-2">
     <div id="panel1" class="panel">
       <%= render 'players/partials/current_hand', player:, game: %>
-    </div>
-    <div id="panel2" class="panel hidden">
+      Dungeon Row
       <%= render 'players/partials/active_deck', game:  %> 
-    </div>
-    <div id="panel3" class="panel hidden">
+      Reserves
       <%= render 'players/partials/reserves', game:  %> 
     </div>
     <div id="panel5" class="panel hidden">
