@@ -1,38 +1,17 @@
-<% card = {} if local_assigns[:card].nil? %>
-<div class="group relative"> 
-  <div
-    class="card card-compact glass cursor-pointer h-[85px]"
-    onclick='executeAction(this)'
-    data-type="<%= local_assigns[:data_type] %>"
-    data-name="<%= local_assigns[:data_name] %>"
-  >
-    <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="max-w-[54px]"/></figure>
-    <div class='p-[1px] relative h-[26px]' style="font-size: 6px">
-      <div class="font-bold mt-1 flex gap-1 justify-center card_actions_parent">
-        <% if card['actions']&.one? %>
-          <% card.dig('actions', 0).each do |key, value| %>
-            <div>
-              <%= render 'players/components/icon_action', key:, value: %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <% if card['cost'].present? %>
-        <div class="bg-sky-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['cost'] %></div>
-      <% end %>
-      <% if card['health'].present? %>
-        <div class="bg-red-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['health'] %></div>
-      <% end %>
-      <div class="text-center card_name"><%= card['name']&.humanize %></div>
-    </div>
-  </div>
-  <div class='hidden_info_card absolute left-[85px] top-0 z-10 opacity-0 group-hover:opacity-100 transition duration-300 group-hover:delay-300'>
+<div class="mini_card relative"> 
+  <%= render(
+    'players/components/info_card',
+    card: local_assigns.fetch(:card, {}),
+    data_type: local_assigns[:data_type], 
+    data_name: local_assigns[:data_name],
+    small_card: true
+  ) %>
+  <div class='hidden_info_card absolute left-[85px] top-0 opacity-0 transition duration-300 delay-0'>
     <%= render(
       'players/components/info_card',
-      card:,
+      card: local_assigns.fetch(:card, {}),
       data_type: local_assigns[:data_type], 
-      data_name: local_assigns[:data_name],
-      small_card: false
+      data_name: local_assigns[:data_name]
     ) %>
   </div>
 </div>

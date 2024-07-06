@@ -3,44 +3,43 @@
   small_card = local_assigns[:small_card] || false
 %>
 <div
-  class="card card-compact glass cursor-pointer <%= small_card ?  "h-[85px]" : "h-[216px]" %>
+  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[100px]" : "h-[216px]" %>"
   onclick='executeAction(this)'
   data-type="<%= local_assigns[:data_type] %>"
   data-name="<%= local_assigns[:data_name] %>"
 >
-  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[54px]" : "max-w-[152px]" %>"/></figure>
-  <div class='<%= small_card ? "p-[1px] h-[26px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
-    <div class="font-bold mt-1 flex gap-1 justify-center card_actions_parent">
+  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[68px]" : "max-w-[152px]" %>"/></figure>
+  <div class='<%= small_card ? "p-[1px] h-[48px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
+    <div class="text-wrap w-[65px] font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
-          <%= render 'players/components/action', key:, value: %> 
+          <div><%= render 'players/components/action', key:, value: %></div>
           <% if (card.fetch('actions', []).size > 1 && index == 0) %>
-            OR
-            <br/>
-          <% end%>
+            <div>OR</div>
+          <% end %>
         <% end%>
       <% end %>
       <% card.fetch('acquire', []).each_with_index do |action, index| %>
-        On Acquire:
-        <br>
+        <div>On Acquire:</div>
         <% action.each do |key, value| %>
-          <%= render 'players/components/action', key:, value: %> 
+          <div>
+            <%= render 'players/components/action', key:, value: %> 
+          </div>
         <% end %>
         <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
-          OR
-          <br/>
+         <div>OR</div>
         <% end%>
       <% end %>
+      <% if card['victory_points'].present? %>
+        <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
+      <% end %>
     </div>
-    <% if card['victory_points'].present? %>
-      <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
-    <% end %>
+    <div class="text-center card_name"><%= card['name']&.humanize %></div>
     <% if card['cost'].present? %>
       <div class="bg-sky-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['cost'] %></div>
     <% end %>
     <% if card['health'].present? %>
       <div class="bg-red-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['health'] %></div>
     <% end %>
-    <div class="text-center card_name"><%= card['name']&.humanize %></div>
   </div>
 </div>
