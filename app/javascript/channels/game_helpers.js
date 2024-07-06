@@ -233,7 +233,6 @@ function replaceCard(player, cards) {
     cards.forEach(function(card) { 
       let cardParent = createCard(card);
       cardParent.children[0].dataset.type  = 'replace_card';
-      cardParent.children[0].dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
     })
     document.getElementById("replace-card-id").appendChild(replaceClone);
