@@ -10,7 +10,7 @@
 >
   <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[68px]" : "max-w-[152px]" %>"/></figure>
   <div class='<%= small_card ? "p-[1px] h-[48px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
-    <div class="text-wrap w-[65px] font-bold mt-1 gap-1 justify-center card_actions_parent">
+    <div class="text-wrap <%= small_card ? "w-[65px]" : "w-[126px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
           <div><%= render 'players/components/action', key:, value: %></div>
