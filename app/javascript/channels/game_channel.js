@@ -19,10 +19,10 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
 
   received(data) {
     if (data['error']) {
-      if (data['error'] === 'Not current player' && data['current_player_index'] != playerId) {
+      if (data['error'] === 'Not current player' && data['current_player_index'] != Number(playerId)) {
         toastr.error(data['error']);
       }
-      if (data['error'] != 'Not current player' && data['current_player_index'] === playerId) {
+      if (data['error'] != 'Not current player' && data['current_player_index'] === Number(playerId)) {
         toastr.error(data['error']);
       }
       return

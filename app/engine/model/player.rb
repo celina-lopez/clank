@@ -72,7 +72,10 @@ class Model::Player
   end
 
   def attack_points=(value)
-    @attack_points = [value, 0].max
+    @attack_points = value
+    return unless @attack_points.negative?
+
+    @attack_points = 0
   end
 
   def inactive_clank

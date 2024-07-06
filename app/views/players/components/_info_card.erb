@@ -33,6 +33,9 @@
       <% if card['victory_points'].present? %>
         <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
       <% end %>
+      <% if card['description'].present? %>
+        <div><%= card['description'] %></div>
+      <% end %>
     </div>
     <div class="text-center card_name"><%= card['name']&.humanize %></div>
     <% if card['cost'].present? %>
