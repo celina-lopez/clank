@@ -249,8 +249,14 @@ function addEndTurnButton(endTurn) {
   }
 }
 
-function addMarketplace(items) {
-  marketplaceParent.children[0].classList.remove('hidden');
+function addMarketplace(items, data) {
+  let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position'])),
+      isMarketplace = activeTile.tags.includes('market');
+  if (!isMarketplace) {
+    marketplaceParent.classList.add('hidden');
+    return
+  }
+  marketplaceParent.classList.remove('hidden');
   marketplaceParent.children[1].innerHTML = '';
   items.forEach(function(item) {
     let itemElement = createCircle(item);
@@ -284,7 +290,7 @@ export function updatePlayerData(player, playerId, data) {
 export function updateGameData(data) {
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
-  addMarketplace(data['marketplace_items']);
+  addMarketplace(data['marketplace_items'], data);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['last_log']);
 }
