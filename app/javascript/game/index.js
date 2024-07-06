@@ -41,6 +41,27 @@ HtmlActions.toggleHiddenInfoCard = function(element) {
   infoBox.innerHTML = hiddenInfoCard.innerHTML;
 };
 
+HtmlActions.addHoverCardFunctions = function() {
+  document.querySelectorAll('.mini_card').forEach((card) => {
+    card.children[0].addEventListener('mouseenter', function () {
+      card.querySelector('.hidden_info_card').classList.remove('opacity-0');
+      card.querySelector('.hidden_info_card').classList.add('opacity-100');
+      card.querySelector('.hidden_info_card').classList.add('delay-500');
+      card.querySelector('.hidden_info_card').classList.add('z-10');
+    });
+    card.children[0].addEventListener('mouseleave', function () {
+      card.querySelector('.hidden_info_card').classList.add('opacity-0');
+      card.querySelector('.hidden_info_card').classList.remove('opacity-100');
+      card.querySelector('.hidden_info_card').classList.remove('delay-500');
+      setTimeout(() => {
+        if (card.querySelector('.hidden_info_card').classList.contains('opacity-0')) {
+          card.querySelector('.hidden_info_card').classList.remove('z-10');
+        }
+      }, 300);
+    });
+  });
+};
+
 Utils.displayName = function (name) {
   return name.
     replace(/_/g, ' ').

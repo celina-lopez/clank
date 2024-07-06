@@ -30,6 +30,8 @@ module.exports = {
     },
     {
       pattern: /bg-(red|yellow|blue|green|pink|teal|orange|cyan|violet)-400/,
-    }
+    },
+    'opacity-100',
+    'delay-500',
   ]
 }
