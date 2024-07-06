@@ -18,24 +18,24 @@ const cardTemplate = document.getElementById('card-template').content,
       statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
-function createCardClone(cardClone, card) {
+function createCardClone(cardClone, card, playerHand=false) {
   let image = cardClone.querySelector('figure').children[0];
   image.src = `/images/${card['name']}.jpeg`;
   image.alt = card['name'];
+  if (playerHand) {
+    cardClone.dataset.type = card['name'];
+  } else {
+    cardClone.dataset.type = 'buy_card';
+    cardClone.dataset.name = card['name'];
+  }
   let container = cardClone.children[1];
   container.querySelector('.card_name').innerHTML = Utils.displayName(card['name'])
   let actionParentElm = container.querySelector('.card_actions_parent');
-  if (card['actions']?.length == 1) {
-    Object.keys(card['actions'][0]).forEach(function(key) {
-      let actionElm = document.getElementById('template-' + key);
-      if (!!actionElm) {
-        let actionTemplate = document.importNode(actionElm.content, true);
-        actionParentElm.appendChild(actionTemplate.children[0]);
-        actionParentElm.innerHTML += card['actions'][0][key]; 
-      }
-    });
+  if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
+  if (card['acquire']) {
+    actionParentElm.innerHTML += `<div>On Acquire</div>`
+    addPopUpActions(card['acquire'], actionParentElm)
   }
-
   ['cost', 'health'].forEach(function(key) {
     if (card[key]) {
       let div = document.createElement('div');
@@ -90,37 +90,11 @@ function addPopUpActions(actions, actionParentElm){
   }
 }
 
-function createCardPopup(cardParent, card) {
-  const cardPopup = cardParent.children[0],
-        image = cardPopup.querySelector('figure').children[0],
-        cardBody = cardPopup.querySelector('.card-body');
-  cardBody.querySelector('h3').innerHTML = Utils.displayName(card['name'])
-  image.src = `/images/${card['name']}.jpeg` 
-  image.alt = card['name'];
-  let actionParentElm = cardPopup.querySelector('.action_parent');
-  if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
-  if (card['acquire']) {
-    actionParentElm.innerHTML += `<div>On Acquire</div><hr/>`
-    addPopUpActions(card['acquire'], actionParentElm)
-  }
-  if (card['cost']) actionParentElm.innerHTML += `<br/>Skill cost: ${card['cost']}`;
-  if (card['health']) actionParentElm.innerHTML += `<br/>Health: ${card['health']}`;
-  return cardPopup;
-};
-
-function findCardButton(cardParent) {
-  return cardParent.querySelector('.hidden_info_card')
-                   .children[0]
-                   .querySelector('.card-body')
-                   .querySelector('.card-actions')
-                   .children[0];
-};
-
-function createCard(card){
+function createCard(card, playerHand=false){
   let clone = document.importNode(cardTemplate, true),
       cardParent = clone.children[0];
-  createCardClone(cardParent.children[0], card);
-  createCardPopup(cardParent.children[2], card);
+  createCardClone(cardParent.children[0], card, playerHand);
+  createCardClone(cardParent.children[1].children[0], card, playerHand);
   return cardParent; 
 }
 
@@ -145,17 +119,7 @@ function populateCards(prefix, cards, playerHand=false) {
   document.getElementById(`${prefix}-cards`).innerHTML = ""
   let index = 0;
   cards.forEach(function(card) { 
-    let cardParent = createCard(card)
-    cardParent.id =`${prefix}-card-${index}`;
-    let cardButton = findCardButton(cardParent);
-    if (playerHand) {
-      cardButton.dataset.type = card['name'];
-      cardButton.innerHTML = 'play';
-    } else {
-      cardButton.dataset.type = 'buy_card';
-      cardButton.dataset.name = card['name'];
-      cardButton.innerHTML = card['health'] ? 'attack' : 'buy';
-    }
+    let cardParent = createCard(card, playerHand)
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
   })
@@ -246,11 +210,9 @@ function addTrashOptions(player) {
         let trashClone = document.importNode(trashOptionTwo, true);
         ['active', 'discarded'].forEach(function(type) {
           player['deck'][type].forEach(function(card) {
-            let cardParent = createCard(card),
-                button = findCardButton(cardParent);
-            button.innerHTML = 'trash';
-            button.dataset.type  = 'trash';
-            button.dataset.name = `${card['name']},${type}`;
+            let cardParent = createCard(card);
+            cardParent.children[0].dataset.type  = 'trash';
+            cardParent.children[0].dataset.name = `${card['name']},${type}`;
             trashClone.querySelector(`#${type}-trash-cards`).appendChild(cardParent);
           })
         })
@@ -269,11 +231,9 @@ function replaceCard(player, cards) {
         replaceClone = document.importNode(replaceCardElm, true);
     document.getElementById("replace-card-id").classList.remove('hidden');
     cards.forEach(function(card) { 
-      let cardParent = createCard(card),
-          button = findCardButton(cardParent);
-      button.innerHTML = 'replace';
-      button.dataset.type  = 'replace_card';
-      button.dataset.name = card['name'];
+      let cardParent = createCard(card);
+      cardParent.children[0].dataset.type  = 'replace_card';
+      cardParent.children[0].dataset.name = card['name'];
       replaceClone.querySelector("#replace-active-cards").appendChild(cardParent);
     })
     document.getElementById("replace-card-id").appendChild(replaceClone);
@@ -330,6 +290,7 @@ export function updateGameData(data) {
   addMarketplace(data['marketplace_items']);
   HtmlActions.addCardTriggers();
   HtmlActions.addHoverToStats();
+  HtmlActions.addHoverCardFunctions()
   updateLogs(data['last_log']);
 }
 
