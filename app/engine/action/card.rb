@@ -17,6 +17,7 @@ class Action::Card < Action::Base
      clank teleport_points skill_points replace_card_points
      discard_number].each do |type|
     define_method(type) do |v = value|
+      history << { type:, value: v, player_index: current_player_index }
       current_player.public_send("#{type}=", current_player.public_send(type) + v)
     end
   end
@@ -26,6 +27,7 @@ class Action::Card < Action::Base
      take_secret_adjacent
      spend_seven_for_two_secret_tomes].each do |type|
     define_method(type) do |v = value|
+      history << { type:, value: v, player_index: current_player_index }
       current_player.public_send("#{type}=", v)
     end
   end

@@ -7,7 +7,7 @@
 - name: goblin
   total: 1
   health: 2
-  actions:
+  acquire:
     - coins: 1
 - name: mercenary
   total: 15

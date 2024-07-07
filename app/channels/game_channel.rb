@@ -9,10 +9,13 @@ class GameChannel < ApplicationCable::Channel
   def receive(data)
     game = Game.find(params[:game_id])
     type, value, player_index = data.values_at('type', 'value', 'player_index')
-    new_game_data = game.engine.execute(type:, value:, player_index:)
+    engine = game.engine
+    new_game_data = engine.execute(type:, value:, player_index:)
     json_data = JSON.parse(new_game_data.to_json)
     game.update!(data: json_data)
-    ActionCable.server.broadcast("game_channel_#{game.id}", json_data.merge(last_log: game.history.last))
+    # TODO: do better...
+    lastest_logs = engine.history.select { |item| item.is_a?(Hash) && item.keys.all? { |key| key.is_a?(Symbol) } }
+    ActionCable.server.broadcast("game_channel_#{game.id}", json_data.merge(lastest_logs:))
   rescue StandardError => e
     ActionCable.server.broadcast("game_channel_#{game.id}",
                                  { error: e.message, current_player_index: game.data['current_player_index'] })

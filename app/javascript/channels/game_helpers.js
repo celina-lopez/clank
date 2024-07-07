@@ -1,3 +1,4 @@
+import 'jquery'
 
 // CARD FUNCTIONS
 const cardTemplate = document.getElementById('card-template').content,
@@ -251,8 +252,9 @@ function addEndTurnButton(endTurn) {
 }
 
 function addMarketplace(items, data) {
-  let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position'])),
-      isMarketplace = activeTile.tags.includes('market');
+  let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position']));
+  if (activeTile == undefined) return;
+  let isMarketplace = activeTile.tags.includes('market');
   if (!isMarketplace) {
     marketplaceParent.classList.add('hidden');
     return
@@ -293,14 +295,17 @@ export function updateGameData(data) {
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items'], data);
   HtmlActions.addHoverCardFunctions()
-  updateLogs(data['last_log']);
+  updateLogs(data['lastest_logs']);
 }
 
 function updateLogs(history) {
-  let logsParent = document.getElementById('logs-parent'),
-      log = document.createElement('div');
-  log.innerHTML = logLabel(history);
-  logsParent.prepend(log);
+  for (let i = 0; i < history.length; i++) {
+    let logsParent = document.getElementById('logs-parent'),
+        log = document.createElement('div');
+    log.innerHTML = logLabel(history[i]);
+    logsParent.prepend(log);
+   toastr.info(logLabel(history[i]));
+  }
 }
 
 function logLabel(history) {

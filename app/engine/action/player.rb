@@ -181,7 +181,9 @@ class Action::Player < Action::Base
 
   def redeem_action_on_card(action_type, action_value)
     history << { type: action_type, value: action_value, player_index: current_player.index }
-    Action::Card.new(gameplay_data, type: action_type, value: action_value).send(action_type)
+    card_engine = Action::Card.new(gameplay_data, type: action_type, value: action_value)
+    card_engine.send(action_type)
+    history.concat(card_engine.history)
   end
 
   def discard_from_deck(card)
