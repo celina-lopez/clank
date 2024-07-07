@@ -291,11 +291,14 @@ export function updatePlayerData(player, playerId, data) {
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
+  // TODO: inventory new referesh 
+  // TODO: fix inventory images 
+  // TODO: log formatter
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items'], data);
   HtmlActions.addHoverCardFunctions()
-  updateLogs(data['lastest_logs']);
+  updateLogs(data['latest_logs']);
 }
 
 function updateLogs(history) {
