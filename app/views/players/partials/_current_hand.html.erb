@@ -1,7 +1,7 @@
 <% empty_hand = player.dig('deck', 'active').empty? %>
 <button id="end_turn_button" class="btn <%= !empty_hand && 'hidden' %>" onclick='executeAction(this)' data-type='end_turn'>End Turn</button>
 <button onclick='executeAction(this)' class="btn <%= empty_hand && "hidden" %>" data-type='play_all_cards' id="play_all_cards_button">Play all</button>
-<div class='my-3 flex gap-3 flex-wrap items-strech' id='player-cards'>
+<div class='my-3 flex gap-3 ' id='player-cards'>
   <% player.dig('deck', 'active').each do |card| %>
     <%= render(
       'players/components/card',

@@ -1,4 +1,4 @@
-<div class='flex gap-3 flex-wrap place-items-stretch' id='marketplace-cards'>
+<div class='flex gap-3' id='marketplace-cards'>
   <% game.data.dig('marketplace').each_with_index do |card, index| %>
     <%= render(
       'players/components/card',

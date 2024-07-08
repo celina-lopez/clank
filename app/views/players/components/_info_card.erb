@@ -17,7 +17,7 @@
           <% if (card.fetch('actions', []).size > 1 && index == 0) %>
             <div>OR</div>
           <% end %>
-        <% end%>
+        <% end %>
       <% end %>
       <% card.fetch('action', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
@@ -25,7 +25,7 @@
           <% if (card.fetch('actions', []).size > 1 && index == 0) %>
             <div>OR</div>
           <% end %>
-        <% end%>
+        <% end %>
       <% end %>
       <% card.fetch('acquire', []).each_with_index do |action, index| %>
         <div>On Acquire:</div>
@@ -36,7 +36,7 @@
         <% end %>
         <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
          <div>OR</div>
-        <% end%>
+        <% end %>
       <% end %>
       <% if card['victory_points'].present? %>
         <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
