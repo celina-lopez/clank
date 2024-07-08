@@ -3,7 +3,7 @@
   small_card = local_assigns[:small_card] || false
 %>
 <div
-  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[100px]" : "h-[216px]" %>"
+  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[100px] w-[68px]" : "h-[216px]" %>"
   onclick='executeAction(this)'
   data-type="<%= local_assigns[:data_type] %>"
   data-name="<%= local_assigns[:data_name] %>"
