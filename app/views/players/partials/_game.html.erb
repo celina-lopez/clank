@@ -21,28 +21,26 @@
       <%= render 'players/partials/inventory', player: @player  %> 
       <%= render 'players/partials/shop', player:, game: %> 
     </div>
-    <div>
-  <div class="my-4 tabs p-0">
-    <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
-    <div class="tab" data-target="#panel5">Status/Info</div>
-  </div>
-  <div class="grid my-2">
-    <div id="panel1" class="panel">
-      <%= render 'players/partials/current_hand', player:, game: %>
-      Dungeon Row
-      <%= render 'players/partials/active_deck', game:  %> 
-      Reserves
-      <%= render 'players/partials/reserves', game:  %> 
+    <div class="my-4 tabs p-0">
+      <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
+      <div class="tab" data-target="#panel5">Status/Info</div>
     </div>
-    <div id="panel5" class="panel hidden">
-      Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
-      Player Rankings (Approximate): TODO: CALCULATE POINTS APPROX<br/>
-      Rules/FAQ  <br/>
-      Logs
-      <%= render 'players/partials/history', game: %> 
+    <div class="grid my-2">
+      <div id="panel1" class="panel">
+        <%= render 'players/partials/current_hand', player:, game: %>
+        Dungeon Row
+        <%= render 'players/partials/active_deck', game:  %> 
+        Reserves
+        <%= render 'players/partials/reserves', game:  %> 
+      </div>
+      <div id="panel5" class="panel hidden">
+        Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
+        Player Rankings (Approximate): TODO: CALCULATE POINTS APPROX<br/>
+        Rules/FAQ  <br/>
+        Logs
+        <%= render 'players/partials/history', game: %> 
+      </div>
     </div>
-  </div>
-</div>
   </div>
   <div id='col-2'>
     <div id="boardgame"></div>
