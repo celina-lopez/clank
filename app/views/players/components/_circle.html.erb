@@ -1,12 +1,13 @@
 <% 
   inventory = {} if local_assigns[:inventory].nil?
-  action_type = nil if local_assigns[:action_type].nil?
-  id = nil if local_assigns[:id].nil?
   inventory_name ||= inventory['name']
 %>
 <div class="mini_card relative"> 
   <div
     class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
+    onclick='executeAction(this)'
+    data-type="<%= local_assigns[:action_type] %>"
+    data-name="<%= inventory['name'] %>"
   >
     <img src='<%= inventory_name && "/images/#{inventory_name}.jpeg" %>' class="rounded-full w-[50px]" />
   </div>
@@ -14,8 +15,8 @@
     <%= render(
       'players/components/info_card',
       card: local_assigns.fetch(:inventory, {}),
-      data_type: action_type, 
-      data_name: inventory_name, 
+      data_type: local_assigns[:action_type], 
+      data_name: inventory['name'], 
     ) %>
   </div>
 </div>
