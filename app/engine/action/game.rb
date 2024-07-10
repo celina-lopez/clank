@@ -36,6 +36,7 @@ class Action::Game < Action::Base
         gameplay_data.dragon.clank -= 1
       else
         gameplay_data.players[hit].health -= 1
+        gameplay_data.players[hit].clank -= 1
       end
       history << { type: 'dragon_clank', value: hit }
     end

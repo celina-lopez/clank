@@ -194,9 +194,13 @@ function addRewards(player) {
   }
 }
 
-function updatePlayerPosition(player, playerId) {
-  var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
-  gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
+function updatePlayerPositions(players) {
+  for (let i = 0; i < players.length; i++) {
+    let player = players[i],
+        playerId = player['index'],
+        playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
+    gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
+  }
 }
 
 function addTrashOptions(player) {
@@ -283,7 +287,6 @@ export function updatePlayerData(player, playerId, data) {
   updateStats(player);
   addTempDescription(player);
   updateInventory(player);
-  updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
@@ -295,9 +298,9 @@ export function updatePlayerData(player, playerId, data) {
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
-  // TODO: inventory new referesh 
   // TODO: fix inventory images 
   // TODO: log formatter
+  updatePlayerPositions(data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   addMarketplace(data['marketplace_items'], data);
