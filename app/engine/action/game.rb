@@ -38,8 +38,8 @@ class Action::Game < Action::Base
         gameplay_data.players[hit].health -= 1
         gameplay_data.players[hit].clank -= 1
       end
-      history << { type: 'dragon_clank', value: hit }
     end
+    history << { type: 'dragon_clank', value: hits }
   end
 
   def increase_dragon

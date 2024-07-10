@@ -259,7 +259,11 @@ function addEndTurnButton(endTurn) {
   }
 }
 
-function addMarketplace(items, data) {
+function addMarketplace(items, data, playerId) {
+  if (data['current_player_index'] != playerId) {
+    marketplaceParent.classList.add('hidden');
+    return;
+  }
   let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position']));
   if (activeTile == undefined) return;
   let isMarketplace = activeTile.tags.includes('market');
@@ -292,6 +296,7 @@ export function updatePlayerData(player, playerId, data) {
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId)
+  addMarketplace(data['marketplace_items'], data, playerId);
   addEndTurnButton(player['deck']['active'].length == 0)
   document.getElementById('infobox').innerHTML = '';
 }
@@ -303,7 +308,6 @@ export function updateGameData(data) {
   updatePlayerPositions(data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
-  addMarketplace(data['marketplace_items'], data);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['latest_logs']);
 }

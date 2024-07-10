@@ -20,6 +20,10 @@
                 "Player #{history['player_index']} gained #{history['value']} health"
               when 'start_game'
                 "Started game with #{history['value']} player(s)"
+              when 'dragon_clank'
+                hits = history['value'].reject { |x| x == -1 }.tally
+                message = hits.map { |player, count| "Player#{player} #{count} #{'time'.pluralize(count)}" }.join(", ")
+                "Dragon hit #{message}!"
               else
                 "Player #{history['player_index']} used #{history['type'].humanize} card"
               end
