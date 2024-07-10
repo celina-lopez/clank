@@ -16,6 +16,7 @@ const cardTemplate = document.getElementById('card-template').content,
       playerBannerElm = document.getElementById('player-banner').children[0],
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
+      inventoryElm = document.getElementById('inventory-id'),
       statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
@@ -143,14 +144,17 @@ function updateStats(player) {
 }
 
 function updateInventory(player) {
-  if (player['inventory']) {
-    let inventory = document.getElementById('inventory-id').children[1];
+  if (player['inventory'].length > 0) {
+    inventoryElm.classList.remove('hidden');
+    let inventory = inventoryElm.children[1];
     inventory.innerHTML = "";
     inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
       let itemElement = createCircle(item);
       inventory.appendChild(itemElement);
     });
+  } else {
+    inventoryElm.classList.add('hidden');
   }
 }
 
