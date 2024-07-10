@@ -16,7 +16,7 @@ const cardTemplate = document.getElementById('card-template').content,
       playerBannerElm = document.getElementById('player-banner').children[0],
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
-      statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
+      statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
 function createCardClone(cardClone, card, playerHand=false) {

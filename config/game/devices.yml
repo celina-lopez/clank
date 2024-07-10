@@ -1,8 +1,3 @@
-- name: teleporter
-  cost: 4
-  acquire:
-    - teleport_points: 1
-  total: 2
 - name: the_vault
   conditionals:
     - type: can_buy
@@ -13,7 +8,7 @@
   acquire:
     - coins: 5
       clank: 3
-  total: 1
+  total: 2
 - name: shrine
   immediate_action:
     - dragon_clank: -3
@@ -26,7 +21,7 @@
   acquire:
     - move_points: 2
   cost: 3
-  total: 2
+  total: 3
 - name: dragon_shrine
   additonal_cube: 1
   acquire:

@@ -14,7 +14,7 @@ class Action::Card < Action::Base
   end
 
   %i[cards health attack_points move_points coins
-     clank teleport_points skill_points replace_card_points
+     clank skill_points replace_card_points
      discard_number].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }

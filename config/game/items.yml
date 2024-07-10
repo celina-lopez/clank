@@ -166,12 +166,12 @@
   conditionals:
     - type: action
       value:
-        teleport_points: 1
+        move_points: 1
       has: artifact
 - name: wand_of_wind
   total: 1
   cost: 6
   victory_points: 3
   actions:
-    - teleport_points: 1
+    - move_points: 1
     - take_secret_adjacent: 1

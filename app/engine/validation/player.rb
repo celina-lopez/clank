@@ -50,11 +50,6 @@ class Validation::Player < Validation::Base
     ok
   end
 
-  def teleport?
-    next_to = add_error_if_error('Not next to tile', current_player.position.next_to?(value))
-    next_to && add_error_if_error('No teleport availabile', current_player.teleport.positive?)
-  end
-
   def trash?
     card_name, card_deck = value.split(',')
     validate_trash_options(card_name)
