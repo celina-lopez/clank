@@ -192,6 +192,7 @@ function addRewards(player) {
 }
 
 function updateMap(data, players) {
+  // TODO: clean these functions up
   mapTiles = data['map']['tiles'];
   let newPlayers = []
   for (let i = 0; i < players.length; i++) {
