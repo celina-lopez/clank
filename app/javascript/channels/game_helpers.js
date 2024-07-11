@@ -16,7 +16,8 @@ const cardTemplate = document.getElementById('card-template').content,
       playerBannerElm = document.getElementById('player-banner').children[0],
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
-      statKeys = ['attack_points', 'move_points', 'teleport_points', 'skill_points', 'clank', 'health', 'coins'];
+      inventoryElm = document.getElementById('inventory-id'),
+      statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'health', 'coins'];
 
 
 function createCardClone(cardClone, card, playerHand=false) {
@@ -143,14 +144,17 @@ function updateStats(player) {
 }
 
 function updateInventory(player) {
-  if (player['inventory']) {
-    let inventory = document.getElementById('inventory-id').children[1];
+  if (player['inventory'].length > 0) {
+    inventoryElm.classList.remove('hidden');
+    let inventory = inventoryElm.children[1];
     inventory.innerHTML = "";
     inventory.classList.remove('hidden');
     player['inventory'].forEach(function(item) {
       let itemElement = createCircle(item);
       inventory.appendChild(itemElement);
     });
+  } else {
+    inventoryElm.classList.add('hidden');
   }
 }
 
@@ -190,9 +194,13 @@ function addRewards(player) {
   }
 }
 
-function updatePlayerPosition(player, playerId) {
-  var playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
-  gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
+function updatePlayerPositions(players) {
+  for (let i = 0; i < players.length; i++) {
+    let player = players[i],
+        playerId = player['index'],
+        playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
+    gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
+  }
 }
 
 function addTrashOptions(player) {
@@ -251,9 +259,13 @@ function addEndTurnButton(endTurn) {
   }
 }
 
-function addMarketplace(items, data) {
+function addMarketplace(items, data, playerId) {
+  if (data['current_player_index'] != playerId) {
+    marketplaceParent.classList.add('hidden');
+    return;
+  }
   let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position']));
-  if (activeTile == undefined) return;
+  if (activeTile == undefined || !activeTile.tags) return;
   let isMarketplace = activeTile.tags.includes('market');
   if (!isMarketplace) {
     marketplaceParent.classList.add('hidden');
@@ -279,24 +291,22 @@ export function updatePlayerData(player, playerId, data) {
   updateStats(player);
   addTempDescription(player);
   updateInventory(player);
-  updatePlayerPosition(player, playerId); 
   addRewards(player);
   addTrashOptions(player);
   replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId)
+  addMarketplace(data['marketplace_items'], data, playerId);
   addEndTurnButton(player['deck']['active'].length == 0)
   document.getElementById('infobox').innerHTML = '';
 }
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
-  // TODO: inventory new referesh 
   // TODO: fix inventory images 
-  // TODO: log formatter
+  updatePlayerPositions(data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
-  addMarketplace(data['marketplace_items'], data);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['latest_logs']);
 }
@@ -305,40 +315,15 @@ function updateLogs(history) {
   for (let i = 0; i < history.length; i++) {
     let logsParent = document.getElementById('logs-parent'),
         log = document.createElement('div');
-    log.innerHTML = logLabel(history[i]);
+    log.innerHTML = history[i];
     logsParent.prepend(log);
-   toastr.info(logLabel(history[i]));
-  }
-}
-
-function logLabel(history) {
-  switch(history['type']) {
-  case 'move':
-    return `Player ${history['player_index']} moved to tile ${history['value']}`
-  case 'buy_card':
-    return `Player ${history['player_index']} acquired ${history['value'].replace(/_/g, ' ')} card`
-  case 'coins':
-    return `Player ${history['player_index']} gained ${history['value']} coin(s)`
-  case 'end_turn':
-    return `Player ${history['player_index']} ended their turn`
-  case 'dragon_attack':
-    return 'Dragon Attacked!'
-  case 'redeemed_reward':
-    return `Player ${history['player_index']} redeemed a reward`
-  case 'move_points':
-    return `Player ${history['player_index']} gained ${history['value']} move point(s)`
-  case 'health':
-    return `Player ${history['player_index']} gained ${history['value']} health`
-  case 'start_game':
-    return `Started game with ${history['value']} player(s)`
-  default:
-    return `Player ${history['player_index']} used ${Utils.displayName(history['type'])} card`
+   toastr.info(history[i]);
   }
 }
 
 export function endGame(data){
   gameContainer.innerHTML = '<h1>Game over!</h1>';
-  data['players'].sort((a, b) => a['victory_points'] - b['victory_points']).forEach(function(player, index) {
+  data['players'].sort((a, b) => b['victory_points'] - a['victory_points']).forEach(function(player, index) {
     let playerElm = document.createElement('div');
     playerElm.innerHTML = `Player ${index}: ${player['victory_points']} victory points`;
     if (index == 0) playerElm.innerHTML += ' (Winner)';

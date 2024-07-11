@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Model::Player
-  attr_accessor :move_points, :teleport_points, :coins, :inventory, :deck,
-                :clank, :position, :rewards, :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
+  attr_accessor :move_points, :coins, :inventory, :deck, :position, :rewards,
+                :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
                 :discard_number, :spend_seven_for_two_secret_tomes, :take_secret_adjacent,
                 :victory_points, :moved_to_crystal_cave, :replace_card_points
-  attr_reader :health, :index, :attack_points
+  attr_reader :health, :index, :attack_points, :clank
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
   MAX_HEALTH = 10
@@ -30,7 +30,6 @@ class Model::Player
     deck: nil,
     attack_points: 0,
     move_points: 0,
-    teleport_points: 0,
     coins: nil,
     skill_points: 0,
     rewards: [],
@@ -52,7 +51,6 @@ class Model::Player
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @move_points = move_points || 0
-    @teleport_points = teleport_points || 0
     @coins = coins || START_COINS
     @rewards = rewards || []
     @skill_points = skill_points || 0
@@ -78,6 +76,13 @@ class Model::Player
     @attack_points = 0
   end
 
+  def clank=(value)
+    @clank = value
+    return unless @clank.negative?
+
+    @clank = 0
+  end
+
   def inactive_clank
     clank - MAX_CLANK
   end
@@ -97,7 +102,6 @@ class Model::Player
   def reset! # rubocop:disable Metrics/MethodLength
     @attack_points = 0
     @move_points = 0
-    @teleport_points = 0
     @skill_points = 0
     @rewards = []
     @trash_options = []

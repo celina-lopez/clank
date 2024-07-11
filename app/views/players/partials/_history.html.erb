@@ -1,31 +1,7 @@
 <div id="logs-parent" class="overflow-auto max-h-screen">
   <% game.history.reverse.each do |history| %>
-    <%
-      label = case history['type']
-              when 'move'
-                "Player #{history['player_index']} moved to tile #{history['value']}"
-              when 'buy_card'
-                "Player #{history['player_index']} acquired #{history['value'].humanize} card"
-              when 'coins'
-                "Player #{history['player_index']} gained #{history['value']} coin(s)"
-              when 'end_turn'
-                "Player #{history['player_index']} ended their turn"
-              when 'dragon_attack'
-                'Dragon Attacked!'
-              when 'redeemed_reward'
-                "Player #{history['player_index']} redeemed a reward"
-              when 'move_points'
-                "Player #{history['player_index']} gained #{history['value']} move point(s)"
-              when 'health'
-                "Player #{history['player_index']} gained #{history['value']} health"
-              when 'start_game'
-                "Started game with #{history['value']} player(s)"
-              else
-                "Player #{history['player_index']} used #{history['type'].humanize} card"
-              end
-    %>
     <div>
-      <%= label %>
+      <%= Labeler.label(history) %>
     </div>
   <% end %>
 </div>

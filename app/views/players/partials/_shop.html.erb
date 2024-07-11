@@ -3,6 +3,9 @@
   is_marketplace = active_tile.fetch('tags', []).include?('market')
 %>
 <div id='marketplace-id' class='<%= !is_marketplace && 'hidden'%>'>
-  <div>Marketplace Active</div>
+  <div>
+    Marketplace Active!
+    <p>Each item cost 7 coins</p>
+  </div>
   <%= render 'players/partials/marketplace', player: %> 
 </div>

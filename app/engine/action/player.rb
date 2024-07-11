@@ -62,16 +62,6 @@ class Action::Player < Action::Base
     end
   end
 
-  def teleport # rubocop:disable Metrics/AbcSize
-    current_player.position.current_position = value
-    current_player.teleport -= 1
-    pick_up_item(value)
-    return unless current_player.position.tags(value).include?('crystal_cave')
-    return unless current_player.skip_crystal_cave
-
-    current_player.moved_to_crystal_cave = true
-  end
-
   def redeem_reward
     indexes = value.split(',').map(&:to_i)
     reward = current_player.rewards.dig(*indexes)
@@ -100,10 +90,8 @@ class Action::Player < Action::Base
   private
 
   def remove_health(danger)
-    if current_player.attack_points >= danger
-      danger -= current_player.attack_points
-      current_player.attack_points -= danger
-    end
+    danger -= current_player.attack_points if current_player.attack_points.positive?
+    return if danger.negative?
 
     current_player.health -= danger
   end
@@ -163,7 +151,6 @@ class Action::Player < Action::Base
     # TODO: inventory doesnt update if no inventory to begin with
     # TODO: fix click on map bug where the popup doesnt prevent you from clicking on map
     # TODO: position of monkey idol is way off on phaser, also it should costtwo more steps to go there perhpas
-    # TODO: when player has teleporter! they should move
     new_card = card.dup
     new_card.delete('cost')
     current_player.deck.discarded << new_card

@@ -28,6 +28,8 @@ class Validation::Player < Validation::Base
   def move? # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     next_to = current_player.position.next_to?(value)
     ok = add_error_if_error('Please choose adjacent tile', next_to)
+    return ok unless ok
+
     if value.to_i.zero?
       ok &= add_error_if_error('You dont have an artificat', current_player.inventory.any? { |x| x['is_artifact'] })
     end
@@ -48,11 +50,6 @@ class Validation::Player < Validation::Base
     danger = edge_metadata.fetch('danger', 0)
     ok &= add_error_if_error("Player doesn't have enough health", (current_player.health - danger).positive?)
     ok
-  end
-
-  def teleport?
-    next_to = add_error_if_error('Not next to tile', current_player.position.next_to?(value))
-    next_to && add_error_if_error('No teleport availabile', current_player.teleport.positive?)
   end
 
   def trash?

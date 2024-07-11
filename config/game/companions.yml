@@ -92,7 +92,7 @@
   total: 1
   actions:
     - clank: 1
-      teleport_points: 1
+      move_points: 1
   victory_points: 1
 - name: rebel_miner
   cost: 2
