@@ -224,6 +224,8 @@ map_1:
     frontend_data:
       x: 1.04
       y: -2.42
+      player_x: 1.81
+      player_y: -5.5
     items:
       - name: monkey_idol
         victory_points: 5

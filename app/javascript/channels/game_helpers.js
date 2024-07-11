@@ -192,12 +192,14 @@ function addRewards(player) {
 }
 
 function updatePlayerPositions(players) {
+  let newPlayers = []
   for (let i = 0; i < players.length; i++) {
-    let player = players[i],
-        playerId = player['index'],
-        playerPosition = mapTiles.find((tile) => tile.tile === parseInt(player['position']['current_position']));
-    gamePlayers[playerId].setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
+    gamePlayers[i].destroy();
+    let player = players[i];
+    let playerSprite = addPlayerToMap(gameThiz, parseInt(player['position']['current_position']) , i);
+    newPlayers.push(playerSprite);
   }
+  gamePlayers = newPlayers;
 }
 
 function addTrashOptions(player) {
