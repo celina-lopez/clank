@@ -51,4 +51,3 @@ actions:
   other_clank: number
   dragon_attack: boolean
   spend_seven_for_two_secret_tomes: boolean
-  take_secret_adjacent: boolean

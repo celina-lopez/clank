@@ -174,4 +174,4 @@
   victory_points: 3
   actions:
     - move_points: 1
-    - take_secret_adjacent: 1
+      skill_points: 1

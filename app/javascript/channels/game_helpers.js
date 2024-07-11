@@ -67,9 +67,6 @@ function addTempDescription(player) {
   if (player['spend_seven_for_two_secret_tomes']) {
     perksElm.innerHTML += '<div> Spend 7 coins for two Secret Tomes</div>';
   }
-  if (player['take_secret_adjacent']) {
-    perksElm.innerHTML += '<div> Take a secret adjacent</div>';
-  }
 }
 
 function addActionElm(parent, action, key){

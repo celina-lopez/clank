@@ -24,7 +24,6 @@ class Action::Card < Action::Base
 
   %i[ignore_monster_path
      skip_crystal_cave
-     take_secret_adjacent
      spend_seven_for_two_secret_tomes].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }
@@ -37,7 +36,6 @@ class Action::Card < Action::Base
     action_game = Action::Game.new(gameplay_data, type: 'dragon_attack', value: val)
     action_game.dragon_attack!
     history.concat(action_game.history)
-    # TODO: if person is dead, remove them from rotation, calculate victory points correctly
     self.gameplay_data = action_game.gameplay_data
   end
 
