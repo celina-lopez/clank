@@ -191,7 +191,8 @@ function addRewards(player) {
   }
 }
 
-function updatePlayerPositions(players) {
+function updateMap(data, players) {
+  mapTiles = data['map']['tiles'];
   let newPlayers = []
   for (let i = 0; i < players.length; i++) {
     gamePlayers[i].destroy();
@@ -200,6 +201,10 @@ function updatePlayerPositions(players) {
     newPlayers.push(playerSprite);
   }
   gamePlayers = newPlayers;
+  tileSprites.forEach(function(tile) {
+    tile.destroy();
+  });
+  tileSprites = generateTileMap(gameThiz);
 }
 
 function addTrashOptions(player) {
@@ -303,7 +308,7 @@ export function updatePlayerData(player, playerId, data) {
 
 export function updateGameData(data) {
   // TODO: fix inventory images 
-  updatePlayerPositions(data['players']); 
+  updateMap(data, data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
   HtmlActions.addHoverCardFunctions()
