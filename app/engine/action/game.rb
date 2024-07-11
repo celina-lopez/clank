@@ -1,20 +1,16 @@
 # frozen_string_literal: true
 
 class Action::Game < Action::Base
-  def end_turn # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def end_turn # rubocop:disable Metrics/AbcSize
     loop do
       gameplay_data.next_player!
-      if current_player.position.escape_tile? && current_player.artifact?
-        return end_game! if gameplay_data.players.size == 1
+      break unless current_player.position.escape_tile? && current_player.artifact?
+      return end_game! if gameplay_data.players.size == 1
 
-        current_player.position.current_position = current_player.position.current_position - 1
-        return end_game! if current_player.position.end_tile?
+      current_player.position.current_position -= 1
+      return end_game! if current_player.position.end_tile?
 
-        dragon_attack!
-
-        break
-      end
-      break if current_player.health.positive?
+      dragon_attack!
     end
     drawn_cards = gameplay_data.deck.reload_active_deck
     fullfill_immediate_actions(drawn_cards)

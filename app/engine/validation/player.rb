@@ -28,6 +28,8 @@ class Validation::Player < Validation::Base
   def move? # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     next_to = current_player.position.next_to?(value)
     ok = add_error_if_error('Please choose adjacent tile', next_to)
+    return ok unless ok
+
     if value.to_i.zero?
       ok &= add_error_if_error('You dont have an artificat', current_player.inventory.any? { |x| x['is_artifact'] })
     end

@@ -265,7 +265,7 @@ function addMarketplace(items, data, playerId) {
     return;
   }
   let activeTile = mapTiles.find((tile) => tile.tile === parseInt(data['players'][data['current_player_index']]['position']['current_position']));
-  if (activeTile == undefined) return;
+  if (activeTile == undefined || !activeTile.tags) return;
   let isMarketplace = activeTile.tags.includes('market');
   if (!isMarketplace) {
     marketplaceParent.classList.add('hidden');
@@ -304,7 +304,6 @@ export function updatePlayerData(player, playerId, data) {
 
 export function updateGameData(data) {
   // TODO: fix inventory images 
-  // TODO: log formatter
   updatePlayerPositions(data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);
@@ -316,40 +315,15 @@ function updateLogs(history) {
   for (let i = 0; i < history.length; i++) {
     let logsParent = document.getElementById('logs-parent'),
         log = document.createElement('div');
-    log.innerHTML = logLabel(history[i]);
+    log.innerHTML = history[i];
     logsParent.prepend(log);
-   toastr.info(logLabel(history[i]));
-  }
-}
-
-function logLabel(history) {
-  switch(history['type']) {
-  case 'move':
-    return `Player ${history['player_index']} moved to tile ${history['value']}`
-  case 'buy_card':
-    return `Player ${history['player_index']} acquired ${history['value'].replace(/_/g, ' ')} card`
-  case 'coins':
-    return `Player ${history['player_index']} gained ${history['value']} coin(s)`
-  case 'end_turn':
-    return `Player ${history['player_index']} ended their turn`
-  case 'dragon_attack':
-    return 'Dragon Attacked!'
-  case 'redeemed_reward':
-    return `Player ${history['player_index']} redeemed a reward`
-  case 'move_points':
-    return `Player ${history['player_index']} gained ${history['value']} move point(s)`
-  case 'health':
-    return `Player ${history['player_index']} gained ${history['value']} health`
-  case 'start_game':
-    return `Started game with ${history['value']} player(s)`
-  default:
-    return `Player ${history['player_index']} used ${Utils.displayName(history['type'])} card`
+   toastr.info(history[i]);
   }
 }
 
 export function endGame(data){
   gameContainer.innerHTML = '<h1>Game over!</h1>';
-  data['players'].sort((a, b) => a['victory_points'] - b['victory_points']).forEach(function(player, index) {
+  data['players'].sort((a, b) => b['victory_points'] - a['victory_points']).forEach(function(player, index) {
     let playerElm = document.createElement('div');
     playerElm.innerHTML = `Player ${index}: ${player['victory_points']} victory points`;
     if (index == 0) playerElm.innerHTML += ' (Winner)';
