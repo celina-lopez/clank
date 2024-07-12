@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController
-  layout 'game'
   before_action :set_game
   before_action :set_player
-
-  def show
-    @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'phaser.yml'))
-  end
+  layout 'game'
 
   private
 

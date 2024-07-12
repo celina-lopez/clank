@@ -3,7 +3,10 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   root 'pages#index'
-  resources :games, except: %i[destroy edit update] do
-    resources :players, only: %i[show]
+  resources :games, only: %i[create]
+  namespace :clank do
+    resources :games, except: %i[destroy edit update] do
+      resources :players, only: %i[show]
+    end
   end
 end

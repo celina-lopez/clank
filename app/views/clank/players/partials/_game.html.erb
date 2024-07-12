@@ -11,15 +11,15 @@
 <div class="grid grid-cols-2 lg:auto-cols-min">
   <div id='col-1' class="col-span-2 lg:col-span-1">
     <div>
-      <%= render 'players/partials/stats', player: %>
-      <%= render 'players/partials/instructions', player: %>
+      <%= render 'clank/players/partials/stats', player: %>
+      <%= render 'clank/players/partials/instructions', player: %>
       <div id="infobox" class="mb-2">
       </div>
-      <%= render 'players/partials/rewards', player: %> 
-      <%= render 'players/partials/replace_card', player:, game: %> 
-      <%= render 'players/partials/trash_options', player: %>
-      <%= render 'players/partials/inventory', player: @player  %> 
-      <%= render 'players/partials/shop', player:, game: %> 
+      <%= render 'clank/players/partials/rewards', player: %> 
+      <%= render 'clank/players/partials/replace_card', player:, game: %> 
+      <%= render 'clank/players/partials/trash_options', player: %>
+      <%= render 'clank/players/partials/inventory', player: @player  %> 
+      <%= render 'clank/players/partials/shop', player:, game: %> 
     </div>
     <div class="my-4 tabs p-0">
       <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
@@ -27,11 +27,11 @@
     </div>
     <div class="grid my-2">
       <div id="panel1" class="panel">
-        <%= render 'players/partials/current_hand', player:, game: %>
+        <%= render 'clank/players/partials/current_hand', player:, game: %>
         Dungeon Row
-        <%= render 'players/partials/active_deck', game:  %> 
+        <%= render 'clank/players/partials/active_deck', game:  %> 
         Reserves
-        <%= render 'players/partials/reserves', game:  %> 
+        <%= render 'clank/players/partials/reserves', game:  %> 
       </div>
       <div id="panel5" class="panel hidden">
         Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
@@ -46,7 +46,7 @@
     <div id="boardgame"></div>
   </div>
 </div>
-<%= render 'players/partials/templates' %>
+<%= render 'clank/players/partials/templates' %>
 
 
 <script>

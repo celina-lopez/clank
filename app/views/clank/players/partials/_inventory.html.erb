@@ -9,7 +9,7 @@
           inventory['name']
         end
       %>
-      <%= render 'players/components/circle', inventory_name:, inventory:, action_type: "redeem_inventory_item", id: "inventory-#{inventory['name']}"  %>
+      <%= render 'players/components/circle', inventory_name:, inventory:, action_type: "redeem_inventory_item", id: "inventory-#{inventory['name']}", game_prefix: "clank" %>
     <% end %>
   </div>
 </div>

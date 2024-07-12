@@ -1,14 +1,7 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  def new
-    @game = Game.new
-  end
-
-  def show
-    @game = Game.find(params[:id])
-    @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'phaser.yml'))
-  end
+  before_action :set_view_path
 
   def create
     engine = Engine.new
@@ -18,12 +11,16 @@ class GamesController < ApplicationController
       history: engine.history,
       title: game_params[:title]
     )
-    redirect_to game_path(game)
+    redirect_to clank_game_path(game) # TODO: fix to specific game
   end
 
   private
 
   def game_params
     params.require(:game).permit(:number_of_players, :title)
+  end
+
+  def set_view_path
+    prepend_view_path Rails.root.join('app', 'views', 'games')
   end
 end
