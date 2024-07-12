@@ -1,0 +1,7 @@
+<div id="logs-parent" class="overflow-auto max-h-screen">
+  <% game.history.reverse.each do |history| %>
+    <div>
+      <%= Labeler.label(history) %>
+    </div>
+  <% end %>
+</div>
