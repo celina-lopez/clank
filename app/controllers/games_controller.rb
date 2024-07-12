@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :set_view_path
+  before_action :set_view_path, only: %i[new index]
 
   def create
     engine = Engine.new
