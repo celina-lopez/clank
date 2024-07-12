@@ -280,6 +280,7 @@ function addMarketplace(items, data, playerId) {
   marketplaceParent.children[1].innerHTML = '';
   items.forEach(function(item) {
     let itemElement = createCircle(item);
+    itemElement.children[0].dataset.type = 'buy_artifact';
     marketplaceParent.children[1].appendChild(itemElement);
   });
 }
