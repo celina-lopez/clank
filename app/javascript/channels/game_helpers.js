@@ -192,20 +192,19 @@ function addRewards(player) {
 }
 
 function updateMap(data, players) {
-  // TODO: clean these functions up
   mapTiles = data['map']['tiles'];
   let newPlayers = []
   for (let i = 0; i < players.length; i++) {
     gamePlayers[i].destroy();
     let player = players[i];
-    let playerSprite = addPlayerToMap(gameThiz, parseInt(player['position']['current_position']) , i);
+    let playerSprite = addPlayerToMap(parseInt(player['position']['current_position']) , i);
     newPlayers.push(playerSprite);
   }
   gamePlayers = newPlayers;
   tileSprites.forEach(function(tile) {
     tile.destroy();
   });
-  tileSprites = generateTileMap(gameThiz);
+  tileSprites = generateTileMap();
 }
 
 function addTrashOptions(player) {

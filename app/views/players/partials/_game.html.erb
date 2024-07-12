@@ -78,26 +78,26 @@
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
   var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
   var tileSprites = []
-  function generateTileMap(thiz) {
+  function generateTileMap() {
     var sprites = []
     mapTiles.forEach((tileData) => {
       if (tileData.tile < 0) return;
       let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'] || typeOfTileConfig['default'];
       let size = config.size || 20;
-      let tile = thiz.add.rectangle(size  + 20, size, size, size, config.color);
+      let tile = gameThiz.add.rectangle(size  + 20, size, size, size, config.color);
       tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
       tile.setAlpha(0.1); 
       tile.setInteractive(); 
 
 
     // Create a graphics object for the popup background
-      let popup = thiz.add.graphics();
+      let popup = gameThiz.add.graphics();
       popup.fillStyle(0x000000, 0.8); // Black background with 80% opacity
       popup.fillRect(0, 0, 150, 100); // Set size of the popup
       popup.setVisible(false);
 
       // Create a text object for displaying tile info
-      let infoText = thiz.add.text(10, 10, 'Hello', { font: '16px Arial', fill: '#ffffff' });
+      let infoText = gameThiz.add.text(10, 10, 'Hello', { font: '16px Arial', fill: '#ffffff' });
       infoText.setDepth(1);
       infoText.setVisible(false);
 
@@ -126,11 +126,11 @@
     return sprites;
   };
   let gamePlayers = []
-  function addPlayerToMap(thiz, position, index){
+  function addPlayerToMap(position, index){
     var playerPosition = mapTiles.find((tile) => tile.tile === position);
     let config = typeOfTileConfig[playerPosition.tags && playerPosition.tags[0] || 'default'] || typeOfTileConfig['default'];
     let size = config.size || 20;
-    var player = thiz.add.image(size + 20, size, "player" + index)
+    var player = gameThiz.add.image(size + 20, size, "player" + index)
     if (playerPosition.tags && playerPosition.tags.includes('monkey')) { 
       player.setOrigin(playerPosition.frontend_data.player_x, playerPosition.frontend_data.player_y);
     } else {
@@ -141,9 +141,9 @@
 
   function create() {
     gameThiz = this;
-    tileSprites = generateTileMap(gameThiz);
+    tileSprites = generateTileMap();
     <% @game.data['players'].each do |player| %>
-      let playerSprite = addPlayerToMap(gameThiz, <%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
+      let playerSprite = addPlayerToMap(<%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
       gamePlayers.push(playerSprite);
     <% end %>
   }
