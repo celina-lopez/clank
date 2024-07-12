@@ -3,10 +3,14 @@
   small_card = local_assigns[:small_card] || false
 %>
 <div
-  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[131px] w-[95px]" : "h-[216px]" %>"
-  onclick='executeAction(this)'
-  data-type="<%= local_assigns[:data_type] %>"
-  data-name="<%= local_assigns[:data_name] %>"
+  <% if small_card %>
+    class="card card-compact bg-white shadow cursor-pointer h-[131px] w-[95px]"
+    onclick='executeAction(this)'
+    data-type="<%= local_assigns[:data_type] %>"
+    data-name="<%= local_assigns[:data_name] %>"
+  <% else %>
+    class="card card-compact bg-white shadow h-[216px]"
+  <% end %>
 >
   <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[95px]" : "max-w-[152px]" %>"/></figure>
   <div class='<%= small_card ? "px-[5px] py-[1px] h-[63px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
