@@ -3,13 +3,13 @@
   small_card = local_assigns[:small_card] || false
 %>
 <div
-  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[100px] w-[68px]" : "h-[216px]" %>"
+  class="card card-compact bg-white shadow cursor-pointer <%= small_card ?  "h-[131px] w-[95px]" : "h-[216px]" %>"
   onclick='executeAction(this)'
   data-type="<%= local_assigns[:data_type] %>"
   data-name="<%= local_assigns[:data_name] %>"
 >
-  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[68px]" : "max-w-[152px]" %>"/></figure>
-  <div class='<%= small_card ? "p-[1px] h-[48px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
+  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[95px]" : "max-w-[152px]" %>"/></figure>
+  <div class='<%= small_card ? "px-[5px] py-[1px] h-[63px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
     <div class="text-wrap <%= small_card ? "w-[65px]" : "w-[126px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
@@ -45,7 +45,7 @@
         <div><%= card['description'] %></div>
       <% end %>
     </div>
-    <div class="text-center card_name"><%= card['name']&.humanize %></div>
+    <div class="text-center absolute bottom-0 right-0 left-0 card_name"><%= card['name']&.humanize %></div>
     <% if card['cost'].present? %>
       <div class="bg-sky-600 px-1 text-white rounded-br absolute bottom-0 right-0"><%= card['cost'] %></div>
     <% end %>
