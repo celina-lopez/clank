@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  data       :json             not null
+#  game_type  :integer          default(0)
 #  history    :json             not null
 #  password   :string
 #  title      :string           not null
@@ -13,6 +14,11 @@
 class Game < ApplicationRecord
   validates :data, presence: true
   validates :title, presence: true
+  validates :game_type, presence: true
+
+  enum game_type: {
+    clank: 0
+  }
 
   def engine
     Engine.from_json(data, history:)

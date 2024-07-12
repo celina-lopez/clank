@@ -13,7 +13,7 @@
     <div class="text-wrap <%= small_card ? "w-[65px]" : "w-[126px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
-          <div><%= render 'players/components/action', key:, value: %></div>
+          <div><%= render "#{game_prefix}/players/components/action", key:, value: %></div>
           <% if (card.fetch('actions', []).size > 1 && index == 0) %>
             <div>OR</div>
           <% end %>
@@ -21,7 +21,7 @@
       <% end %>
       <% card.fetch('action', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
-          <div><%= render 'players/components/action', key:, value: %></div>
+          <div><%= render "#{game_prefix}/players/components/action", key:, value: %></div>
           <% if (card.fetch('actions', []).size > 1 && index == 0) %>
             <div>OR</div>
           <% end %>
@@ -31,7 +31,7 @@
         <div>On Acquire:</div>
         <% action.each do |key, value| %>
           <div>
-            <%= render 'players/components/action', key:, value: %> 
+            <%= render "#{game_prefix}/players/components/action", key:, value: %> 
           </div>
         <% end %>
         <% if (card.fetch('acquire', []).size > 1 && index == 0) %>
@@ -39,7 +39,7 @@
         <% end %>
       <% end %>
       <% if card['victory_points'].present? %>
-        <%= render 'players/components/action', key: 'victory_points', value: card['victory_points'] %> 
+        <%= render "#{game_prefix}/players/components/action", key: 'victory_points', value: card['victory_points'] %> 
       <% end %>
       <% if card['description'].present? %>
         <div><%= card['description'] %></div>

@@ -4,7 +4,7 @@ import { updatePlayerData, updateGameData, endGame } from "channels/game_helpers
 
 window.app = {}
 let hrefParts = document.location.href.split("/"),
-gameId = hrefParts[4], // Game param
+gameId = hrefParts[5], // Game param
 playerId = hrefParts[hrefParts.length - 1]; // Player id
 
 

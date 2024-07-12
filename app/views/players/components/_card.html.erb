@@ -4,14 +4,16 @@
     card: local_assigns.fetch(:card, {}),
     data_type: local_assigns[:data_type], 
     data_name: local_assigns[:data_name],
-    small_card: true
+    small_card: true,
+    game_prefix:
   ) %>
   <div class='hidden_info_card absolute left-[85px] top-0 opacity-0 transition duration-300 delay-0'>
     <%= render(
       'players/components/info_card',
       card: local_assigns.fetch(:card, {}),
       data_type: local_assigns[:data_type], 
-      data_name: local_assigns[:data_name]
+      data_name: local_assigns[:data_name],
+      game_prefix:
     ) %>
   </div>
 </div>

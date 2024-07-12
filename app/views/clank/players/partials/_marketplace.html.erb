@@ -1,0 +1,5 @@
+<div class="flex">
+  <% @game.data['marketplace_items'].each do |item| %>
+    <%= render 'players/components/circle', inventory: item, action_type: "buy_artifact", id: "marketplace-#{item['name']}", game_prefix: "clank"  %>
+  <% end %>
+</div>

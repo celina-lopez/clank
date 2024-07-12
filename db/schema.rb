@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_12_233142) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_12_184908) do
   create_table "games", force: :cascade do |t|
     t.json "data", default: {}, null: false
     t.string "password"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_12_233142) do
     t.datetime "updated_at", null: false
     t.json "history", default: [], null: false
     t.string "title", null: false
+    t.integer "game_type", default: 0
   end
 
 end
