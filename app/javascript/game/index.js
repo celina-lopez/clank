@@ -8,7 +8,7 @@ const Utils = {};
 Game.createDescriptionForTile = function(tileData) {
   let description = `Tile Info: ${tileData.tile}\n`;
   tileData.tags && tileData.tags.forEach((tag) => {
-    if (itemableArray.includes(tag)) {
+    if (itemableArray.includes(tag) && tileData.items.length > 0) {
       description += `${tileData.items.length} ${tag.replace(/_/g, ' ')}(s)\n`;
     } else if (descriptionArray.includes(tag)) { 
       description += Utils.displayName(tag) + '\n';

@@ -89,8 +89,7 @@
       tile.setAlpha(0.1); 
       tile.setInteractive(); 
 
-
-    // Create a graphics object for the popup background
+      // Create a graphics object for the popup background
       let popup = gameThiz.add.graphics();
       popup.fillStyle(0x000000, 0.8); // Black background with 80% opacity
       popup.fillRect(0, 0, 150, 100); // Set size of the popup
@@ -107,13 +106,30 @@
         infoText.setText(info);
         popup.setVisible(true);
         infoText.setVisible(true);
-        popup.setPosition(pointer.x + 15, pointer.y + 15);
-        infoText.setPosition(pointer.x + 25, pointer.y + 25);
+
+        // Calculate positions
+        let popupX = pointer.x + 15;
+        let popupY = pointer.y + 15;
+        let infoTextX = pointer.x + 25;
+        let infoTextY = pointer.y + 25;
+
+        // Boundary checks for popup
+        if (popupX + 150 > gameThiz.scale.width) {
+          popupX = gameThiz.scale.width - 150;
+          infoTextX = popupX + 10;
+        }
+        if (popupY + 100 > gameThiz.scale.height) {
+          popupY = gameThiz.scale.height - 100;
+          infoTextY = popupY + 10;
+        }
+
+        popup.setPosition(popupX, popupY);
+        infoText.setPosition(infoTextX, infoTextY);
 
       });
       tile.on('pointerout', function () {
         this.setAlpha(0.1);
-           popup.setVisible(false);
+        popup.setVisible(false);
         infoText.setVisible(false);
       });
       tile.on('pointerdown', function () {
