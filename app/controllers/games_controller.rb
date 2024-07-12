@@ -3,13 +3,18 @@
 class GamesController < ApplicationController
   before_action :set_view_path, only: %i[new index]
 
+  def new
+    @game = Game.new
+  end
+
   def create
     engine = Engine.new
     gameplay_data = engine.execute(type: 'start_game', value: game_params[:number_of_players])
     game = Game.create!(
       data: JSON.parse(gameplay_data.to_json),
       history: engine.history,
-      title: game_params[:title]
+      title: game_params[:title],
+      game_type: game_params[:game_type]
     )
     redirect_to clank_game_path(game) # TODO: fix to specific game
   end
@@ -17,7 +22,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:number_of_players, :title)
+    params.require(:game).permit(:number_of_players, :title, :game_type)
   end
 
   def set_view_path

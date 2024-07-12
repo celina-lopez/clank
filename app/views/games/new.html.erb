@@ -24,6 +24,8 @@
     <%= form.number_field :number_of_players, required: true, class: "input input-bordered w-full max-w-xs", min: 0 %>
   </label>
 
+  <%= form.hidden_field :game_type, value: params[:game_type] %>
+
   <div class="actions mt-3">
     <%= form.submit class: "btn btn-active btn-primary" %>
   </div>
