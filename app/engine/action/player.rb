@@ -97,18 +97,12 @@ class Action::Player < Action::Base
   end
 
   def pick_up_item(tile)
-    tile_data = gameplay_data.map.tiles.find { |x| x['tile'] == tile.to_i }
+    tile_index = gameplay_data.map.tiles.index { |x| x['tile'] == tile.to_i }
+    tile_data = gameplay_data.map.tiles[tile_index]
     item = tile_data.fetch('items', []).pop
     return unless item.present?
 
-    if item['is_artifact']
-      artifact_size = current_player.inventory.filter { |x| x['is_artifact'] }.size
-      unless artifact_size.zero?
-        backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
-
-        return unless backpack_size > artifact_size
-      end
-    end
+    return if replace_or_pick_artifact(item)
 
     current_player.inventory << item
     if item['on_acquire'].present?
@@ -117,6 +111,26 @@ class Action::Player < Action::Base
       end
     end
     history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
+  end
+
+  def replace_or_pick_artifact(item)
+    return false unless item['is_artifact']
+
+    player_artifacts = current_player.inventory.filter { |x| x['is_artifact'] }
+    return false if player_artifacts.empty?
+
+    backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
+
+    return false if backpack_size > player_artifacts.size
+
+    lowest_artifact = player_artifacts.sort_by! { |x| x['victory_points'] }.first
+    if lowest_artifact['victory_points'] < item['victory_points']
+      current_player.inventory.delete_at(current_player.inventory.index(lowest_artifact))
+      tile_data['items'] << lowest_artifact
+      current_player.inventory << item
+      history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
+    end
+    true
   end
 
   def remove_trashed_option(card_name)
