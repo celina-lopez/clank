@@ -161,7 +161,6 @@ class Action::Player < Action::Base
     card_on_acquire(card)
     return if card['health'].present? || Base::DEVICE_CARD_NAMES.include?(card['name'])
 
-    # TODO: position of monkey idol is way off on phaser, also it should costtwo more steps to go there perhpas
     new_card = card.dup
     new_card.delete('cost')
     current_player.deck.discarded << new_card
