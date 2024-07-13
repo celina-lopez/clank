@@ -16,10 +16,14 @@ class GamesController < ApplicationController
       title: game_params[:title],
       game_type: game_params[:game_type]
     )
-    redirect_to clank_game_path(game) # TODO: fix to specific game
+    redirect_to path_for(game)
   end
 
   private
+
+  def path_for(game)
+    "/#{game.game_type}/games/#{game.id}"
+  end
 
   def game_params
     params.require(:game).permit(:number_of_players, :title, :game_type)
