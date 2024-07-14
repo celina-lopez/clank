@@ -9,7 +9,8 @@ class GamesController < ApplicationController
 
   def create
     engine = Engine.new
-    gameplay_data = engine.execute(type: 'start_game', value: game_params[:number_of_players])
+    gameplay_data = engine.execute(type: 'start_game',
+                                   value: game_params[:settings])
     game = Game.create!(
       data: JSON.parse(gameplay_data.to_json),
       history: engine.history,
@@ -26,7 +27,13 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:number_of_players, :title, :game_type)
+    params[:game][:settings] ||= {}
+    params[:game][:settings][:num_players] = params[:game][:number_of_players]
+    params.require(:game).permit(
+      :title,
+      :game_type,
+      settings: {}
+    )
   end
 
   def set_view_path

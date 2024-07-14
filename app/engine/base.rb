@@ -21,7 +21,7 @@ class Base
   CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
   MINOR_ITEMS = config_yaml('minor_items').freeze
   MAJOR_ITEMS = config_yaml('major_items').freeze
-  DEFAULT_MAP = YAML.load_file('config/game/maps.yml')['map_1']
+  MAPS = YAML.load_file('config/game/maps.yml')
 
   attr_accessor :gameplay_data
 
