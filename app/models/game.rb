@@ -4,9 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  data       :json             not null
-#  game_type  :integer          default(0)
+#  game_type  :integer          default("clank")
 #  history    :json             not null
 #  password   :string
+#  settings   :json
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

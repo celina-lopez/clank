@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_12_184908) do
     t.json "history", default: [], null: false
     t.string "title", null: false
     t.integer "game_type", default: 0
+    t.json "settings", default: {}
   end
 
 end
