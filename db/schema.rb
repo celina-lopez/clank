@@ -10,16 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_12_184908) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_015732) do
   create_table "games", force: :cascade do |t|
-    t.json "data", default: {}, null: false
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.json "history", default: [], null: false
+    t.string "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
+    t.string "password"
+    t.json "data", default: {}, null: false
+    t.json "history", default: [], null: false
     t.integer "game_type", default: 0
     t.json "settings", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_type"], name: "index_games_on_game_type"
+    t.index ["uuid"], name: "index_games_on_uuid"
   end
 
 end

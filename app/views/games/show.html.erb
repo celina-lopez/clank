@@ -3,7 +3,6 @@
 <% @game.data['players'].each do |player| %>
   <div class="flex" style="align-items: center;">
     <div class="h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', player['index'].to_i) %>-400"></div>
-    <%# TODO: game uuid %>
-    <%= link_to "Player #{player['index']}", "/#{@game.game_type}/games/#{@game.id}/players/#{player['index']}", class: "btn btn-link" %>
+    <%= link_to "Player #{player['index']}", "/#{@game.game_type}/games/#{@game.uuid}/players/#{player['index']}", class: "btn btn-link" %>
   </div>
 <% end %>

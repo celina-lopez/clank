@@ -22,7 +22,7 @@ class GamesController < ApplicationController
   private
 
   def path_for(game)
-    "/#{game.game_type}/games/#{game.id}"
+    "/#{game.game_type}/games/#{game.uuid}"
   end
 
   def game_params

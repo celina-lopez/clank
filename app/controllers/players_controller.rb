@@ -8,7 +8,7 @@ class PlayersController < ApplicationController
   private
 
   def set_game
-    @game = Game.find(params[:game_id])
+    @game = Game.find_by_uuid(params[:game_id])
   end
 
   def set_player
