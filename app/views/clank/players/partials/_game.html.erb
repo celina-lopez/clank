@@ -159,8 +159,7 @@
     gameThiz = this;
     tileSprites = generateTileMap();
     <% @game.data['players'].each do |player| %>
-      let playerSprite = addPlayerToMap(<%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>);
-      gamePlayers.push(playerSprite);
+      gamePlayers.push(addPlayerToMap(<%= player['position']['current_position'].to_i %>, <%= player['index'].to_i %>));
     <% end %>
   }
 

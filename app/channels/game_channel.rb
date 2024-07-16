@@ -7,16 +7,16 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    game = Game.find(params[:game_id])
+    game = Game.find_by_uuid(params[:game_id])
     type, value, player_index = data.values_at('type', 'value', 'player_index')
     engine = game.engine
     new_game_data = engine.execute(type:, value:, player_index:)
     json_data = JSON.parse(new_game_data.to_json)
     game.update!(data: json_data)
     latest_logs = parsed_logs(engine.history)
-    ActionCable.server.broadcast("game_channel_#{game.id}", json_data.merge(latest_logs:))
+    ActionCable.server.broadcast("game_channel_#{game.uuid}", json_data.merge(latest_logs:))
   rescue StandardError => e
-    ActionCable.server.broadcast("game_channel_#{game.id}",
+    ActionCable.server.broadcast("game_channel_#{game.uuid}",
                                  { error: e.message, current_player_index: game.data['current_player_index'] })
   end
 
