@@ -49,12 +49,8 @@ map_1:
       move: 2
   - x: 6
     y: 11
-    metadata:
-      danger: 1
   - x: 11
     y: 6
-    metadata:
-      danger: 1
   - x: 7
     y: 2
   - x: 7
@@ -166,25 +162,25 @@ map_1:
   - x: 16
     y: 27
     metadata:
-      danger: 1
+      move: 2
   - x: 16
     y: 11
     metadata:
-      move: 1
+      move: 2
   - x: 11
     y: 16
     metadata:
-      move: 1
+      move: 2
   - x: 17
     y: 12
   - x: 17
     y: 13
     metadata:
-      move: 1
+      move: 2
   - x: 13
     y: 17
     metadata:
-      move: 1
+      move: 2
   - x: 17
     y: 23
   - x: 23
@@ -193,12 +189,12 @@ map_1:
     y: 28
     metadata:
       danger: 1
-      move: 1
+      move: 2
   - x: 28
     y: 17
     metadata:
       danger: 1
-      move: 1
+      move: 2
   - x: 18
     y: 13
     metadata:
