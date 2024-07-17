@@ -123,8 +123,8 @@ function populateCards(prefix, cards, playerHand=false) {
 };
 
 // PLAYER FUNCTIONS
-function updateStats(players) {
-  players.forEach(function(player) {
+function updateStats(game) {
+  game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
     playerStatContainer.innerHTML = '';
     statKeys.forEach(function(stat) {
@@ -140,6 +140,8 @@ function updateStats(players) {
       }
     });
   });
+  document.getElementById('dragon-position').innerHTML = dragonPositionArray[game.dragon.position];
+  document.getElementById('dragon-clank').innerHTML = dragonPositionArray[game.dragon.clank];
 }
 
 function updateInventory(player) {
@@ -310,7 +312,7 @@ export function updatePlayerData(player, playerId, data) {
 
 export function updateGameData(data) {
   // TODO: fix inventory images 
-  updateStats(data['players']);
+  updateStats(data);
   updateMap(data, data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);

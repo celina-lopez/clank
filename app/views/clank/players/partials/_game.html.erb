@@ -1,5 +1,5 @@
 <style>
-#boardgame{
+#boardgame {
   overflow: scroll;
   background-size: 100% 100%;
   height: 710px;
@@ -23,7 +23,8 @@
     </div>
     <div class="my-4 tabs p-0">
       <div class="tab border-b-2 border-b-primary " data-target="#panel1">Hand</div>
-      <div class="tab" data-target="#panel5">Status/Info</div>
+      <div class="tab" data-target="#panel2">Game Stats</div>
+      <div class="tab" data-target="#panel3">Logs</div>
     </div>
     <div class="grid my-2">
       <div id="panel1" class="panel">
@@ -33,19 +34,42 @@
         Reserves
         <%= render 'clank/players/partials/reserves', game:  %> 
       </div>
-      <div id="panel5" class="panel hidden">
-        Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
+       <div id="panel2" class="panel hidden">
+          <div class="flex mt-2" style='align-items:center;'>
+              <div class="mr-2 h-[10px] w-[10px] bg-primary"></div>
+              Dragon 
+            </div>
+              <div class="stats glass" id='dragon-stats'>
+                <div class="stat">
+                  <div class="stat-figure text-primary text-[25px]">
+                    <%= render "clank/players/components/icon_action", key: 'position' %>
+                  </div>
+                  <div class="stat-title text-sm">Dragon Strength</div>
+                  <div class="stat-value text-primary text-base" id='dragon-position'>
+                    <%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i] %>
+                  </div>
+                </div>
+                <div class="stat">
+                  <div class="stat-figure text-primary text-[25px]">
+                     <i class="text-black-600 fa-solid fa-face-sad-cry"></i>
+                  </div>
+                  <div class="stat-title text-sm">Clank</div>
+                  <div class="stat-value text-primary text-base" id='dragon-clank'>
+                    <%= @game.data.dig('dragon', 'clank').to_i %>
+                  </div>
+                </div>
+              </div>
         <% game.data['players'].filter { |x| x['index'] != player['index'] }.map do |p| %>
           <div>
-            <div class="flex" style='align-items:center;'>
+            <div class="flex mt-2" style='align-items:center;'>
               <div class="mr-2 h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', p['index'].to_i) %>-400"></div>
               Player <%= p['index'] %>
             </div>
             <%= render 'clank/players/partials/stats', player: p %>
           </div>
         <% end %>
-        Rules/FAQ  <br/>
-        Logs
+      </div>
+      <div id="panel3" class="panel hidden">
         <%= render 'players/partials/history', game: %> 
       </div>
     </div>
@@ -72,6 +96,7 @@
 
   var game = new Phaser.Game(config);
   var gameThiz;
+  var dragonPositionArray = <%= raw Model::Dragon::POSTION_ARRAY %>;
 
   function preload() {
     <% @phaser_config['preload_images'].each do |name, source| %>
