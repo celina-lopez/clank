@@ -157,6 +157,13 @@ map_1:
     frontend_data:
       x: -6.51
       y: -4.8
+    items:
+      - name: artifact_mask
+        victory_points: 5
+        total: 1
+        is_artifact: true
+        on_acquire:
+          increase_dragon: 1
   - tile: 21
     tags:
       - crystal_cave
