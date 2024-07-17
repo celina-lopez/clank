@@ -4,11 +4,7 @@
   total: 2
   actions:
     - draw: 1
-  conditionals:
-    - type: action
-      value:
-        skill_points: 2
-      has: monkey_idol
+    - skill_points: 2
 - name: cleric_of_the_sun
   cost: 3
   total: 2
@@ -24,10 +20,9 @@
   actions:
     - coins: 2
       move_points: 1
-  conditionals:
+  conditions:
     - type: victory
-      value:
-        victory_points: 4
+      victory_points: 4
       two_of:
         - chalice
         - dragon_egg
@@ -38,6 +33,7 @@
   actions:
     - clank: -2
       skill_points: 2
+  description: "Gems are minus 2 skill points"
   victory_points: 2
 - name: kobold_merchant
   cost: 3
@@ -45,11 +41,6 @@
   actions:
     - coins: 2
   victory_points: 1
-  conditionals:
-    - type: action
-      value:
-        skill_points: 2
-      has: artifact
 - name: master_burglar
   cost: 3
   total: 2
@@ -81,11 +72,7 @@
   total: 1
   actions:
     - skill_points: 2
-  conditionals:
-    - type: action
-      value:
-        draw: 1
-      has_companion: true
+    - draw: 1
   victory_points: 1
 - name: invoker_of_the_ancients
   cost: 4
@@ -99,33 +86,19 @@
   total: 1
   actions:
     - coins: 2
-  conditionals:
-    - type: action
-      value:
-        draw: 1
-      has_companion: true
   victory_points: 1
 - name: rebel_scout
   cost: 3
   total: 1
   actions:
     - move_points: 2
-  conditionals:
-    - type: action
-      value:
-        draw: 1
-      has_companion: true
+    - draw: 1
   victory_points: 1
 - name: rebel_soldier
   cost: 2
   total: 1
   actions:
     - attack_points: 2
-  conditionals:
-    - type: action
-      value:
-        draw: 1
-      has_companion: true
   victory_points: 1
 - name: the_duke
   cost: 5
@@ -133,25 +106,17 @@
   actions:
     - attack_points: 2
       skill_points: 2
-  conditionals:
+  conditions:
     - type: victory
-      value:
-        victory: 1
+      victory: 1
       custom: for_every_5_coins_add_victory_point
 - name: the_mountain_king
   cost: 6
   total: 1
   actions:
     - skill_points: 2
-  conditionals:
-    - type: action
-      value:
-        attack_points: 1
-      has: crown
-    - type: item
-      value:
-        move_points: 1
-      has: crown
+    - attack_points: 2
+    - move_points: 1
   victory_points: 3
 - name: the_queen_of_hearts
   cost: 6
@@ -159,11 +124,7 @@
   actions:
     - skill_points: 3
       attack_points: 1
-  conditionals:
-    - type: action
-      value:
-        health: 1
-      has: crown
+    - health: 1
   victory_points: 3
 - name: treasure_hunter
   cost: 3
@@ -178,10 +139,9 @@
   total: 1
   actions:
     - skill_points: 3
-  conditionals:
+  conditions:
     - type: victory
-      value:
-        victory_points: 2
+      victory_points: 2
       custom: for_every_secret_tome_add_victory_point
 - name: tunnel_guide
   cost: 1

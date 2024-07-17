@@ -80,11 +80,8 @@
   cost: 2
   actions:
     - move_points: 1
-  conditionals:
-    - type: after_action_trigger
-      value:
-        skill_points: 1
-      custom: for_every_clank_this_turn
+    - skill_points: 1
+    - attack_points: 1
 - name: scepter_of_the_ape_lord
   total: 1
   cost: 3
@@ -114,11 +111,8 @@
 - name: slight_of_hand
   total: 2
   cost: 2
-  conditionals:
-    - type: after_action_trigger
-      value:
-        draw: 2
-      custom: pick_card_to_discard
+  actions:
+    - draw: 2
 - name: flying_carpet
   total: 1
   cost: 6
@@ -163,11 +157,7 @@
   victory_points: 1
   actions:
     - skill_points: 2
-  conditionals:
-    - type: action
-      value:
-        move_points: 1
-      has: artifact
+    - move_points: 1
 - name: wand_of_wind
   total: 1
   cost: 6

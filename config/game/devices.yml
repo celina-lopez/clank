@@ -1,5 +1,5 @@
 - name: the_vault
-  conditionals:
+  conditions:
     - type: can_buy
       is_in: depths
   cost: 3

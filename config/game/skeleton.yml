@@ -5,7 +5,7 @@ character:
   total: number
   actions: array
   acquire: array
-  conditionals: array
+  conditions: array
 item_enum:
   - artifact
   - monkey_idol
@@ -21,12 +21,10 @@ custom:
   - for_every_secret_tome_add_victory_point: "secret_tome  *"
   - for_every_clank_this_turn: clank *
   - pick_card_to_discard: "current deck"
-conditionals:
+conditions:
   types:
     - can_buy
-    - action
     - victory
-    - after_action_trigger
   value: object
   has: string
   has_companion: boolean

@@ -24,7 +24,9 @@ class CalculateVictoryPoints < Base
   end
 
   def custom_two_of_condition_points(player, condition)
-    return 0 unless condtion['two_of'].present? && player.inventory.count { |c| c['name'] == condition['two_of'] } >= 2
+    return 0 unless condition['two_of'].present? && player.inventory.count do |c|
+                      condition['two_of'].include?(c['name'])
+                    end >= 2
 
     condition['victory_points']
   end

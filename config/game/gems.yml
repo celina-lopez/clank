@@ -15,12 +15,11 @@
     - dragon_attack: 1
   acquire:
     - clank: 2
-  conditionals:
+  conditions:
     - type: can_buy
       is_in: depths
     - type: victory
-      value:
-        victory_points: 10
+      victory_points: 10
       has: mastery_token
   actions:
     - draw: 1

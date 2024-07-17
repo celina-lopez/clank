@@ -114,22 +114,13 @@ class Validation::Player < Validation::Base
     add_error_if_error("Need #{card['health'] - current_player.attack_points} more attack points", result)
   end
 
-  def validate_buy_conditions # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+  def validate_buy_conditions
     return true unless card['conditions'].present?
 
     card['conditions'].all? do |condition|
       if condition['type'] == 'can_buy'
-        if condition['has'].present?
-          current_player.inventory.any? { |x| x['name'] == condition['has'] }
-        elsif condition['has_companion'].present?
-          current_player.deck.active.any? { |x| Base::COMPANION_NAMES.include?(x['name']) }
-        elsif condition['two_of'].present?
-          current_player.inventory.select { |x| x['name'] == condition['two_of'] }.count >= 2
-        elsif condition['is_in'].present?
-          current_player.position.public_send("#{condition['is_in']}?")
-        else
-          raise StandardError, 'UHHHHH what?'
-        end
+        result = current_player.position.public_send("#{condition['is_in']}?")
+        add_error_if_error("Not in #{condition['is_in'].humanize}", result)
       else
         true
       end
