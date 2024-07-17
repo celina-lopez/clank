@@ -10,7 +10,6 @@ const cardTemplate = document.getElementById('card-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
       gameContainer = document.getElementById('game-container'),
-      playerStatContainer = document.getElementById('player-stats'),
       statTemplate = document.getElementById('stat-template').content,
       perksElm = document.getElementById('perks'),
       playerBannerElm = document.getElementById('player-banner').children[0],
@@ -124,19 +123,22 @@ function populateCards(prefix, cards, playerHand=false) {
 };
 
 // PLAYER FUNCTIONS
-function updateStats(player) {
-  playerStatContainer.innerHTML = '';
-  statKeys.forEach(function(stat) {
-    if (player[stat] > 0) {
-      let statClone = document.importNode(statTemplate, true),
-          statParent = statClone.children[0],
-          actionElm = document.getElementById('template-' + stat),
-          actionTemplate = document.importNode(actionElm.content, true).children[0];
-      statParent.children[0].appendChild(actionTemplate);
-      statParent.children[1].innerHTML = Utils.displayName(stat);
-      statParent.children[2].innerHTML = player[stat]; 
-      playerStatContainer.appendChild(statClone);
-    }
+function updateStats(players) {
+  players.forEach(function(player) {
+    let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
+    playerStatContainer.innerHTML = '';
+    statKeys.forEach(function(stat) {
+      if (player[stat] > 0) {
+        let statClone = document.importNode(statTemplate, true),
+            statParent = statClone.children[0],
+            actionElm = document.getElementById('template-' + stat),
+            actionTemplate = document.importNode(actionElm.content, true).children[0];
+        statParent.children[0].appendChild(actionTemplate);
+        statParent.children[1].innerHTML = Utils.displayName(stat);
+        statParent.children[2].innerHTML = player[stat]; 
+        playerStatContainer.appendChild(statClone);
+      }
+    });
   });
 }
 
@@ -293,7 +295,6 @@ function updateBanner(data, playerId) {
 }
 
 export function updatePlayerData(player, playerId, data) {
-  updateStats(player);
   addTempDescription(player);
   updateInventory(player);
   addRewards(player);
@@ -309,6 +310,7 @@ export function updatePlayerData(player, playerId, data) {
 
 export function updateGameData(data) {
   // TODO: fix inventory images 
+  updateStats(data['players']);
   updateMap(data, data['players']); 
   populateCards('active', data['deck']['active']);
   populateCards('marketplace', data['marketplace']);

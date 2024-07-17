@@ -35,7 +35,15 @@
       </div>
       <div id="panel5" class="panel hidden">
         Dragon Position: <%= @game.data.dig('dragon', 'position') %> (<%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i]%> cubes)<br/>
-        Player Rankings (Approximate): TODO: CALCULATE POINTS APPROX<br/>
+        <% game.data['players'].filter { |x| x['index'] != player['index'] }.map do |p| %>
+          <div>
+            <div class="flex" style='align-items:center;'>
+              <div class="mr-2 h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', p['index'].to_i) %>-400"></div>
+              Player <%= p['index'] %>
+            </div>
+            <%= render 'clank/players/partials/stats', player: p %>
+          </div>
+        <% end %>
         Rules/FAQ  <br/>
         Logs
         <%= render 'players/partials/history', game: %> 

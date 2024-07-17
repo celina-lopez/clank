@@ -1,4 +1,4 @@
-<div class="stats glass" id='player-stats'>
+<div class="stats glass" id='player-stats-<%= player['index'] %>'>
   <%= render 'players/components/stat', player:, stat: 'attack_points', game_prefix: 'clank' %>
   <%= render 'players/components/stat', player:, stat: 'move_points', game_prefix: 'clank' %>
   <%= render 'players/components/stat', player:, stat: 'skill_points', game_prefix: 'clank' %>
