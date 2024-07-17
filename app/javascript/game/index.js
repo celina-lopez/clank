@@ -1,5 +1,5 @@
 const descriptionArray = ['ending', 'market', 'depths', 'health', 'crystal_cave'];
-const itemableArray = ['artifact', 'major_item', 'minor_item', 'monkey'];
+const itemableArray = ['major_item', 'minor_item', 'monkey'];
 
 const Game = {};
 const HtmlActions = {};
@@ -10,6 +10,9 @@ Game.createDescriptionForTile = function(tileData) {
   tileData.tags && tileData.tags.forEach((tag) => {
     if (itemableArray.includes(tag) && tileData.items.length > 0) {
       description += `${tileData.items.length} ${tag.replace(/_/g, ' ')}(s)\n`;
+    } else if (tag == 'artifact' && tileData.items.length > 0) {
+      let artifact =  tileData.items.find(item => item.is_artifact)
+      description +=  `${Utils.displayName(artifact.name)}\n(${artifact.victory_points} VP)\n`;
     } else if (descriptionArray.includes(tag)) { 
       description += Utils.displayName(tag) + '\n';
     }
