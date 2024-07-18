@@ -90,7 +90,10 @@ class Action::Player < Action::Base
   private
 
   def remove_health(danger)
-    danger -= current_player.attack_points if current_player.attack_points.positive?
+    if current_player.attack_points.positive?
+      current_player.attack_points -= danger
+      danger -= current_player.attack_points
+    end
     return if danger.negative?
 
     current_player.health -= danger
