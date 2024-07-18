@@ -24,9 +24,9 @@
         </div>
         <%= player['victory_points'] %> victory points
       </div>
-      <div class="collapse-content">
+      <div class="collapse-content text-start">
         <% game.data['results'][player['index']].each do |point| %>
-          <div><%= point['name'] %>: <%= point['points'] %></div>
+          <div><%= point['name'].humanize %>: <%= point['points'] %> points</div>
         <% end %>
       </div>
     </div>
