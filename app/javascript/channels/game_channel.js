@@ -14,7 +14,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
   },
 
   disconnected() {
-    console.log("disconnected!")
+    alert('Disconnected from game, please refresh!');
   },
 
   received(data) {

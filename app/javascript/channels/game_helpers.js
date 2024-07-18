@@ -257,7 +257,12 @@ function replaceCard(player, cards) {
   }
 }
 
-function addEndTurnButton(endTurn) {
+function addEndTurnButton(isCurrentPlayer, endTurn) {
+  if (!isCurrentPlayer) {
+    endTurnElm.classList.add('hidden');
+    playAllElm.classList.add('hidden');
+    return
+  }
   if (endTurn) {
     endTurnElm.classList.remove('hidden');
     playAllElm.classList.add('hidden');
@@ -297,6 +302,8 @@ function updateBanner(data, playerId) {
 }
 
 export function updatePlayerData(player, playerId, data) {
+  // TODO: clean up this later 
+  addEndTurnButton(data['current_player_index'] == playerId, data.players[data['current_player_index']]['deck']['active'].length == 0)
   addTempDescription(player);
   updateInventory(player);
   addRewards(player);
@@ -305,7 +312,6 @@ export function updatePlayerData(player, playerId, data) {
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId)
   addMarketplace(data['marketplace_items'], data, playerId);
-  addEndTurnButton(player['deck']['active'].length == 0)
   document.getElementById('infobox').innerHTML = '';
 }
 // GAME FUNCTIONS
