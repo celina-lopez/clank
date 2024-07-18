@@ -2,7 +2,7 @@
 
 class Model::Game
   attr_accessor :players, :current_player_index, :deck, :marketplace, :map, :dragon,
-                :marketplace_items, :end_game
+                :marketplace_items, :end_game, :results
 
   def self.from_json(json)
     Model::Game.new(
@@ -13,7 +13,8 @@ class Model::Game
       map: Model::Map.from_json(json['map']),
       players: json['players'].map { |p| Model::Player.from_json(p) },
       current_player_index: json['current_player_index'],
-      end_game: json['end_game']
+      end_game: json['end_game'],
+      results: json['results']
     )
   end
 
@@ -26,7 +27,8 @@ class Model::Game
     players: nil,
     current_player_index: 0,
     marketplace_items: Base::MARKETPLACE_ITEMS,
-    end_game: false
+    end_game: false,
+    results: []
   )
     @dragon = dragon
     @current_player_index = current_player_index
@@ -39,7 +41,8 @@ class Model::Game
                else
                  players
                end
-    @end_game = end_game
+    @results = results
+    @eng_game = end_game
   end
 
   def initialize_players(num_players)

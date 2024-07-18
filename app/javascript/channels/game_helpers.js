@@ -330,12 +330,6 @@ function updateLogs(history) {
   }
 }
 
-export function endGame(data){
-  gameContainer.innerHTML = '<h1>Game over!</h1>';
-  data['players'].sort((a, b) => b['victory_points'] - a['victory_points']).forEach(function(player, index) {
-    let playerElm = document.createElement('div');
-    playerElm.innerHTML = `Player ${index}: ${player['victory_points']} victory points`;
-    if (index == 0) playerElm.innerHTML += ' (Winner)';
-    gameContainer.appendChild(playerElm);
-  })
+export function endGame(){
+  window.location.reload();
 }
