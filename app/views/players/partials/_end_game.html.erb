@@ -5,6 +5,10 @@
   <div class="pr-10 mb-3">
     <a class="btn btn-primary" href="/games/new?game_type=clank">Play again!</a>
   </div>
+  <div class="pr-10 mb-3">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?url=<%= request.url %>&text=Check%20out%20the%20endgame%20results%20of%20Clank!&via=ClankGame" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+  </div>
   <% @game.data['players'].sort {|x| x['victory_points'] }.each_with_index do |player, index| %>
     <div tabindex="<%= index %>" class="collapse collapse-arrow border-primary border">
       <div class="collapse-title text-xl font-medium">
