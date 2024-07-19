@@ -1,8 +1,45 @@
 <h1><%= @game.title %></h1>
 <p>Send your friends the links! (No peaking!)</p>
 <% @game.data['players'].each do |player| %>
-  <div class="flex" style="align-items: center;">
+<% player_link =  "#{root_url}#{@game.game_type}/games/#{@game.uuid}/players/#{player['index']}"%>
+  <div class="flex my-3" style="align-items: center;">
     <div class="h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', player['index'].to_i) %>-400"></div>
-    <%= link_to "Player #{player['index']}", "/#{@game.game_type}/games/#{@game.uuid}/players/#{player['index']}", class: "btn btn-link" %>
+    <%= link_to "Player #{player['index']}", player_link, class: "btn btn-link" %>
+    <button
+      class="btn btn-sm"
+      onclick="copyLink(this)"
+      data-href="<%= player_link %>"
+    >
+      Copy link
+    </button>
+
+    <a
+      class="btn ml-10 btn-sm"
+      target="_blank"
+      href="mailto:?subject=Lets play Clank!&body=Hey, I made a game online. Here's your link: <%= player_link %>"
+    >
+      <i class="fa-solid fa-envelope"></i>
+    </a>
   </div>
 <% end %>
+<script>
+  function copyLink(thiz) {
+    var tempInput = document.createElement("input");
+    tempInput.style.position = "absolute";
+    tempInput.style.left = "-9999px";
+    tempInput.value = thiz.dataset.href;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+
+    thiz.innerHTML = 'Copied!';
+    thiz.classList.add("copied");
+
+    setTimeout(function() {
+        thiz.innerHTML = 'Copy Link';
+        thiz.classList.remove("copied");
+    }, 2000); // Reset after 2 seconds
+  }
+</script>
