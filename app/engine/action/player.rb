@@ -38,13 +38,16 @@ class Action::Player < Action::Base
 
   def move # rubocop:disable Metrics/AbcSize
     edge_metadata = current_player.position.edge_metadata(value)
+    tile_tags = current_player.position.tags(value)
     current_player.position.current_position = value
 
     pick_up_item(value)
 
     current_player.move_points -= edge_metadata.fetch('move', 1)
     remove_health(edge_metadata.fetch('danger', 0)) unless current_player.ignore_monster_path
-    return unless current_player.position.tags(value).include?('crystal_cave')
+    # TODO: refactor this
+    current_player.health += 1 if tile_tags.include?('health')
+    return unless tile_tags.include?('crystal_cave')
     return if current_player.skip_crystal_cave
 
     current_player.moved_to_crystal_cave = true
