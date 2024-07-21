@@ -108,7 +108,10 @@ class Action::Player < Action::Base
     item = tile_data.fetch('items', []).pop
     return unless item.present?
 
-    return if replace_or_pick_artifact(tile_data, item)
+    if replace_or_pick_artifact(tile_data, item)
+      tile_data['items'] << item
+      return
+    end
 
     current_player.inventory << item
     if item['on_acquire'].present?
@@ -125,7 +128,7 @@ class Action::Player < Action::Base
     player_artifacts = current_player.inventory.filter { |x| x['is_artifact'] }
     return false if player_artifacts.empty?
 
-    backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack ' }.size
+    backpack_size = current_player.inventory.filter { |x| x['name'] == 'backpack' }.size
 
     return false if backpack_size > player_artifacts.size
 
