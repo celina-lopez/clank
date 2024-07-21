@@ -27,12 +27,12 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params[:game][:settings] ||= {}
-    params[:game][:settings][:num_players] = params[:game][:number_of_players]
     params.require(:game).permit(
       :title,
       :game_type,
-      settings: {}
+      settings: [
+        players: []
+      ]
     )
   end
 

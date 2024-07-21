@@ -19,8 +19,8 @@ class Model::Game
   end
 
   def initialize(
-    num_players: nil,
-    dragon: Model::Dragon.new,
+    new_players: nil,
+    dragon: nil,
     deck: Model::Deck.new(Base::STARTING_GAME_CARDS, num_of_active_cards: 6),
     marketplace: Base::MARKETPLACE,
     map: Model::Map.new,
@@ -30,14 +30,14 @@ class Model::Game
     end_game: false,
     results: []
   )
-    @dragon = dragon
+    @dragon = dragon || Model::Dragon.new(num_players: new_players&.length)
     @current_player_index = current_player_index
     @map = map
     @deck = deck
     @marketplace = marketplace
     @marketplace_items = marketplace_items
-    @players = if num_players.present?
-                 initialize_players(num_players)
+    @players = if new_players.present?
+                 initialize_players(new_players)
                else
                  players
                end
@@ -45,9 +45,11 @@ class Model::Game
     @eng_game = end_game
   end
 
-  def initialize_players(num_players)
-    @players = num_players.times.map do |i|
-      Model::Player.new(i)
+  def initialize_players(new_players)
+    count = -1
+    @players = new_players.map do |name|
+      count += 1
+      Model::Player.new(count, name:)
     end
   end
 

@@ -303,7 +303,7 @@ function updateBanner(data, playerId) {
   if (data.current_player_index == playerId) {
     playerBannerElm.innerHTML = 'Your Turn'
   } else {
-    playerBannerElm.innerHTML = `Player ${data.current_player_index}'s Turn`
+    playerBannerElm.innerHTML = `${data.players[data.current_player_index].name}'s Turn`
   }
 }
 

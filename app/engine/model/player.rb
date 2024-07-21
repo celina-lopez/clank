@@ -5,7 +5,7 @@ class Model::Player
                 :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
                 :discard_number, :spend_seven_for_two_secret_tomes,
                 :victory_points, :moved_to_crystal_cave, :replace_card_points
-  attr_reader :health, :index, :attack_points, :clank
+  attr_reader :health, :index, :attack_points, :clank, :name
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
   MAX_HEALTH = 10
@@ -23,6 +23,7 @@ class Model::Player
 
   def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     index = 0,
+    name: nil,
     health: nil,
     clank: nil,
     inventory: [],
@@ -43,6 +44,7 @@ class Model::Player
     replace_card_points: 0
   )
     @index = index || 0
+    @name = name
     @inventory = inventory || []
     @position = position || Model::Position.new
     @deck = deck || Model::Deck.new(Base::STARTING_DECK_CARDS)

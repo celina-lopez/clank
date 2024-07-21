@@ -17,16 +17,35 @@
     <%= form.text_field :title, required: true, class: "input input-bordered w-full max-w-xs" %>
   </label>
 
-  <label class="form-control w-full max-w-xs">
-    <div class="label">
-      <span class="label-text">Number of players</span>
-    </div>
-    <%= form.number_field :number_of_players, required: true, class: "input input-bordered w-full max-w-xs", min: 0 %>
-  </label>
+  <button id="addPlayerBtn" class="my-2 btn btn-primary btn-outline">Add Player</button>
+  <div id="playerContainer">
+    <label class="form-control w-full max-w-xs my-2">
+      <div class="label">
+        <span class="label-text">Name</span>
+      </div>
+      <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]", value="Player 0">
+    </label>
+  </div>
+  <template id="addPlayerForm">
+    <label class="form-control w-full max-w-xs my-2">
+      <div class="label">
+        <span class="label-text">Name</span>
+      </div>
+      <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]">
+    </label>
+  </template>
 
-  <%= form.hidden_field :game_type, value: params[:game_type] %>
+  <%= form.hidden_field :game_type, value: params.fetch(:game_type, 'clank') %>
 
   <div class="actions mt-3">
     <%= form.submit class: "btn btn-active btn-primary" %>
   </div>
 <% end %>
+<script>
+  document.getElementById('addPlayerBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    let clone = document.importNode(document.getElementById('addPlayerForm').content, true)
+    clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
+    document.getElementById('playerContainer').appendChild(clone);
+  });
+</script>

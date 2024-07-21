@@ -17,7 +17,7 @@ class Action::Game < Action::Base
   end
 
   def start_game
-    self.gameplay_data = Model::Game.new(num_players: value[:num_players].to_i,
+    self.gameplay_data = Model::Game.new(new_players: value[:players],
                                          map: Model::Map.new(map_type: value[:map_type]))
   end
 

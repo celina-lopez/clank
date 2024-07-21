@@ -9,7 +9,7 @@
       <% if @game.data['current_player_index'] == @player['index'] %>
         <h2 class="text-white">Your Turn</h2>
       <% else %>
-        <h2 class="text-white">Player <%= @game.data['current_player_index'] %>'s Turn</h2>
+        <h2 class="text-white"><%= @game.data['players'][@game.data['current_player_index']]['name'] %>'s Turn</h2>
       <% end %>
     </div>
     <div class="mx-2 overflow-hidden">

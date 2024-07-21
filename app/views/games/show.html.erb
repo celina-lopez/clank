@@ -4,7 +4,7 @@
 <% player_link =  "#{root_url}#{@game.game_type}/games/#{@game.uuid}/players/#{player['index']}"%>
   <div class="flex my-3" style="align-items: center;">
     <div class="h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', player['index'].to_i) %>-400"></div>
-    <%= link_to "Player #{player['index']}", player_link, class: "btn btn-link" %>
+    <%= link_to player['name'], player_link, class: "btn btn-link" %>
     <button
       class="btn btn-sm"
       onclick="copyLink(this)"
