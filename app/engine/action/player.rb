@@ -108,7 +108,7 @@ class Action::Player < Action::Base
     item = tile_data.fetch('items', []).pop
     return unless item.present?
 
-    return if replace_or_pick_artifact(item)
+    return if replace_or_pick_artifact(tile_data, item)
 
     current_player.inventory << item
     if item['on_acquire'].present?
@@ -119,7 +119,7 @@ class Action::Player < Action::Base
     history << { type: 'picked_up_item', value: item['name'], player_index: current_player.index }
   end
 
-  def replace_or_pick_artifact(item)
+  def replace_or_pick_artifact(tile_data, item)
     return false unless item['is_artifact']
 
     player_artifacts = current_player.inventory.filter { |x| x['is_artifact'] }
