@@ -9,7 +9,6 @@ const cardTemplate = document.getElementById('card-template').content,
       circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
-      gameContainer = document.getElementById('game-container'),
       statTemplate = document.getElementById('stat-template').content,
       perksElm = document.getElementById('perks'),
       playerBannerElm = document.getElementById('player-banner').children[0],
@@ -38,6 +37,13 @@ function createCardClone(cardClone, card, playerHand=false) {
     actionParentElm.innerHTML += `<div>On Acquire</div>`
     addPopUpActions(card['acquire'], actionParentElm)
   }
+  if (card['conditions']) {
+    card['conditions'].forEach(function(condition) {
+      if (condition['type'] == 'can_buy'){
+        actionParentElm.innerHTML += `<div>Can ONLY buy in ${Utils.displayName(condition['is_in'])}</div>`
+      }
+    });
+  } 
   if (card['victory_points']) {
     addPopUpActions([{'victory_points': card['victory_points']}], actionParentElm)
   }
