@@ -8,4 +8,3 @@ pin 'trix'
 pin 'actioncable', to: '/assets/actioncable.js'
 pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js', preload: true
 pin 'toastr', to: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'
-pin 'theme-change', to: 'https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js', preload: true
