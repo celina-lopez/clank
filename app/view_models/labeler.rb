@@ -13,7 +13,7 @@ class Labeler
       when 'end_turn'
         "Player #{history['player_index']} ended their turn"
       when 'dragon_attack'
-        'Dragon Attacked!'
+        "Dragon hit Player#{history['value']}!"
       when 'redeemed_reward'
         "Player #{history['player_index']} redeemed a reward"
       when 'move_points'
@@ -34,17 +34,9 @@ class Labeler
         "Player #{history['player_index']} used #{history['value'].to_s.humanize} from their inventory"
       when 'replace_card'
         "Player #{history['player_index']} replaced a card on the dungeon row"
-      when 'dragon_clank'
-        dragon_clank(history)
       else
         "Player #{history['player_index']} used #{history['type'].to_s.humanize} card"
       end
-    end
-
-    def dragon_clank(history)
-      hits = history['value'].reject { |x| x == -1 }.tally
-      message = hits.map { |player, count| "Player#{player} #{count} #{'time'.pluralize(count)}" }.join(', ')
-      "Dragon hit #{message}!"
     end
   end
 end
