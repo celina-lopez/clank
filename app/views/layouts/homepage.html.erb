@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="fantasy">
   <head>
     <title>PlayBoard.Games</title>
     <%= csrf_meta_tags %>
@@ -11,10 +11,8 @@
 
   <body>
     <main>
-      <div class="navbar bg-base-100">
-        <a class="btn btn-ghost text-xl" href='/'><img src='/images/logo.png' width='30' />PlayBoard.Games</a>
-      </div>
-        <%= yield %>
+      <%= render 'layouts/header' %>
+      <%= yield %>
     </main>
   </body>
 </html>

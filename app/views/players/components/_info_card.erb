@@ -4,12 +4,12 @@
 %>
 <div
   <% if small_card %>
-    class="card card-compact bg-white shadow cursor-pointer h-[131px] w-[95px]"
+    class="card text-black card-compact bg-white shadow cursor-pointer h-[131px] w-[95px]"
     onclick='executeAction(this)'
     data-type="<%= local_assigns[:data_type] %>"
     data-name="<%= local_assigns[:data_name] %>"
   <% else %>
-    class="card card-compact bg-white shadow h-[216px]"
+    class="card card-compact text-black bg-white shadow h-[216px]"
   <% end %>
 >
   <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[95px]" : "max-w-[152px]" %>"/></figure>

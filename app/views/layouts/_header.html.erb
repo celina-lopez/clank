@@ -1,0 +1,24 @@
+<div class="navbar bg-base-100">
+  <a class="btn btn-ghost text-xl" href='/'><img src='/images/logo.png' width='30' />PlayBoard.Games</a>
+  <input type="checkbox" class="toggle" checked="checked" />
+</div>
+<script>
+  const toggle = document.querySelector('.toggle');
+  const html = document.querySelector('html');
+  toggle.addEventListener('click', () => {
+    if (html.dataset.theme === 'fantasy') {
+      html.dataset.theme = 'dracula';
+      // save to local storage
+      localStorage.setItem('theme', 'dracula');
+    } else {
+      html.dataset.theme = 'fantasy';
+      localStorage.setItem('theme', 'fantasy');
+    }
+  });
+
+  // get the theme from local storage
+  const theme = localStorage.getItem('theme');
+  if (theme) {
+    html.dataset.theme = theme;
+  }
+</script>
