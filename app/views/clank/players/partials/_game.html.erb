@@ -63,7 +63,7 @@
           <div>
             <div class="flex mt-2" style='align-items:center;'>
               <div class="mr-2 h-[10px] w-[10px] bg-<%= @phaser_config.dig('player_colors', p['index'].to_i) %>-400"></div>
-              Player <%= p['index'] %>
+              <%= p['name'] %>
             </div>
             <%= render 'clank/players/partials/stats', player: p %>
           </div>
