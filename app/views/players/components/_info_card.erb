@@ -44,7 +44,7 @@
       <% end %>
       <% card.fetch('conditions', []).each_with_index do |action, index| %>
         <% if action['type'] == 'can_buy' %>
-          <div>Can ONLY buy in <%= action['is_in'].humanize %></div>
+          <div>Can ONLY <%= card['health'] ? 'attack' : 'buy' %> in <%= action['is_in'].humanize %></div>
         <% end %>
       <% end %>
       <% if card['victory_points'].present? %>

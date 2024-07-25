@@ -40,7 +40,9 @@ function createCardClone(cardClone, card, playerHand=false) {
   if (card['conditions']) {
     card['conditions'].forEach(function(condition) {
       if (condition['type'] == 'can_buy'){
-        actionParentElm.innerHTML += `<div>Can ONLY buy in ${Utils.displayName(condition['is_in'])}</div>`
+        actionParentElm.innerHTML += "<div>Can ONLY "
+        actionParentElm.innerHTML += card['health'] ? 'attack' : 'buy'
+        actionParentElm.innerHTML += ` in ${Utils.displayName(condition['is_in'])}</div>`
       }
     });
   } 
