@@ -11,7 +11,7 @@ const cardTemplate = document.getElementById('card-template').content,
       marketplaceParent = document.getElementById('marketplace-id'),
       statTemplate = document.getElementById('stat-template').content,
       perksElm = document.getElementById('perks'),
-      playerBannerElm = document.getElementById('player-banner').children[0],
+      playerBannerElm = document.getElementById('player-banner'),
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
       inventoryElm = document.getElementById('inventory-id'),
@@ -297,10 +297,11 @@ function addMarketplace(items, data, playerId) {
 }
 
 function updateBanner(data, playerId) {
+  playerBannerElm.className = `bg-${playerColors[data.current_player_index]}-400 w-100 text-center`
   if (data.current_player_index == playerId) {
-    playerBannerElm.innerHTML = 'Your Turn'
+    playerBannerElm.children[0].innerHTML = 'Your Turn'
   } else {
-    playerBannerElm.innerHTML = `${data.players[data.current_player_index].name}'s Turn`
+    playerBannerElm.children[0].innerHTML = `${data.players[data.current_player_index].name}'s Turn`
   }
 }
 

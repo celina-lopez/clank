@@ -2,16 +2,7 @@
   <% if @game.data['end_game'] %>
     <%= render 'players/partials/end_game', game: @game %>
   <% else %>
-    <div 
-      class="bg-<%= @phaser_config.dig('player_colors', @player['index'].to_i) %>-400 w-100 text-center"
-      id="player-banner"
-    >
-      <% if @game.data['current_player_index'] == @player['index'] %>
-        <h2 class="text-white">Your Turn</h2>
-      <% else %>
-        <h2 class="text-white"><%= @game.data['players'][@game.data['current_player_index']]['name'] %>'s Turn</h2>
-      <% end %>
-    </div>
+    <%= render 'players/components/banner', game: @game, player: @player, phaser_config: @phaser_config %>
     <div class="mx-2 overflow-hidden">
       <%= render 'clank/players/partials/game', game: @game, player: @player %>
     </div>

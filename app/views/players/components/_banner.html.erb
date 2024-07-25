@@ -1,0 +1,13 @@
+<div 
+  class="bg-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 w-100 text-center"
+  id="player-banner"
+>
+  <% if game.data['current_player_index'] == player['index'] %>
+    <h2 class="text-white">Your Turn</h2>
+  <% else %>
+    <h2 class="text-white"><%= game.data['players'][game.data['current_player_index']]['name'] %>'s Turn</h2>
+  <% end %>
+</div>
+<script>
+  const playerColors = <%= phaser_config.dig('player_colors').to_json.html_safe %>;
+</script>
