@@ -22,9 +22,7 @@ class Action::Card < Action::Base
     end
   end
 
-  %i[ignore_monster_path
-     skip_crystal_cave
-     spend_seven_for_two_secret_tomes].each do |type|
+  %i[ignore_monster_path skip_crystal_cave].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }
       current_player.public_send("#{type}=", v)

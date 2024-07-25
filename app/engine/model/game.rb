@@ -69,7 +69,7 @@ class Model::Game
   def activate_current_player_actions
     active_actions = current_player.deck.active.map do |x|
       x.fetch('actions', []).first&.keys
-    end & %w[ignore_monster_path skip_crystal_cave spend_seven_for_two_secret_tomes]
+    end & %w[ignore_monster_path skip_crystal_cave]
     active_actions.each { |action| current_player.send("#{action}=", true) } if active_actions.any?
   end
 end

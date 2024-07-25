@@ -3,8 +3,7 @@
 class Model::Player
   attr_accessor :move_points, :coins, :inventory, :deck, :position, :rewards,
                 :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
-                :discard_number, :spend_seven_for_two_secret_tomes,
-                :victory_points, :moved_to_crystal_cave, :replace_card_points
+                :discard_number, :victory_points, :moved_to_crystal_cave, :replace_card_points
   attr_reader :health, :index, :attack_points, :clank, :name
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
@@ -38,7 +37,6 @@ class Model::Player
     ignore_monster_path: false,
     skip_crystal_cave: false,
     discard_number: 0,
-    spend_seven_for_two_secret_tomes: false,
     moved_to_crystal_cave: false,
     victory_points: 0,
     replace_card_points: 0
@@ -59,7 +57,6 @@ class Model::Player
     @ignore_monster_path = ignore_monster_path || false
     @skip_crystal_cave = skip_crystal_cave || false
     @discard_number = discard_number || 0
-    @spend_seven_for_two_secret_tomes = spend_seven_for_two_secret_tomes || false
     @moved_to_crystal_cave = moved_to_crystal_cave || false
     @victory_points = victory_points
     @replace_card_points = replace_card_points || 0
@@ -99,7 +96,7 @@ class Model::Player
     inventory.any? { |item| item['is_artifact'] }
   end
 
-  def reset! # rubocop:disable Metrics/MethodLength
+  def reset!
     @attack_points = 0
     @move_points = 0
     @skill_points = 0
@@ -108,7 +105,6 @@ class Model::Player
     @ignore_monster_path = false
     @skip_crystal_cave = false
     @discard_number = 0
-    @spend_seven_for_two_secret_tomes = false
     @moved_to_crystal_cave = false
     @replace_card_points = 0
   end

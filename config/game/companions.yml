@@ -13,6 +13,7 @@
   actions:
     - attack_points: 1
       skill_points: 2
+    - health: 1
   victory_points: 1
 - name: dwarven_peddlar
   cost: 2
@@ -20,6 +21,7 @@
   actions:
     - coins: 2
       move_points: 1
+    - health: 1
   conditions:
     - type: victory
       victory_points: 4
@@ -80,6 +82,7 @@
   actions:
     - clank: 1
       move_points: 1
+    - health: 1
   victory_points: 1
 - name: rebel_miner
   cost: 2
@@ -124,7 +127,7 @@
   actions:
     - skill_points: 3
       attack_points: 1
-    - health: 1
+    - health: 2
   victory_points: 3
 - name: treasure_hunter
   cost: 3
@@ -139,6 +142,7 @@
   total: 1
   actions:
     - skill_points: 3
+    - health: 1
   conditions:
     - type: victory
       victory_points: 2
@@ -154,6 +158,6 @@
   cost: 3
   victory_points: 2
   actions:
-    - health: 1
+    - health: 2
     - coins: 2
     - attack_points: 3

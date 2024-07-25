@@ -69,9 +69,6 @@ function addTempDescription(player) {
   if (player['skip_crystal_cave']) {
     perksElm.innerHTML += '<div> You dont have to stop at crystal caves</div>';
   }
-  if (player['spend_seven_for_two_secret_tomes']) {
-    perksElm.innerHTML += '<div> Spend 7 coins for two Secret Tomes</div>';
-  }
 }
 
 function addActionElm(parent, action, key){
@@ -147,7 +144,7 @@ function updateStats(game) {
     });
   });
   document.getElementById('dragon-position').innerHTML = dragonPositionArray[game.dragon.position];
-  document.getElementById('dragon-clank').innerHTML = dragonPositionArray[game.dragon.clank];
+  document.getElementById('dragon-clank').innerHTML = game.dragon.clank;
 }
 
 function updateInventory(player) {
@@ -181,8 +178,6 @@ function addRewards(player) {
           let label = rewardOptionKeys[k];
           if (label == 'discard_number') {
             label = `Discard ${rewardOptionData[rewardOptionKeys[k]]} card(s)`;
-          } else if (label == 'spend_seven_for_two_secret_tomes') {
-            label = 'Spend 7 coins for 2 secret tome this turn';
           } else if (['health', 'coins', 'attack_points', 'move_points'].includes(label)) {  
             label = `Gain ${rewardOptionData[rewardOptionKeys[k]]} ${Utils.displayName(label.split('_points')[0])}`;
           } else {

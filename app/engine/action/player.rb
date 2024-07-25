@@ -168,11 +168,7 @@ class Action::Player < Action::Base
     pay_with_attack_points(card) if card['health'].present?
     redeem_cost(card) if card['cost'].present?
     card_on_acquire(card)
-    return if card['health'].present? || Base::DEVICE_CARD_NAMES.include?(card['name'])
-
-    new_card = card.dup
-    new_card.delete('cost')
-    current_player.deck.discarded << new_card
+    current_player.deck.discarded << card
   end
 
   def card_on_acquire(card)
