@@ -14,7 +14,7 @@ class Labeler
       when 'end_turn'
         "#{player} ended their turn"
       when 'dragon_attack'
-        "Dragon hit #{players[history['value']]['name']}!"
+        "Dragon hit #{players.dig(history['value'], ['name'])}!"
       when 'redeemed_reward'
         "#{player} redeemed a reward"
       when 'move_points'

@@ -10,12 +10,13 @@ const cardTemplate = document.getElementById('card-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
       statTemplate = document.getElementById('stat-template').content,
+      healthStatTemplate = document.getElementById('health-stat').content,
       perksElm = document.getElementById('perks'),
       playerBannerElm = document.getElementById('player-banner'),
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
       inventoryElm = document.getElementById('inventory-id'),
-      statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'health', 'coins'];
+      statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'coins'];
 
 
 function createCardClone(cardClone, card, playerHand=false) {
@@ -144,6 +145,15 @@ function updateStats(game) {
         playerStatContainer.appendChild(statClone);
       }
     });
+     let healthStatClone = document.importNode(healthStatTemplate, true),
+      statParent = healthStatClone.children[0].children[0],
+      heart = statParent.children[0].querySelector('rect'),
+      heartStat = statParent.children[1],
+      heightStat = (player.health / 10) * 100;
+  heart.setAttribute('height', `${heightStat}%`);
+  heart.setAttribute('y', `${100 - heightStat}%`);
+  heartStat.innerHTML = player.health;
+  playerStatContainer.appendChild(healthStatClone);
   });
   document.getElementById('dragon-position').innerHTML = dragonPositionArray[game.dragon.position];
   document.getElementById('dragon-clank').innerHTML = game.dragon.clank;
