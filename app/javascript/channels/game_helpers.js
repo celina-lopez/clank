@@ -50,6 +50,9 @@ function createCardClone(cardClone, card, playerHand=false) {
   if (card['victory_points']) {
     addPopUpActions([{'victory_points': card['victory_points']}], actionParentElm)
   }
+  if (card.description) {
+   actionParentElm.innerHTML += `<div>${card.description}</div>`;
+  }
   ['cost', 'health'].forEach(function(key) {
     if (card[key]) {
       let div = document.createElement('div');
