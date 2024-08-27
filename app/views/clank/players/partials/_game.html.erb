@@ -117,8 +117,7 @@
       if (tileData.tile < 0) return;
       let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'] || typeOfTileConfig['default'];
       let size = config.size || 20;
-      let tile = gameThiz.add.rectangle(size  + 20, size, size, size, config.color);
-      tile.setOrigin(tileData.frontend_data.x, tileData.frontend_data.y);
+      let tile = gameThiz.add.rectangle(tileData.frontend_data.x, tileData.frontend_data.y, size, size, config.color);
       tile.setAlpha(0.1); 
       tile.setInteractive(); 
 
@@ -177,14 +176,7 @@
   let gamePlayers = []
   function addPlayerToMap(position, index){
     var playerPosition = mapTiles.find((tile) => tile.tile === position);
-    let config = typeOfTileConfig[playerPosition.tags && playerPosition.tags[0] || 'default'] || typeOfTileConfig['default'];
-    let size = config.size || 20;
-    var player = gameThiz.add.image(size + 20, size, "player" + index)
-    if (playerPosition.tags && playerPosition.tags.includes('monkey')) { 
-      player.setOrigin(playerPosition.frontend_data.player_x, playerPosition.frontend_data.player_y);
-    } else {
-      player.setOrigin(playerPosition.frontend_data.x, playerPosition.frontend_data.y);
-    }
+    var player = gameThiz.add.image(playerPosition.frontend_data.x, playerPosition.frontend_data.y, "player" + index)
     return player
   }
 

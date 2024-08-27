@@ -3,130 +3,130 @@ map_1:
     tags:
       - ending
     frontend_data:
-      x: -3
-      y: .5
+      x: 500
+      y: 50
   - tile: -2
     tags:
       - ending
     frontend_data:
-      x: -5
-      y: .5
+      x: 400
+      y: 50
   - tile: -3
     tags:
       - ending
     frontend_data:
-      x: -7
-      y: .5
+      x: 300
+      y: 50
   - tile: -4
     tags:
       - ending
     frontend_data:
-      x: -9
-      y: .5
+      x: 200
+      y: 50
   - tile: 0
     tags:
       - ending
     frontend_data:
-      x: 0.2
-      y: .5
+      x: 100
+      y: 50
   - tile: 1
     frontend_data:
-      x: 0.2
-      y: -.56
+      x: 100
+      y: 124
   - tile: 2
     frontend_data:
-      x: -1.68
-      y: -.57
+      x: 210
+      y: 125
   - tile: 3
     tags:
       - minor_item
     frontend_data:
-      x: -3.78
-      y: -.57
+      x: 337
+      y: 124
   - tile: 4
     tags:
       - major_item
     frontend_data:
-      x: -5.6
-      y: -.48
+      x: 445
+      y: 119
   - tile: 5
     tags:
       - major_item
     frontend_data:
-      x: -7.6
-      y: -.48
+      x: 564
+      y: 119
   - tile: 6
     tags:
       - crystal_cave
       - major_item
     frontend_data:
-      x: 0.2
-      y: -1.67
+      x: 97
+      y: 190
   - tile: 7
     tags:
       - crystal_cave
     frontend_data:
-      x: -1.53
-      y: -1.9
+      x: 205
+      y: 200
   - tile: 8
     tags:
       - major_item
     frontend_data:
-      x: -4.39
-      y: -2.04
+      x: 375
+      y: 213
   - tile: 9
     tags:
       - crystal_cave
       - minor_item
     frontend_data:
-      x: -6.3
-      y: -2.05
+      x: 485
+      y: 213
   - tile: 10
     frontend_data:
-      x: -8.6
-      y: -1.92
+      x: 625
+      y: 205
   - tile: 11
     tags:
       - health
     frontend_data:
-      x: 1.1
-      y: -2.9
+      x: 40
+      y: 265
   - tile: 12
     tags:
       - minor_item
     frontend_data:
-      x: -0.9
-      y: -3.33
+      x: 165
+      y: 290
   - tile: 13
     tags:
       - crystal_cave
     frontend_data:
-      x: -2.92
-      y: -2.9
+      x: 286
+      y: 265
   - tile: 14
     frontend_data:
-      x: -4.9
-      y: -3.17
+      x: 403
+      y: 281
   - tile: 15
     tags:
       - minor_item
     frontend_data:
-      x: -7.66
-      y: -3.19
+      x: 572
+      y: 282
   - tile: 16
     tags:
       - depths
     frontend_data:
-      x: 0.64
-      y: -4.52
+      x: 76
+      y: 360
   - tile: 17
     tags:
       - crystal_cave
       - artifact
       - depths
     frontend_data:
-      x: -2.33
-      y: -4.24
+      x: 250
+      y: 344
     items:
       - name: artifact_crown
         victory_points: 3
@@ -140,23 +140,23 @@ map_1:
       - minor_item
       - depths
     frontend_data:
-      x: -4.2
-      y: -5.22
+      x: 356
+      y: 400
   - tile: 19
     tags:
       - market
       - depths
       - minor_item
     frontend_data:
-      x: -5.36
-      y: -5.55
+      x: 432
+      y: 422
   - tile: 20
     tags:
       - depths
       - artifact
     frontend_data:
-      x: -6.51
-      y: -4.8
+      x: 504
+      y: 378
     items:
       - name: artifact_mask
         victory_points: 5
@@ -170,16 +170,16 @@ map_1:
       - minor_item
       - depths
     frontend_data:
-      x: -8.34
-      y: -4.74
+      x: 607
+      y: 373
   - tile: 22
     tags:
       - crystal_cave
       - artifact
       - depths
     frontend_data:
-      x: -1.2
-      y: -5.1
+      x: 181
+      y: 396
     items:
       - name: artifact_banana
         victory_points: 15
@@ -192,16 +192,16 @@ map_1:
       - market
       - depths
     frontend_data:
-      x: -3.6
-      y: -6.94
+      x: 325
+      y: 506
   - tile: 24
     tags:
       - market
       - artifact
       - depths
     frontend_data:
-      x: -5.4
-      y: -7.13
+      x: 434
+      y: 519
     items:
       - name: artifact_vase
         victory_points: 10
@@ -215,22 +215,22 @@ map_1:
       - major_item
       - depths
     frontend_data:
-      x: -6.55
-      y: -6.38
+      x: 503
+      y: 473
   - tile: 26
     tags:
       - major_item
       - depths
     frontend_data:
-      x: -8.81
-      y: -6.2
+      x: 643
+      y: 465
   - tile: 27
     tags:
       - monkey
       - depths
     frontend_data:
-      x: 1.04
-      y: -2.42
+      x: 80
+      y: 510
       player_x: 1.81
       player_y: -5.5
     items:
@@ -251,22 +251,22 @@ map_1:
       - major_item
       - depths
     frontend_data:
-      x: -2.27
-      y: -6.32
+      x: 242
+      y: 470
   - tile: 29
     tags:
       - health
       - depths
     frontend_data:
-      x: -7.89
-      y: -7.1
+      x: 580
+      y: 518
   - tile: 30
     tags:
       - depths
       - artifact
     frontend_data:
-      x: -8.83
-      y: -7.97
+      x: 642
+      y: 565
     items:
       - name: artifact_mask
         victory_points: 30
@@ -279,15 +279,15 @@ map_1:
       - minor_item
       - depths
     frontend_data:
-      x: -1.96
-      y: -7.7
+      x: 230
+      y: 550
   - tile: 32
     tags:
       - depths
       - artifact
     frontend_data:
-      x: -3.28
-      y: -8.64
+      x: 310
+      y: 610
     items:
       - name: artifact_shield
         victory_points: 20
@@ -301,15 +301,15 @@ map_1:
       - minor_item
       - depths
     frontend_data:
-      x: -5.04
-      y: -8.55
+      x: 413
+      y: 605
   - tile: 34
     tags:
       - depths
       - artifact
     frontend_data:
-      x: -6.69
-      y: -8.47
+      x: 510
+      y: 596
     items:
       - name: artifact_staff
         victory_points: 25
@@ -323,25 +323,25 @@ map_1:
       - crystal_cave
       - depths
     frontend_data:
-      x: -8.16
-      y: -9.38
+      x: 600
+      y: 650
   - tile: 36
     tags:
       - depths
     frontend_data:
-      x: 0.34
-      y: -9.48
+      x: 92
+      y: 657
   - tile: 37
     tags:
       - major_item
       - depths
     frontend_data:
-      x: -1.7
-      y: -9.48
+      x: 210
+      y: 658
   - tile: 38
     tags:
       - health
       - depths
     frontend_data:
-      x: -4.67
-      y: -9.68
+      x: 390
+      y: 670

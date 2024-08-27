@@ -1,3 +1,4 @@
+.vscode
 *.rbc
 capybara-*.html
 .rspec

@@ -148,15 +148,15 @@ function updateStats(game) {
         playerStatContainer.appendChild(statClone);
       }
     });
-     let healthStatClone = document.importNode(healthStatTemplate, true),
-      statParent = healthStatClone.children[0].children[0],
-      heart = statParent.children[0].querySelector('rect'),
-      heartStat = statParent.children[1],
-      heightStat = (player.health / 10) * 100;
-  heart.setAttribute('height', `${heightStat}%`);
-  heart.setAttribute('y', `${100 - heightStat}%`);
-  heartStat.innerHTML = player.health;
-  playerStatContainer.appendChild(healthStatClone);
+    let healthStatClone = document.importNode(healthStatTemplate, true),
+    statParent = healthStatClone.children[0].children[0],
+    heart = statParent.children[0].querySelector('rect'),
+    heartStat = statParent.children[1],
+    heightStat = (player.health / 10) * 100;
+    heart.setAttribute('height', `${heightStat}%`);
+    heart.setAttribute('y', `${100 - heightStat}%`);
+    heartStat.innerHTML = player.health;
+    playerStatContainer.appendChild(healthStatClone);
   });
   document.getElementById('dragon-position').innerHTML = dragonPositionArray[game.dragon.position];
   document.getElementById('dragon-clank').innerHTML = game.dragon.clank;
