@@ -109,6 +109,7 @@
 
   const descriptionArray = <%= @phaser_config['tagable_descriptions'].to_json.html_safe %>;
   const typeOfTileConfig = <%= @phaser_config['tiles'].to_json.html_safe %>;
+  const playerColorConfig = <%= @phaser_config['game_player_colors'].to_json.html_safe %>;
   var mapTiles = <%= game.data.dig('map', 'tiles').to_json.html_safe %>;
   var tileSprites = []
   function generateTileMap() {
@@ -176,7 +177,9 @@
   let gamePlayers = []
   function addPlayerToMap(position, index){
     var playerPosition = mapTiles.find((tile) => tile.tile === position);
-    var player = gameThiz.add.image(playerPosition.frontend_data.x, playerPosition.frontend_data.y, "player" + index)
+    var xOffset = ((index % 3) * 20) - 20;
+    var yOffset =  (Math.floor(index / 3) * 20) - 20;
+    let player = gameThiz.add.rectangle(playerPosition.frontend_data.x - xOffset, playerPosition.frontend_data.y + yOffset, 15, 15, playerColorConfig[index]);
     return player
   }
 

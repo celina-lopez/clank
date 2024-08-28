@@ -29,3 +29,13 @@ player_colors:
   - orange
   - cyan
   - violet
+game_player_colors:
+  - 0xf87171 # red
+  - 0x60a5fa # blue
+  - 0x4ade80 # green
+  - 0xf472b6 # pink
+  - 0xfacc15 # yellow
+  - 0x2dd4bf # teal
+  - 0xfb923c # orange
+  - 0x22d3ee # cyan
+  - 0xa78bfa # violet
