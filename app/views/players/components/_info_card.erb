@@ -12,7 +12,7 @@
     class="card card-compact text-black bg-white shadow h-[216px]"
   <% end %>
 >
-  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.jpeg" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[95px]" : "max-w-[152px]" %>"/></figure>
+  <figure><img src='<%= card['name'].present? && "/images/#{card['name']}.png" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[95px]" : "max-w-[152px]" %>"/></figure>
   <div class='<%= small_card ? "px-[5px] py-[1px] h-[63px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
     <div class="text-wrap <%= small_card ? "w-[65px]" : "w-[126px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>

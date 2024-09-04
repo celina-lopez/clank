@@ -21,7 +21,7 @@ const cardTemplate = document.getElementById('card-template').content,
 
 function createCardClone(cardClone, card, playerHand=false) {
   let image = cardClone.querySelector('figure').children[0];
-  image.src = `/images/${card['name']}.jpeg`;
+  image.src = `/images/${card['name']}.png`;
   image.alt = card['name'];
   if (playerHand) {
     cardClone.dataset.type = card['name'];
@@ -116,7 +116,7 @@ function createCircle(card) {
       popUp = circleParent.children[1].children[0];
   itemParent.dataset.name = card['name'];
   itemParent.dataset.type = 'redeem_inventory_item'; 
-  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.jpeg' class="rounded-full w-[50px]"/>`
+  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.png' class="rounded-full w-[50px]"/>`
   createCardClone(popUp, card);
   return circleParent;
 }
