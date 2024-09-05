@@ -1,7 +1,7 @@
 <% empty_hand = player.dig('deck', 'active').empty? %>
 <button
   id="end_turn_button"
-  class="btn <%= !(empty_hand && player['index'] == game.data['current_player_index']) && 'hidden' %>"
+  class="btn  <%= !(empty_hand && player['index'] == game.data['current_player_index']) && 'hidden' %>"
   onclick='executeAction(this)'
   data-type='end_turn'>End Turn</button>
 <button
