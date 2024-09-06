@@ -213,6 +213,10 @@ function addRewards(player) {
 
 function updateMap(data, players) {
   mapTiles = data['map']['tiles'];
+  tileSprites.forEach(function(tile) {
+    tile.destroy();
+  });
+  tileSprites = generateTileMap();
   let newPlayers = []
   for (let i = 0; i < players.length; i++) {
     gamePlayers[i].destroy();
@@ -221,10 +225,6 @@ function updateMap(data, players) {
     newPlayers.push(playerSprite);
   }
   gamePlayers = newPlayers;
-  tileSprites.forEach(function(tile) {
-    tile.destroy();
-  });
-  tileSprites = generateTileMap();
 }
 
 function addTrashOptions(player) {

@@ -121,17 +121,15 @@
       if (tileData.items && tileData.items.find(item => item.is_artifact)) {
         let artifact = tileData.items.find(item => item.is_artifact);
         if (artifact){
+          if (artifact.name == 'artifact_banana') console.log(tileData)
           let overlay = gameThiz.add.sprite(tileData.frontend_data.x, tileData.frontend_data.y, artifact.name);
           overlay.setScale(0.09);
+          tileSprites.push(overlay);
         }
       }
       let tile = gameThiz.add.rectangle(tileData.frontend_data.x, tileData.frontend_data.y, size, size, config.color);
       tile.setAlpha(0.1); 
       tile.setInteractive();
-      // tileData.items.length > 0) {
-      // let artifact =  tileData.items.find(item => item.is_artifact)
-      // description +=  `${Utils.displayName(artifact.name)}\n(${artifact.victory_points} VP)\n`;
-    // }
 
       // Create a graphics object for the popup background
       let popup = gameThiz.add.graphics();
