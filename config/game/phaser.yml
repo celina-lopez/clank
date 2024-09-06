@@ -10,6 +10,12 @@ tiles:
     color: 0xc1a05a
 preload_images:
   background: "/images/basic.png"
+  artifact_mask: "/images/artifact_mask.png"
+  artifact_banana: "/images/artifact_banana.png"
+  artifact_crown: "/images/artifact_crown.png"
+  artifact_shield: "/images/artifact_shield.png"
+  artifact_staff: "/images/artifact_staff.png"
+  artifact_vase: "/images/artifact_vase.png"
 config:
   height: 710
   width: 700

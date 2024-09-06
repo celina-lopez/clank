@@ -6,7 +6,8 @@ const HtmlActions = {};
 const Utils = {};
 
 Game.createDescriptionForTile = function(tileData) {
-  let description = `Tile Info: ${tileData.tile}\n`;
+  if (!tileData.tags || tileData.tags.length == 0) return;
+  let description = '';
   tileData.tags && tileData.tags.forEach((tag) => {
     if (itemableArray.includes(tag) && tileData.items.length > 0) {
       description += `${tileData.items.length} ${tag.replace(/_/g, ' ')}(s)\n`;

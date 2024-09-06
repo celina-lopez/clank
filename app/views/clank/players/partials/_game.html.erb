@@ -118,9 +118,20 @@
       if (tileData.tile < 0) return;
       let config = typeOfTileConfig[tileData.tags && tileData.tags[0] || 'default'] || typeOfTileConfig['default'];
       let size = config.size || 20;
+      if (tileData.items && tileData.items.find(item => item.is_artifact)) {
+        let artifact = tileData.items.find(item => item.is_artifact);
+        if (artifact){
+          let overlay = gameThiz.add.sprite(tileData.frontend_data.x, tileData.frontend_data.y, artifact.name);
+          overlay.setScale(0.09);
+        }
+      }
       let tile = gameThiz.add.rectangle(tileData.frontend_data.x, tileData.frontend_data.y, size, size, config.color);
       tile.setAlpha(0.1); 
-      tile.setInteractive(); 
+      tile.setInteractive();
+      // tileData.items.length > 0) {
+      // let artifact =  tileData.items.find(item => item.is_artifact)
+      // description +=  `${Utils.displayName(artifact.name)}\n(${artifact.victory_points} VP)\n`;
+    // }
 
       // Create a graphics object for the popup background
       let popup = gameThiz.add.graphics();
@@ -136,6 +147,7 @@
       tile.on('pointerover', function (pointer) {
         this.setAlpha(0.3);
         let info = Game.createDescriptionForTile(tileData);
+        if (!info) return;
         infoText.setText(info);
         popup.setVisible(true);
         infoText.setVisible(true);
