@@ -4,4 +4,4 @@ bin/dev
 
 ## TODO
 
-- [ ] UX
+- [ ] redo game
