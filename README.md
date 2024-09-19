@@ -5,3 +5,8 @@ bin/dev
 ## TODO
 
 - [ ] redo game
+
+
+
+
+
