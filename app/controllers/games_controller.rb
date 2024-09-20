@@ -8,7 +8,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    engine = Engine.new
+    engine = game_params[:game_type].classify.constantize::Engine.new
     gameplay_data = engine.execute(type: 'start_game',
                                    value: game_params[:settings])
     game = Game.create!(

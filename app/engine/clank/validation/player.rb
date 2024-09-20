@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class Clank::Validation::Player < Validation::Player
-  def attack?
-    add_error_if_error('Not enough attack points', current_player.attack_points >= value)
-  end
-
   def redeem_reward?
     add_error_if_error('Invalid format', current_player.rewards.dig(*value.split(',').map(&:to_i)).present?)
   end

@@ -11,7 +11,12 @@ class Action::Base < Base
   end
 
   def self.actions_include?(type)
-    instance_methods(false).include?(type.to_sym)
+    instance_methods(false).include?(type.to_sym) ||
+      name.split('::')[1, 3]
+          .join('::')
+          .constantize
+          .instance_methods(false)
+          .include?(type.to_sym)
   end
 
   def execute!

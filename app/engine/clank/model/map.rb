@@ -2,9 +2,9 @@
 
 class Clank::Model::Map < Model::Map
   def generate_new_map(map_type)
-    major_tokens = shuffle_items(Base::MAJOR_ITEMS)
-    minor_tokens = shuffle_items(Base::MINOR_ITEMS)
-    Base::MAPS[map_type].map do |tile|
+    major_tokens = shuffle_items(Clank::Base::MAJOR_ITEMS)
+    minor_tokens = shuffle_items(Clank::Base::MINOR_ITEMS)
+    Clank::Base::MAPS[map_type].map do |tile|
       add_items(tile, major_tokens, minor_tokens)
     end
   end

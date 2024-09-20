@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Engine < Base
+class Clank::Engine < Engine
   def self.klass_type(type)
-    if Action::Player.actions_include?(type)
+    if Clank::Action::Player.actions_include?(type)
       'Player'
-    elsif Base::CARD_NAMES.include?(type) || Action::Card.actions_include?(type)
+    elsif Clank::Base::CARD_NAMES.include?(type) || Clank::Action::Card.actions_include?(type)
       'Card'
-    elsif Action::Game.actions_include?(type)
+    elsif Clank::Action::Game.actions_include?(type)
       'Game'
     end
   end

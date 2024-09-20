@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalculateVictoryPoints < Base
+class Clank::CalculateVictoryPoints < CalculateVictoryPoints
   def execute!
     gameplay_data.players.each do |player|
       gameplay_data.results[player.index] = []

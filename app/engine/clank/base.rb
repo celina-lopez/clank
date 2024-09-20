@@ -6,7 +6,6 @@ end
 
 class Clank::Base < Base
   COMPANION_CARDS = config_yaml('companions').freeze
-  COMPANION_NAMES = COMPANION_CARDS.map { |c| c['name'] }.freeze
   GEM_CARDS = config_yaml('gems').freeze
   GEM_CARD_NAMES = GEM_CARDS.map { |c| c['name'] }.freeze
   MISC_DECK = %w[items].flat_map { |name| config_yaml(name) }.freeze

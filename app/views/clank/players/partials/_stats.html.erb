@@ -14,7 +14,7 @@
         <rect
           id="redFill"
           width="100%"
-          height="<%= height = ((player['health'].to_f / Model::Player::MAX_HEALTH) * 100) %>%"
+          height="<%= height = ((player['health'].to_f / Clank::Model::Player::MAX_HEALTH) * 100) %>%"
           fill="red"
           clip-path="url(#heartClip)"
           y="<%= 100 - height %>%"

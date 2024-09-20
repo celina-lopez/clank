@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Model::Position
-  EDGES = YAML.load_file('config/game/edges.yml')['map_1']
-  MAP = YAML.load_file('config/game/maps.yml')['map_1']
   attr_accessor :current_position
   attr_reader :graph
 
@@ -13,7 +11,7 @@ class Model::Position
   end
 
   def self.from_json(json)
-    Model::Position.new(json['current_position'], json['graph'])
+    game_engine::Model::Position.new(json['current_position'], json['graph'])
   end
 
   def next_to?(goal)
@@ -21,24 +19,10 @@ class Model::Position
   end
 
   def edge_metadata(goal)
-    edge = Model::Position::EDGES.find do |x|
+    edge = game_engine::Model::Position::EDGES.find do |x|
       x['x'] == current_position && x['y'] == goal.to_i
     end
     edge.fetch('metadata', {})
-  end
-
-  def end_tile?
-    current_position == -4
-  end
-
-  def escape_tile?
-    current_position <= 0
-  end
-
-  %w[marketplace depths crystal_cave].each do |key|
-    define_method "#{key}?" do
-      current_position_tags.include?(key)
-    end
   end
 
   def current_position_tags
@@ -46,19 +30,12 @@ class Model::Position
   end
 
   def tags(goal)
-    MAP.find { |x| x['tile'] == goal.to_i }.fetch('tags', [])
+    engine::Model::Position::MAP.find { |x| x['tile'] == goal.to_i }.fetch('tags', [])
   end
 
   private
 
   def build_graph(graph)
-    EDGES.each do |edge|
-      from = edge['x']
-      to = edge['y']
-      weight = edge.fetch('metdata', {}).fetch('move', 1)
-      graph[from][to] = weight
-      graph[to][from] = weight
-    end
-    graph
+    raise NotImplementedError
   end
 end

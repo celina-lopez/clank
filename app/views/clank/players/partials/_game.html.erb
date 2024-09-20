@@ -46,7 +46,7 @@
                   </div>
                   <div class="stat-title text-sm">Dragon Strength</div>
                   <div class="stat-value text-primary text-base" id='dragon-position'>
-                    <%= Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i] %>
+                    <%= Clank::Model::Dragon::POSTION_ARRAY[@game.data.dig('dragon', 'position').to_i] %>
                   </div>
                 </div>
                 <div class="stat">
@@ -96,7 +96,7 @@
 
   var game = new Phaser.Game(config);
   var gameThiz;
-  var dragonPositionArray = <%= raw Model::Dragon::POSTION_ARRAY %>;
+  var dragonPositionArray = <%= raw Clank::Model::Dragon::POSTION_ARRAY %>;
 
   function preload() {
     <% @phaser_config['preload_images'].each do |name, source| %>

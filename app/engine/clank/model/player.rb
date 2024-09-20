@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
 class Clank::Model::Player < Model::Player
-  attr_accessor :coins, :inventory, :deck, :position, :rewards, :replace_card_points,
-                :skill_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
-                :discard_number, :victory_points, :moved_to_crystal_cave
+  attr_accessor :coins, :rewards, :replace_card_points, :trash_options, :ignore_monster_path, :skip_crystal_cave,
+                :discard_number, :moved_to_crystal_cave, :deck, :position
   attr_reader :clank
 
   STARTING_CLANK_CUBES = { 0 => 3, 1 => 2, 2 => 1 }.tap { |h| h.default = 0 }.freeze
   MAX_HEALTH = 10
   MAX_CLANK = 30
   START_COINS = 7
+
+  def self.from_json(json)
+    game_engine::Model::Player.new(
+      json['index'],
+      position: game_engine::Model::Position.from_json(json['position']),
+      deck: game_engine::Model::Deck.from_json(json['deck']),
+      **json.symbolize_keys.reject { |k, _v| %i[index position deck].include?(k) }
+    )
+  end
 
   def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     index = 0,
@@ -35,8 +43,8 @@ class Clank::Model::Player < Model::Player
     @index = index || 0
     @name = name
     @inventory = inventory || []
-    @position = position || Model::Position.new
-    @deck = deck || Model::Deck.new(Base::STARTING_DECK_CARDS)
+    @position = position || game_engine::Model::Position.new
+    @deck = deck || game_engine::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
     @clank = clank || STARTING_CLANK_CUBES[index]
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
