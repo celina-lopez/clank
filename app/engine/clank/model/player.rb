@@ -11,10 +11,10 @@ class Clank::Model::Player < Model::Player
   START_COINS = 7
 
   def self.from_json(json)
-    game_engine::Model::Player.new(
+    Clank::Model::Player.new(
       json['index'],
-      position: game_engine::Model::Position.from_json(json['position']),
-      deck: game_engine::Model::Deck.from_json(json['deck']),
+      position: Clank::Model::Position.from_json(json['position']),
+      deck: Clank::Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index position deck].include?(k) }
     )
   end
@@ -43,8 +43,8 @@ class Clank::Model::Player < Model::Player
     @index = index || 0
     @name = name
     @inventory = inventory || []
-    @position = position || game_engine::Model::Position.new
-    @deck = deck || game_engine::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
+    @position = position || Clank::Model::Position.new
+    @deck = deck || Clank::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
     @clank = clank || STARTING_CLANK_CUBES[index]
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH

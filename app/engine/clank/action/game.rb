@@ -46,8 +46,8 @@ class Clank::Action::Game < Action::Game
     end
     immediate_actions.each do |action|
       action_data = action.to_a.first
-      klass_type = Engine.klass_type(action_data[0])
-      Action.const_get(klass_type).new(gameplay_data, type: action_data[0], value: action_data[1]).execute!
+      klass_type = Clank::Engine.klass_type(action_data[0])
+      Clank::Action.const_get(klass_type).new(gameplay_data, type: action_data[0], value: action_data[1]).execute!
       history << { type: action_data[0], value: action_data[1] }
     end
   end

@@ -29,6 +29,6 @@ class Game < ApplicationRecord
   }
 
   def engine
-    Engine.from_json(data, history:)
+    game_type.classify.constantize::Engine.from_json(data, history:)
   end
 end

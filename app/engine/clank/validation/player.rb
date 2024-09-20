@@ -119,6 +119,6 @@ class Clank::Validation::Player < Validation::Player
     has_gem_collector = current_player.deck.active.find { |x| x['name'] == 'gem_collector' }
     return false unless has_gem_collector
 
-    GEM_CARD_NAMES.include?(value)
+    Clank::Base::GEM_CARD_NAMES.include?(value)
   end
 end

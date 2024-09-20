@@ -29,8 +29,8 @@ class Engine < Base
     gameplay_data
   end
 
-  def game_engine
-    @game_engine ||= self.class.name.deconstantize.constantize
+  def self.game_engine
+    name.deconstantize.constantize
   end
 
   def klass_type(type)

@@ -17,7 +17,7 @@ class Clank::Action::Card < Action::Card
 
   def dragon_attack(val = value)
     history << { type: 'dragon_attack', value: val }
-    action_game = Action::Game.new(gameplay_data, type: 'dragon_attack', value: val)
+    action_game = Clank::Action::Game.new(gameplay_data, type: 'dragon_attack', value: val)
     action_game.dragon_attack!
     history.concat(action_game.history)
     self.gameplay_data = action_game.gameplay_data

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Model::Position
+class Model::Position < Base
   attr_accessor :current_position
   attr_reader :graph
 
@@ -11,7 +11,7 @@ class Model::Position
   end
 
   def self.from_json(json)
-    game_engine::Model::Position.new(json['current_position'], json['graph'])
+    new(json['current_position'], json['graph'])
   end
 
   def next_to?(goal)

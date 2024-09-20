@@ -24,7 +24,7 @@ class Clank::Action::Player < Action::Player
   end
 
   def play_all_cards
-    card_klass = Action::Card.new(gameplay_data, type: nil, value: nil)
+    card_klass = Clank::Action::Card.new(gameplay_data, type: nil, value: nil)
     active_cards = current_player.deck.active.dup
     active_cards.each do |card|
       if (actions = card.fetch('actions', [])).one?
@@ -198,6 +198,6 @@ class Clank::Action::Player < Action::Player
     has_gem_collector = current_player.deck.active.find { |x| x['name'] == 'gem_collector' }
     return false unless has_gem_collector
 
-    GEM_CARD_NAMES.include?(value)
+    Clank::Base::GEM_CARD_NAMES.include?(value)
   end
 end

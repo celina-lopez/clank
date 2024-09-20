@@ -6,7 +6,11 @@ end
 
 class Base
   def game_engine
-    @game_engine ||= self.class.name.deconstantize.deconstantize.constantize
+    @game_engine ||= self.class.game_engine
+  end
+
+  def self.game_engine
+    name.deconstantize.deconstantize.constantize
   end
 
   attr_accessor :gameplay_data
