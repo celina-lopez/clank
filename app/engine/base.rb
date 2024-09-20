@@ -5,23 +5,13 @@ def config_yaml(name)
 end
 
 class Base
-  COMPANION_CARDS = config_yaml('companions').freeze
-  COMPANION_NAMES = COMPANION_CARDS.map { |c| c['name'] }.freeze
-  GEM_CARDS = config_yaml('gems').freeze
-  GEM_CARD_NAMES = GEM_CARDS.map { |c| c['name'] }.freeze
-  MISC_DECK = %w[items].flat_map { |name| config_yaml(name) }.freeze
-  DEVICE_CARDS = config_yaml('devices').freeze
-  DEVICE_CARD_NAMES = DEVICE_CARDS.map { |c| c['name'] }.freeze
-  MONSTER_CARDS = config_yaml('monsters').freeze
-  MARKETPLACE = config_yaml('reserves').freeze
-  MARKETPLACE_ITEMS = config_yaml('marketplace')['map_1'].freeze
-  STARTING_DECK_CARDS = config_yaml('starting_deck').freeze
-  STARTING_GAME_CARDS = [GEM_CARDS, COMPANION_CARDS, DEVICE_CARDS, MISC_DECK, MONSTER_CARDS].flatten
-  CARDS = [GEM_CARDS, COMPANION_CARDS, MISC_DECK, DEVICE_CARDS, MONSTER_CARDS, MARKETPLACE, STARTING_DECK_CARDS].flatten
-  CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
-  MINOR_ITEMS = config_yaml('minor_items').freeze
-  MAJOR_ITEMS = config_yaml('major_items').freeze
-  MAPS = YAML.load_file('config/game/maps.yml')
+  def game_engine
+    @game_engine ||= self.class.game_engine
+  end
+
+  def self.game_engine
+    name.deconstantize.deconstantize.constantize
+  end
 
   attr_accessor :gameplay_data
 

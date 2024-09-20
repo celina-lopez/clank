@@ -4,7 +4,7 @@ class Engine < Base
   attr_accessor :history
 
   def self.from_json(json, history: [])
-    data = Model::Game.from_json(json)
+    data = game_engine::Model::Game.from_json(json)
     new(data, history:)
   end
 
@@ -19,14 +19,18 @@ class Engine < Base
             'Not current player'
     end
     klass = klass_type(type)
-    validation_klass = Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
+    validation_klass = game_engine::Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
 
     history << { type:, value:, player_index: }
-    action_klass = Action.const_get(klass).new(gameplay_data, type:, value:)
+    action_klass = game_engine::Action.const_get(klass).new(gameplay_data, type:, value:)
     self.gameplay_data = action_klass.execute!
     history.concat(action_klass.history)
     gameplay_data
+  end
+
+  def self.game_engine
+    name.deconstantize.constantize
   end
 
   def klass_type(type)
@@ -34,12 +38,6 @@ class Engine < Base
   end
 
   def self.klass_type(type)
-    if Action::Player.actions_include?(type)
-      'Player'
-    elsif Base::CARD_NAMES.include?(type) || Action::Card.actions_include?(type)
-      'Card'
-    elsif Action::Game.actions_include?(type)
-      'Game'
-    end
+    raise NotImplementedError
   end
 end
