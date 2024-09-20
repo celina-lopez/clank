@@ -30,7 +30,7 @@ class Model::Position < Base
   end
 
   def tags(goal)
-    engine::Model::Position::MAP.find { |x| x['tile'] == goal.to_i }.fetch('tags', [])
+    game_engine::Model::Position::MAP.find { |x| x['tile'] == goal.to_i }.fetch('tags', [])
   end
 
   private

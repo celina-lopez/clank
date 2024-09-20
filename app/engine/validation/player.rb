@@ -12,6 +12,6 @@ class Validation::Player < Validation::Base
   private
 
   def card
-    @card ||= CARDS.find { |x| x['name'] == value }
+    @card ||= game_engine::Base::CARDS.find { |x| x['name'] == value }
   end
 end

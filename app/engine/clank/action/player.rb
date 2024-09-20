@@ -183,7 +183,7 @@ class Clank::Action::Player < Action::Player
 
   def redeem_action_on_card(action_type, action_value)
     history << { type: action_type, value: action_value, player_index: current_player.index }
-    card_engine = Action::Card.new(gameplay_data, type: action_type, value: action_value)
+    card_engine = Clank::Action::Card.new(gameplay_data, type: action_type, value: action_value)
     card_engine.send(action_type)
     history.concat(card_engine.history)
   end

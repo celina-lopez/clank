@@ -15,7 +15,7 @@ class Clank::Model::Player < Model::Player
       json['index'],
       position: Clank::Model::Position.from_json(json['position']),
       deck: Clank::Model::Deck.from_json(json['deck']),
-      **json.symbolize_keys.reject { |k, _v| %i[index position deck].include?(k) }
+      **json.symbolize_keys.reject { |k, _v| %i[index position deck game_engine].include?(k) }
     )
   end
 
