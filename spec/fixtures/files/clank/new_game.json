@@ -1,0 +1,1381 @@
+{
+  "dragon": { "position": 2, "clank": 24 },
+  "current_player_index": 0,
+  "map": {
+    "tiles": [
+      {
+        "tile": -1,
+        "tags": ["ending"],
+        "frontend_data": { "x": 500, "y": 50 }
+      },
+      {
+        "tile": -2,
+        "tags": ["ending"],
+        "frontend_data": { "x": 400, "y": 50 }
+      },
+      {
+        "tile": -3,
+        "tags": ["ending"],
+        "frontend_data": { "x": 300, "y": 50 }
+      },
+      {
+        "tile": -4,
+        "tags": ["ending"],
+        "frontend_data": { "x": 200, "y": 50 }
+      },
+      { "tile": 0, "tags": ["ending"], "frontend_data": { "x": 100, "y": 50 } },
+      { "tile": 1, "frontend_data": { "x": 100, "y": 124 } },
+      { "tile": 2, "frontend_data": { "x": 210, "y": 125 } },
+      {
+        "tile": 3,
+        "tags": ["minor_item"],
+        "frontend_data": { "x": 337, "y": 124 },
+        "items": [
+          { "name": "swiftness", "total": 3, "action": [{ "move_points": 1 }] },
+          { "name": "strength", "total": 3, "action": [{ "attack_points": 2 }] }
+        ]
+      },
+      {
+        "tile": 4,
+        "tags": ["major_item"],
+        "frontend_data": { "x": 445, "y": 119 },
+        "items": [{ "name": "chalice", "total": 3, "victory_points": 7 }]
+      },
+      {
+        "tile": 5,
+        "tags": ["major_item"],
+        "frontend_data": { "x": 564, "y": 119 },
+        "items": [
+          { "name": "greater_healing", "total": 2, "action": [{ "health": 2 }] }
+        ]
+      },
+      {
+        "tile": 6,
+        "tags": ["crystal_cave", "major_item"],
+        "frontend_data": { "x": 97, "y": 190 },
+        "items": [
+          { "name": "greater_treasure", "total": 2, "action": [{ "coins": 5 }] }
+        ]
+      },
+      {
+        "tile": 7,
+        "tags": ["crystal_cave"],
+        "frontend_data": { "x": 205, "y": 200 }
+      },
+      {
+        "tile": 8,
+        "tags": ["major_item"],
+        "frontend_data": { "x": 375, "y": 213 },
+        "items": [
+          { "name": "draw_three", "total": 2, "action": [{ "draw": 3 }] }
+        ]
+      },
+      {
+        "tile": 9,
+        "tags": ["crystal_cave", "minor_item"],
+        "frontend_data": { "x": 485, "y": 213 },
+        "items": [
+          {
+            "name": "strength",
+            "total": 3,
+            "action": [{ "attack_points": 2 }]
+          },
+          {
+            "name": "magic_spring",
+            "total": 3,
+            "action": [{ "trash_options": 1 }]
+          }
+        ]
+      },
+      { "tile": 10, "frontend_data": { "x": 625, "y": 205 } },
+      {
+        "tile": 11,
+        "tags": ["health"],
+        "frontend_data": { "x": 40, "y": 265 }
+      },
+      {
+        "tile": 12,
+        "tags": ["minor_item"],
+        "frontend_data": { "x": 165, "y": 290 },
+        "items": [
+          { "name": "treasure", "total": 3, "action": [{ "coins": 2 }] },
+          { "name": "healing", "total": 3, "action": [{ "health": 1 }] }
+        ]
+      },
+      {
+        "tile": 13,
+        "tags": ["crystal_cave"],
+        "frontend_data": { "x": 286, "y": 265 }
+      },
+      { "tile": 14, "frontend_data": { "x": 403, "y": 281 } },
+      {
+        "tile": 15,
+        "tags": ["minor_item"],
+        "frontend_data": { "x": 572, "y": 282 },
+        "items": [
+          { "name": "swiftness", "total": 3, "action": [{ "move_points": 1 }] },
+          { "name": "swiftness", "total": 3, "action": [{ "move_points": 1 }] }
+        ]
+      },
+      {
+        "tile": 16,
+        "tags": ["depths"],
+        "frontend_data": { "x": 76, "y": 360 }
+      },
+      {
+        "tile": 17,
+        "tags": ["crystal_cave", "artifact", "depths"],
+        "frontend_data": { "x": 250, "y": 344 },
+        "items": [
+          {
+            "name": "artifact_crown",
+            "victory_points": 3,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 18,
+        "tags": ["market", "minor_item", "depths"],
+        "frontend_data": { "x": 356, "y": 400 },
+        "items": [
+          { "name": "treasure", "total": 3, "action": [{ "coins": 2 }] },
+          { "name": "healing", "total": 3, "action": [{ "health": 1 }] }
+        ]
+      },
+      {
+        "tile": 19,
+        "tags": ["market", "depths", "minor_item"],
+        "frontend_data": { "x": 432, "y": 422 },
+        "items": [
+          {
+            "name": "skill_points",
+            "total": 3,
+            "action": [{ "skill_points": 2 }]
+          },
+          {
+            "name": "magic_spring",
+            "total": 3,
+            "action": [{ "trash_options": 1 }]
+          }
+        ]
+      },
+      {
+        "tile": 20,
+        "tags": ["depths", "artifact"],
+        "frontend_data": { "x": 504, "y": 378 },
+        "items": [
+          {
+            "name": "artifact_mask",
+            "victory_points": 5,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 21,
+        "tags": ["crystal_cave", "minor_item", "depths"],
+        "frontend_data": { "x": 607, "y": 373 },
+        "items": [
+          {
+            "name": "strength",
+            "total": 3,
+            "action": [{ "attack_points": 2 }]
+          },
+          {
+            "name": "dragon_egg",
+            "total": 3,
+            "on_acquire": { "increase_dragon": 1 },
+            "victory_points": 3
+          }
+        ]
+      },
+      {
+        "tile": 22,
+        "tags": ["crystal_cave", "artifact", "depths"],
+        "frontend_data": { "x": 181, "y": 396 },
+        "items": [
+          {
+            "name": "artifact_banana",
+            "victory_points": 15,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 23,
+        "tags": ["market", "depths"],
+        "frontend_data": { "x": 325, "y": 506 }
+      },
+      {
+        "tile": 24,
+        "tags": ["market", "artifact", "depths"],
+        "frontend_data": { "x": 434, "y": 519 },
+        "items": [
+          {
+            "name": "artifact_vase",
+            "victory_points": 10,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 25,
+        "tags": ["crystal_cave", "major_item", "depths"],
+        "frontend_data": { "x": 503, "y": 473 },
+        "items": [
+          { "name": "draw_three", "total": 2, "action": [{ "draw": 3 }] }
+        ]
+      },
+      {
+        "tile": 26,
+        "tags": ["major_item", "depths"],
+        "frontend_data": { "x": 643, "y": 465 },
+        "items": [
+          {
+            "name": "greater_skill_points",
+            "total": 2,
+            "action": [{ "skill_points": 5 }]
+          }
+        ]
+      },
+      {
+        "tile": 27,
+        "tags": ["monkey", "depths"],
+        "frontend_data": {
+          "x": 80,
+          "y": 510,
+          "player_x": 1.81,
+          "player_y": -5.5
+        },
+        "items": [
+          {
+            "name": "monkey_idol",
+            "victory_points": 5,
+            "total": 1,
+            "type": "monkey"
+          },
+          {
+            "name": "monkey_idol",
+            "victory_points": 5,
+            "total": 1,
+            "type": "monkey"
+          },
+          {
+            "name": "monkey_idol",
+            "victory_points": 5,
+            "total": 1,
+            "type": "monkey"
+          }
+        ]
+      },
+      {
+        "tile": 28,
+        "tags": ["major_item", "depths"],
+        "frontend_data": { "x": 242, "y": 470 },
+        "items": [
+          {
+            "name": "greater_skill_points",
+            "total": 2,
+            "action": [{ "skill_points": 5 }]
+          }
+        ]
+      },
+      {
+        "tile": 29,
+        "tags": ["health", "depths"],
+        "frontend_data": { "x": 580, "y": 518 }
+      },
+      {
+        "tile": 30,
+        "tags": ["depths", "artifact"],
+        "frontend_data": { "x": 642, "y": 565 },
+        "items": [
+          {
+            "name": "artifact_mask",
+            "victory_points": 30,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 31,
+        "tags": ["minor_item", "depths"],
+        "frontend_data": { "x": 230, "y": 550 },
+        "items": [
+          {
+            "name": "dragon_egg",
+            "total": 3,
+            "on_acquire": { "increase_dragon": 1 },
+            "victory_points": 3
+          },
+          { "name": "healing", "total": 3, "action": [{ "health": 1 }] }
+        ]
+      },
+      {
+        "tile": 32,
+        "tags": ["depths", "artifact"],
+        "frontend_data": { "x": 310, "y": 610 },
+        "items": [
+          {
+            "name": "artifact_shield",
+            "victory_points": 20,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 33,
+        "tags": ["crystal_cave", "minor_item", "depths"],
+        "frontend_data": { "x": 413, "y": 605 },
+        "items": [
+          {
+            "name": "skill_points",
+            "total": 3,
+            "action": [{ "skill_points": 2 }]
+          },
+          {
+            "name": "skill_points",
+            "total": 3,
+            "action": [{ "skill_points": 2 }]
+          }
+        ]
+      },
+      {
+        "tile": 34,
+        "tags": ["depths", "artifact"],
+        "frontend_data": { "x": 510, "y": 596 },
+        "items": [
+          {
+            "name": "artifact_staff",
+            "victory_points": 25,
+            "total": 1,
+            "is_artifact": true,
+            "on_acquire": { "increase_dragon": 1 }
+          }
+        ]
+      },
+      {
+        "tile": 35,
+        "tags": ["major_item", "crystal_cave", "depths"],
+        "frontend_data": { "x": 600, "y": 650 },
+        "items": [{ "name": "chalice", "total": 3, "victory_points": 7 }]
+      },
+      {
+        "tile": 36,
+        "tags": ["depths"],
+        "frontend_data": { "x": 92, "y": 657 }
+      },
+      {
+        "tile": 37,
+        "tags": ["major_item", "depths"],
+        "frontend_data": { "x": 210, "y": 658 },
+        "items": [
+          { "name": "greater_healing", "total": 2, "action": [{ "health": 2 }] }
+        ]
+      },
+      {
+        "tile": 38,
+        "tags": ["health", "depths"],
+        "frontend_data": { "x": 390, "y": 670 }
+      }
+    ]
+  },
+  "deck": {
+    "num_of_active_cards": 6,
+    "active": [
+      {
+        "name": "brilliance",
+        "total": 1,
+        "cost": 6,
+        "actions": [{ "draw": 3 }]
+      },
+      {
+        "name": "monkey_bot_3000",
+        "cost": 5,
+        "total": 1,
+        "actions": [{ "clank": 3, "draw": 3 }],
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "the_vault",
+        "conditions": [{ "type": "can_buy", "is_in": "depths" }],
+        "cost": 3,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 5, "clank": 3 }],
+        "total": 2
+      },
+      {
+        "name": "kobold_merchant",
+        "cost": 3,
+        "total": 1,
+        "actions": [{ "coins": 2 }],
+        "victory_points": 1
+      },
+      {
+        "name": "move_silently",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "move_points": 2, "clank": -2 }]
+      },
+      {
+        "name": "swagger",
+        "total": 2,
+        "cost": 2,
+        "actions": [
+          { "move_points": 1 },
+          { "skill_points": 1 },
+          { "attack_points": 1 }
+        ]
+      }
+    ],
+    "deck": [
+      {
+        "name": "ladder",
+        "acquire": [{ "move_points": 2 }],
+        "cost": 3,
+        "total": 3
+      },
+      {
+        "name": "watcher",
+        "total": 3,
+        "health": 3,
+        "immediate_action": [{ "clank": 1 }],
+        "acquire": [{ "coins": 2, "other_clank": 1 }]
+      },
+      {
+        "name": "belcher",
+        "total": 2,
+        "health": 2,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 4, "clank": 2 }]
+      },
+      {
+        "name": "orc_grunt",
+        "total": 3,
+        "health": 2,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 3 }]
+      },
+      {
+        "name": "dragon_shrine",
+        "additonal_cube": 1,
+        "acquire": [{ "trash_options": 1 }, { "coins": 2 }],
+        "cost": 4,
+        "total": 2
+      },
+      {
+        "name": "dwarven_peddlar",
+        "cost": 2,
+        "total": 1,
+        "actions": [{ "coins": 2, "move_points": 1 }, { "health": 1 }],
+        "conditions": [
+          {
+            "type": "victory",
+            "victory_points": 4,
+            "two_of": ["chalice", "dragon_egg", "monkey_idol"]
+          }
+        ]
+      },
+      {
+        "name": "sneak",
+        "total": 2,
+        "cost": 2,
+        "actions": [{ "skill_points": 1, "clank": -2, "move_points": 1 }]
+      },
+      {
+        "name": "kobold",
+        "total": 3,
+        "health": 1,
+        "extra_cube": 1,
+        "acquire": [{ "skill_points": 1 }],
+        "immediate_actions": [{ "dragon_attack": 1 }]
+      },
+      {
+        "name": "singing_sword",
+        "total": 1,
+        "cost": 5,
+        "dragon_attacks": true,
+        "victory_points": 2,
+        "actions": [{ "attack_points": 2, "skill_points": 2, "clank": 1 }]
+      },
+      {
+        "name": "tattle",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "skill_points": 2, "other_clank": 2 }]
+      },
+      {
+        "name": "dragon_shrine",
+        "additonal_cube": 1,
+        "acquire": [{ "trash_options": 1 }, { "coins": 2 }],
+        "cost": 4,
+        "total": 2
+      },
+      {
+        "name": "cave_troll",
+        "total": 1,
+        "health": 4,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 3, "draw": 2 }],
+        "conditions": [{ "type": "can_buy", "is_in": "depths" }]
+      },
+      {
+        "name": "belcher",
+        "total": 2,
+        "health": 2,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 4, "clank": 2 }]
+      },
+      {
+        "name": "treasure_hunter",
+        "cost": 3,
+        "total": 2,
+        "actions": [
+          { "skill_points": 2, "attack_points": 2, "replace_card_points": 1 }
+        ],
+        "victory_points": 1
+      },
+      {
+        "name": "wizard",
+        "cost": 6,
+        "total": 1,
+        "actions": [{ "skill_points": 3 }, { "health": 1 }],
+        "conditions": [
+          {
+            "type": "victory",
+            "victory_points": 2,
+            "custom": "for_every_secret_tome_add_victory_point"
+          }
+        ]
+      },
+      {
+        "name": "the_duke",
+        "cost": 5,
+        "total": 1,
+        "actions": [{ "attack_points": 2, "skill_points": 2 }],
+        "conditions": [
+          {
+            "type": "victory",
+            "victory": 1,
+            "custom": "for_every_5_coins_add_victory_point"
+          }
+        ]
+      },
+      {
+        "name": "diamond",
+        "total": 1,
+        "cost": 8,
+        "victory_points": 8,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "sapphire",
+        "total": 3,
+        "cost": 4,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 4,
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "the_queen_of_hearts",
+        "cost": 6,
+        "total": 1,
+        "actions": [{ "skill_points": 3, "attack_points": 1 }, { "health": 2 }],
+        "victory_points": 3
+      },
+      {
+        "name": "wand_of_recall",
+        "total": 2,
+        "cost": 3,
+        "victory_points": 1,
+        "actions": [{ "skill_points": 2 }, { "move_points": 1 }]
+      },
+      {
+        "name": "silver_spear",
+        "total": 2,
+        "cost": 3,
+        "victory_points": 2,
+        "actions": [{ "attack_points": 3 }],
+        "acquire": [{ "attack_points": 1 }]
+      },
+      {
+        "name": "swagger",
+        "total": 2,
+        "cost": 2,
+        "actions": [
+          { "move_points": 1 },
+          { "skill_points": 1 },
+          { "attack_points": 1 }
+        ]
+      },
+      {
+        "name": "kobold",
+        "total": 3,
+        "health": 1,
+        "extra_cube": 1,
+        "acquire": [{ "skill_points": 1 }],
+        "immediate_actions": [{ "dragon_attack": 1 }]
+      },
+      {
+        "name": "crystal_golem",
+        "total": 2,
+        "health": 3,
+        "acquire": [{ "skill_points": 3 }],
+        "conditions": [{ "type": "can_buy", "is_in": "crystal_cave" }]
+      },
+      {
+        "name": "search",
+        "total": 2,
+        "cost": 4,
+        "actions": [{ "skill_points": 2, "move_points": 1, "coins": 1 }]
+      },
+      {
+        "name": "ruby",
+        "total": 2,
+        "cost": 6,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }],
+        "victory_points": 6
+      },
+      {
+        "name": "gem_collector",
+        "cost": 4,
+        "total": 1,
+        "actions": [{ "clank": -2, "skill_points": 2 }],
+        "description": "Gems are minus 2 skill points",
+        "victory_points": 2
+      },
+      {
+        "name": "slight_of_hand",
+        "total": 2,
+        "cost": 2,
+        "actions": [{ "draw": 2 }]
+      },
+      {
+        "name": "animated_door",
+        "total": 2,
+        "health": 1,
+        "acquire": [{ "move_points": 1 }],
+        "attack": 1,
+        "immediate_actions": [{ "dragon_attack": 1 }]
+      },
+      {
+        "name": "underworld_dealing",
+        "total": 1,
+        "cost": 1,
+        "actions": [{ "coins": 1 }, { "health": 2 }]
+      },
+      {
+        "name": "orc_grunt",
+        "total": 3,
+        "health": 2,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 3 }]
+      },
+      {
+        "name": "shrine",
+        "immediate_action": [{ "dragon_clank": -3 }],
+        "acquire": [{ "health": 1 }, { "coins": 1 }],
+        "cost": 2,
+        "total": 3
+      },
+      {
+        "name": "lucky_coin",
+        "total": 2,
+        "cost": 1,
+        "victory_points": 1,
+        "actions": [{ "skill_points": 1, "clank": 1, "draw": 1 }]
+      },
+      {
+        "name": "lucky_coin",
+        "total": 2,
+        "cost": 1,
+        "victory_points": 1,
+        "actions": [{ "skill_points": 1, "clank": 1, "draw": 1 }]
+      },
+      {
+        "name": "apothecary",
+        "total": 1,
+        "cost": 3,
+        "victory_points": 2,
+        "actions": [{ "health": 2 }, { "coins": 2 }, { "attack_points": 3 }]
+      },
+      {
+        "name": "sapphire",
+        "total": 3,
+        "cost": 4,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 4,
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "watcher",
+        "total": 3,
+        "health": 3,
+        "immediate_action": [{ "clank": 1 }],
+        "acquire": [{ "coins": 2, "other_clank": 1 }]
+      },
+      {
+        "name": "ruby",
+        "total": 2,
+        "cost": 6,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }],
+        "victory_points": 6
+      },
+      {
+        "name": "treasure_hunter",
+        "cost": 3,
+        "total": 2,
+        "actions": [
+          { "skill_points": 2, "attack_points": 2, "replace_card_points": 1 }
+        ],
+        "victory_points": 1
+      },
+      {
+        "name": "boots_of_swiftness",
+        "total": 1,
+        "cost": 5,
+        "victory_points": 2,
+        "actions": [{ "move_points": 3 }],
+        "acquire": [{ "move_points": 1 }]
+      },
+      {
+        "name": "tattle",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "skill_points": 2, "other_clank": 2 }]
+      },
+      {
+        "name": "search",
+        "total": 2,
+        "cost": 4,
+        "actions": [{ "skill_points": 2, "move_points": 1, "coins": 1 }]
+      },
+      {
+        "name": "overlord",
+        "health": 2,
+        "total": 2,
+        "immediate_action": [{ "clank": 1 }],
+        "acquire": [{ "draw": 2 }]
+      },
+      {
+        "name": "the_mountain_king",
+        "cost": 6,
+        "total": 1,
+        "actions": [
+          { "skill_points": 2 },
+          { "attack_points": 2 },
+          { "move_points": 1 }
+        ],
+        "victory_points": 3
+      },
+      {
+        "name": "dead_run",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "move_points": 2, "clank": 2, "skip_crystal_cave": true }]
+      },
+      {
+        "name": "rebel_captain",
+        "cost": 3,
+        "total": 1,
+        "actions": [{ "skill_points": 2 }, { "draw": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "shrine",
+        "immediate_action": [{ "dragon_clank": -3 }],
+        "acquire": [{ "health": 1 }, { "coins": 1 }],
+        "cost": 2,
+        "total": 3
+      },
+      {
+        "name": "elven_dagger",
+        "total": 1,
+        "cost": 4,
+        "actions": [{ "skill_points": 1, "attack_points": 1, "draw": 1 }]
+      },
+      {
+        "name": "watcher",
+        "total": 3,
+        "health": 3,
+        "immediate_action": [{ "clank": 1 }],
+        "acquire": [{ "coins": 2, "other_clank": 1 }]
+      },
+      {
+        "name": "cleric_of_the_sun",
+        "cost": 3,
+        "total": 2,
+        "acquire": [{ "health": 1 }],
+        "actions": [{ "attack_points": 1, "skill_points": 2 }, { "health": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "master_burglar",
+        "cost": 3,
+        "total": 2,
+        "victory_points": 2,
+        "actions": [{ "trash_options": { "burgle": 1 }, "skill_points": 2 }]
+      },
+      {
+        "name": "elven_boots",
+        "total": 1,
+        "cost": 4,
+        "victory_points": 2,
+        "actions": [{ "draw": 1, "move_points": 1, "skill_points": 1 }]
+      },
+      {
+        "name": "crystal_golem",
+        "total": 2,
+        "health": 3,
+        "acquire": [{ "skill_points": 3 }],
+        "conditions": [{ "type": "can_buy", "is_in": "crystal_cave" }]
+      },
+      {
+        "name": "orc_grunt",
+        "total": 3,
+        "health": 2,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 3 }]
+      },
+      {
+        "name": "ogre",
+        "acquire": [{ "coins": 5 }],
+        "health": 3,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "total": 2
+      },
+      {
+        "name": "flying_carpet",
+        "total": 1,
+        "cost": 6,
+        "victory_points": 2,
+        "actions": [
+          {
+            "move_points": 2,
+            "skip_crystal_cave": true,
+            "ignore_monster_path": true
+          }
+        ]
+      },
+      {
+        "name": "mister_whiskers",
+        "cost": 1,
+        "total": 1,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "actions": [{ "clank": -2 }, { "dragon_attack": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "rebel_soldier",
+        "cost": 2,
+        "total": 1,
+        "actions": [{ "attack_points": 2 }],
+        "victory_points": 1
+      },
+      {
+        "name": "wand_of_recall",
+        "total": 2,
+        "cost": 3,
+        "victory_points": 1,
+        "actions": [{ "skill_points": 2 }, { "move_points": 1 }]
+      },
+      {
+        "name": "master_burglar",
+        "cost": 3,
+        "total": 2,
+        "victory_points": 2,
+        "actions": [{ "trash_options": { "burgle": 1 }, "skill_points": 2 }]
+      },
+      {
+        "name": "scepter_of_the_ape_lord",
+        "total": 1,
+        "cost": 3,
+        "victory_points": 3,
+        "actions": [{ "clank": 3, "skill_points": 3 }]
+      },
+      {
+        "name": "kobold",
+        "total": 3,
+        "health": 1,
+        "extra_cube": 1,
+        "acquire": [{ "skill_points": 1 }],
+        "immediate_actions": [{ "dragon_attack": 1 }]
+      },
+      {
+        "name": "invoker_of_the_ancients",
+        "cost": 4,
+        "total": 1,
+        "actions": [{ "clank": 1, "move_points": 1 }, { "health": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "rebel_scout",
+        "cost": 3,
+        "total": 1,
+        "actions": [{ "move_points": 2 }, { "draw": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "elven_cloak",
+        "total": 1,
+        "cost": 4,
+        "victory_points": 2,
+        "actions": [{ "skill_points": 1, "clank": -2, "draw": 1 }]
+      },
+      {
+        "name": "bracers_of_agility",
+        "total": 2,
+        "cost": 5,
+        "victory_points": 2,
+        "actions": [{ "draw": 2 }]
+      },
+      {
+        "name": "tunnel_guide",
+        "cost": 1,
+        "total": 2,
+        "actions": [{ "move_points": 1, "attack_points": 1 }]
+      },
+      {
+        "name": "overlord",
+        "health": 2,
+        "total": 2,
+        "immediate_action": [{ "clank": 1 }],
+        "acquire": [{ "draw": 2 }]
+      },
+      {
+        "name": "dead_run",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "move_points": 2, "clank": 2, "skip_crystal_cave": true }]
+      },
+      {
+        "name": "sneak",
+        "total": 2,
+        "cost": 2,
+        "actions": [{ "skill_points": 1, "clank": -2, "move_points": 1 }]
+      },
+      {
+        "name": "rebel_miner",
+        "cost": 2,
+        "total": 1,
+        "actions": [{ "coins": 2 }],
+        "victory_points": 1
+      },
+      {
+        "name": "bracers_of_agility",
+        "total": 2,
+        "cost": 5,
+        "victory_points": 2,
+        "actions": [{ "draw": 2 }]
+      },
+      {
+        "name": "ladder",
+        "acquire": [{ "move_points": 2 }],
+        "cost": 3,
+        "total": 3
+      },
+      {
+        "name": "pickaxe",
+        "cost": 4,
+        "victory_points": 2,
+        "actions": [{ "coins": 2, "attack_points": 2 }],
+        "total": 2
+      },
+      {
+        "name": "amulet_of_vigor",
+        "total": 1,
+        "cost": 7,
+        "victory_points": 3,
+        "actions": [{ "skill_points": 4 }],
+        "acquire": [{ "health": 1 }]
+      },
+      {
+        "name": "ladder",
+        "acquire": [{ "move_points": 2 }],
+        "cost": 3,
+        "total": 3
+      },
+      {
+        "name": "ogre",
+        "acquire": [{ "coins": 5 }],
+        "health": 3,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "total": 2
+      },
+      {
+        "name": "slight_of_hand",
+        "total": 2,
+        "cost": 2,
+        "actions": [{ "draw": 2 }]
+      },
+      {
+        "name": "the_vault",
+        "conditions": [{ "type": "can_buy", "is_in": "depths" }],
+        "cost": 3,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "coins": 5, "clank": 3 }],
+        "total": 2
+      },
+      {
+        "name": "tunnel_guide",
+        "cost": 1,
+        "total": 2,
+        "actions": [{ "move_points": 1, "attack_points": 1 }]
+      },
+      {
+        "name": "shrine",
+        "immediate_action": [{ "dragon_clank": -3 }],
+        "acquire": [{ "health": 1 }, { "coins": 1 }],
+        "cost": 2,
+        "total": 3
+      },
+      {
+        "name": "sapphire",
+        "total": 3,
+        "cost": 4,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 4,
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "emerald",
+        "total": 2,
+        "cost": 5,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 5,
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "archaeologist",
+        "victory_points": 1,
+        "cost": 2,
+        "total": 2,
+        "actions": [{ "draw": 1 }, { "skill_points": 2 }]
+      },
+      {
+        "name": "cleric_of_the_sun",
+        "cost": 3,
+        "total": 2,
+        "acquire": [{ "health": 1 }],
+        "actions": [{ "attack_points": 1, "skill_points": 2 }, { "health": 1 }],
+        "victory_points": 1
+      },
+      {
+        "name": "move_silently",
+        "total": 2,
+        "cost": 3,
+        "actions": [{ "move_points": 2, "clank": -2 }]
+      },
+      {
+        "name": "animated_door",
+        "total": 2,
+        "health": 1,
+        "acquire": [{ "move_points": 1 }],
+        "attack": 1,
+        "immediate_actions": [{ "dragon_attack": 1 }]
+      },
+      {
+        "name": "treasure_map",
+        "total": 1,
+        "cost": 6,
+        "actions": [{ "coins": 5 }]
+      },
+      {
+        "name": "emerald",
+        "total": 2,
+        "cost": 5,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "victory_points": 5,
+        "actions": [{ "draw": 1 }],
+        "acquire": [{ "clank": 2 }]
+      },
+      {
+        "name": "archaeologist",
+        "victory_points": 1,
+        "cost": 2,
+        "total": 2,
+        "actions": [{ "draw": 1 }, { "skill_points": 2 }]
+      },
+      {
+        "name": "pickaxe",
+        "cost": 4,
+        "victory_points": 2,
+        "actions": [{ "coins": 2, "attack_points": 2 }],
+        "total": 2
+      },
+      {
+        "name": "silver_spear",
+        "total": 2,
+        "cost": 3,
+        "victory_points": 2,
+        "actions": [{ "attack_points": 3 }],
+        "acquire": [{ "attack_points": 1 }]
+      },
+      {
+        "name": "wand_of_wind",
+        "total": 1,
+        "cost": 6,
+        "victory_points": 3,
+        "actions": [{ "move_points": 1, "skill_points": 1 }]
+      },
+      {
+        "name": "dragon_eye",
+        "total": 1,
+        "cost": 5,
+        "immediate_actions": [{ "dragon_attack": 1 }],
+        "acquire": [{ "clank": 2 }],
+        "conditions": [
+          { "type": "can_buy", "is_in": "depths" },
+          { "type": "victory", "victory_points": 10, "has": "mastery_token" }
+        ],
+        "actions": [{ "draw": 1 }]
+      }
+    ],
+    "discarded": []
+  },
+  "marketplace": [
+    {
+      "name": "explore",
+      "total": 15,
+      "cost": 3,
+      "actions": [{ "move_points": 1, "skill_points": 2 }]
+    },
+    { "name": "goblin", "total": 1, "health": 2, "acquire": [{ "coins": 1 }] },
+    {
+      "name": "mercenary",
+      "total": 15,
+      "actions": [{ "attack_points": 2, "skill_points": 1 }],
+      "cost": 2
+    },
+    { "name": "secret_tome", "victory_points": 7, "cost": 7, "total": 12 }
+  ],
+  "marketplace_items": [
+    {
+      "name": "key",
+      "total": 3,
+      "victory_points": 5,
+      "description": "Go through locked corridors",
+      "tiles": [18, 19, 23, 24]
+    },
+    {
+      "name": "crown",
+      "total": 3,
+      "victory_points": 9,
+      "tiles": [18, 19, 23, 24]
+    },
+    {
+      "name": "backpack",
+      "total": 2,
+      "victory_points": 5,
+      "description": "Hold an extra artifact",
+      "tiles": [18, 19, 23, 24]
+    }
+  ],
+  "game_engine": "Clank",
+  "players": [
+    {
+      "index": 0,
+      "name": "celina",
+      "inventory": [],
+      "position": {
+        "current_position": 0,
+        "graph": {
+          "-3": { "-4": 1, "-2": 1 },
+          "-4": { "-3": 1 },
+          "-2": { "-3": 1, "-1": 1 },
+          "-1": { "-2": 1, "0": 1 },
+          "0": { "-1": 1, "1": 1 },
+          "1": { "0": 1, "2": 1 },
+          "2": { "1": 1, "7": 1, "3": 1, "6": 1 },
+          "7": { "2": 1, "12": 1, "13": 1 },
+          "3": { "2": 1, "4": 1, "8": 1, "9": 1 },
+          "4": { "3": 1, "5": 1, "9": 1 },
+          "5": { "4": 1, "10": 1 },
+          "10": { "5": 1, "9": 1, "15": 1 },
+          "6": { "2": 1, "11": 1 },
+          "11": { "6": 1, "16": 1 },
+          "12": { "7": 1, "16": 1, "17": 1 },
+          "13": { "7": 1, "8": 1, "14": 1, "17": 1, "18": 1 },
+          "8": { "3": 1, "13": 1 },
+          "9": { "3": 1, "4": 1, "10": 1, "14": 1 },
+          "15": { "10": 1, "14": 1, "20": 1 },
+          "16": { "12": 1, "21": 1, "17": 1, "22": 1, "27": 1, "11": 1 },
+          "17": { "12": 1, "16": 1, "13": 1, "23": 1, "28": 1 },
+          "14": { "13": 1, "9": 1, "15": 1, "20": 1 },
+          "20": { "14": 1, "15": 1, "19": 1, "21": 1 },
+          "21": { "16": 1, "20": 1, "26": 1 },
+          "22": { "16": 1, "27": 1 },
+          "27": { "16": 1, "22": 1, "31": 1, "36": 1 },
+          "23": { "17": 1, "18": 1, "24": 1, "28": 1, "31": 1, "32": 1 },
+          "28": { "17": 1, "23": 1 },
+          "18": { "13": 1, "23": 1 },
+          "19": { "20": 1, "24": 1, "25": 1 },
+          "24": { "19": 1, "23": 1, "33": 1 },
+          "25": { "19": 1, "29": 1 },
+          "26": { "21": 1, "30": 1 },
+          "31": { "23": 1, "27": 1, "32": 1, "36": 1 },
+          "32": { "23": 1, "31": 1, "33": 1, "37": 1, "38": 1 },
+          "33": { "24": 1, "32": 1, "34": 1 },
+          "29": { "25": 1, "34": 1 },
+          "30": { "26": 1 },
+          "36": { "27": 1, "31": 1, "37": 1 },
+          "34": { "29": 1, "33": 1, "35": 1, "38": 1 },
+          "37": { "32": 1, "36": 1 },
+          "38": { "32": 1, "34": 1, "35": 1 },
+          "35": { "34": 1, "38": 1 }
+        }
+      },
+      "deck": {
+        "num_of_active_cards": 5,
+        "active": [
+          { "name": "sidestep", "actions": [{ "move_points": 1 }], "total": 1 },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          {
+            "name": "scramble",
+            "actions": [{ "move_points": 1, "skill_points": 1 }],
+            "total": 1
+          },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] }
+        ],
+        "deck": [
+          { "name": "stumble", "actions": [{ "clank": 1 }], "total": 2 },
+          { "name": "stumble", "actions": [{ "clank": 1 }], "total": 2 },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] }
+        ],
+        "discarded": []
+      },
+      "clank": 3,
+      "attack_points": 0,
+      "health": 10,
+      "move_points": 0,
+      "coins": 7,
+      "rewards": [],
+      "skill_points": 0,
+      "trash_options": [],
+      "ignore_monster_path": false,
+      "skip_crystal_cave": false,
+      "discard_number": 0,
+      "moved_to_crystal_cave": false,
+      "victory_points": 0,
+      "replace_card_points": 0
+    },
+    {
+      "index": 1,
+      "name": "marisa",
+      "inventory": [],
+      "position": {
+        "current_position": 0,
+        "graph": {
+          "-3": { "-4": 1, "-2": 1 },
+          "-4": { "-3": 1 },
+          "-2": { "-3": 1, "-1": 1 },
+          "-1": { "-2": 1, "0": 1 },
+          "0": { "-1": 1, "1": 1 },
+          "1": { "0": 1, "2": 1 },
+          "2": { "1": 1, "7": 1, "3": 1, "6": 1 },
+          "7": { "2": 1, "12": 1, "13": 1 },
+          "3": { "2": 1, "4": 1, "8": 1, "9": 1 },
+          "4": { "3": 1, "5": 1, "9": 1 },
+          "5": { "4": 1, "10": 1 },
+          "10": { "5": 1, "9": 1, "15": 1 },
+          "6": { "2": 1, "11": 1 },
+          "11": { "6": 1, "16": 1 },
+          "12": { "7": 1, "16": 1, "17": 1 },
+          "13": { "7": 1, "8": 1, "14": 1, "17": 1, "18": 1 },
+          "8": { "3": 1, "13": 1 },
+          "9": { "3": 1, "4": 1, "10": 1, "14": 1 },
+          "15": { "10": 1, "14": 1, "20": 1 },
+          "16": { "12": 1, "21": 1, "17": 1, "22": 1, "27": 1, "11": 1 },
+          "17": { "12": 1, "16": 1, "13": 1, "23": 1, "28": 1 },
+          "14": { "13": 1, "9": 1, "15": 1, "20": 1 },
+          "20": { "14": 1, "15": 1, "19": 1, "21": 1 },
+          "21": { "16": 1, "20": 1, "26": 1 },
+          "22": { "16": 1, "27": 1 },
+          "27": { "16": 1, "22": 1, "31": 1, "36": 1 },
+          "23": { "17": 1, "18": 1, "24": 1, "28": 1, "31": 1, "32": 1 },
+          "28": { "17": 1, "23": 1 },
+          "18": { "13": 1, "23": 1 },
+          "19": { "20": 1, "24": 1, "25": 1 },
+          "24": { "19": 1, "23": 1, "33": 1 },
+          "25": { "19": 1, "29": 1 },
+          "26": { "21": 1, "30": 1 },
+          "31": { "23": 1, "27": 1, "32": 1, "36": 1 },
+          "32": { "23": 1, "31": 1, "33": 1, "37": 1, "38": 1 },
+          "33": { "24": 1, "32": 1, "34": 1 },
+          "29": { "25": 1, "34": 1 },
+          "30": { "26": 1 },
+          "36": { "27": 1, "31": 1, "37": 1 },
+          "34": { "29": 1, "33": 1, "35": 1, "38": 1 },
+          "37": { "32": 1, "36": 1 },
+          "38": { "32": 1, "34": 1, "35": 1 },
+          "35": { "34": 1, "38": 1 }
+        }
+      },
+      "deck": {
+        "num_of_active_cards": 5,
+        "active": [
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "stumble", "actions": [{ "clank": 1 }], "total": 2 },
+          { "name": "sidestep", "actions": [{ "move_points": 1 }], "total": 1 },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] }
+        ],
+        "deck": [
+          { "name": "stumble", "actions": [{ "clank": 1 }], "total": 2 },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] },
+          {
+            "name": "scramble",
+            "actions": [{ "move_points": 1, "skill_points": 1 }],
+            "total": 1
+          },
+          { "name": "burgle", "total": 6, "actions": [{ "skill_points": 1 }] }
+        ],
+        "discarded": []
+      },
+      "clank": 2,
+      "attack_points": 0,
+      "health": 10,
+      "move_points": 0,
+      "coins": 7,
+      "rewards": [],
+      "skill_points": 0,
+      "trash_options": [],
+      "ignore_monster_path": false,
+      "skip_crystal_cave": false,
+      "discard_number": 0,
+      "moved_to_crystal_cave": false,
+      "victory_points": 0,
+      "replace_card_points": 0
+    }
+  ],
+  "results": [],
+  "eng_game": false
+}
