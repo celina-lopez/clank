@@ -2,11 +2,10 @@
 
 class Action::Card < Action::Base
   def execute!
-    if card.nil?
-      send(type)
-      return gameplay_data
-    end
-    redeem_card_rewards
+    return unless card.nil?
+
+    send(type)
+    gameplay_data
   end
 
   def card
