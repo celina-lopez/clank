@@ -6,7 +6,7 @@ class Model::Game < Base
   def initialize(**kwargs)
     @current_player_index = kwargs[:current_player_index]
     @players = if kwargs[:new_players].present?
-                 initialize_players(kwargs[:new_players])
+                 initialize_players(new_players)
                else
                  kwargs[:players]
                end

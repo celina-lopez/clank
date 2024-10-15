@@ -54,7 +54,7 @@ class Clank::Model::Game < Model::Game
   private
 
   def activate_current_player_actions
-    active_actions = current_player.deck.active.map do |x|
+    active_actions = current_player.deck.active.flat_map do |x|
       x.fetch('actions', []).first&.keys
     end & %w[ignore_monster_path skip_crystal_cave]
     active_actions.each { |action| current_player.send("#{action}=", true) } if active_actions.any?

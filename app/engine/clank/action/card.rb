@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Clank::Action::Card < Action::Card
+  def execute!
+    super
+    redeem_card_rewards
+    gameplay_data
+  end
   %i[coins clank replace_card_points discard_number].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }

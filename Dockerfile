@@ -2,7 +2,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM --platform=linux/amd64 registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
 WORKDIR /rails
@@ -46,4 +46,4 @@ RUN SECRET_KEY_BASE="dummy_key_base" ./bin/rails assets:precompile
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 ENV RAILS_ENV=production
-CMD ["./bin/rails", "server"]
+ENTRYPOINT ["./bin/rails", "server", "-b", "0.0.0.0"]
