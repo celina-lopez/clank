@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
-    config.hosts << 'bonjour.worthyofapenny.com'
+    config.hosts << /.*\.worthyofapenny\.com\z/
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.active_record.legacy_connection_handling = false

@@ -46,4 +46,4 @@ RUN SECRET_KEY_BASE="dummy_key_base" ./bin/rails assets:precompile
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 ENV RAILS_ENV=production
-ENTRYPOINT ["./bin/rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["./bin/dev"]
