@@ -1,6 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
+  # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
+  config.assume_ssl = false
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -44,7 +48,7 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = [/63vrm.hatchboxapp/, /playboard.games/]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
