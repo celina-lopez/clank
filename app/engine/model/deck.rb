@@ -65,8 +65,6 @@ class Model::Deck
     deck + discarded + active
   end
 
-  private
-
   def reload_deck
     self.deck = discarded.shuffle!
     self.discarded = []

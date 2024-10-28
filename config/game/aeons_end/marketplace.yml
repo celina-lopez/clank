@@ -1,0 +1,50 @@
+- name: diamond_cluster
+  cost: 4
+  total: 6
+  actions:
+    - coins: 2
+  conditional:
+    - type: has_card
+      card: diamond_cluster
+      count: 1
+      actions:
+        - coins: 2
+- name: jade
+  cost: 2
+  total: 6
+  actions:
+    - coins: 2
+- name: spectral_echo
+  cost: 3
+  total: 6
+  actions:
+    - attack_points: 2
+      trash_points: 1
+- name: planar_insight
+  cost: 6
+  total: 6
+  actions:
+    - attack_points: 2
+  conditional:
+    - type: breach_number
+      actions:
+        - attack_points: 1
+- name: essence_theft
+  cost: 5
+  total: 6
+  actions:
+    - attack_points: 3
+      discard_points: 1
+- name: mages_tailsman
+  cost: 5
+  total: 6
+  actions:
+    - charge: 1
+      other_player_charge: 1
+- name: mages_tailsman
+  cost: 4
+  total: 6
+  actions:
+    - focus_any: 1
+    - destroy: mages_tailsmans
+      gravehold_health: 3

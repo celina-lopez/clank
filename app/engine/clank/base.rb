@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def config_yaml(name)
-  YAML.load_file(Rails.root.join('config', 'game', "#{name}.yml"))
+  YAML.load_file(Rails.root.join('config', 'game', 'clank', "#{name}.yml"))
 end
 
 class Clank::Base < Base

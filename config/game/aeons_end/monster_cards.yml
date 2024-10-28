@@ -1,0 +1,45 @@
+- name: agony_field
+  power: 2
+  discard_method:
+    - type: destroy
+      cost: 2
+  actions:
+    - unleash: 1
+      discard_points: 3
+      draw: 1
+- name: blane_sire
+  health: 6
+  type: persistent
+  actions:
+    - unleash: 1
+- name: bleed_static
+  power: 3
+  conditional:
+    - type: most_spells
+      actions:
+        - health: -2
+- name: eye_of_nothing
+  power: 2
+  discard_method:
+    - cost: 6
+- name: haze_spewer
+  health: 5
+  type: persistent
+  actions:
+    - gravehold_health: this
+- name: skewer
+  actions:
+    - unleash: 1
+      health: -3
+      draw: 1
+- name: slaughter
+  actions:
+    - unleash: 1
+      gravehold_health: -3
+- name: woven_sky
+  power: 2
+  discard_method:
+    - discard: 3
+  actions:
+    - unleash: 1
+      health: -4
