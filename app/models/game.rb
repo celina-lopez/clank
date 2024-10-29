@@ -2,10 +2,10 @@
 #
 # Table name: games
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  data       :json             not null
 #  game_type  :integer          default("clank")
-#  history    :json             not null
+#  history    :json             not null, is an Array
 #  password   :string
 #  settings   :json
 #  title      :string           not null

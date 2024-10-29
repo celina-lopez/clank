@@ -5,11 +5,11 @@ ruby File.read('.ruby-version').strip
 
 gem 'bootsnap', '>= 1.4.2', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'jbuilder', '~> 2.7' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'pg', '~> 1.1'
 gem 'puma', '~> 4.1' # Use Puma as the app server
 gem 'rails', '~> 7.0.0'
 gem 'redis'
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
-gem 'sqlite3', '~> 1.4' # Use sqlite3 as the database for Active Record
 gem 'turbolinks', '~> 5' # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

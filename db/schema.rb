@@ -11,12 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2024_03_14_015732) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "games", force: :cascade do |t|
     t.string "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
     t.string "password"
     t.json "data", default: {}, null: false
-    t.json "history", default: [], null: false
+    t.json "history", default: [], null: false, array: true
     t.integer "game_type", default: 0
     t.json "settings", default: {}
     t.datetime "created_at", null: false
