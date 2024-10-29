@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class Clank::Model::Player < Model::Player
+class AeonsEnd::Model::Player < Model::Player
   attr_accessor :coins, :rewards, :deck
   attr_reader :clank
 
   MAX_HEALTH = 10
 
   def self.from_json(json)
-    Clank::Model::Player.new(
+    AeonsEnd::Model::Player.new(
       json['index'],
       deck: Clank::Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index deck game_engine].include?(k) }

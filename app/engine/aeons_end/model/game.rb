@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class Clank::Model::Game < Model::Game
+class AeonsEnd::Model::Game < Model::Game
   attr_accessor :deck, :marketplace, :map, :dragon, :marketplace_items
 
   def self.from_json(json)
-    Clank::Model::Game.new(
+    AeonsEnd::Model::Game.new(
       monster: AeonsEnd::Model::Monster.from_json(json['monster']),
       marketplace: json['marketplace'],
       players: json['players'].map { |p| Clank::Model::Player.from_json(p) },
@@ -21,7 +21,7 @@ class Clank::Model::Game < Model::Game
     current_player_index: 0,
     end_game: false
   )
-    @monster = monster || AeonsEnd::Model::Monster.new(AeonsEnd::Base::MONSTER_CARDS)
+    @monster = monster || AeonsEnd::Model::Monster.new
     @current_player_index = current_player_index
     @marketplace = marketplace
     @players = if new_players.present?

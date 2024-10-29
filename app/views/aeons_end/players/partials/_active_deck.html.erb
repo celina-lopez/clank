@@ -1,0 +1,13 @@
+<div class='flex flex-wrap gap-3' id='active-cards'>
+  <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
+    <%= render(
+      'players/components/card',
+      card:,
+      id: "active-card-#{index}",
+      data_type: 'buy_card',
+      data_name: card['name'],
+      button_text: card['health'].present? ? 'attack' : 'buy',
+      game_prefix: "clank"
+    ) %>
+  <% end %>
+</div>

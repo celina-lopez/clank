@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Clank::Action::Game < Action::Game
+  def start_game
+    self.gameplay_data = game_engine::Model::Game.new(new_players: value[:players],
+                                                      map: game_engine::Model::Map.new(map_type: value[:map_type]))
+  end
+
   def end_turn # rubocop:disable Metrics/AbcSize
     loop do
       gameplay_data.next_player!
@@ -50,5 +55,10 @@ class Clank::Action::Game < Action::Game
       Clank::Action.const_get(klass_type).new(gameplay_data, type: action_data[0], value: action_data[1]).execute!
       history << { type: action_data[0], value: action_data[1] }
     end
+  end
+
+  def end_game!
+    super
+    CalculateVictoryPoints.new(gameplay_data).execute!
   end
 end

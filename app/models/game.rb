@@ -25,7 +25,8 @@ class Game < ApplicationRecord
   validates :game_type, presence: true
 
   enum game_type: {
-    clank: 0
+    clank: 0,
+    aeons_end: 1
   }
 
   def engine

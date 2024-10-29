@@ -8,6 +8,10 @@ class AeonsEnd::Action::Game < Action::Game
     fullfill_immediate_actions
   end
 
+  def start_game
+    self.gameplay_data = game_engine::Model::Game.new(new_players: value[:players])
+  end
+
   private
 
   def fullfill_immediate_actions
