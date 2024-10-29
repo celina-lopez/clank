@@ -160,6 +160,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
+    pg (1.5.3)
     popper_js (2.11.8)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -268,12 +269,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.7.2-aarch64-linux)
-    sqlite3 (1.7.2-arm-linux)
-    sqlite3 (1.7.2-arm64-darwin)
-    sqlite3 (1.7.2-x86-linux)
-    sqlite3 (1.7.2-x86_64-darwin)
-    sqlite3 (1.7.2-x86_64-linux)
     tailwindcss-rails (2.3.0)
       railties (>= 6.0.0)
     tailwindcss-rails (2.3.0-aarch64-linux)
@@ -333,6 +328,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   light-service
   listen (~> 3.2)
+  pg (~> 1.1)
   pry
   puma (~> 4.1)
   rails (~> 7.0.0)
@@ -343,7 +339,6 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen
-  sqlite3 (~> 1.4)
   tailwindcss-rails (~> 2.3)
   toastr-rails (~> 1.0)
   turbolinks (~> 5)
