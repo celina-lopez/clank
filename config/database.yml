@@ -23,4 +23,6 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV["DATABASE_URL"] %>
+  database: clank_production
+  username: clank
+  password: <%= ENV['CLANK_DB_PASSWORD'] %>
