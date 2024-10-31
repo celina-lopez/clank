@@ -10,6 +10,7 @@ module App
   class Application < Rails::Application
     config.hosts << /.*\.worthyofapenny\.com\z/
     config.hosts << /.*\.playboard\.games\z/
+    config.hosts << 'playboard.games'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.active_record.legacy_connection_handling = false
