@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-def config_yaml(name)
-  YAML.load_file(Rails.root.join('config', 'game', "#{name}.yml"))
-end
-
 class Base
   def game_engine
     @game_engine ||= self.class.game_engine

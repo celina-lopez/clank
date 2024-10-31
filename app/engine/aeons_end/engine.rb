@@ -2,11 +2,11 @@
 
 class AeonsEnd::Engine < Engine
   def self.klass_type(type)
-    if Clank::Action::Player.actions_include?(type)
+    if AeonsEnd::Action::Player.actions_include?(type)
       'Player'
-    elsif Clank::Action::Card.actions_include?(type)
+    elsif AeonsEnd::Action::Card.actions_include?(type)
       'Card'
-    elsif Clank::Action::Game.actions_include?(type)
+    elsif AeonsEnd::Action::Game.actions_include?(type)
       'Game'
     end
   end
