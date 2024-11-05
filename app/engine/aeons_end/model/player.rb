@@ -29,7 +29,9 @@ class AeonsEnd::Model::Player < Model::Player
     @name = name
     @slots = slots
     @filled_slots = filled_slots
-    @deck = deck || AeonsEnd::Model::Deck.new(AeonsEnd::Base::STARTING_DECK_CARDS)
+    @deck = deck || AeonsEnd::Model::Deck.new(
+      AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }['starting_hand']
+    )
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @rewards = rewards || []
