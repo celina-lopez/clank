@@ -2,14 +2,13 @@
 
 class AeonsEnd::Model::Player < Model::Player
   attr_accessor :coins, :rewards, :deck
-  attr_reader :clank
 
   MAX_HEALTH = 10
 
   def self.from_json(json)
     AeonsEnd::Model::Player.new(
       json['index'],
-      deck: Clank::Model::Deck.from_json(json['deck']),
+      deck: AeonsEnd::Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index deck game_engine].include?(k) }
     )
   end
@@ -30,7 +29,7 @@ class AeonsEnd::Model::Player < Model::Player
     @name = name
     @slots = slots
     @filled_slots = filled_slots
-    @deck = deck || Clank::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
+    @deck = deck || AeonsEnd::Model::Deck.new(AeonsEnd::Base::STARTING_DECK_CARDS)
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @rewards = rewards || []

@@ -7,7 +7,7 @@ class AeonsEnd::Model::Game < Model::Game
     AeonsEnd::Model::Game.new(
       monster: AeonsEnd::Model::Monster.from_json(json['monster']),
       marketplace: json['marketplace'],
-      players: json['players'].map { |p| Clank::Model::Player.from_json(p) },
+      players: json['players'].map { |p| AeonsEnd::Model::Player.from_json(p) },
       current_player_index: json['current_player_index'],
       end_game: json['end_game']
     )

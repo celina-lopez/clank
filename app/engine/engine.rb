@@ -18,7 +18,6 @@ class Engine < Base
       raise Validation::Base::InvalidMoveError,
             'Not current player'
     end
-    binding.pry
     klass = klass_type(type)
     validation_klass = game_engine::Validation.const_get(klass).new(gameplay_data, type:, value:, player_index:)
     raise Validation::Base::InvalidMoveError, validation_klass.error_messages unless validation_klass.valid?
