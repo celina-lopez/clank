@@ -13,7 +13,7 @@ class AeonsEnd::Model::Monster
   def initialize(
     health: 70,
     type: MONSTER_TYPES.first,
-    deck: AeonsEnd::Model::Deck.new(AeonsEnd::Base::MONSTER_CARDS)
+    deck: AeonsEnd::Model::Deck.new(AeonsEnd::Base::MONSTER_CARDS, num_of_active_cards: 0)
   )
     @health = health
     @type = type

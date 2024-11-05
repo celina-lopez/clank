@@ -1,5 +1,5 @@
 <div class='flex flex-wrap gap-3' id='active-cards'>
-  <% game.data.dig('deck', 'active').each_with_index do |card, index| %>
+  <% game.data.dig('monster','deck', 'active').each_with_index do |card, index| %>
     <%= render(
       'players/components/card',
       card:,
