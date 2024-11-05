@@ -14,16 +14,15 @@
     <div class="label">
       <span class="label-text">Name of game</span>
     </div>
-    <%= form.text_field :title, required: true, class: "input input-bordered w-full max-w-xs" %>
+    <%= form.text_field :title, required: true, class: "input input-bordered w-full max-w-xs", value: RandomNameGenerator.game_name %>
   </label>
 
-  <button id="addPlayerBtn" class="my-2 btn btn-primary btn-outline">Add Player</button>
   <div id="playerContainer">
     <label class="form-control w-full max-w-xs my-2">
       <div class="label">
         <span class="label-text">Name</span>
       </div>
-      <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]", value="Player 0">
+      <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]", value="<%= RandomNameGenerator.character_name %>">
     </label>
   </div>
   <template id="addPlayerForm">
@@ -38,6 +37,7 @@
   <%= form.hidden_field :game_type, value: params.fetch(:game_type, 'clank') %>
 
   <div class="actions mt-3">
+    <button id="addPlayerBtn" class="my-2 btn btn-primary btn-outline">Add Player</button>
     <%= form.submit class: "btn btn-active btn-primary" %>
   </div>
 <% end %>
@@ -46,6 +46,15 @@
     e.preventDefault();
     let clone = document.importNode(document.getElementById('addPlayerForm').content, true)
     clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
+    clone.querySelector('input').setAttribute('value', generateName());
     document.getElementById('playerContainer').appendChild(clone);
   });
+
+  const firstPart = <%= raw RandomNameGenerator::NAME_FIRST %>;
+  const secondPart = <%= raw RandomNameGenerator::NAME_SECOND %>;
+  function generateName () {
+    const firstIndex = Math.floor(Math.random() * firstPart.length); 
+    const secondIndex = Math.floor(Math.random() * secondPart.length); 
+    return firstPart[firstIndex] + secondPart[secondIndex];
+  }
 </script>
