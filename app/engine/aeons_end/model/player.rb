@@ -13,29 +13,55 @@ class AeonsEnd::Model::Player < Model::Player
     )
   end
 
-  def initialize( # rubocop:disable Metrics/ParameterLists
+  def initialize( # rubocop:disable Metrics/ParameterLists, Lint/MissingSuper
     index = 0,
     name: nil,
     health: nil,
     deck: nil,
     attack_points: 0,
+    breaches: {},
     slots: 0,
-    filled_slots: 0,
     skill_points: 0,
-    rewards: [],
-    victory_points: 0
+    rewards: []
   )
+    character = AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }
     @index = index || 0
     @name = name
+    @breaches = breaches || initialize_breaches(character)
     @slots = slots
-    @filled_slots = filled_slots
-    @deck = deck || AeonsEnd::Model::Deck.new(
-      AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }['starting_hand']
-    )
+    @deck = deck || initialize_deck(character)
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH
     @rewards = rewards || []
     @skill_points = skill_points || 0
-    @victory_points = victory_points
+  end
+
+  def initialize_deck(character)
+    AeonsEnd::Model::Deck.new(
+      active: character['starting_hand'].flat_map { |x| [x] * x['total'] },
+      deck: character['starting_deck'].flat_map { |x| [x] * x['total'] }
+    )
+  end
+
+  def initialize_breaches(character)
+    data = character['breaches']
+    {
+      first: {
+        item: nil,
+        opened: data['first']
+      },
+      second: {
+        item: nil,
+        opened: data['second']
+      },
+      third: {
+        item: nil,
+        opened: data['third']
+      },
+      fourth: {
+        item: nil,
+        opened: data['fourth']
+      }
+    }
   end
 end
