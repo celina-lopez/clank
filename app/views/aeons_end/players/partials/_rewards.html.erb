@@ -1,3 +1,21 @@
+<div class="<%= player['other_players_draws_cards_points'].zero? && "hidden" %>" id="other_players_draws_cards_points-id">
+  # TODO: should add this to javascript
+  <div>Choose Player:</div>
+  <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
+    <% game.data['players'].filter { |x| x['index'] != player['index'] }.each do |x| %>
+    <div
+      onclick="executeAction(this)"
+      class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
+      data-type="redeem_reward"
+      data-name="other_players_draws_cards_points,<%= x['index'] %>"
+    >
+      <%= x['name'] %>
+    </div>
+      <% end  %>
+  </div>
+</div>
+
+
 <div class="<%= player['rewards'].empty? && "hidden" %>" id="rewards-id">
   <% player['rewards'].each_with_index do |reward_options, reward_options_index| %>
     <div>Choose Rewards:</div>

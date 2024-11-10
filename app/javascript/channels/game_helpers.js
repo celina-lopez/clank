@@ -231,6 +231,7 @@ function updateMap(data, players) {
 }
 
 function addTrashOptions(player) {
+  if (!player['trash_options']) { return }
   document.getElementById("trash-options-id").innerHTML = '';
   if (player['trash_options'].length > 0) {
     document.getElementById("trash-options-id").classList.remove('hidden');
@@ -292,6 +293,7 @@ function addEndTurnButton(isCurrentPlayer, endTurn) {
 }
 
 function addMarketplace(items, data, playerId) {
+  if (marketplaceParent == null) return;
   if (data['current_player_index'] != playerId) {
     marketplaceParent.classList.add('hidden');
     return;
@@ -328,11 +330,11 @@ export function updatePlayerData(player, playerId, data) {
   updateInventory(player);
   addRewards(player);
   addTrashOptions(player);
-  replaceCard(player, data['deck']['active']);
+  if (data['deck']) replaceCard(player, data['deck']['active']);
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId)
   addMarketplace(data['marketplace_items'], data, playerId);
-  document.getElementById('infobox').innerHTML = '';
+  if (document.getElementById('infobox')) document.getElementById('infobox').innerHTML = '';
 }
 // GAME FUNCTIONS
 

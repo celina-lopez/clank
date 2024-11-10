@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AeonsEnd::Model::Player < Model::Player
-  attr_accessor :coins, :rewards, :deck
+  attr_accessor :coins, :rewards, :deck, :other_players_draws_cards_points
 
   MAX_HEALTH = 10
 
@@ -22,7 +22,8 @@ class AeonsEnd::Model::Player < Model::Player
     breaches: {},
     slots: 0,
     skill_points: 0,
-    rewards: []
+    rewards: [],
+    other_players_draws_cards_points: 0
   )
     character = AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }
     @index = index || 0
@@ -34,6 +35,7 @@ class AeonsEnd::Model::Player < Model::Player
     @health = health || MAX_HEALTH
     @rewards = rewards || []
     @skill_points = skill_points || 0
+    @other_players_draws_cards_points = other_players_draws_cards_points || 0
   end
 
   def initialize_deck(character)
@@ -63,5 +65,11 @@ class AeonsEnd::Model::Player < Model::Player
         opened: data['fourth']
       }
     }
+  end
+
+  def reset!
+    @rewards = []
+    @skill_points = 0
+    @other_players_draws_cards_points = 0
   end
 end

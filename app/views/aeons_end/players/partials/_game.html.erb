@@ -1,4 +1,5 @@
 <%= render 'aeons_end/players/partials/stats', player:, game: %>
+<%= render 'aeons_end/players/partials/rewards', player:, game: %>
 <%# Dragon deck below %>
 <%= render 'aeons_end/players/partials/active_deck', player:, game: %>
 <%# Player hand %>
@@ -23,5 +24,6 @@
     HtmlActions.tabActions();
     HtmlActions.addHoverCardFunctions()
   });
-
 </script>
+
+<%= render 'aeons_end/players/partials/templates', player:, game: %>

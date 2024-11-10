@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AeonsEnd::Model::Game < Model::Game
-  attr_accessor :deck, :marketplace, :map, :dragon, :marketplace_items, :turn_order, :players
+  attr_accessor :deck, :marketplace, :map, :monster, :marketplace_items, :turn_order, :players, :gravehold
 
   def self.from_json(json)
     AeonsEnd::Model::Game.new(

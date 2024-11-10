@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AeonsEnd::Model::Monster
+  attr_accessor :health, :type, :deck
+
   MONSTER_TYPES = %w[default].freeze
   def self.from_json(json)
     new(
@@ -18,5 +20,9 @@ class AeonsEnd::Model::Monster
     @health = health
     @type = type
     @deck = deck
+  end
+
+  def dead?
+    health <= 0
   end
 end

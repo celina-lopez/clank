@@ -6,10 +6,21 @@ class AeonsEnd::Action::Card < Action::Card
     redeem_card_rewards
     gameplay_data
   end
-  %i[other_players_draws_cards_points discard_monster_top_card cast_other_player_prepped_spell_points].each do |type|
+  %i[discard_monster_top_card cast_other_player_prepped_spell_points].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }
       current_player.public_send("#{type}=", current_player.public_send(type) + v)
+    end
+  end
+
+  def other_players_draws_cards_points(v = value)
+    history << { type: 'other_players_draws_cards_points', value: v, player_index: current_player_index }
+    if gameplay_data.players.size > 2
+      current_player.other_players_draws_cards_points = current_player.other_players_draws_cards_points + v
+    elsif gameplay_data.players.size == 2
+      other_player = gameplay_data.players.detect { |p| p.index != current_player_index }
+      # TODO: its actually discard and then draw, so put in the other players rewards
+      other_player.deck.draw(1)
     end
   end
 
