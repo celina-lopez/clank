@@ -275,16 +275,16 @@ function replaceCard(player, cards) {
 
 function addEndTurnButton(isCurrentPlayer, endTurn) {
   if (!isCurrentPlayer) {
-    endTurnElm.classList.add('hidden');
-    playAllElm.classList.add('hidden');
+    endTurnElm?.classList?.add('hidden');
+    playAllElm?.classList?.add('hidden');
     return
   }
   if (endTurn) {
-    endTurnElm.classList.remove('hidden');
-    playAllElm.classList.add('hidden');
+    endTurnElm?.classList?.remove('hidden');
+    playAllElm?.classList?.add('hidden');
   } else {
-    endTurnElm.classList.add('hidden');
-    playAllElm.classList.remove('hidden');
+    endTurnElm?.classList?.add('hidden');
+    playAllElm?.classList?.remove('hidden');
   }
 }
 

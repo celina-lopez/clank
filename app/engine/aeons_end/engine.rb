@@ -8,6 +8,9 @@ class AeonsEnd::Engine < Engine
       'Card'
     elsif AeonsEnd::Action::Game.actions_include?(type)
       'Game'
+    else
+      # TODO: fix
+      'Card'
     end
   end
 end
