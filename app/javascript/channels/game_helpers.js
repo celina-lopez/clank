@@ -65,6 +65,7 @@ function createCardClone(cardClone, card, playerHand=false) {
 };
 
 function addTempDescription(player) {
+  if (perksElm == null) return;
   perksElm.innerHTML = '';
   if (player['ignore_monster_path']) { 
     perksElm.innerHTML += '<div> You can ignore monsters in your way</div>';
@@ -163,6 +164,7 @@ function updateStats(game) {
 }
 
 function updateInventory(player) {
+  if (!player['inventory']) { return };
   if (player['inventory'].length > 0) {
     inventoryElm.classList.remove('hidden');
     let inventory = inventoryElm.children[1];
@@ -178,6 +180,7 @@ function updateInventory(player) {
 }
 
 function addRewards(player) {
+  if (!player['rewards']) { return }
   rewardContainer.innerHTML = '';
   if (player['rewards'].length > 0) {
     rewardContainer.classList.remove('hidden');
