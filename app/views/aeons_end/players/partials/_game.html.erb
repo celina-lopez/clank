@@ -2,9 +2,12 @@
 <%# Dragon deck below %>
 <%= render 'aeons_end/players/partials/active_deck', player:, game: %>
 <%# Player hand %>
-# power up
-<br>
-# portal gates
+<button
+  id="end_turn_button"
+  class="btn"
+  onclick='executeAction(this)'
+  data-type='end_turn'>End Turn</button>
+<%= render 'aeons_end/players/partials/portal_gates', player:, game: %>
 <%= render 'aeons_end/players/partials/current_hand', player:, game: %>
 <%# Marketplace %>
 <%= render 'aeons_end/players/partials/reserves', player:, game: %>

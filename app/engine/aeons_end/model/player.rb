@@ -27,8 +27,8 @@ class AeonsEnd::Model::Player < Model::Player
     character = AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }
     @index = index || 0
     @name = name
-    @breaches = breaches || initialize_breaches(character)
-    @slots = slots
+    @breaches = breaches.empty? ? initialize_breaches(character) : breaches
+    @slots = slots || 0
     @deck = deck || initialize_deck(character)
     @attack_points = attack_points || 0
     @health = health || MAX_HEALTH

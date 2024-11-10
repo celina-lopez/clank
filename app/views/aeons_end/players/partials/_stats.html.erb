@@ -6,8 +6,17 @@
     <div class="stat-title text-sm">Turn order</div>
     <div class="stat-value text-primary text-base"><%= game.data['current_player_index'] %></div>
   </div>
-  <%= render 'players/components/stat', player:, stat: 'attack_points', game_prefix: 'aeons_end' %>
-  <%= render 'players/components/stat', player:, stat: 'skill_points', game_prefix: 'aeons_end' %>
+  <%= render 'aeons_end/players/components/stat', player:, stat: 'attack_points', game_prefix: 'aeons_end' %>
+  <%= render 'aeons_end/players/components/stat', player:, stat: 'skill_points', game_prefix: 'aeons_end' %>
+  <div class="stat">
+  <div class="stat-figure text-primary text-[25px]">
+    <%= render "aeons_end/players/components/icon_action", key: 'slots'%>
+  </div>
+  <div class="stat-title text-sm"> Power up</div>
+  <%# TODO: fix below %>
+  <div class="stat-value text-primary text-base"><%= player.fetch('slots', 0) %> / 4</div>
+</div>
+
   <div class="stat">
     <div class="stat-figure text-primary text-[25px] relative group">
       <svg id="heart" width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
