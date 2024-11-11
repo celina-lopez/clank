@@ -1,8 +1,11 @@
 <div class='flex gap-3' id='marketplace-cards'>
   <% ['first', 'second', 'third', 'fourth'].each do |label| %>
-    <% breach =  player['breaches'][label]['opened'] %>
+    <% 
+      breach =  player['breaches'][label]['opened']
+      bg_image = player.dig('breaches',label,'item', 'name')
+    %>
     <% if breach == 0 %>
-      <div class="wrapper bg-yellow"></div>
+      <div class="wrapper" style="<%= bg_image ? "background-image: url('/images/#{bg_image}.png')" : ""%>"></div>
     <% elsif breach == 1 %>
       <div class="wrapper">
         <div class="one-quarter"></div>
@@ -28,6 +31,7 @@
     border-radius: 50%;
     border: 3px solid burlywood;
     overflow: hidden;
+    background-size: contain;
   }
 
   .one {

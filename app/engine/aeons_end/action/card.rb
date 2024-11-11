@@ -28,7 +28,11 @@ class AeonsEnd::Action::Card < Action::Card
 
   def redeem_card_rewards
     if (actions = card.fetch('actions', [])).one?
-      actions.first.each { |k, v| send(k, v) }
+      if (actions = actions.first).keys.include?('attack_points')
+        current_player.add_to_breach(card)
+      else
+        actions.first.each { |k, v| send(k, v) }
+      end
     elsif actions.any?
       current_player.rewards << actions
     end

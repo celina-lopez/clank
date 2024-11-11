@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AeonsEnd::Model::Player < Model::Player
-  attr_accessor :coins, :rewards, :deck, :other_players_draws_cards_points
+  attr_accessor :coins, :rewards, :deck, :other_players_draws_cards_points, :breaches
 
   MAX_HEALTH = 10
 
@@ -43,6 +43,15 @@ class AeonsEnd::Model::Player < Model::Player
       active: character['starting_hand'].flat_map { |x| [x] * x['total'] },
       deck: character['starting_deck'].flat_map { |x| [x] * x['total'] }
     )
+  end
+
+  def add_to_breach(value)
+    breaches.each_value do |breach|
+      if breach['item'].nil? && breach['opened'].zero?
+        breach['item'] = value
+        break
+      end
+    end
   end
 
   def initialize_breaches(character)
