@@ -70,6 +70,13 @@ function updateStats(game) {
   playerStatContainer.appendChild(monsterstatClone);
 }
 
+function updateBreaches(player) {
+  Object.keys(player.breaches).forEach(function(breachNum) {
+    let breachElm = document.getElementById(`breach-${breachNum}`);
+    breachElm.style.backgroundImage = `url('/images/${player.breaches[breachNum]['item']['name']}.png')`;
+  })
+}
+
 
 function addRewards(player) {
   if (!player['rewards']) { return }
@@ -151,6 +158,7 @@ export function updatePlayerData(player, playerId, data) {
   addRewards(player);
   addTrashOptions(player);
   populateCards('player', player['deck']['active'], true);
+  updateBreaches(player);
   updateBanner(data, playerId)
 }
 // GAME FUNCTIONS

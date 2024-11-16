@@ -5,7 +5,7 @@
       bg_image = player.dig('breaches',label,'item', 'name')
     %>
     <% if breach == 0 %>
-      <div class="wrapper" style="<%= bg_image ? "background-image: url('/images/#{bg_image}.png')" : ""%>"></div>
+      <div class="wrapper" id="breach-<%= label %>" style="<%= bg_image ? "background-image: url('/images/#{bg_image}.png')" : ""%>"></div>
     <% elsif breach == 1 %>
       <div class="wrapper">
         <div class="one-quarter"></div>
