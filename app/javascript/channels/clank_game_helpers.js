@@ -1,9 +1,8 @@
 import 'jquery'
 import { createCard, createCardClone } from './card_helpers'
-import { updateLogs, updateBanner, endGame } from './utils'
+import { updateLogs, updateBanner } from './utils'
 
 
-// CARD FUNCTIONS
 const rewardParent = document.getElementById('rewards-parent')?.content,
       rewardTemplate = document.getElementById('rewards-option')?.content,
       trashOptionOne = document.getElementById('trash-option-1')?.content,
@@ -14,7 +13,6 @@ const rewardParent = document.getElementById('rewards-parent')?.content,
       statTemplate = document.getElementById('stat-template')?.content,
       healthStatTemplate = document.getElementById('health-stat')?.content,
       perksElm = document.getElementById('perks'),
-      playerBannerElm = document.getElementById('player-banner'),
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
       inventoryElm = document.getElementById('inventory-id'),

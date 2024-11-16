@@ -33,7 +33,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
       }
       return
     }
- if (data['end_game']) {
+    if (data['end_game']) {
       endGame(data);
       return;
     }

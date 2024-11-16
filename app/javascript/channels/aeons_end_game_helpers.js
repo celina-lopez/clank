@@ -1,5 +1,6 @@
 import 'jquery'
 import { createCard } from './card_helpers'
+import { updateBanner } from './utils'
 
 // CARD FUNCTIONS
 const rewardParent = document.getElementById('rewards-parent').content,
@@ -9,7 +10,6 @@ const rewardParent = document.getElementById('rewards-parent').content,
       rewardContainer = document.getElementById('rewards-id'),
       statTemplate = document.getElementById('stat-template').content,
       healthStatTemplate = document.getElementById('health-stat').content,
-      playerBannerElm = document.getElementById('player-banner'),
       endTurnElm = document.getElementById('end_turn_button'),
       statKeys = ['attack_points', 'turn_order', 'skill_points', 'slots'];
 
@@ -145,15 +145,6 @@ function addEndTurnButton(isCurrentPlayer) {
   endTurnElm.classList?.remove('hidden');
 }
 
-function updateBanner(data, playerId) {
-  playerBannerElm.className = `bg-${playerColors[data.current_player_index]}-400 w-100 text-center`
-  if (data.current_player_index == playerId) {
-    playerBannerElm.children[0].innerHTML = 'Your Turn'
-  } else {
-    playerBannerElm.children[0].innerHTML = `${data.players[data.current_player_index].name}'s Turn`
-  }
-}
-
 export function updatePlayerData(player, playerId, data) {
   // TODO: clean up this later 
   addEndTurnButton(data['current_player_index'] == playerId)
@@ -170,18 +161,4 @@ export function updateGameData(data) {
   HtmlActions.addHoverCardFunctions()
   // updateLogs(data['latest_logs']);
   // TODO: fix game logs
-}
-
-function updateLogs(history) {
-  for (let i = 0; i < history.length; i++) {
-    let logsParent = document.getElementById('logs-parent'),
-        log = document.createElement('div');
-    log.innerHTML = history[i];
-    logsParent.prepend(log);
-   toastr.info(history[i]);
-  }
-}
-
-export function endGame(){
-  window.location.reload();
 }
