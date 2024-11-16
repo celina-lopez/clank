@@ -1,18 +1,18 @@
 import 'jquery'
 
 // CARD FUNCTIONS
-const cardTemplate = document.getElementById('card-template')?.content,
-      rewardParent = document.getElementById('rewards-parent')?.content,
-      rewardTemplate = document.getElementById('rewards-option')?.content,
-      trashOptionOne = document.getElementById('trash-option-1')?.content,
-      trashOptionTwo = document.getElementById('trash-option-2')?.content,
-      circleTemplate = document.getElementById('circle-template')?.content,
+const cardTemplate = document.getElementById('card-template').content,
+      rewardParent = document.getElementById('rewards-parent').content,
+      rewardTemplate = document.getElementById('rewards-option').content,
+      trashOptionOne = document.getElementById('trash-option-1').content,
+      trashOptionTwo = document.getElementById('trash-option-2').content,
+      circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
-      statTemplate = document.getElementById('stat-template')?.content,
-      healthStatTemplate = document.getElementById('health-stat')?.content,
+      statTemplate = document.getElementById('stat-template').content,
+      healthStatTemplate = document.getElementById('health-stat').content,
       playerBannerElm = document.getElementById('player-banner'),
       endTurnElm = document.getElementById('end_turn_button'),
-      statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'coins'];
+      statKeys = ['attack_points', 'turn_order', 'skill_points', 'slots'];
 
 
 function createCardClone(cardClone, card, playerHand=false) {
@@ -134,6 +134,23 @@ function updateStats(game) {
     heartStat.innerHTML = player.health;
     playerStatContainer.appendChild(healthStatClone);
   });
+  let playerStatContainer = document.getElementById(`player-stats-${game.current_player_index}`),
+  statClone = document.importNode(statTemplate, true),
+      gameStatParent = statClone.children[0],
+      actionElm = document.getElementById('template-gravehold'),
+      actionTemplate = document.importNode(actionElm.content, true).children[0];
+  gameStatParent.children[0].appendChild(actionTemplate);
+  gameStatParent.children[1].innerHTML = Utils.displayName('gravehold');
+  gameStatParent.children[2].innerHTML = game['gravehold']; 
+  playerStatContainer.appendChild(statClone);
+  let monsterstatClone = document.importNode(statTemplate, true),
+      monstergameStatParent = monsterstatClone.children[0],
+      monsteractionElm = document.getElementById('template-monster'),
+      monsteractionTemplate = document.importNode(monsteractionElm.content, true).children[0];
+  monstergameStatParent.children[0].appendChild(monsteractionTemplate);
+  monstergameStatParent.children[1].innerHTML = Utils.displayName('monster');
+  monstergameStatParent.children[2].innerHTML = game['monster']['health']; 
+  playerStatContainer.appendChild(monsterstatClone);
 }
 
 

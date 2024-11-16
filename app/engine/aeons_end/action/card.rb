@@ -31,7 +31,7 @@ class AeonsEnd::Action::Card < Action::Card
       if (actions = actions.first).keys.include?('attack_points')
         current_player.add_to_breach(card)
       else
-        actions.first.each { |k, v| send(k, v) }
+        actions.each { |k, v| send(k, v) }
       end
     elsif actions.any?
       current_player.rewards << actions

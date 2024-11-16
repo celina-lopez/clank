@@ -7,9 +7,9 @@
 <template id='stat-template'>
   <%= render 'players/components/stat', player: {'sample' => 1}, stat: 'sample', game_prefix: "clank" %>
 </template>
-<% %w[attack_points move_points coins skill_points clank victory_points health].each do |key| %>
+<% %w[attack_points turn_order skill_points slots gravehold monster].each do |key| %>
   <template id='template-<%= key %>'>
-    <%= render 'clank/players/components/icon_action', key: %>
+    <%= render 'aeons_end/players/components/icon_action', key: %>
   </template>
 <% end %>
 <template id='rewards-parent'>
