@@ -1,12 +1,11 @@
 import 'jquery'
+import { createCard } from './card_helpers'
 
 // CARD FUNCTIONS
-const cardTemplate = document.getElementById('card-template').content,
-      rewardParent = document.getElementById('rewards-parent').content,
+const rewardParent = document.getElementById('rewards-parent').content,
       rewardTemplate = document.getElementById('rewards-option').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
-      circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       statTemplate = document.getElementById('stat-template').content,
       healthStatTemplate = document.getElementById('health-stat').content,
@@ -14,88 +13,6 @@ const cardTemplate = document.getElementById('card-template').content,
       endTurnElm = document.getElementById('end_turn_button'),
       statKeys = ['attack_points', 'turn_order', 'skill_points', 'slots'];
 
-
-function createCardClone(cardClone, card, playerHand=false) {
-  let image = cardClone.querySelector('figure').children[0];
-  image.src = `/images/${card['name']}.png`;
-  image.alt = card['name'];
-  if (playerHand) {
-    cardClone.dataset.type = card['name'];
-  } else {
-    cardClone.dataset.type = 'buy_card';
-    cardClone.dataset.name = card['name'];
-  }
-  let container = cardClone.children[1];
-  container.querySelector('.card_name').innerHTML = Utils.displayName(card['name'])
-  let actionParentElm = container.querySelector('.card_actions_parent');
-  if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
-  if (card['action']) addPopUpActions(card['action'], actionParentElm)
-  if (card['conditions']) {
-    card['conditions'].forEach(function(condition) {
-      if (condition['type'] == 'can_buy'){
-        actionParentElm.innerHTML += "<div>Can ONLY "
-        actionParentElm.innerHTML += card['health'] ? 'attack' : 'buy'
-        actionParentElm.innerHTML += ` in ${Utils.displayName(condition['is_in'])}</div>`
-      }
-    });
-  } 
-  if (card.description) {
-   actionParentElm.innerHTML += `<div>${card.description}</div>`;
-  }
-  ['cost', 'health'].forEach(function(key) {
-    if (card[key]) {
-      let div = document.createElement('div');
-      div.classList.add(`bg-${key == 'cost' ? 'sky' : 'red'}-600`, 'px-1', 'rounded-br', 'text-white', 'absolute', 'bottom-0', 'right-0');
-      div.innerHTML = card[key];
-      container.appendChild(div);
-    }
-  });
-  return cardClone;
-};
-
-function addActionElm(parent, action, key){
-  let actionElm = document.getElementById('template-' + key);
-  if (!!actionElm) {
-    let actionTemplate = document.importNode(actionElm.content, true).children[0];
-    parent.appendChild(actionTemplate);
-  }
-  let value = action[key],
-      label = Utils.displayName(key.replace(/_points|_options/g, '')),
-      description = `${value} ${label}`; 
-  if (Number.isInteger(value) && value > 0) description = `+${value} ${label}`;
-  if (typeof(value) == 'object') description = `${label} ${Object.keys(value)[0]}`;
-  parent.innerHTML += `${description}<br/>`;
-}
-
-function addPopUpActions(actions, actionParentElm){
-  for (let i = 0; i < actions.length; i++) {
-    let action = actions[i];
-    Object.keys(action).forEach(function(key) {
-      addActionElm(actionParentElm, action, key)
-    });
-    if (i < actions.length - 1) actionParentElm.innerHTML += '<div>or</div>';
-  }
-}
-
-function createCard(card, playerHand=false){
-  let clone = document.importNode(cardTemplate, true),
-      cardParent = clone.children[0];
-  createCardClone(cardParent.children[0], card, playerHand);
-  createCardClone(cardParent.children[1].children[0], card, playerHand);
-  return cardParent; 
-}
-
-function createCircle(card) {
-  let circleClone = document.importNode(circleTemplate, true),
-      circleParent = circleClone.children[0],
-      itemParent = circleParent.children[0],
-      popUp = circleParent.children[1].children[0];
-  itemParent.dataset.name = card['name'];
-  itemParent.dataset.type = 'redeem_inventory_item'; 
-  itemParent.innerHTML = `<img src='/images/${card['name'].replace(/greater_/g, '')}.png' class="rounded-full w-[50px]"/>`
-  createCardClone(popUp, card);
-  return circleParent;
-}
 
 function populateCards(prefix, cards, playerHand=false) {
   document.getElementById(`${prefix}-cards`).innerHTML = ""

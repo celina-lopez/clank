@@ -1,4 +1,5 @@
 import consumer from "channels/consumer"
+import { endGame } from './utils'
 import 'jquery'
 
 window.app = {}
@@ -32,16 +33,16 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
       }
       return
     }
-    import(gameHelpPath).then(({ updatePlayerData, updateGameData, endGame }) => {
  if (data['end_game']) {
       endGame(data);
       return;
     }
-    let player = data['players'][playerId];
-    updatePlayerData(player, playerId, data);
-    updateGameData(data);
-}).catch(error => {
-  console.error("Error loading game helpers:", error);
-});
+    import(gameHelpPath).then(({ updatePlayerData, updateGameData }) => {
+      let player = data['players'][playerId];
+      updatePlayerData(player, playerId, data);
+      updateGameData(data);
+    }).catch(error => {
+      console.error("Error loading game helpers:", error);
+    });
   }
 });

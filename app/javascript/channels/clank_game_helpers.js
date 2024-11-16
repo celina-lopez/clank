@@ -1,8 +1,10 @@
 import 'jquery'
+import { createCard, createCardClone } from './card_helpers'
+import { updateLogs, updateBanner, endGame } from './utils'
+
 
 // CARD FUNCTIONS
-const cardTemplate = document.getElementById('card-template')?.content,
-      rewardParent = document.getElementById('rewards-parent')?.content,
+const rewardParent = document.getElementById('rewards-parent')?.content,
       rewardTemplate = document.getElementById('rewards-option')?.content,
       trashOptionOne = document.getElementById('trash-option-1')?.content,
       trashOptionTwo = document.getElementById('trash-option-2')?.content,
@@ -19,51 +21,6 @@ const cardTemplate = document.getElementById('card-template')?.content,
       statKeys = ['attack_points', 'move_points', 'skill_points', 'clank', 'coins'];
 
 
-function createCardClone(cardClone, card, playerHand=false) {
-  let image = cardClone.querySelector('figure').children[0];
-  image.src = `/images/${card['name']}.png`;
-  image.alt = card['name'];
-  if (playerHand) {
-    cardClone.dataset.type = card['name'];
-  } else {
-    cardClone.dataset.type = 'buy_card';
-    cardClone.dataset.name = card['name'];
-  }
-  let container = cardClone.children[1];
-  container.querySelector('.card_name').innerHTML = Utils.displayName(card['name'])
-  let actionParentElm = container.querySelector('.card_actions_parent');
-  if (card['actions']) addPopUpActions(card['actions'], actionParentElm)
-  if (card['action']) addPopUpActions(card['action'], actionParentElm)
-  if (card['acquire']) {
-    actionParentElm.innerHTML += `<div>On Acquire</div>`
-    addPopUpActions(card['acquire'], actionParentElm)
-  }
-  if (card['conditions']) {
-    card['conditions'].forEach(function(condition) {
-      if (condition['type'] == 'can_buy'){
-        actionParentElm.innerHTML += "<div>Can ONLY "
-        actionParentElm.innerHTML += card['health'] ? 'attack' : 'buy'
-        actionParentElm.innerHTML += ` in ${Utils.displayName(condition['is_in'])}</div>`
-      }
-    });
-  } 
-  if (card['victory_points']) {
-    addPopUpActions([{'victory_points': card['victory_points']}], actionParentElm)
-  }
-  if (card.description) {
-   actionParentElm.innerHTML += `<div>${card.description}</div>`;
-  }
-  ['cost', 'health'].forEach(function(key) {
-    if (card[key]) {
-      let div = document.createElement('div');
-      div.classList.add(`bg-${key == 'cost' ? 'sky' : 'red'}-600`, 'px-1', 'rounded-br', 'text-white', 'absolute', 'bottom-0', 'right-0');
-      div.innerHTML = card[key];
-      container.appendChild(div);
-    }
-  });
-  return cardClone;
-};
-
 function addTempDescription(player) {
   if (perksElm == null) return;
   perksElm.innerHTML = '';
@@ -76,38 +33,6 @@ function addTempDescription(player) {
   if (player['skip_crystal_cave']) {
     perksElm.innerHTML += '<div> You dont have to stop at crystal caves</div>';
   }
-}
-
-function addActionElm(parent, action, key){
-  let actionElm = document.getElementById('template-' + key);
-  if (!!actionElm) {
-    let actionTemplate = document.importNode(actionElm.content, true).children[0];
-    parent.appendChild(actionTemplate);
-  }
-  let value = action[key],
-      label = Utils.displayName(key.replace(/_points|_options/g, '')),
-      description = `${value} ${label}`; 
-  if (Number.isInteger(value) && value > 0) description = `+${value} ${label}`;
-  if (typeof(value) == 'object') description = `${label} ${Object.keys(value)[0]}`;
-  parent.innerHTML += `${description}<br/>`;
-}
-
-function addPopUpActions(actions, actionParentElm){
-  for (let i = 0; i < actions.length; i++) {
-    let action = actions[i];
-    Object.keys(action).forEach(function(key) {
-      addActionElm(actionParentElm, action, key)
-    });
-    if (i < actions.length - 1) actionParentElm.innerHTML += '<div>or</div>';
-  }
-}
-
-function createCard(card, playerHand=false){
-  let clone = document.importNode(cardTemplate, true),
-      cardParent = clone.children[0];
-  createCardClone(cardParent.children[0], card, playerHand);
-  createCardClone(cardParent.children[1].children[0], card, playerHand);
-  return cardParent; 
 }
 
 function createCircle(card) {
@@ -314,15 +239,6 @@ function addMarketplace(items, data, playerId) {
   });
 }
 
-function updateBanner(data, playerId) {
-  playerBannerElm.className = `bg-${playerColors[data.current_player_index]}-400 w-100 text-center`
-  if (data.current_player_index == playerId) {
-    playerBannerElm.children[0].innerHTML = 'Your Turn'
-  } else {
-    playerBannerElm.children[0].innerHTML = `${data.players[data.current_player_index].name}'s Turn`
-  }
-}
-
 export function updatePlayerData(player, playerId, data) {
   // TODO: clean up this later 
   addEndTurnButton(data['current_player_index'] == playerId, data.players[data['current_player_index']]['deck']['active'].length == 0)
@@ -346,18 +262,4 @@ export function updateGameData(data) {
   populateCards('marketplace', data['marketplace']);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['latest_logs']);
-}
-
-function updateLogs(history) {
-  for (let i = 0; i < history.length; i++) {
-    let logsParent = document.getElementById('logs-parent'),
-        log = document.createElement('div');
-    log.innerHTML = history[i];
-    logsParent.prepend(log);
-   toastr.info(history[i]);
-  }
-}
-
-export function endGame(){
-  window.location.reload();
 }
