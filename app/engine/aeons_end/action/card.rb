@@ -6,7 +6,7 @@ class AeonsEnd::Action::Card < Action::Card
     redeem_card_rewards
     gameplay_data
   end
-  %i[discard_monster_top_card cast_other_player_prepped_spell_points].each do |type|
+  %i[discard_monster_top_card cast_other_player_prepped_spell_points gem_skill_points].each do |type|
     define_method(type) do |v = value|
       history << { type:, value: v, player_index: current_player_index }
       current_player.public_send("#{type}=", current_player.public_send(type) + v)
