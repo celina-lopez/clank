@@ -1,6 +1,7 @@
 import 'jquery'
 import { createCard } from './card_helpers'
-import { updateBanner } from './utils'
+import { updateBanner, updateStat } from './utils'
+import { updateStatsForPlayer, updateHealthStat } from './player_helpers'
 
 // CARD FUNCTIONS
 const rewardParent = document.getElementById('rewards-parent').content,
@@ -8,10 +9,9 @@ const rewardParent = document.getElementById('rewards-parent').content,
       trashOptionOne = document.getElementById('trash-option-1').content,
       trashOptionTwo = document.getElementById('trash-option-2').content,
       rewardContainer = document.getElementById('rewards-id'),
-      statTemplate = document.getElementById('stat-template').content,
-      healthStatTemplate = document.getElementById('health-stat').content,
       endTurnElm = document.getElementById('end_turn_button'),
-      statKeys = ['attack_points', 'turn_order', 'skill_points', 'slots'];
+      healthMax = 10,
+      statKeys = ['attack_points', 'skill_points'];
 
 
 function populateCards(prefix, cards, playerHand=false) {
@@ -29,50 +29,19 @@ function updateStats(game) {
   game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
     playerStatContainer.innerHTML = '';
-    statKeys.forEach(function(stat) {
-      if (player[stat] > 0) {
-        let statClone = document.importNode(statTemplate, true),
-            statParent = statClone.children[0],
-            actionElm = document.getElementById('template-' + stat),
-            actionTemplate = document.importNode(actionElm.content, true).children[0];
-        statParent.children[0].appendChild(actionTemplate);
-        statParent.children[1].innerHTML = Utils.displayName(stat);
-        statParent.children[2].innerHTML = player[stat]; 
-        playerStatContainer.appendChild(statClone);
-      }
-    });
-    let healthStatClone = document.importNode(healthStatTemplate, true),
-    statParent = healthStatClone.children[0].children[0],
-    heart = statParent.children[0].querySelector('rect'),
-    heartStat = statParent.children[1],
-    heightStat = (player.health / 10) * 100;
-    heart.setAttribute('height', `${heightStat}%`);
-    heart.setAttribute('y', `${100 - heightStat}%`);
-    heartStat.innerHTML = player.health;
-    playerStatContainer.appendChild(healthStatClone);
+    updateStatsForPlayer(playerStatContainer, player, statKeys, -1);
+    updateStat(playerStatContainer, 'slots', `${player['slots']} / 4`); // TODO: add max slots
+    updateHealthStat(playerStatContainer, player, healthMax);
+    updateStat(playerStatContainer, 'turn_order', game['current_player_index']);
+    updateStat(playerStatContainer, 'gravehold', game['gravehold']);
+    updateStat(playerStatContainer, 'monster', game['monster']['health']);
   });
-  let playerStatContainer = document.getElementById(`player-stats-${game.current_player_index}`),
-  statClone = document.importNode(statTemplate, true),
-      gameStatParent = statClone.children[0],
-      actionElm = document.getElementById('template-gravehold'),
-      actionTemplate = document.importNode(actionElm.content, true).children[0];
-  gameStatParent.children[0].appendChild(actionTemplate);
-  gameStatParent.children[1].innerHTML = Utils.displayName('gravehold');
-  gameStatParent.children[2].innerHTML = game['gravehold']; 
-  playerStatContainer.appendChild(statClone);
-  let monsterstatClone = document.importNode(statTemplate, true),
-      monstergameStatParent = monsterstatClone.children[0],
-      monsteractionElm = document.getElementById('template-monster'),
-      monsteractionTemplate = document.importNode(monsteractionElm.content, true).children[0];
-  monstergameStatParent.children[0].appendChild(monsteractionTemplate);
-  monstergameStatParent.children[1].innerHTML = Utils.displayName('monster');
-  monstergameStatParent.children[2].innerHTML = game['monster']['health']; 
-  playerStatContainer.appendChild(monsterstatClone);
 }
 
 function updateBreaches(player) {
   Object.keys(player.breaches).forEach(function(breachNum) {
     let breachElm = document.getElementById(`breach-${breachNum}`);
+    if (!breachElm || !player.breaches[breachNum]['item']) { return }
     breachElm.style.backgroundImage = `url('/images/${player.breaches[breachNum]['item']['name']}.png')`;
   })
 }

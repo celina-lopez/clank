@@ -1,6 +1,7 @@
 import 'jquery'
 
-const playerBannerElm = document.getElementById('player-banner');
+const playerBannerElm = document.getElementById('player-banner'),
+      statTemplate = document.getElementById('stat-template').content ;
 
 export function updateBanner(data, playerId) {
   playerBannerElm.className = `bg-${playerColors[data.current_player_index]}-400 w-100 text-center`
@@ -23,4 +24,15 @@ export function updateLogs(history) {
 
 export function endGame(){
   window.location.reload();
+}
+
+export function updateStat(playerStatContainer, name, value) {
+  const clone = document.importNode(statTemplate, true),
+      parent = clone.children[0],
+      actionElm = document.getElementById('template-' + name),
+      actionTemplate = document.importNode(actionElm.content, true).children[0];
+  parent.children[0].appendChild(actionTemplate);
+  parent.children[1].innerHTML = Utils.displayName(name);
+  parent.children[2].innerHTML = value;
+  playerStatContainer.appendChild(clone);
 }
