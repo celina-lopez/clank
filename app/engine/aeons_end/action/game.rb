@@ -2,10 +2,16 @@
 
 class AeonsEnd::Action::Game < Action::Game
   def end_turn
-    gameplay_data.next_player!
-    return end_game! if gameplay_data.monster.dead? || gameplay_data.gravehold <= 0
+    loop do
+      gameplay_data.next_player!
 
-    fullfill_immediate_actions
+      break if gameplay_data.current_player_index > -1
+
+      fullfill_monster_actions
+      gameplay_data.monster.deck.draw(1)
+    end
+
+    end_game! if gameplay_data.monster.dead? || gameplay_data.gravehold <= 0
   end
 
   def start_game
@@ -14,7 +20,16 @@ class AeonsEnd::Action::Game < Action::Game
 
   private
 
-  def fullfill_immediate_actions
-    # todo
+  def fullfill_monster_actions
+    gameplay_data.monster.deck.active.each do |card|
+      if card['power'].present? && (card['power']).positive?
+        card['power'] -= 1
+      else
+        card['actions'].each do |action|
+          AeonsEnd::Action::Monster.new(gameplay_data).send(action.first, action.last)
+        end
+      end
+      gameplay_data.monster.deck.discard(card) if card['power'].zero? || card['health'].zero?
+    end
   end
 end

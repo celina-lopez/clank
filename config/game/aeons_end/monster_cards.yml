@@ -1,45 +1,53 @@
 - name: agony_field
+  image: watcher
   power: 2
   discard_method:
     - type: destroy
       cost: 2
   actions:
     - unleash: 1
-      discard_points: 3
-      draw: 1
+      discard_and_draw_points: [3, 1]
 - name: blane_sire
+  image: kobold
   health: 6
   type: persistent
   actions:
     - unleash: 1
 - name: bleed_static
+  image: overlord
   power: 3
   conditional:
     - type: most_spells
       actions:
         - health: -2
 - name: eye_of_nothing
+  image: watcher
   power: 2
   discard_method:
     - cost: 6
+  actions:
+    - unleash: 2
 - name: haze_spewer
+  image: orc_grunt
   health: 5
   type: persistent
   actions:
     - gravehold_health: this
 - name: skewer
+  image: ogre
   actions:
     - unleash: 1
-      health: -3
-      draw: 1
+      health_and_draw_points: [-3, 1]
 - name: slaughter
+  image: crystal_golem
   actions:
     - unleash: 1
       gravehold_health: -3
 - name: woven_sky
+  image: belcher
   power: 2
   discard_method:
     - discard: 3
   actions:
     - unleash: 1
-      health: -4
+      health_and_draw_points: [-4, 0]

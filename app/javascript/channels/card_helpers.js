@@ -6,7 +6,11 @@ const cardTemplate = document.getElementById('card-template').content;
 
 export function createCardClone(cardClone, card, playerHand=false) {
   let image = cardClone.querySelector('figure').children[0];
-  image.src = `/images/${card['name']}.png`;
+  if (card['image']) {
+    image.src = `/images/${card['image']}.png`;
+  } else if (card['name']) {
+    image.src = `/images/${card['name']}.png`;
+  }
   image.alt = card['name'];
   if (playerHand) {
     cardClone.dataset.type = card['name'];

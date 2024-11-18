@@ -1,44 +1,40 @@
 # frozen_string_literal: true
 
 class AeonsEnd::Model::Game < Model::Game
-  attr_accessor :deck, :marketplace, :map, :monster, :marketplace_items, :turn_order, :players, :gravehold
+  attr_accessor :deck, :marketplace, :monster, :marketplace_items, :turn_order, :gravehold, :discard_and_draw_points,
+                :health_and_draw_points
 
   def self.from_json(json)
     AeonsEnd::Model::Game.new(
       monster: AeonsEnd::Model::Monster.from_json(json['monster']),
-      marketplace: json['marketplace'],
       players: json['players'].map { |p| AeonsEnd::Model::Player.from_json(p) },
-      current_player_index: json['current_player_index'],
-      end_game: json['end_game']
+      **json.symbolize_keys.reject { |k, _v| %i[monster players].include?(k) }
     )
   end
 
-  def initialize(
-    new_players: nil,
+  def initialize( # rubocop:disable Metrics/ParameterLists
     monster: nil,
     marketplace: AeonsEnd::Base::MARKETPLACE,
-    players: nil,
-    current_player_index: 0,
-    end_game: false,
     turn_order: nil,
-    gravehold: 31
+    gravehold: 31,
+    discard_and_draw_points: [],
+    health_and_draw_points: [],
+    current_player_index: 0,
+    **kwargs
   )
+    super
     @monster = monster || AeonsEnd::Model::Monster.new
-    @current_player_index = current_player_index
     @marketplace = marketplace
-    @players = if new_players.present?
-                 initialize_players(new_players)
-               else
-                 players
-               end
-    @eng_game = end_game
-    @turn_order = turn_order || generate_turn_order!
+    @turn_order = turn_order || [0, nil, nil, nil, -1, -1] # TODO: always start with a player
+    @current_player_index = current_player_index || 0
     @gravehold = gravehold || 31
+    @discard_and_draw_points = discard_and_draw_points
+    @health_and_draw_points = health_and_draw_points
   end
 
   def next_player!
     current_player.reset!
-    current_player.deck.reload_active_deck
+    current_player.deck.reload_active_deck # TODO: Make sure to refresh the deck without the ones on the breaches
     next_in_turn_order
   end
 
@@ -55,14 +51,12 @@ class AeonsEnd::Model::Game < Model::Game
 
   def next_in_turn_order
     turn = turn_order.pop
-    self.current_player_index = if turn == -1
-                                  # TODO: dragon actions
-                                  0 # remove
-                                elsif turn.nil?
+
+    self.current_player_index = if turn.nil?
                                   # TODO: wild card? maybe keep it
                                   rand(players.size) # TODO: check if this is seeded
                                 else
-                                  turn_order.pop
+                                  turn
                                 end
     return unless turn_order.empty?
 

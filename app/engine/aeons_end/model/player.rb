@@ -13,30 +13,24 @@ class AeonsEnd::Model::Player < Model::Player
     )
   end
 
-  def initialize( # rubocop:disable Metrics/ParameterLists, Lint/MissingSuper
+  def initialize( # rubocop:disable Metrics/ParameterLists
     index = 0,
-    name: nil,
-    health: nil,
     deck: nil,
-    attack_points: 0,
     breaches: {},
     slots: 0,
-    skill_points: 0,
     rewards: [],
     other_players_draws_cards_points: 0,
-    gem_skill_points: 0
+    gem_skill_points: 0,
+    **kwargs
   )
+    super
     character = AeonsEnd::Base::STARTING_DECK_CARDS.find { |x| x['name'] == name }
     @index = index || 0
-    @name = name
     @breaches = breaches.empty? ? initialize_breaches(character) : breaches
     @slots = slots || 0
     @gem_skill_points = gem_skill_points || 0
     @deck = deck || initialize_deck(character)
-    @attack_points = attack_points || 0
-    @health = health || MAX_HEALTH
     @rewards = rewards || []
-    @skill_points = skill_points || 0
     @other_players_draws_cards_points = other_players_draws_cards_points || 0
   end
 
