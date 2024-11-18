@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def config_yaml(name)
-  YAML.load_file(Rails.root.join('config', 'game', "#{name}.yml"))
+  YAML.load_file(Rails.root.join('config', 'game', 'clank', "#{name}.yml"))
 end
 
 class Clank::Base < Base
@@ -20,5 +20,5 @@ class Clank::Base < Base
   CARD_NAMES = CARDS.map { |c| c['name'] }.freeze
   MINOR_ITEMS = config_yaml('minor_items').freeze
   MAJOR_ITEMS = config_yaml('major_items').freeze
-  MAPS = YAML.load_file('config/game/maps.yml')
+  MAPS = config_yaml('maps').freeze
 end

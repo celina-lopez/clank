@@ -1,0 +1,12 @@
+<div class='flex gap-3' id='marketplace-cards'>
+  <% game.data.dig('marketplace').each_with_index do |card, index| %>
+    <%= render(
+      'players/components/card',
+      card:,
+      id: "marketplace-card-#{index}",
+      data_type: 'buy_card',
+      data_name: card['name'],
+      game_prefix: "aeons_end"
+    ) %>
+  <% end %>
+</div>

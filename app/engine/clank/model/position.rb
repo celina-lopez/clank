@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Clank::Model::Position < Model::Position
-  EDGES = YAML.load_file('config/game/edges.yml')['map_1']
-  MAP = YAML.load_file('config/game/maps.yml')['map_1']
+  EDGES = YAML.load_file('config/game/clank/edges.yml')['map_1']
+  MAP = YAML.load_file('config/game/clank/maps.yml')['map_1']
 
   def end_tile?
     current_position == -4

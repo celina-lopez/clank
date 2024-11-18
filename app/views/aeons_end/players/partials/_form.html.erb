@@ -1,0 +1,32 @@
+<div id="playerContainer">
+  <label class="form-control w-full max-w-xs my-2">
+    <div class="label">
+      <span class="label-text">Character</span>
+    </div>
+    <select class="select select-bordered"  name="game[settings][players][]">
+      <% (characters = YAML.load_file(Rails.root.join('config', 'game', 'aeons_end', "starting_deck.yml"))).each do |character| %>
+        <option value="<%= character['name'] %>"><%= character['name'].capitalize %></option>
+      <% end %>
+    </select>
+  </label>
+</div>
+<template id="addPlayerForm">
+  <label class="form-control w-full max-w-xs my-2">
+    <div class="label">
+      <span class="label-text">Character</span>
+    </div>
+    <select class="select select-bordered" name="game[settings][players][]">
+      <% (characters = YAML.load_file(Rails.root.join('config', 'game', 'aeons_end', "starting_deck.yml"))).each do |character| %>
+        <option value="<%= character['name'] %>"><%= character['name'].capitalize %></option>
+      <% end %>
+    </select>
+  </label>
+</template>
+
+<script>
+  function addPlayerBtn() {
+    let clone = document.importNode(document.getElementById('addPlayerForm').content, true)
+    clone.querySelector('select').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
+    document.getElementById('playerContainer').appendChild(clone);
+  };
+</script>

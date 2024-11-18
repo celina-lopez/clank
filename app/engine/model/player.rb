@@ -5,12 +5,12 @@ class Model::Player < Base
                 :skill_points, :discard_number, :victory_points
   attr_reader :health, :index, :attack_points, :clank, :name
 
-  def initialize(**kwargs)
-    @index = kwargs[:index] || 0
+  def initialize(index, **kwargs)
+    @index = index
     @name = kwargs[:name]
     @inventory = kwargs[:inventory] || []
     @attack_points = kwargs[:attack_points] || 0
-    @health = kwargs[:health] || game_engine::MAX_HEALTH
+    @health = kwargs[:health] || game_engine::Model::Player::MAX_HEALTH
     @move_points = kwargs[:move_points] || 0
     @skill_points = kwargs[:skill_points] || 0
     @victory_points = kwargs[:victory_points]

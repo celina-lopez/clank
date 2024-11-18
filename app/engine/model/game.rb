@@ -4,6 +4,7 @@ class Model::Game < Base
   attr_accessor :players, :current_player_index, :end_game, :results
 
   def initialize(**kwargs)
+    super
     @current_player_index = kwargs[:current_player_index]
     @players = if kwargs[:new_players].present?
                  initialize_players(kwargs[:new_players])
@@ -11,7 +12,7 @@ class Model::Game < Base
                  kwargs[:players]
                end
     @results = kwargs[:results]
-    @eng_game = kwargs[:end_game]
+    @end_game = kwargs[:end_game]
   end
 
   def initialize_players(new_players)

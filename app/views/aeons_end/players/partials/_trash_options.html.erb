@@ -1,0 +1,45 @@
+<div class="<%= player['trash_options'].empty? && "hidden" %>" id="trash-options-id">
+  <% player['trash_options'].each do |trash_option| %>
+    <% if trash_option.is_a?(Hash) %>
+      <div>Trash a <%= (card_name = trash_option.keys.first).humanize %> from Discard or Active deck:</div>
+      <% %w[active discarded].each do |key| %>
+        <button
+          onclick="executeAction(this)"
+          class="btn btn-primary"
+          data-type="trash"
+          data-name="<%= card_name %>,<%= key %>"
+        >
+          Trash from <%= key.humanize %> Deck
+        </button>
+      <% end %>
+    <% else %>
+      <div>Choose a card to Trash from your Active or Discarded Deck:</div>
+      <div class="<%= player.dig('deck', 'active').empty? && 'hidden' %>">Active:</div>
+      <div class='flex gap-3 flex-wrap items-strech' id='active-trash-cards'>
+        <% player.dig('deck', 'active').each_with_index do |card, index| %>
+          <%= render(
+            'players/components/card',
+            card:,
+            id: "trash-active-card-#{index}",
+            data_type: "trash",
+            data_name: "#{card['name']},active",
+            button_text: 'trash'
+          ) %>
+        <% end %>
+      </div>
+      <div class="<%= player.dig('deck', 'discarded').empty? && 'hidden' %>">Discarded:</div>
+      <div class='flex gap-3 flex-wrap items-strech' id='discarded-trash-cards'>
+        <% player.dig('deck', 'discarded').each_with_index do |card, index| %>
+          <%= render(
+            'players/components/card',
+            card:,
+            id: "trash-discarded-card-#{index}",
+            data_type: "trash",
+            data_name: "#{card['name']},discarded",
+            button_text: 'trash'
+          ) %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

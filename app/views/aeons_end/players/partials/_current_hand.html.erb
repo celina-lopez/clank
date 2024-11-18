@@ -1,0 +1,11 @@
+<div class='my-3 flex gap-3 ' id='player-cards'>
+  <% player.dig('deck', 'active').each do |card| %>
+    <%= render(
+      'players/components/card',
+      card:,
+      data_type: card['name'],
+      button_text: 'play',
+      game_prefix: "clank"
+    ) %>
+  <% end %>
+</div>

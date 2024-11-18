@@ -1,0 +1,73 @@
+<div class='flex gap-3' id='marketplace-cards'>
+  <% ['first', 'second', 'third', 'fourth'].each do |label| %>
+    <% 
+      breach =  player['breaches'][label]['opened']
+      bg_image = player.dig('breaches',label,'item', 'image') || player.dig('breaches',label,'item', 'name')
+    %>
+    <% if breach == 0 %>
+      <div class="wrapper" id="breach-<%= label %>" style="<%= bg_image ? "background-image: url('/images/#{bg_image}.png')" : ""%>"></div>
+    <% elsif breach == 1 %>
+      <div class="wrapper">
+        <div class="one-quarter"></div>
+        <div class="two-quarter"></div>
+      </div>
+    <% elsif breach == 2 %>
+      <div class="wrapper">
+        <div class="one"></div>
+        <div class="two"></div>
+      </div>
+    <% elsif breach == 3 %>
+      <div class="wrapper wrapper-2">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three-three-quarters"></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<style>
+  .wrapper {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 3px solid burlywood;
+    overflow: hidden;
+    background-size: contain;
+  }
+
+  .one {
+    display: inline-block;
+    background-color: burlywood;
+    height: 100px; width:50px;
+  }
+
+  .two {
+    display: inline-block;
+    background-color: white;
+    height: 100px; width:50px;
+  }
+
+  .one-quarter {
+    display: inline-block;
+    background-color: burlywood;
+    height: 50px; width:50px;
+  }
+
+  .two-quarter {
+    display: inline-block;
+    background-color: white;
+    height: 100px; width:50px;
+  }
+
+  .three-three-quarters {
+    position: absolute;
+    top: 0;
+    background-color: burlywood;
+    height: 50px;
+    width: 102px;
+  }
+  .wrapper-2 {
+    position: relative;
+  }
+
+
+</style>

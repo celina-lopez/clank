@@ -2,6 +2,7 @@
 
 class GamesController < ApplicationController
   before_action :set_view_path, only: %i[new index]
+  before_action :set_game, only: %i[show]
 
   def new
     @game = Game.new
@@ -21,6 +22,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def set_game
+    @game = Game.find_by_uuid(params[:id])
+  end
 
   def path_for(game)
     "/#{game.game_type}/games/#{game.uuid}"

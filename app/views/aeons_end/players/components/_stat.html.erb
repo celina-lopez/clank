@@ -1,0 +1,7 @@
+<div class="stat">
+  <div class="stat-figure text-primary text-[25px]">
+    <%= render "#{game_prefix}/players/components/icon_action", key: stat %>
+  </div>
+  <div class="stat-title text-sm"><%= stat.gsub('points', '').humanize %></div>
+  <div class="stat-value text-primary text-base"><%= player.fetch(stat, 0) %></div>
+</div>

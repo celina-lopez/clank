@@ -1,0 +1,115 @@
+- name: adelheim
+  life: 10
+  slots: 5
+  starting_hand:
+    - name: amethyst_shard
+      image: amulet_of_vigor
+      total: 1
+      actions:
+        - skill_points: 1
+          other_players_draws_cards_points: 1
+    - name: crystal
+      image: diamond
+      total: 2
+      actions:
+        - skill_points: 1
+    - name: spark
+      image: wand_of_recall
+      total: 2
+      actions:
+        - attack_points: 1
+  starting_deck:
+    - name: crystal
+      image: diamond
+      total: 5
+      actions:
+        - skill_points: 1
+  activation_power:
+    during: monster_draw
+    actions:
+      - discard_monster_top_card: true
+  breaches:
+    first: 0
+    second: 1
+    third: 3
+    fourth: 2
+- name: jian
+  life: 10
+  slots: 4
+  starting_hand:
+    - name: moonstone_shard
+      image: singing_sword
+      total: 1
+      actions:
+        - skill_points: 1
+          gem_skill_points: 1
+    - name: crystal
+      image: diamond
+      total: 2
+      actions:
+        - skill_points: 1
+    - name: spark
+      image: wand_of_recall
+      total: 2
+      actions:
+        - attack_points: 1
+  starting_deck:
+    - name: crystal
+      image: diamond
+      total: 3
+      actions:
+        - skill_points: 1
+    - name: spark
+      image: wand_of_recall
+      total: 2
+      actions:
+        - attack_points: 1
+  activation_power:
+    during: main
+    actions:
+      - cast_other_player_prepped_spell_points: 2
+  breaches:
+    first: 0
+    second: 0
+    third: 3
+    fourth: 2
+- name: mist
+  life: 10
+  slots: 5
+  starting_hand:
+    - name: garnet_shard
+      image: scepter_of_the_ape_lord
+      total: 1
+      actions:
+        - skill_points: 1
+        - cast_other_player_prepped_spell_points: 1
+    - name: crystal
+      image: diamond
+      total: 3
+      actions:
+        - skill_points: 1
+    - name: spark
+      image: wand_of_recall
+      total: 1
+      actions:
+        - attack_points: 1
+  starting_deck:
+    - name: crystal
+      image: diamond
+      total: 3
+      actions:
+        - skill_points: 1
+    - name: spark
+      image: wand_of_recall
+      total: 2
+      actions:
+        - attack_points: 1
+  activation_power:
+    during: main
+    actions:
+      - other_player_draw: 4
+  breaches:
+    first: 0
+    second: 1
+    third: 2
+    fourth: 2

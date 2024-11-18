@@ -38,7 +38,7 @@ class Model::Deck
   def initialize_deck(cards)
     total_cards = []
     cards.each do |card|
-      card['total'].times { total_cards << card }
+      card.fetch('total', 1).times { total_cards << card }
     end
     total_cards.shuffle!
   end
@@ -64,8 +64,6 @@ class Model::Deck
   def full_deck
     deck + discarded + active
   end
-
-  private
 
   def reload_deck
     self.deck = discarded.shuffle!

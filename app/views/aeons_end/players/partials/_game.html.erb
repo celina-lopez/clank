@@ -1,0 +1,29 @@
+<%= render 'aeons_end/players/partials/stats', player:, game: %>
+<%= render 'aeons_end/players/partials/rewards', player:, game: %>
+<%# Dragon deck below %>
+<%= render 'aeons_end/players/partials/active_deck', player:, game: %>
+<%# Player hand %>
+<button
+  id="end_turn_button"
+  class="btn"
+  onclick='executeAction(this)'
+  data-type='end_turn'>End Turn</button>
+<%= render 'aeons_end/players/partials/portal_gates', player:, game: %>
+<%= render 'aeons_end/players/partials/current_hand', player:, game: %>
+<%# Marketplace %>
+<%= render 'aeons_end/players/partials/reserves', player:, game: %>
+<script>
+
+  function executeAction(e) {
+    let data = { type: e.dataset.type, player_index: <%= player.dig('index') %> }
+    if (!!e.dataset.name) data.value = e.dataset.name
+    window.app.action.send(data);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    HtmlActions.tabActions();
+    HtmlActions.addHoverCardFunctions()
+  });
+</script>
+
+<%= render 'aeons_end/players/partials/templates', player:, game: %>
