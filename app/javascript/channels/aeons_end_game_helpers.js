@@ -42,7 +42,8 @@ function updateBreaches(player) {
   Object.keys(player.breaches).forEach(function(breachNum) {
     let breachElm = document.getElementById(`breach-${breachNum}`);
     if (!breachElm || !player.breaches[breachNum]['item']) { return }
-    breachElm.style.backgroundImage = `url('/images/${player.breaches[breachNum]['item']['name']}.png')`;
+    const item = player.breaches[breachNum]['item'];
+    breachElm.style.backgroundImage = `url('/images/${item['image'] || item['name']}.png')`;
   })
 }
 

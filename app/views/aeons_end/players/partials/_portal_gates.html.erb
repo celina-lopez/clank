@@ -2,7 +2,7 @@
   <% ['first', 'second', 'third', 'fourth'].each do |label| %>
     <% 
       breach =  player['breaches'][label]['opened']
-      bg_image = player.dig('breaches',label,'item', 'name')
+      bg_image = player.dig('breaches',label,'item', 'image') || player.dig('breaches',label,'item', 'name')
     %>
     <% if breach == 0 %>
       <div class="wrapper" id="breach-<%= label %>" style="<%= bg_image ? "background-image: url('/images/#{bg_image}.png')" : ""%>"></div>

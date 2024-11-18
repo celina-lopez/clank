@@ -29,7 +29,9 @@ class AeonsEnd::Action::Game < Action::Game
           AeonsEnd::Action::Monster.new(gameplay_data).send(action.first, action.last)
         end
       end
-      gameplay_data.monster.deck.discard(card) if card['power'].zero? || card['health'].zero?
+      if card['power'].present? && card['power'].zero? || card['health'].present? && card['health'].zero?
+        gameplay_data.monster.deck.discard(card)
+      end
     end
   end
 end
