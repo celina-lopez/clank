@@ -26,7 +26,8 @@ class Game < ApplicationRecord
 
   enum game_type: {
     clank: 0,
-    aeons_end: 1
+    aeons_end: 1,
+    love_letter: 2
   }
 
   def engine

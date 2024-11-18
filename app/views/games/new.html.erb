@@ -16,11 +16,8 @@
     </div>
     <%= form.text_field :title, required: true, class: "input input-bordered w-full max-w-xs", value: RandomNameGenerator.game_name %>
   </label>
-  <% if (game_type = params.fetch(:game_type, 'clank')) == 'clank' %>
-    <%= render 'clank/players/partials/form' %>
-  <% elsif game_type == "aeons_end" %>
-    <%= render 'aeons_end/players/partials/form' %>
-  <% end %>
+  <% game_type = params.fetch(:game_type, 'clank') %>
+  <%= render "#{game_type}/players/partials/form" %>
 
   <%= form.hidden_field :game_type, value: game_type %>
 

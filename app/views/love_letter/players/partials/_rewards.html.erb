@@ -1,0 +1,25 @@
+<div class="<%= player['rewards'].empty? && "hidden" %>" id="rewards-id">
+  <% player['rewards'].each_with_index do |reward_options, reward_options_index| %>
+    <div>Choose Rewards:</div>
+    <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
+      <% reward_options.each_with_index do |reward, index| %>
+        <div
+          onclick="executeAction(this)"
+          class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
+          data-type="redeem_reward"
+          data-name="<%= reward_options_index %>,<%= index %>"
+        >
+          <% reward.each do |k, v| %>
+            <% if k == 'discard_number' %>
+              Discard <%= v %> card(s)
+            <% elsif %w[health coins attack_points move_points].include?(k) %>
+              Gain <%= v %>  <%= k.humanize(capitalize: false).singularize %>
+            <% else %>
+              <%= k.humanize %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,41 @@
+<%
+  with_prefix = false if local_assigns[:with_prefix].nil?
+  value = local_assigns[:value]
+  case key
+  when 'attack_points'
+    icon = 'shield-halved'
+    color = 'red'
+  when 'move_points'
+    icon = 'person-walking'
+    color = 'amber'
+  when 'coins'
+    icon = 'sack-dollar'
+    color = 'yellow'
+  when 'skill_points'
+    icon = 'wand-sparkles'
+    color = 'sky'
+  when 'clank'
+    icon = 'face-sad-cry'
+    color = 'sky'
+  when 'victory_points'
+    icon = 'face-smile'
+    color = 'green'
+  when 'health'
+    icon = 'heart'
+    color = 'red'
+  when 'position'
+    icon = 'dragon'
+    color = 'slate'
+  else
+    icon = nil
+    color = nil
+  end
+%>
+<% if icon %>
+  <i class="text-<%= color %>-600 fa-solid fa-<%= icon %>"></i>
+  <% if with_prefix %>
+    <%= value.positive? ? "+#{value}" : value %>
+  <% else %>
+    <%= value %>
+  <% end %>
+<% end %>
