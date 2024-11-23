@@ -4,8 +4,7 @@ class Action::Card < Action::Base
   def execute!
     return unless card.nil?
 
-    send(type)
-    gameplay_data
+    super
   end
 
   def card

@@ -1,11 +1,9 @@
 - name: princess
-  image: the_queen_of_hearts
   total: 1
   actions:
     - end_of_round: true
       skill_points: 9
 - name: countess
-  image: skill_boost
   total: 1
   conditionals:
     - play: king
@@ -14,48 +12,40 @@
     - end_of_round: true
       skill_points: 8
 - name: king
-  image: the_mountain_king
   total: 1
   actions:
     - trade_points: 1
       skill_points: 7
 - name: chancellor
-  image: the_duke
   total: 2
   actions:
     - draw_and_replace: 2
       skill_points: 6
 - name: prince
-  image: rebel_captain
   total: 2
   actions:
     - discard_and_draws_points: 1
       skill_points: 5
 - name: handmaid
-  image: search
   total: 2
   actions:
     - protection: true
       skill_points: 4
 - name: baron
-  image: brillance
   total: 2
   actions:
     - compare_points: 1
       skill_points: 3
 - name: priest
-  image: invoker_of_the_ancients
   total: 2
   actions:
     - look_points: 1
       skill_points: 2
 - name: guard
-  image: rebel_captain
   total: 6
   actions:
     - choose_and_guess_points: 1
       skill_points: 1
 - name: spy
-  image: master_burglar
   total: 2
   actions: []

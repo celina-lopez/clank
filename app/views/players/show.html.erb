@@ -4,7 +4,7 @@
   <% else %>
     <%= render 'players/components/banner', game: @game, player: @player, phaser_config: @phaser_config %>
     <div class="mx-2 overflow-hidden">
-      <%= render 'clank/players/partials/game', game: @game, player: @player %>
+      <%= render "#{@game.game_type}/players/partials/game", game: @game, player: @player %>
     </div>
   <% end %>
   <footer class="footer footer-center mt-3 text-base-content p-4">

@@ -2,20 +2,8 @@
   with_prefix = false if local_assigns[:with_prefix].nil?
   value = local_assigns[:value]
   case key
-  when 'attack_points'
-    icon = 'shield-halved'
-    color = 'red'
-  when 'move_points'
-    icon = 'person-walking'
-    color = 'amber'
-  when 'coins'
-    icon = 'sack-dollar'
-    color = 'yellow'
   when 'skill_points'
     icon = 'wand-sparkles'
-    color = 'sky'
-  when 'clank'
-    icon = 'face-sad-cry'
     color = 'sky'
   when 'victory_points'
     icon = 'face-smile'
@@ -23,9 +11,6 @@
   when 'health'
     icon = 'heart'
     color = 'red'
-  when 'position'
-    icon = 'dragon'
-    color = 'slate'
   else
     icon = nil
     color = nil

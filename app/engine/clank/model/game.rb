@@ -3,7 +3,7 @@
 class Clank::Model::Game < Model::Game
   attr_accessor :deck, :marketplace, :map, :dragon, :marketplace_items
 
-  def self.from_json(json)
+  def self.from_json(json) # rubocop:disable Metrics/MethodLength
     Clank::Model::Game.new(
       dragon: Clank::Model::Dragon.from_json(json['dragon']),
       deck: Clank::Model::Deck.from_json(json['deck']),

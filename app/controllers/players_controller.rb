@@ -5,6 +5,10 @@ class PlayersController < ApplicationController
   before_action :set_player
   layout 'game'
 
+  def show
+    @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'clank', 'phaser.yml'))
+  end
+
   private
 
   def set_game

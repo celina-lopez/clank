@@ -1,25 +1,13 @@
 <%
   label = case key
-  when 'attack_points'
-    'Attack'
-  when 'move_points'
-    'Move'
-  when 'coins'
-    'Coins'
   when 'skill_points'
     'Skill'
-  when 'clank'
-    'Clank'
   when 'victory_points'
     'Victory'
-  when 'other_clank'
-    "Other players give +#{value} clank"
   when 'replace_card_points'
     "Replace a card in the dungeon row"
   when 'draw'
     "Draw +#{value} cards"
-  when 'cost'
-    "Skill points"
   when 'health'
     "Health"
   else
@@ -28,7 +16,7 @@
 %>
 <div>
   <% if label %>
-    <%= render 'clank/players/components/icon_action', key:, value:, with_prefix: true %>
+    <%= render 'love_letter/players/components/icon_action', key:, value:, with_prefix: true %>
     <%= label %>
   <% else %>
     <%= key.humanize %>

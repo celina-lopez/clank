@@ -8,6 +8,10 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def show
+    @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'clank', 'phaser.yml'))
+  end
+
   def create
     engine = game_params[:game_type].classify.constantize::Engine.new
     gameplay_data = engine.execute(type: 'start_game',
@@ -18,17 +22,13 @@ class GamesController < ApplicationController
       title: game_params[:title],
       game_type: game_params[:game_type]
     )
-    redirect_to path_for(game)
+    redirect_to game_path(game.uuid)
   end
 
   private
 
   def set_game
     @game = Game.find_by_uuid(params[:id])
-  end
-
-  def path_for(game)
-    "/#{game.game_type}/games/#{game.uuid}"
   end
 
   def game_params

@@ -1,15 +1,12 @@
 <template id='card-template'>
-  <%= render 'players/components/card', game_prefix: 'clank' %>
-</template>
-<template id='circle-template'>
-  <%= render 'players/components/circle', game_prefix: "clank" %>
+  <%= render 'players/components/card', game_prefix: 'love_letter' %>
 </template>
 <template id='stat-template'>
   <%= render 'players/components/stat', player: {'sample' => 1}, stat: 'sample', game_prefix: "love_letter" %>
 </template>
 <% %w[skill_points victory_points].each do |key| %>
   <template id='template-<%= key %>'>
-    <%= render 'clank/players/components/icon_action', key: %>
+    <%= render 'love_letter/players/components/icon_action', key: %>
   </template>
 <% end %>
 <template id='rewards-parent'>

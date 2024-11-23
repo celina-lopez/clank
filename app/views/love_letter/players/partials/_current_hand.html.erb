@@ -1,12 +1,6 @@
-<% empty_hand = player.dig('deck', 'active').empty? %>
-<button
-  id="end_turn_button"
-  class="btn  <%= !(empty_hand && player['index'] == game.data['current_player_index']) && 'hidden' %>"
-  onclick='executeAction(this)'
-  data-type='end_turn'>End Turn</button>
-<button
-  onclick='executeAction(this)'
-  class="btn <%= !(!empty_hand && player['index'] == game.data['current_player_index']) && "hidden" %>" data-type='play_all_cards' id="play_all_cards_button">Play all</button>
+<div class="<%= player['index'] == game['current_player_index'] ? 'hidden' : '' %>" id="helper_text">
+  Choose a card to play
+</div>
 <div class='my-3 flex gap-3 ' id='player-cards'>
   <% player.dig('deck', 'active').each do |card| %>
     <%= render(
@@ -14,7 +8,7 @@
       card:,
       data_type: card['name'],
       button_text: 'play',
-      game_prefix: "clank"
+    game_prefix: "love_letter"
     ) %>
   <% end %>
 </div>

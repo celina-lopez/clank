@@ -7,11 +7,7 @@ Rails.application.routes.draw do
   resource :instructions, only: [] do
     get :clank
   end
-  %w[clank aeons_end love_letter].each do |game|
-    namespace game do
-      resources :games, only: %i[show] do
-        resources :players, only: %i[show]
-      end
-    end
-  end
+  resources :games, only: %i[show]
+
+  get '/:game_type/games/:game_id/players/:player_id', to: 'players#show', as: :game_player
 end

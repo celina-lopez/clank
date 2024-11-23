@@ -7,7 +7,6 @@ import { updateStatsForPlayer } from './player_helpers'
 const rewardParent = document.getElementById('rewards-parent').content,
       rewardTemplate = document.getElementById('rewards-option').content,
       rewardContainer = document.getElementById('rewards-id'),
-      endTurnElm = document.getElementById('end_turn_button'),
       statKeys = ['favors'];
 
 
