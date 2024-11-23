@@ -38,4 +38,9 @@ class LoveLetter::Model::Game < Model::Game
       )
     end
   end
+
+  def next_player!
+    current_player.reset!
+    super
+  end
 end

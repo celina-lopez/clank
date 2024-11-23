@@ -39,4 +39,13 @@ class LoveLetter::Model::Player < Model::Player
     @choose_player_to_reveal_card = choose_player_to_reveal_card
     @choose_player_to_guess_card = choose_player_to_guess_card
   end
+
+  def reset!
+    @choose_player_to_discard_points = 0
+    @choose_player_to_compare_points = 0
+    @choose_player_to_reveal_card = 0
+    @choose_player_to_guess_card = 0
+    @trade_card_points = 0
+    @keep_card_points = 0
+  end
 end

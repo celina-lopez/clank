@@ -9,11 +9,14 @@ class LoveLetter::Action::Card < Action::Card
 
   def princess
     current_player.removed_from_round = true
+    immediately_end_turn
   end
 
-  def countess; end
+  def spy
+    immediately_end_turn
+  end
 
-  def spy; end
+  alias countess spy
 
   def king
     current_player.trade_card_points = 1
@@ -31,6 +34,7 @@ class LoveLetter::Action::Card < Action::Card
 
   def handmaid
     current_player.protected_from_discard = true
+    immediately_end_turn
   end
 
   def baron
@@ -45,8 +49,14 @@ class LoveLetter::Action::Card < Action::Card
     current_player.choose_player_to_guess_card = 1
   end
 
+  private
+
   def play_card
     card = current_player.deck.active.find { |c| c['name'] == type }
     current_player.deck.discard(card)
+  end
+
+  def immediately_end_turn
+    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn').end_turn
   end
 end

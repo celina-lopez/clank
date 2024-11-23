@@ -16,6 +16,6 @@ class PlayersController < ApplicationController
   end
 
   def set_player
-    @player = @game.data['players'].find { |player| player['index'] == params[:id].to_i }
+    @player = @game.data['players'].find { |player| player['index'].to_i == params[:id].to_i }
   end
 end
