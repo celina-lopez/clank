@@ -1,51 +1,35 @@
 - name: princess
   total: 1
+  victory_points: 9
   actions:
-    - end_of_round: true
-      skill_points: 9
+    - removed_from_round
+    - immediately_end_turn
 - name: countess
   total: 1
+  victory_points: 9
   conditionals:
     - play: king
     - play: prince
-  actions:
-    - end_of_round: true
-      skill_points: 8
 - name: king
   total: 1
-  actions:
-    - trade_points: 1
-      skill_points: 7
+  victory_points: 7
 - name: chancellor
   total: 2
-  actions:
-    - draw_and_replace: 2
-      skill_points: 6
+  victory_points: 6
 - name: prince
   total: 2
-  actions:
-    - discard_and_draws_points: 1
-      skill_points: 5
+  victory_points: 5
 - name: handmaid
   total: 2
-  actions:
-    - protection: true
-      skill_points: 4
+  victory_points: 4
 - name: baron
   total: 2
-  actions:
-    - compare_points: 1
-      skill_points: 3
+  victory_points: 3
 - name: priest
   total: 2
-  actions:
-    - look_points: 1
-      skill_points: 2
+  victory_points: 2
 - name: guard
   total: 6
-  actions:
-    - choose_and_guess_points: 1
-      skill_points: 1
+  victory_points: 1
 - name: spy
   total: 2
-  actions: []

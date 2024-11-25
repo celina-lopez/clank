@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize
 # frozen_string_literal: true
 
 class LoveLetter::Action::Game < Action::Game
@@ -9,9 +10,11 @@ class LoveLetter::Action::Game < Action::Game
     end_of_round! if gameplay_data.deck.active.empty?
     gameplay_data.end_game = true if end_game?
     gameplay_data.next_player!
+    gameplay_data.next_player! until current_player.removed_from_round
     drawn_card = gameplay_data.deck.active.pop
     current_player.deck.active << drawn_card
     current_player.protected_from_discard = false
+    current_player.revealed_card_to_player = nil
   end
 
   private
@@ -24,3 +27,5 @@ class LoveLetter::Action::Game < Action::Game
     end
   end
 end
+
+# rubocop:enable Metrics/AbcSize
