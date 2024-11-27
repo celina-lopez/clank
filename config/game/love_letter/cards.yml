@@ -1,35 +1,42 @@
 - name: princess
   total: 1
   victory_points: 9
-  actions:
-    - removed_from_round
-    - immediately_end_turn
+  actions: []
 - name: countess
   total: 1
   victory_points: 9
   conditionals:
     - play: king
     - play: prince
+  actions: []
 - name: king
   total: 1
   victory_points: 7
+  actions: []
 - name: chancellor
   total: 2
   victory_points: 6
+  actions: []
 - name: prince
   total: 2
   victory_points: 5
+  actions: []
 - name: handmaid
   total: 2
   victory_points: 4
+  actions: []
 - name: baron
   total: 2
   victory_points: 3
+  actions: []
 - name: priest
   total: 2
   victory_points: 2
+  actions: []
 - name: guard
   total: 6
   victory_points: 1
+  actions: []
 - name: spy
   total: 2
+  actions: []
