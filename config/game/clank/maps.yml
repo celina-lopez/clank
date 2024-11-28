@@ -136,7 +136,7 @@ map_1:
           increase_dragon: 1
   - tile: 18
     tags:
-      - market
+      - marketplace
       - minor_item
       - depths
     frontend_data:
@@ -144,7 +144,7 @@ map_1:
       y: 400
   - tile: 19
     tags:
-      - market
+      - marketplace
       - depths
       - minor_item
     frontend_data:
@@ -189,14 +189,14 @@ map_1:
           increase_dragon: 1
   - tile: 23
     tags:
-      - market
+      - marketplace
       - depths
     frontend_data:
       x: 325
       y: 506
   - tile: 24
     tags:
-      - market
+      - marketplace
       - artifact
       - depths
     frontend_data:

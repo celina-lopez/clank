@@ -9,10 +9,10 @@ RSpec.describe Clank::Model::Game do
   describe '.from_json' do
     it 'initializes a game from JSON' do
       expect(game.dragon).to be_a(Clank::Model::Dragon)
-      expect(game.deck).to be_a(Clank::Model::Deck)
+      expect(game.deck).to be_a(Model::Deck)
       expect(game.marketplace).to eq(gameplay_data['marketplace'])
       expect(game.marketplace_items).to eq(gameplay_data['marketplace_items'])
-      expect(game.map).to be_a(Clank::Model::Map)
+      expect(game.map).to be_a(Model::Map)
       expect(game.players.count).to eq(gameplay_data['players'].count)
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe Clank::Model::Game do
 
     it 'initializes with default values when no players are provided' do
       expect(game.dragon).to be_a(Clank::Model::Dragon)
-      expect(game.deck.active_cards.count).to eq(6)
+      expect(game.deck.active.count).to eq(6)
     end
   end
 

@@ -19,45 +19,32 @@ class Clank::Model::Player < Model::Player
     )
   end
 
-  def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def initialize( # rubocop:disable Metrics/MethodLength, Metrics/ParameterLists, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     index = 0,
-    name: nil,
-    health: nil,
     clank: nil,
-    inventory: [],
     position: nil,
     deck: nil,
-    attack_points: 0,
-    move_points: 0,
     coins: nil,
-    skill_points: 0,
     rewards: [],
     trash_options: [],
     ignore_monster_path: false,
     skip_crystal_cave: false,
     discard_number: 0,
     moved_to_crystal_cave: false,
-    victory_points: 0,
-    replace_card_points: 0
+    replace_card_points: 0,
+    **kwargs
   )
-    @index = index || 0
-    @name = name
-    @inventory = inventory || []
+    super
     @position = position || Clank::Model::Position.new
     @deck = deck || Clank::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
     @clank = clank || STARTING_CLANK_CUBES[index]
-    @attack_points = attack_points || 0
-    @health = health || MAX_HEALTH
-    @move_points = move_points || 0
     @coins = coins || START_COINS
     @rewards = rewards || []
-    @skill_points = skill_points || 0
     @trash_options = trash_options || []
     @ignore_monster_path = ignore_monster_path || false
     @skip_crystal_cave = skip_crystal_cave || false
     @discard_number = discard_number || 0
     @moved_to_crystal_cave = moved_to_crystal_cave || false
-    @victory_points = victory_points
     @replace_card_points = replace_card_points || 0
   end
 
