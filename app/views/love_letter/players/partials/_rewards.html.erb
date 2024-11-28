@@ -1,25 +1,68 @@
-<div class="<%= player['rewards'].empty? && "hidden" %>" id="rewards-id">
-  <% player['rewards'].each_with_index do |reward_options, reward_options_index| %>
-    <div>Choose Rewards:</div>
-    <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
-      <% reward_options.each_with_index do |reward, index| %>
-        <div
-          onclick="executeAction(this)"
-          class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
-          data-type="redeem_reward"
-          data-name="<%= reward_options_index %>,<%= index %>"
-        >
-          <% reward.each do |k, v| %>
-            <% if k == 'discard_number' %>
-              Discard <%= v %> card(s)
-            <% elsif %w[health coins attack_points move_points].include?(k) %>
-              Gain <%= v %>  <%= k.humanize(capitalize: false).singularize %>
-            <% else %>
-              <%= k.humanize %>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
+<%
+  all_players = game.data['players']
+  other_players = all_players.reject { |p| p['index'] == current_player['index'] }
+%>
+<% %w[trade_card choose_player_to_compare choose_player_to_reveal].each do |action_type| %>
+  <div id="<%= action_type %>">
+    <% other_players.each do |p| %>
+      <div
+        class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
+        onclick='executeAction(this)'
+        data-type="<%= action_type %>"
+        data-name="<%= p['index'] %>"
+      >
+        <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div id="choose_player_to_discard">
+  <% all_players.each do |p| %>
+    <div
+      class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
+      onclick='executeAction(this)'
+      data-type="choose_player_to_discard"
+      data-name="<%= p['index'] %>"
+    >
+      <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
     </div>
   <% end %>
+</div>
+<%# TODO: if keep card, then update actions on cards in hand %>
+
+<div id="choose_player_to_guess">
+  <select id="card_to_guess" class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer">
+    <% LoveLetter::Base::CARD_NAMES.each do |card_name| %>
+      <option value="<%= card_name %>"><%= card_name %></option>
+    <% end %>
+  </select>
+  <input type="hidden" id="player_to_guess" />
+  <% other_players.each do |p| %>
+    <div
+      class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
+      onclick='choosePlayerToGuess(this)'
+      data-name="<%= p['index'] %>"
+    >
+      <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
+    </div>
+  <% end %>
+
+  <button id="guess_button" onclick="guess()" class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer">
+    Guess
+  </button>
+
+  <script>
+    function choosePlayerToGuess(element) {
+      const player_to_guess = element.dataset.name
+      document.getElementById('player_to_guess').value = player_to_guess
+    }
+
+    function guess() {
+      const card_to_guess = document.getElementById('card_to_guess').value
+      const player_to_guess = document.getElementById('player_to_guess').value
+      let data = { type: 'choose_player_to_guess', player_index: <%= player.dig('index') %>, value: `${player_to_guess},${card_to_guess}` }
+      window.app.action.send(data);
+    }
+  </script>
 </div>
