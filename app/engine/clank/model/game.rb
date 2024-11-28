@@ -7,41 +7,26 @@ class Clank::Model::Game < Model::Game
     Clank::Model::Game.new(
       dragon: Clank::Model::Dragon.from_json(json['dragon']),
       deck: Clank::Model::Deck.from_json(json['deck']),
-      marketplace: json['marketplace'],
-      marketplace_items: json['marketplace_items'],
       map: Clank::Model::Map.from_json(json['map']),
       players: json['players'].map { |p| Clank::Model::Player.from_json(p) },
-      current_player_index: json['current_player_index'],
-      end_game: json['end_game'],
-      results: json['results']
+      **json.symbolize_keys.reject { |k, _v| %i[dragon deck map players].include?(k) }
     )
   end
 
   def initialize(
-    new_players: nil,
     dragon: nil,
     deck: Clank::Model::Deck.new(Clank::Base::STARTING_GAME_CARDS, num_of_active_cards: 6),
     marketplace: Clank::Base::MARKETPLACE,
     map: Clank::Model::Map.new,
-    players: nil,
-    current_player_index: 0,
     marketplace_items: Clank::Base::MARKETPLACE_ITEMS,
-    end_game: false,
-    results: []
+     **kwargs
   )
-    @dragon = dragon || Clank::Model::Dragon.new(num_players: new_players&.length)
-    @current_player_index = current_player_index
+    super
+    @dragon = dragon || Clank::Model::Dragon.new(num_players: kwargs[:new_players]&.length)
     @map = map
     @deck = deck
     @marketplace = marketplace
     @marketplace_items = marketplace_items
-    @players = if new_players.present?
-                 initialize_players(new_players)
-               else
-                 players
-               end
-    @results = results
-    @eng_game = end_game
   end
 
   def next_player!

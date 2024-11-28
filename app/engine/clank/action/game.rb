@@ -59,6 +59,6 @@ class Clank::Action::Game < Action::Game
 
   def end_game!
     super
-    CalculateVictoryPoints.new(gameplay_data).execute!
+    Clank::CalculateVictoryPoints.new(gameplay_data).execute!
   end
 end

@@ -1,0 +1,14 @@
+<div class="<%= player['index'] == game['current_player_index'] ? 'hidden' : '' %>" id="helper_text">
+  Choose a card to play
+</div>
+<div class='my-3 flex gap-3 ' id='player-cards'>
+  <% player.dig('deck', 'active').each do |card| %>
+    <%= render(
+      'players/components/card',
+      card:,
+      data_type: card['name'],
+      button_text: 'play',
+    game_prefix: "love_letter"
+    ) %>
+  <% end %>
+</div>

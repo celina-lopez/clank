@@ -1,0 +1,24 @@
+<%
+  label = case key
+  when 'skill_points'
+    'Skill'
+  when 'victory_points'
+    'Victory'
+  when 'replace_card_points'
+    "Replace a card in the dungeon row"
+  when 'draw'
+    "Draw +#{value} cards"
+  when 'health'
+    "Health"
+  else
+    nil
+  end
+%>
+<div>
+  <% if label %>
+    <%= render 'love_letter/players/components/icon_action', key:, value:, with_prefix: true %>
+    <%= label %>
+  <% else %>
+    <%= key.humanize %>
+  <% end %>
+</div>

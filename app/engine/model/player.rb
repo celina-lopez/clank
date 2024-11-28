@@ -10,7 +10,9 @@ class Model::Player < Base
     @name = kwargs[:name]
     @inventory = kwargs[:inventory] || []
     @attack_points = kwargs[:attack_points] || 0
-    @health = kwargs[:health] || game_engine::Model::Player::MAX_HEALTH
+    if game_engine::Model::Player.const_defined?('MAX_HEALTH')
+      @health = kwargs[:health] || game_engine::Model::Player::MAX_HEALTH
+    end
     @move_points = kwargs[:move_points] || 0
     @skill_points = kwargs[:skill_points] || 0
     @victory_points = kwargs[:victory_points]

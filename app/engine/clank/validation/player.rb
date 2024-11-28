@@ -7,7 +7,7 @@ class Clank::Validation::Player < Validation::Player
 
   def buy?
     result = add_error_if_error('Not in marketplace', current_player.position.marketplace?)
-    result && add_error_if_error("Need #{current_player.coins - value} coins", current_player.coins >= value)
+    result && add_error_if_error("Need #{7 - current_player.coins} coins", current_player.coins >= 7)
   end
 
   def buy_card?
@@ -23,7 +23,7 @@ class Clank::Validation::Player < Validation::Player
     return ok unless ok
 
     if value.to_i.zero?
-      ok &= add_error_if_error('You dont have an artificat', current_player.inventory.any? { |x| x['is_artifact'] })
+      ok &= add_error_if_error('You dont have an artifact', current_player.inventory.any? { |x| x['is_artifact'] })
     end
     unless current_player.skip_crystal_cave
       ok &= add_error_if_error('Cant move if you been in a crystal cave', !current_player.moved_to_crystal_cave)
@@ -46,7 +46,9 @@ class Clank::Validation::Player < Validation::Player
 
   def trash?
     card_name, card_deck = value.split(',')
-    validate_trash_options(card_name)
+    result = validate_trash_options(card_name)
+    return result unless result
+
     card_index = nil
     %w[active discarded].each do |deck|
       next unless card_deck == deck || card_deck.nil?

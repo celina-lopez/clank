@@ -8,29 +8,48 @@ RSpec.describe Clank::Action::Game do
   let(:gameplay_data) { JSON.parse(file_fixture('clank/new_game.json').read) }
 
   describe '#end_turn' do
-    before do
-      allow(subject.gameplay_data.deck).to receive(:active).and_return([])
-    end
-
     it 'calls next_player! and reload_active_deck' do
-      expect(subject.gameplay_data).to receive(:next_player!)
-      expect(subject).to receive(:fullfill_immediate_actions)
+      expect(subject.gameplay_data).to receive(:next_player!).and_call_original
+      expect(subject).to receive(:fullfill_immediate_actions).and_call_original
       subject.end_turn
     end
 
-    context 'when current player is on escape tile and has artifact' do
-      before do
-        allow(subject.gameplay_data.players[1].position).to receive(:escape_tile?).and_return(true)
-        allow(subject.gameplay_data.players[0]).to receive(:artifact?).and_return(true)
+    context 'end game with one player' do
+      context 'when game is finished' do
+        before do
+          gameplay_data['players'] = [gameplay_data['players'][0]]
+          gameplay_data['players'][0]['position']['current_position'] = 0
+          gameplay_data['players'][0]['inventory'] = [{ 'is_artifact' => true }]
+        end
+
+        it 'ends the game when there is only one player left' do
+          expect(subject).to receive(:end_game!).and_call_original
+          subject.end_turn
+          expect(subject.gameplay_data.end_game).to be_truthy
+        end
       end
 
-      xit 'ends the game when there is only one player left' do
-        allow(subject.gameplay_data.players).to receive(:size).and_return(1)
-        expect(subject).to receive(:end_game!)
-        subject.end_turn
+      context 'when game is not finished' do
+        before do
+          gameplay_data['players'][1]['position']['current_position'] = 0
+          gameplay_data['players'][1]['inventory'] = [{ 'is_artifact' => true }]
+        end
+        it 'decreases the current player’s position and triggers dragon attack if not on end tile' do
+          expect(subject).to receive(:dragon_attack!).and_call_original
+          subject.end_turn
+          expect(subject.gameplay_data.players[1].position.current_position).to eq(-1)
+        end
       end
 
-      xit 'decreases the current player’s position and triggers dragon attack if not on end tile' do
+      context 'ends game when player is on ending tile' do
+        before do
+          gameplay_data['players'][1]['position']['current_position'] = -3
+          gameplay_data['players'][1]['inventory'] = [{ 'is_artifact' => true }]
+        end
+        it 'decreases the current player’s position and triggers dragon attack if not on end tile' do
+          subject.end_turn
+          expect(subject.gameplay_data.end_game).to be_truthy
+        end
       end
     end
   end
