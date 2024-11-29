@@ -10,6 +10,7 @@ bin/dev
 - [ ] when everyone is out of the round
 - [ ] begin next round logic
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
+- [ ] BUG why do all the cards keep getting refreshed lol
 
 ## TODO - AEONS END
 

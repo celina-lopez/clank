@@ -12,6 +12,8 @@ if (gameType === 'clank') {
   gameHelpPath = "channels/clank_game_helpers";
 } else if (gameType === 'aeons_end') {
   gameHelpPath = "channels/aeons_end_game_helpers";
+} else if (gameType === 'love_letter') {
+  gameHelpPath = "channels/love_letter_game_helpers";
 }
 
 window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game_id: gameId }, {

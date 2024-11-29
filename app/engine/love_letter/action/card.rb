@@ -57,6 +57,6 @@ class LoveLetter::Action::Card < Action::Card
   end
 
   def immediately_end_turn
-    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn').end_turn
+    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn', value: nil).end_turn
   end
 end
