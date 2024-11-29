@@ -5,7 +5,7 @@ class LoveLetter::Action::Player < Action::Player
   def trade_card
     chosen_player = find_player(value)
     current_player_deck = current_player.deck.active.dup
-    current_player.deck.active = chosen_player.deck.active.dup
+    current_player.deck.active = chosen_player.deck.active
     chosen_player.deck.active = current_player_deck
     immediately_end_turn
   end
@@ -60,7 +60,7 @@ class LoveLetter::Action::Player < Action::Player
   private
 
   def immediately_end_turn
-    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn').end_turn
+    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn', value: nil).end_turn
   end
 
   def find_player(index)

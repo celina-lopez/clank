@@ -1,0 +1,23 @@
+<%
+  label = local_assigns[:label] || ''
+  onclick = local_assigns[:onclick] || 'executeAction(this)'
+%>
+
+<div id="<%= action_type %>" class="<%= player[player_trait].positive? ? '' : 'hidden' %>">
+  <div><%= label %></div>
+  <div class="flex flex-row gap-2">
+    <% players.each do |p| %>
+      <div>
+        <div
+          class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
+          onclick="<%= onclick %>"
+          data-type="<%= action_type %>"
+          data-name="<%= p['index'] %>"
+        >
+          <img src='<%= "/images/profile-#{p['index']}.png" %>' class="rounded-full w-[50px]" />
+        </div>
+        <%= p['name'] %>
+      </div>
+    <% end %>
+  </div>
+</div>

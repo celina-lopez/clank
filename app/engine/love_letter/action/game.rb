@@ -9,15 +9,22 @@ class LoveLetter::Action::Game < Action::Game
   def end_turn
     end_of_round! if gameplay_data.deck.active.empty?
     gameplay_data.end_game = true if end_game?
-    gameplay_data.next_player!
-    gameplay_data.next_player! until current_player.removed_from_round
-    drawn_card = gameplay_data.deck.active.pop
+    loop do
+      gameplay_data.next_player!
+      break unless current_player.removed_from_round
+    end
+    drawn_card = gameplay_data.deck.deck.pop
     current_player.deck.active << drawn_card
     current_player.protected_from_discard = false
     current_player.revealed_card_to_player = nil
   end
 
   private
+
+  def end_game?
+    # TODO: count number of love tokens
+    false
+  end
 
   def end_of_round!
     gameplay_data.deck = LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)

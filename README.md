@@ -2,7 +2,14 @@
 bin/dev
 ```
 
-## TODO
+## TODO - LOVE_LETTER
+
+- [ ] choosing a player
+- [ ] one turn
+- [ ] show all cards that have been played by players
+- [ ] add to templates - the choosing
+
+## TODO - AEONS END
 
 - [ ] do one turn lol
 - [ ] when selecting card, put in highest slot

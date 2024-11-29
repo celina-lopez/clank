@@ -1,68 +1,75 @@
 <%
   all_players = game.data['players']
-  other_players = all_players.reject { |p| p['index'] == current_player['index'] }
+  other_players = all_players.reject { |p| p['index'] == player['index'] }
+  action_to_points = {
+    'trade_card' => 'trade_card_points',
+    'choose_player_to_compare' => 'choose_player_to_compare_points',
+    'choose_player_to_reveal' => 'choose_player_to_reveal_card' # TODO: maybe update this to points
+  }
 %>
 <% %w[trade_card choose_player_to_compare choose_player_to_reveal].each do |action_type| %>
-  <div id="<%= action_type %>">
-    <% other_players.each do |p| %>
-      <div
-        class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
-        onclick='executeAction(this)'
-        data-type="<%= action_type %>"
-        data-name="<%= p['index'] %>"
-      >
-        <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
-      </div>
-    <% end %>
-  </div>
+  <%= render(
+    'love_letter/players/components/choose',
+    action_type:,
+    players: other_players,
+    player_trait: action_to_points[action_type],
+    label: action_type == 'trade_card' ? 'Choose a player to trade your card with' : action_type == 'choose_player_to_compare' ? 'Choose a player to compare your card with' : 'Choose a player to reveal your card to',
+    player:
+  ) %>
 <% end %>
 
-<div id="choose_player_to_discard">
-  <% all_players.each do |p| %>
-    <div
-      class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
-      onclick='executeAction(this)'
-      data-type="choose_player_to_discard"
-      data-name="<%= p['index'] %>"
-    >
-      <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
-    </div>
-  <% end %>
-</div>
+<%= render(
+  'love_letter/players/components/choose',
+  action_type: 'choose_player_to_discard',
+  players: all_players,
+  player_trait: 'choose_player_to_discard_points',
+  label: 'Choose a player to discard their hand',
+  player:
+) %>
+
 <%# TODO: if keep card, then update actions on cards in hand %>
 
-<div id="choose_player_to_guess">
-  <select id="card_to_guess" class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer">
+<%= render(
+  'love_letter/players/components/choose',
+  action_type: 'choose_player_to_guess_characters',
+  players: other_players,
+  player_trait: 'choose_player_to_guess_card',
+  label: 'Choose a card to see their cards',
+  player:
+) %>
+
+<div id="choose_player_to_guess" class="<%= player['choose_player_to_guess_card'].positive? ? '' : 'hidden' %>">
+  <div>Choose a card to guess</div>
+  <select id="card_to_guess" class="select select-bordered w-full max-w-xs"> 
     <% LoveLetter::Base::CARD_NAMES.each do |card_name| %>
       <option value="<%= card_name %>"><%= card_name %></option>
     <% end %>
   </select>
   <input type="hidden" id="player_to_guess" />
-  <% other_players.each do |p| %>
-    <div
-      class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
-      onclick='choosePlayerToGuess(this)'
-      data-name="<%= p['index'] %>"
-    >
-      <img src='<%= "/images/player_#{p['index']}.png" %>' class="rounded-full w-[50px]" />
-    </div>
-  <% end %>
-
-  <button id="guess_button" onclick="guess()" class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer">
+  <%= render(
+    'love_letter/players/components/choose',
+    action_type: 'choose_player_to_guess_characters',
+    players: other_players,
+    player_trait: 'choose_player_to_guess_card',
+    onclick: 'choosePlayerToGuess(this)',
+    player:,
+    label: 'Choose a player to guess their cards'
+  ) %>
+  <button id="guess_button" onclick="guess()" class="btn btn-primary">
     Guess
   </button>
-
-  <script>
-    function choosePlayerToGuess(element) {
-      const player_to_guess = element.dataset.name
-      document.getElementById('player_to_guess').value = player_to_guess
-    }
-
-    function guess() {
-      const card_to_guess = document.getElementById('card_to_guess').value
-      const player_to_guess = document.getElementById('player_to_guess').value
-      let data = { type: 'choose_player_to_guess', player_index: <%= player.dig('index') %>, value: `${player_to_guess},${card_to_guess}` }
-      window.app.action.send(data);
-    }
-  </script>
 </div>
+
+<script>
+  function choosePlayerToGuess(element) {
+    const player_to_guess = element.dataset.name
+    document.getElementById('player_to_guess').value = player_to_guess
+  }
+
+  function guess() {
+    const card_to_guess = document.getElementById('card_to_guess').value
+    const player_to_guess = document.getElementById('player_to_guess').value
+    let data = { type: 'choose_player_to_guess', player_index: <%= player.dig('index') %>, value: `${player_to_guess},${card_to_guess}` }
+    window.app.action.send(data);
+  }
+</script>
