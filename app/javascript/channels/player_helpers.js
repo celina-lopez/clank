@@ -1,8 +1,8 @@
 import 'jquery'
 
 // CARD FUNCTIONS
-const statTemplate = document.getElementById('stat-template').content,
-      healthStatTemplate = document.getElementById('health-stat').content;
+const statTemplate = document.getElementById('stat-template')?.content,
+      healthStatTemplate = document.getElementById('health-stat')?.content;
 
 export function updateStatsForPlayer(playerStatContainer, player, playerStats, minimumThreshold=0) {
   playerStats.forEach(function(stat) {

@@ -2,9 +2,8 @@
 
 class LoveLetter::Action::Card < Action::Card
   def execute!
-    # TODO: figure out why this doesn't work without gameplay_data at the end
     play_card
-    super
+    send(type)
     gameplay_data
   end
 
@@ -24,7 +23,7 @@ class LoveLetter::Action::Card < Action::Card
   end
 
   def chancellor
-    new_cards = gameplay_data.deck.active.pop(2)
+    new_cards = gameplay_data.deck.deck.pop(2)
     current_player.deck.active.concat(new_cards)
     current_player.keep_card_points = 1
   end
@@ -58,6 +57,6 @@ class LoveLetter::Action::Card < Action::Card
   end
 
   def immediately_end_turn
-    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn').end_turn
+    LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn', value: nil).end_turn
   end
 end
