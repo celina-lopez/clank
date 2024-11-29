@@ -52,7 +52,7 @@ class LoveLetter::Action::Player < Action::Player
   def choose_player_to_guess
     player_index, card_name = value.split(',')
     chosen_player = find_player(player_index)
-    chosen_card = find_player_card(card_name)
+    chosen_card = chosen_player.deck.active.find { |card| card['name'] == card_name }
     chosen_player.removed_from_round = true unless chosen_card.nil?
     immediately_end_turn
   end

@@ -7,7 +7,9 @@ bin/dev
 - [ ] choosing a player
 - [ ] one turn
 - [ ] show all cards that have been played by players
-- [ ] add to templates - the choosing
+- [ ] when everyone is out of the round
+- [ ] begin next round logic
+- [ ] still has to choose princesses on cards even if baron shows up dont automate it
 
 ## TODO - AEONS END
 
