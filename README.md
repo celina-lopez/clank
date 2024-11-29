@@ -4,13 +4,12 @@ bin/dev
 
 ## TODO - LOVE_LETTER
 
-- [ ] choosing a player
-- [ ] one turn
 - [ ] show all cards that have been played by players
+- [ ] reveal cards actions
 - [ ] when everyone is out of the round
 - [ ] begin next round logic
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
-- [ ] BUG why do all the cards keep getting refreshed lol
+- [ ] specs lol
 
 ## TODO - AEONS END
 
