@@ -7,8 +7,14 @@ class LoveLetter::Action::Game < Action::Game
   end
 
   def end_turn
-    end_of_round! if gameplay_data.deck.active.empty?
-    gameplay_data.end_game = true if end_game?
+    if gameplay_data.deck.deck.empty?
+      end_of_round!
+      return
+    end
+    if end_game?
+      gameplay_data.end_game = true
+      return
+    end
     loop do
       gameplay_data.next_player!
       break unless current_player.removed_from_round

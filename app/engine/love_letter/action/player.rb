@@ -22,7 +22,11 @@ class LoveLetter::Action::Player < Action::Player
   def choose_player_to_discard # rubocop:disable Metrics/AbcSize
     chosen_player = find_player(value)
     discarded_card = chosen_player.deck.active.pop
-    chosen_player.removed_from_round = true if discarded_card['name'] == 'princess'
+    if discarded_card['name'] == 'princess'
+      chosen_player.removed_from_round = true
+      immediately_end_turn
+      return
+    end
     new_card = gameplay_data.deck.active.pop
     new_card = gameplay_data.deck.discarded.pop if new_card.nil?
     chosen_player.deck.active << new_card if new_card.present?
