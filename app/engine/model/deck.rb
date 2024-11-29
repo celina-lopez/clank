@@ -4,18 +4,13 @@ class Model::Deck
   attr_accessor :active, :deck, :discarded, :num_of_active_cards
 
   def self.from_json(json)
-    Model::Deck.new(
-      num_of_active_cards: json['num_of_active_cards'],
-      active: json['active'],
-      deck: json['deck'],
-      discarded: json['discarded']
-    )
+    Model::Deck.new(**json.symbolize_keys)
   end
 
   def initialize(cards = [], active: [], num_of_active_cards: 5, deck: [], discarded: [])
     @num_of_active_cards = num_of_active_cards
     if cards.present?
-      initialize_new_deck(cards, num_of_active_cards:)
+      initialize_new_deck(cards)
     else
       @active = active
       @deck = deck
@@ -23,7 +18,7 @@ class Model::Deck
     end
   end
 
-  def initialize_new_deck(cards, num_of_active_cards: 5)
+  def initialize_new_deck(cards)
     deck = initialize_deck(cards)
     @active = deck.pop(num_of_active_cards)
     @deck = deck
