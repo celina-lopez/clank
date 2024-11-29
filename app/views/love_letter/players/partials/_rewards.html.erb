@@ -29,15 +29,6 @@
 
 <%# TODO: if keep card, then update actions on cards in hand %>
 
-<%= render(
-  'love_letter/players/components/choose',
-  action_type: 'choose_player_to_guess_characters',
-  players: other_players,
-  player_trait: 'choose_player_to_guess_card',
-  label: 'Choose a card to see their cards',
-  player:
-) %>
-
 <div id="choose_player_to_guess" class="<%= player['choose_player_to_guess_card'].positive? ? '' : 'hidden' %>">
   <div>Choose a card to guess</div>
   <select id="card_to_guess" class="select select-bordered w-full max-w-xs"> 

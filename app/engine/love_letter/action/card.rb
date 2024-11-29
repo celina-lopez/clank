@@ -2,9 +2,8 @@
 
 class LoveLetter::Action::Card < Action::Card
   def execute!
-    # TODO: figure out why this doesn't work without gameplay_data at the end
     play_card
-    super
+    send(type)
     gameplay_data
   end
 
