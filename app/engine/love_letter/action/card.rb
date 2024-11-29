@@ -23,7 +23,7 @@ class LoveLetter::Action::Card < Action::Card
   end
 
   def chancellor
-    new_cards = gameplay_data.deck.active.pop(2)
+    new_cards = gameplay_data.deck.deck.pop(2)
     current_player.deck.active.concat(new_cards)
     current_player.keep_card_points = 1
   end

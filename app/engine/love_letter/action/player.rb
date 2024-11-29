@@ -11,11 +11,11 @@ class LoveLetter::Action::Player < Action::Player
   end
 
   def keep_card # rubocop:disable Metrics/AbcSize
-    card_to_keep = find_current_player_card(value)
+    card_to_keep = current_player.deck.active.find { |x| x['name'] == value }
     current_player.deck.active.delete(card_to_keep)
     put_at_bottom_of_deck = current_player.deck.active.pop(2)
-    gameplay_data.deck.active.concat(put_at_bottom_of_deck)
-    current_player.deck.active << card_to_keep
+    gameplay_data.deck.deck.concat(put_at_bottom_of_deck)
+    current_player.deck.active = [card_to_keep]
     immediately_end_turn
   end
 
@@ -69,9 +69,5 @@ class LoveLetter::Action::Player < Action::Player
 
   def find_player(index)
     gameplay_data.players.find { |player| player.index == index.to_i }
-  end
-
-  def find_current_player_card(name)
-    current_player.deck.active.find { |x| x.name == name }
   end
 end
