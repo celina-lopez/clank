@@ -33,6 +33,7 @@ class LoveLetter::Action::Game < Action::Game
   end
 
   def end_of_round!
+    # TODO: give love token to winner
     gameplay_data.deck = LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)
     gameplay_data.setup_deck(gameplay_data.players.size)
     gameplay_data.players.each do |player|

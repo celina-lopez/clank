@@ -1,0 +1,172 @@
+{
+  "deck": {
+    "num_of_active_cards": 0,
+    "active": [],
+    "deck": [
+      { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+      { "name": "prince", "total": 2, "victory_points": 5, "actions": [] },
+      {
+        "name": "countess",
+        "total": 1,
+        "victory_points": 9,
+        "conditionals": [{ "play": "king" }, { "play": "prince" }],
+        "actions": []
+      },
+      { "name": "handmaid", "total": 2, "victory_points": 4, "actions": [] },
+      { "name": "princess", "total": 1, "victory_points": 9, "actions": [] },
+      { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+      { "name": "priest", "total": 2, "victory_points": 2, "actions": [] },
+      { "name": "baron", "total": 2, "victory_points": 3, "actions": [] },
+      { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+      { "name": "king", "total": 1, "victory_points": 7, "actions": [] },
+      { "name": "spy", "total": 2, "actions": [] },
+      { "name": "prince", "total": 2, "victory_points": 5, "actions": [] },
+      {
+        "name": "chancellor",
+        "image": "the_duke",
+        "total": 2,
+        "victory_points": 6,
+        "actions": []
+      },
+      { "name": "baron", "total": 2, "victory_points": 3, "actions": [] },
+      { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+      { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+      { "name": "handmaid", "total": 2, "victory_points": 4, "actions": [] }
+    ],
+    "discarded": []
+  },
+  "gameplay_data": {
+    "new_players": ["Stormheart", "Ironheart", "Ironclaw"],
+    "deck": {
+      "num_of_active_cards": 0,
+      "active": [],
+      "deck": [
+        { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+        { "name": "prince", "total": 2, "victory_points": 5, "actions": [] },
+        {
+          "name": "countess",
+          "total": 1,
+          "victory_points": 9,
+          "conditionals": [{ "play": "king" }, { "play": "prince" }],
+          "actions": []
+        },
+        { "name": "handmaid", "total": 2, "victory_points": 4, "actions": [] },
+        { "name": "princess", "total": 1, "victory_points": 9, "actions": [] },
+        { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+        { "name": "priest", "total": 2, "victory_points": 2, "actions": [] },
+        { "name": "baron", "total": 2, "victory_points": 3, "actions": [] },
+        { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+        { "name": "king", "total": 1, "victory_points": 7, "actions": [] },
+        { "name": "spy", "total": 2, "actions": [] },
+        { "name": "prince", "total": 2, "victory_points": 5, "actions": [] },
+        {
+          "name": "chancellor",
+          "image": "the_duke",
+          "total": 2,
+          "victory_points": 6,
+          "actions": []
+        },
+        { "name": "baron", "total": 2, "victory_points": 3, "actions": [] },
+        { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+        { "name": "guard", "total": 6, "victory_points": 1, "actions": [] },
+        { "name": "handmaid", "total": 2, "victory_points": 4, "actions": [] }
+      ],
+      "discarded": []
+    }
+  },
+  "current_player_index": 0,
+  "game_engine": "LoveLetter",
+  "players": [
+    {
+      "index": 0,
+      "name": "Stormheart",
+      "inventory": [],
+      "attack_points": 0,
+      "game_engine": "LoveLetter",
+      "move_points": 0,
+      "skill_points": 0,
+      "victory_points": null,
+      "deck": {
+        "num_of_active_cards": 5,
+        "active": [
+          {
+            "name": "chancellor",
+            "image": "the_duke",
+            "total": 2,
+            "victory_points": 6,
+            "actions": []
+          },
+          { "name": "priest", "total": 2, "victory_points": 2, "actions": [] }
+        ],
+        "deck": [],
+        "discarded": []
+      },
+      "rewards": [],
+      "removed_from_round": false,
+      "trade_card_points": 0,
+      "keep_card_points": 0,
+      "choose_player_to_discard_points": 0,
+      "protected_from_discard": false,
+      "choose_player_to_compare_points": 0,
+      "choose_player_to_reveal_card": 0,
+      "choose_player_to_guess_card": 0,
+      "revealed_card_to_player": null
+    },
+    {
+      "index": 1,
+      "name": "Ironheart",
+      "inventory": [],
+      "attack_points": 0,
+      "game_engine": "LoveLetter",
+      "move_points": 0,
+      "skill_points": 0,
+      "victory_points": null,
+      "deck": {
+        "num_of_active_cards": 5,
+        "active": [{ "name": "spy", "total": 2, "actions": [] }],
+        "deck": [],
+        "discarded": []
+      },
+      "rewards": [],
+      "removed_from_round": false,
+      "trade_card_points": 0,
+      "keep_card_points": 0,
+      "choose_player_to_discard_points": 0,
+      "protected_from_discard": false,
+      "choose_player_to_compare_points": 0,
+      "choose_player_to_reveal_card": 0,
+      "choose_player_to_guess_card": 0,
+      "revealed_card_to_player": null
+    },
+    {
+      "index": 2,
+      "name": "Ironclaw",
+      "inventory": [],
+      "attack_points": 0,
+      "game_engine": "LoveLetter",
+      "move_points": 0,
+      "skill_points": 0,
+      "victory_points": null,
+      "deck": {
+        "num_of_active_cards": 5,
+        "active": [
+          { "name": "guard", "total": 6, "victory_points": 1, "actions": [] }
+        ],
+        "deck": [],
+        "discarded": []
+      },
+      "rewards": [],
+      "removed_from_round": false,
+      "trade_card_points": 0,
+      "keep_card_points": 0,
+      "choose_player_to_discard_points": 0,
+      "protected_from_discard": false,
+      "choose_player_to_compare_points": 0,
+      "choose_player_to_reveal_card": 0,
+      "choose_player_to_guess_card": 0,
+      "revealed_card_to_player": null
+    }
+  ],
+  "results": null,
+  "end_game": null
+}
