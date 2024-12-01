@@ -1,26 +1,3 @@
 <template id='card-template'>
   <%= render 'players/components/card', game_prefix: 'love_letter' %>
 </template>
-<template id='stat-template'>
-  <%= render 'players/components/stat', player: {'sample' => 1}, stat: 'sample', game_prefix: "love_letter" %>
-</template>
-<% %w[skill_points victory_points].each do |key| %>
-  <template id='template-<%= key %>'>
-    <%= render 'love_letter/players/components/icon_action', key: %>
-  </template>
-<% end %>
-<template id='rewards-parent'>
-  <div>Choose Rewards:</div>
-    <div class="grid gap-4 grid-cols-3 auto-cols-auto	">
-    </div>
-  </div>
-</template>
-<template id='rewards-option'>
-  <div
-    onclick="executeAction(this)"
-    class="card border border-2 rounded hover:bg-violet-200 cursor-pointer"
-    data-type="redeem_reward"
-    data-name="0,0"
-  >
-  </div>
-</template>

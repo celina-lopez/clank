@@ -1,7 +1,7 @@
 import 'jquery'
 
 const playerBannerElm = document.getElementById('player-banner'),
-      statTemplate = document.getElementById('stat-template').content ;
+      statTemplate = document.getElementById('stat-template')?.content ;
 
 export function updateBanner(data, playerId) {
   playerBannerElm.className = `bg-${playerColors[data.current_player_index]}-400 w-100 text-center`

@@ -39,5 +39,6 @@
   victory_points: 1
   actions: []
 - name: spy
+  victory_points: 0
   total: 2
   actions: []

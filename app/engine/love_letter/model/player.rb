@@ -51,4 +51,8 @@ class LoveLetter::Model::Player < Model::Player
     @trade_card_points = 0
     @keep_card_points = 0
   end
+
+  def protected_from_discard?
+    protected_from_discard
+  end
 end

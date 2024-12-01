@@ -24,6 +24,6 @@ class LoveLetter::Validation::Player < Validation::Player
 
   def protected?(index)
     chosen_player = gameplay_data.players.find { |player| player.index == index.to_i }
-    chosen_player.deck.active.find { |card| card['name'] == 'handmaid' }.present?
+    chosen_player.protected_from_discard?
   end
 end

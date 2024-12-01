@@ -9,7 +9,6 @@ bin/dev
 - [ ] when everyone is out of the round
 - [ ] begin next round logic
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
-- [ ] specs lol
 
 ## TODO - AEONS END
 

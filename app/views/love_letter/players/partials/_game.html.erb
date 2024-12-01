@@ -1,7 +1,7 @@
 <div class="grid grid-cols-2 lg:auto-cols-min">
   <div id='col-1' class="col-span-2 lg:col-span-1">
     <div>
-      <%= render 'love_letter/players/partials/stats', player: %>
+      <%= render 'love_letter/players/partials/stats', player:, game:, phaser_config: @phaser_config %>
       <%= render 'love_letter/players/partials/rewards', player:, game: %> 
     </div>
     <div class="my-4 tabs p-0">

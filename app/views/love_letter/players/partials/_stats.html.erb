@@ -1,3 +1,24 @@
-<div class="stats glass mt-3" id='player-stats-<%= player['index'] %>'>
-  <%= render 'players/components/stat', player:, stat: 'skill_points', game_prefix: 'love_letter' %>
+<div class="flex gap-5">
+  <div>
+    <% game.data['players'].each do |player| %>
+      <div class="relative">
+        <img
+          src="/images/profile-<%= player['index'] %>.png"
+          class="rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
+        />
+        <div class="absolute top-[50px] right-[3px] bg-primary text-white rounded-full w-[25px] h-[25px] flex items-center justify-center">
+          <%= player.fetch('victory_points', 0) || 0 %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    Last card played
+    <%= render(
+      'players/components/card',
+      card: game.data['deck']['discarded'].last,
+      game_prefix: 'love_letter'
+      ) %>
+  </div>
 </div>
