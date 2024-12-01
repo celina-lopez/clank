@@ -1,16 +1,15 @@
 <%
-  with_prefix = false if local_assigns[:with_prefix].nil?
   value = local_assigns[:value]
   case key
-  when 'skill_points'
-    icon = 'wand-sparkles'
-    color = 'sky'
   when 'victory_points'
     icon = 'face-smile'
     color = 'green'
-  when 'health'
+  when 'favor_tokens'
     icon = 'heart'
     color = 'red'
+  when 'removed_from_round'
+    icon = 'face-sad-cry'
+    color = 'sky'
   else
     icon = nil
     color = nil
@@ -18,9 +17,5 @@
 %>
 <% if icon %>
   <i class="text-<%= color %>-600 fa-solid fa-<%= icon %>"></i>
-  <% if with_prefix %>
-    <%= value.positive? ? "+#{value}" : value %>
-  <% else %>
-    <%= value %>
-  <% end %>
+  <%= value == true ? '' : value %>
 <% end %>
