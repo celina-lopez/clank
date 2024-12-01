@@ -21,4 +21,16 @@
       game_prefix: 'love_letter'
       ) %>
   </div>
+
+  <div>
+    Revealed Card
+    <% if player['revealed_card_to_player'].present? %>
+      <img src="/images/profile-<%= player['revealed_card_to_player']['index'] %>.png" class="rounded-full border-<%= phaser_config.dig('player_colors', player['revealed_card_to_player']['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]"/>
+    <%= render(
+        'players/components/card',
+        card: player['revealed_card_to_player']['card'],
+        game_prefix: 'love_letter'
+      ) %>
+    <% end %>
+  </div>
 </div>

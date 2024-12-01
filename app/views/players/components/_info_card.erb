@@ -14,7 +14,7 @@
 >
   <figure><img src='<%= card['image'].present? ? "/images/#{card['image']}.png" : card['name'].present? ? "/images/#{card['name']}.png" : "" %>' alt="<%= card['name'] %>" class="<%= small_card ? "max-w-[130px]" : "max-w-[207px]" %>"/></figure>
   <div class='<%= small_card ? "px-[5px] py-[1px] h-[63px]" : "p-3 h-[136px]" %> relative' style="<%= small_card ? "font-size: 6px" : "font-size: 12px" %>">
-    <div class="text-wrap <%= small_card ? "w-[65px]" : "w-[126px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
+    <div class="text-wrap <%= small_card ? "w-[114px]" : "w-[175px]" %> font-bold mt-1 gap-1 justify-center card_actions_parent">
       <% card.fetch('actions', []).each_with_index do |action, index| %>
         <% action.each do |key, value| %>
           <div><%= render "#{game_prefix}/players/components/action", key:, value: %></div>

@@ -53,7 +53,7 @@ class LoveLetter::Action::Card < Action::Card
 
   def play_card
     card = current_player.deck.active.find { |c| c['name'] == type }
-    current_player.deck.destroy!(card)
+    current_player.deck.discard(card)
     gameplay_data.deck.discarded << card
   end
 

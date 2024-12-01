@@ -22,19 +22,17 @@ class LoveLetter::Model::Game < Model::Game
   end
 
   def setup_deck(player_count)
-    cards_aside = player_count == 2 ? deck.active.pop(3) : deck.active.pop(1)
-    deck.discarded.concat(cards_aside)
+    cards_aside = player_count == 2 ? deck.deck.pop(3) : deck.deck.pop(1)
+    deck.active = cards_aside
   end
 
   def initialize_players(new_players)
-    count = -1
     setup_deck(new_players.size)
     @players = new_players.each_with_index.map do |name, index|
-      count += 1
       game_engine::Model::Player.new(
-        count,
+        index,
         name:,
-        deck: LoveLetter::Model::Deck.new(active: @deck.deck.pop(index.zero? ? 2 : 1))
+        deck: LoveLetter::Model::Deck.new(active: deck.deck.pop(index.zero? ? 2 : 1))
       )
     end
   end

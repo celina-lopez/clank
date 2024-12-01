@@ -2,43 +2,50 @@
   total: 1
   victory_points: 9
   actions: []
+  description: "If you play/discard this card, you are out of the round."
 - name: countess
   total: 1
   victory_points: 9
-  conditionals:
-    - play: king
-    - play: prince
+  description: "The Countess has no effect when played or discarded. You must play the Countess as the card for your turn if either the King or a Prince is the other card in your hand."
   actions: []
 - name: king
   total: 1
   victory_points: 7
   actions: []
+  description: "Choose another player and trade hands with that player"
 - name: chancellor
   image: the_duke
   total: 2
+  description: "Draw two cards from the deck into your hand. Choose and keep one of the three cards now in your hand."
   victory_points: 6
   actions: []
 - name: prince
   total: 2
   victory_points: 5
   actions: []
+  description: "Choose any player (including yourself). That player discards their hand (without resolving its effect) and draws a new hand"
 - name: handmaid
   total: 2
   victory_points: 4
   actions: []
+  description: "Until the next turn, ignore all effects from other players cards."
 - name: baron
   total: 2
   victory_points: 3
   actions: []
+  description: "Choose another player. You and that player secretly compare your hands. Whoever has the lower value card is out of the round."
 - name: priest
   total: 2
   victory_points: 2
   actions: []
+  description: "Choose another player and secretly look at their hand (without revealing it to anyone else)."
 - name: guard
   total: 6
   victory_points: 1
+  description: "Choose another player and name a character other than Guard. If the chosen player has that card in their hand, they are out of the round."
   actions: []
 - name: spy
   victory_points: 0
+  description: "A Spy has no effect when played or discarded. At the end of the round, if you are the only player still in the round who played or discarded a Spy, you gain one favor token."
   total: 2
   actions: []
