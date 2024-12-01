@@ -7,7 +7,7 @@ class LoveLetter::Action::Game < Action::Game
   end
 
   def end_turn
-    if gameplay_data.deck.deck.empty?
+    if end_of_round?
       end_of_round!
       return
     end
@@ -33,12 +33,24 @@ class LoveLetter::Action::Game < Action::Game
   end
 
   def end_of_round!
-    # TODO: give love token to winner
+    if gameplay_data.deck.deck.empty?
+      valid_players = gameplay_data.players.filter { |player| !player.removed_from_round }
+      highest_score = valid_players.map { |player| player.deck.active.first['victory_points'] }.max
+      valid_players.each do |player|
+        player.favor_tokens += 1 if player.deck.active.first['victory_points'] == highest_score
+      end
+    end
     gameplay_data.deck = LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)
     gameplay_data.setup_deck(gameplay_data.players.size)
     gameplay_data.players.each do |player|
       player.deck = LoveLetter::Model::Deck.new(active: gameplay_data.deck.deck.pop(1))
     end
+  end
+
+  def end_of_round?
+    return true if gameplay_data.deck.deck.empty?
+
+    gameplay_data.players.filter(&:removed_from_round).size == (gameplay_data.players.size - 1)
   end
 end
 
