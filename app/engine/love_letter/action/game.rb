@@ -41,8 +41,9 @@ class LoveLetter::Action::Game < Action::Game
       valid
     end
     valid_players.each do |player|
-      player.favor_tokens += 1 if player.deck.active.first['victory_points'] == highest_score
-      player.favor_tokens += 1 if spy_players.one? && spy_players.include?(player.index)
+      player.victory_points ||= 0
+      player.victory_points += 1 if player.deck.active.first['victory_points'] == highest_score
+      player.victory_points += 1 if spy_players.one? && spy_players.include?(player.index)
     end
   end
 
@@ -51,7 +52,8 @@ class LoveLetter::Action::Game < Action::Game
       distribute_favor_tokens_with_empty_deck
     else
       gameplay_data.players.each do |player|
-        player.favor_tokens += 1 unless player.removed_from_round
+        player.victory_points ||= 0
+        player.victory_points += 1 unless player.removed_from_round
       end
     end
     gameplay_data.deck = LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)
