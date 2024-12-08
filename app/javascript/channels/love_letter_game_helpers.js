@@ -49,11 +49,16 @@ function exposeRewards(player) {
 }
 
 function updateCardStatues(game) {
-  if (game.data['deck']['discarded'].last) {
+  if (game.deck.discarded.length > 0) {
     document.getElementById('last_card_played').classList.remove('hidden');
+    populateCards('last_card_played', [game.deck.discarded[game.deck.discarded.length - 1]], false);
   }
   if (game.data['revealed_card_to_player']) {
     document.getElementById('revealed_card').classList.remove('hidden');
+    const container = document.getElementById('revealed_card-container');
+    container.innerHTML = '<img src="/images/profile-' + game['revealed_card_to_player']['index'] + '.png" class="rounded-full border-gray-400 border-2 rounded h-[75px] w-[75px]"/>';
+    container.innerHTML += '<div id="revealed_card-cards"></div>';
+    populateCards('revealed_card', [game['revealed_card_to_player']['card']], false);
   }
 }
 
