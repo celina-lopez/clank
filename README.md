@@ -4,7 +4,7 @@ bin/dev
 
 ## TODO - LOVE_LETTER
 
-- [ ] reveal cards actions
+- [ ] update avatar status
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
 
 ## TODO - AEONS END

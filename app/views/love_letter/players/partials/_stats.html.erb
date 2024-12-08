@@ -1,8 +1,7 @@
 <div class="flex gap-5">
   <div>
-    <%# TODO: add hover stuff %>
     <% game.data['players'].each do |player| %>
-      <div class="mini_card relative"> 
+      <div class="mini_card relative" id='player-stats-<%= player['index'] %>'> 
         <div>
           <img
             src="/images/profile-<%= player['index'] %>.png"
@@ -30,7 +29,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="<%= game.data['deck']['discarded'].last ? '' : 'hidden' %>" id='last_card_played'>
     Last card played
     <%= render(
       'players/components/card',
@@ -39,7 +38,7 @@
       ) %>
   </div>
 
-  <div>
+  <div class="<%= player['revealed_card_to_player'].present? ? '' : 'hidden' %>" id='revealed_card'>
     Revealed Card
     <% if player['revealed_card_to_player'].present? %>
       <img src="/images/profile-<%= player['revealed_card_to_player']['index'] %>.png" class="rounded-full border-<%= phaser_config.dig('player_colors', player['revealed_card_to_player']['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]"/>

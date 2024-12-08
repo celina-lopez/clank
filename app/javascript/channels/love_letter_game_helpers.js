@@ -24,12 +24,16 @@ function populateCards(prefix, cards, playerHand=false) {
   })
 };
 
-// PLAYER FUNCTIONS - do love tokens here TODO
+// PLAYER FUNCTIONS 
 function updateStats(game) {
   game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
-    playerStatContainer.innerHTML = '';
-    updateStatsForPlayer(playerStatContainer, player, statKeys);
+    if (player.removed_from_round) {
+      playerStatContainer.children[0].querySelector('img').classList.add('opacity-50')
+    } else {
+      playerStatContainer.children[0].querySelector('img').classList.remove('opacity-50')
+    }
+    playerStatContainer.children[0].querySelector('div').innerHTML = player.victory_points || 0
   });
 }
 
@@ -44,6 +48,15 @@ function exposeRewards(player) {
   });
 }
 
+function updateCardStatues(game) {
+  if (game.data['deck']['discarded'].last) {
+    document.getElementById('last_card_played').classList.remove('hidden');
+  }
+  if (game.data['revealed_card_to_player']) {
+    document.getElementById('revealed_card').classList.remove('hidden');
+  }
+}
+
 export function updatePlayerData(player, playerId, data) {
   populateCards('player', player['deck']['active'], true);
   updateBanner(data, playerId);
@@ -52,7 +65,8 @@ export function updatePlayerData(player, playerId, data) {
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
-  // updateStats(data);
+  updateStats(data);
+  updateCardStatues(data);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['latest_logs']);
 }
