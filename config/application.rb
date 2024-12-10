@@ -8,10 +8,6 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
-    config.hosts << /.*\.worthyofapenny\.com\z/
-    config.hosts << /.*\.playboard\.games\z/
-    config.hosts << 'playboard.games'
-    config.hosts << '10.244.0.77'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.active_record.legacy_connection_handling = false

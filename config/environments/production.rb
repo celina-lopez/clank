@@ -1,4 +1,7 @@
 Rails.application.configure do
+  config.hosts << /.*\.worthyofapenny\.com\z/
+  config.hosts << /.*\.playboard\.games\z/
+  config.hosts << 'playboard.games'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
