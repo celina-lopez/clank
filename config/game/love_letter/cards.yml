@@ -45,6 +45,7 @@
   description: "Choose another player and name a character other than Guard. If the chosen player has that card in their hand, they are out of the round."
   actions: []
 - name: spy
+  image: the_mountain_king
   victory_points: 0
   description: "A Spy has no effect when played or discarded. At the end of the round, if you are the only player still in the round who played or discarded a Spy, you gain one favor token."
   total: 2

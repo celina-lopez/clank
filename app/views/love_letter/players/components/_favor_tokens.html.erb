@@ -1,0 +1,20 @@
+<%
+  favor_tokens_needed = case game.data['players'].size
+    when 5, 6
+      3
+    when 4
+      4
+    when 3
+      5
+    when 2
+      6
+    end
+%>
+<div>
+  <% player['victory_points'].to_i.times do %>
+    <i class="text-red-600 fa-solid fa-heart"></i>
+  <% end %>
+  <% (favor_tokens_needed - player['victory_points'].to_i).times do %>
+    <i class="text-slate-300 fa-solid fa-heart"></i>
+  <% end %>
+</div>

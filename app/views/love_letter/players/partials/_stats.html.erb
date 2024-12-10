@@ -1,48 +1,12 @@
-<div class="flex gap-5">
-  <div>
-    <% game.data['players'].each do |player| %>
-      <div class="mini_card relative" id='player-stats-<%= player['index'] %>'> 
-        <div>
-          <img
-            src="/images/profile-<%= player['index'] %>.png"
-            class="rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
-          />
-          <div class="absolute top-[50px] right-[3px] bg-primary text-white rounded-full w-[25px] h-[25px] flex items-center justify-center">
-            <%= player.fetch('victory_points', 0) || 0 %>
-          </div>
-        </div>
-        <div class='hidden_info_card absolute left-[85px] top-0 opacity-0 transition duration-300 delay-0'>
-          <%= render(
-            'players/components/info_card',
-            card: {
-              'name' => player['name'],
-              'actions' => [
-                {'favor_tokens' => player.fetch('favor_tokens', 0) || 0,
-                'removed_from_round' => player.fetch('removed_from_round', false)}.select { |_, value| value.present? }
-              ],
-              'image' => "profile-#{player['index']}",
-            },
-            game_prefix: 'love_letter'
-          ) %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<div class="grid grid-cols-3 gap-4">
+  <% game.data['players'].reject { |x| x['index'] == player['index'] }.each do |player| %>
+    <%= render "love_letter/players/partials/player", player:, game:, phaser_config: %> 
+  <% end %>
+</div>
 
-  <div class="<%= game.data['deck']['discarded'].last ? '' : 'hidden' %>" id='last_card_played'>
-    <div>Last card played</div>
-    <div id='last_card_played-cards'>
-      <%= render(
-        'players/components/card',
-        card: game.data['deck']['discarded'].last,
-        game_prefix: 'love_letter'
-      ) %>
-    </div>
-  </div>
-
-  <div class="<%= player['revealed_card_to_player'].present? ? '' : 'hidden' %>" id='revealed_card'>
-    <div>Revealed Card</div>
-    <div id='revealed_card-container'>
+<div class="<%= player['revealed_card_to_player'].present? ? '' : 'hidden' %>" id='revealed_card'>
+  <div>Revealed Card</div>
+  <div id='revealed_card-container'>
     <% if player['revealed_card_to_player'].present? %>
       <img src="/images/profile-<%= player['revealed_card_to_player']['index'] %>.png" class="rounded-full border-<%= phaser_config.dig('player_colors', player['revealed_card_to_player']['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]"/>
       <div id='revealed_card-cards'>
@@ -50,9 +14,8 @@
           'players/components/card',
           card: player['revealed_card_to_player']['card'],
           game_prefix: 'love_letter'
-          ) %>
-        </div>
-      <% end %>
-    </div>
+        ) %>
+      </div>
+    <% end %>
   </div>
 </div>
