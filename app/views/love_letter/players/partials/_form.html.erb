@@ -3,7 +3,7 @@
     <div class="label">
       <span class="label-text">Name</span>
     </div>
-    <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]", value="<%= RandomNameGenerator.character_name %>">
+    <input required="required" class="input input-bordered w-full max-w-xs" name="game[settings][players][]", value="<%= RandomNameGenerator.character_name('royal') %>">
   </label>
 </div>
 <template id="addPlayerForm">
@@ -23,11 +23,11 @@
     document.getElementById('playerContainer').appendChild(clone);
   };
 
-  const firstPart = <%= raw RandomNameGenerator::NAME_FIRST %>;
-  const secondPart = <%= raw RandomNameGenerator::NAME_SECOND %>;
+  const firstPart = <%= raw RandomNameGenerator::FANTASY_NAME_FIRST %>;
+  const secondPart = <%= raw RandomNameGenerator::FANTASY_NAME_SECOND %>;
   function generateName () {
     const firstIndex = Math.floor(Math.random() * firstPart.length); 
     const secondIndex = Math.floor(Math.random() * secondPart.length); 
-    return firstPart[firstIndex] + secondPart[secondIndex];
+    return firstPart[firstIndex] + ' of ' + secondPart[secondIndex];
   }
 </script>
