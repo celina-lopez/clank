@@ -4,8 +4,7 @@ import { updateBanner, updateLogs } from './utils'
 import { updateStatsForPlayer } from './player_helpers'
 
 // CARD FUNCTIONS
-const statKeys = ['victory_points'],
-      rewardToStat = {
+const rewardToStat = {
         trade_card: 'trade_card_points',
         choose_player_to_compare: 'choose_player_to_compare_points',
         choose_player_to_reveal: 'choose_player_to_reveal_card',
@@ -42,8 +41,10 @@ function exposeRewards(player) {
     let element = document.getElementById(reward_name);
     if (player[rewardToStat[reward_name]] > 0) {
       element.classList.remove('hidden');
+      document.getElementById('rewards_modal').showModal();
     } else {
       element.classList.add('hidden');
+      document.getElementById('rewards_modal').close();
     }
   });
 }
