@@ -10,6 +10,13 @@ const rewardToStat = {
         choose_player_to_reveal: 'choose_player_to_reveal_card',
         choose_player_to_discard: 'choose_player_to_discard_points',
         choose_player_to_guess: 'choose_player_to_guess_card'
+      },
+      favor_tokens_needed = {
+        2: 6,
+        3: 5,
+        4: 4,
+        5: 3,
+        6: 3
       };
 
 
@@ -20,20 +27,40 @@ function populateCards(prefix, cards, playerHand=false) {
     let cardParent = createCard(card, playerHand)
     document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
     index += 1;
-  })
+  });
 };
+
+function removeFunctionsFromCards(prefix) {
+  document.getElementById(`${prefix}-cards`).children.forEach(function(card) {
+    card.chidlren[0].onclick = null;
+  });
+}
+
 
 // PLAYER FUNCTIONS 
 function updateStats(game) {
   game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
     if (player.removed_from_round) {
-      playerStatContainer.children[0].querySelector('img').classList.add('opacity-50')
+      playerStatContainer.querySelector('img').classList.add('opacity-50')
     } else {
-      playerStatContainer.children[0].querySelector('img').classList.remove('opacity-50')
+      playerStatContainer.querySelector('img').classList.remove('opacity-50')
     }
-    playerStatContainer.children[0].querySelector('div').innerHTML = player.victory_points || 0
+    playerStatContainer.children[1].innerHTML = renderFavorTokens(game, player);
+    populateCards(`${player.index}-discarded`, player.deck.discarded)
+    removeFunctionsFromCards(`${player.index}-discarded`)
   });
+}
+
+function renderFavorTokens(game, player) {
+  let favorTokens = ''
+  for (let i = 0; i < player.victory_points; i++) {
+    favorTokens += '<i class="text-red-600 fa-solid fa-heart"></i>'
+  }
+  for (let i = 0; i < (favor_tokens_needed[game.players.length] - player.victory_points); i++) {
+    favorTokens += '<i class="text-slate-300 fa-solid fa-heart"></i>'
+  }
+  return favorTokens
 }
 
 function exposeRewards(player) {
@@ -49,15 +76,14 @@ function exposeRewards(player) {
   });
 }
 
-function updateCardStatues(game) {
-  if (game.deck.discarded.length > 0) {
-    document.getElementById('last_card_played').classList.remove('hidden');
-    populateCards('last_card_played', [game.deck.discarded[game.deck.discarded.length - 1]], false);
-  }
-}
-
 export function updatePlayerData(player, playerId, data) {
   populateCards('player', player['deck']['active'], true);
+  if (player.keep_card_points) {
+    document.getElementById(`player-cards`).children.forEach(function(card) {
+      card.children[0].dataset.name = card.children[0].dataset.type  
+      card.children[0].dataset.type = 'keep_card'
+    });
+  }
   updateBanner(data, playerId);
   exposeRewards(player);
   if (player.revealed_card_to_player) {
@@ -72,7 +98,6 @@ export function updatePlayerData(player, playerId, data) {
 
 export function updateGameData(data) {
   updateStats(data);
-  updateCardStatues(data);
   HtmlActions.addHoverCardFunctions()
   updateLogs(data['latest_logs']);
 }

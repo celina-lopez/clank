@@ -7,10 +7,11 @@ bin/dev
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
 - [ ] winner arc
 - [ ] coffee tip hehe
-- [ ] choices in modal
 - [ ] logs toastr
+- [ ] update discarded hands
 - [ ] max players 6
 - [ ] discarding lol doesn't work...
+- [ ] dont show out players as options
 
 ## TODO - AEONS END
 
