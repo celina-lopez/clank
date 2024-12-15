@@ -5,15 +5,13 @@ bin/dev
 ## TODO - LOVE_LETTER
 
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
-- [ ] winner arc
 - [ ] coffee tip hehe
 - [ ] logs toastr
-- [ ] update discarded hands
 - [ ] max players 6
 - [ ] discarding lol doesn't work...
 - [ ] dont show out players as options
-- [ ] show the cards overlapping
 - [ ] kick ppl out if discarded - princess
+- [ ] hearts need to be somewhat apart
 
 ## TODO - AEONS END
 
