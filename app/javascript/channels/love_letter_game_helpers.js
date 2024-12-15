@@ -2,7 +2,7 @@ import 'jquery'
 import { createCard } from './card_helpers'
 import { updateBanner, updateLogs } from './utils'
 
-// CARD FUNCTIONS
+// PLAYER FUNCTIONS
 const rewardToStat = {
         trade_card: 'trade_card_points',
         choose_player_to_compare: 'choose_player_to_compare_points',
@@ -36,8 +36,6 @@ function removeFunctionsFromCards(prefix) {
   }
 }
 
-
-// PLAYER FUNCTIONS 
 function updateStats(game) {
   game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
@@ -68,7 +66,9 @@ function exposeRewards(player) {
     let element = document.getElementById(reward_name);
     if (player[rewardToStat[reward_name]] > 0) {
       element.classList.remove('hidden');
-      document.getElementById('rewards_modal').showModal();
+      setTimeout(function() {
+        document.getElementById('rewards_modal').showModal();
+      }, 100);
     } else {
       element.classList.add('hidden');
       document.getElementById('rewards_modal').close();
@@ -79,10 +79,11 @@ function exposeRewards(player) {
 export function updatePlayerData(player, playerId, data) {
   populateCards('player', player['deck']['active'], true);
   if (player.keep_card_points) {
-    document.getElementById(`player-cards`).children.forEach(function(card) {
-      card.children[0].dataset.name = card.children[0].dataset.type  
-      card.children[0].dataset.type = 'keep_card'
-    });
+    let children = document.getElementById(`player-cards`).children
+    for (let i = 0; i < children.length; i++) {
+      children[i].children[0].dataset.name = children[i].children[0].dataset.type  
+      children[i].children[0].dataset.type = 'keep_card'
+    }
   }
   updateBanner(data, playerId);
   exposeRewards(player);

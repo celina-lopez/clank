@@ -13,6 +13,7 @@ bin/dev
 - [ ] discarding lol doesn't work...
 - [ ] dont show out players as options
 - [ ] show the cards overlapping
+- [ ] kick ppl out if discarded - princess
 
 ## TODO - AEONS END
 
