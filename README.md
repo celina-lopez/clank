@@ -12,6 +12,7 @@ bin/dev
 - [ ] max players 6
 - [ ] discarding lol doesn't work...
 - [ ] dont show out players as options
+- [ ] show the cards overlapping
 
 ## TODO - AEONS END
 

@@ -1,7 +1,6 @@
 import 'jquery'
 import { createCard } from './card_helpers'
 import { updateBanner, updateLogs } from './utils'
-import { updateStatsForPlayer } from './player_helpers'
 
 // CARD FUNCTIONS
 const rewardToStat = {
@@ -21,19 +20,20 @@ const rewardToStat = {
 
 
 function populateCards(prefix, cards, playerHand=false) {
-  document.getElementById(`${prefix}-cards`).innerHTML = ""
-  let index = 0;
+  let container = document.getElementById(`${prefix}-cards`)
+  container.innerHTML = ""
   cards.forEach(function(card) { 
     let cardParent = createCard(card, playerHand)
-    document.querySelector(`#${prefix}-cards`).appendChild(cardParent);
-    index += 1;
+    container.appendChild(cardParent);
   });
 };
 
 function removeFunctionsFromCards(prefix) {
-  document.getElementById(`${prefix}-cards`).children.forEach(function(card) {
-    card.chidlren[0].onclick = null;
-  });
+  let children = document.getElementById(`${prefix}-cards`).children
+  for (let i = 0; i < children.length; i++) {
+    children[i].classList.add('w-6')
+    children[i].children[0].onclick = null;
+  }
 }
 
 
