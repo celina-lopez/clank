@@ -1,6 +1,6 @@
 <%
-  all_players = game.data['players']
-  other_players = all_players.reject { |p| p['index'] == player['index'] }
+  all_players = game.data['players'].reject { |p| p['removed_from_round'] }
+  other_players = all_players.reject { |p| p['index'] == player['index'] || p['removed_from_round'] }
   action_to_points = {
     'trade_card' => 'trade_card_points',
     'choose_player_to_compare' => 'choose_player_to_compare_points',
@@ -47,7 +47,8 @@
         player_trait: 'choose_player_to_guess_card',
         onclick: 'choosePlayerToGuess(this)',
         player:,
-        label: 'Choose a player to guess their cards'
+        label: 'Choose a player to guess their cards',
+        element_name: 'player_to_guess'
       ) %>
       <button id="guess_button" onclick="guess()" class="btn btn-primary">
         Guess
@@ -60,6 +61,8 @@
   function choosePlayerToGuess(element) {
     const player_to_guess = element.dataset.name
     document.getElementById('player_to_guess').value = player_to_guess
+    document.getElementById(`player_to_guess-${player_to_guess}`).classList.add('border-2')
+    document.getElementById(`player_to_guess-${player_to_guess}`).classList.add('border-sky-500')
   }
 
   function guess() {

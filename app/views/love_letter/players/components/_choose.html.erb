@@ -2,13 +2,14 @@
   label = local_assigns[:label] || ''
   onclick = local_assigns[:onclick] || 'executeAction(this)'
   action_type = local_assigns[:action_type] || '' 
+  element_name = action_type.presence || local_assigns[:element_name] || ''
 %>
 
-<div id="<%= action_type %>" class="<%= player[player_trait].positive? ? '' : action_type.present? ? 'hidden' : '' %>">
+<div id="<%= element_name %>" class="<%= player[player_trait].positive? ? '' : action_type.present? ? 'hidden' : '' %>">
   <div><%= label %></div>
   <div class="flex flex-row gap-2">
     <% players.each do |p| %>
-      <div class="z-10">
+      <div class="z-10" id="<%= element_name%>-<%= p['index'] %>">
         <div
           class="rounded-full trigger-button bg-red-100 border-black border-2 rounded h-[50px] w-[50px] cursor-pointer"
           onclick="<%= onclick %>"

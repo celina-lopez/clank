@@ -12,6 +12,7 @@ bin/dev
 - [ ] dont show out players as options
 - [ ] kick ppl out if discarded - princess
 - [ ] hearts need to be somewhat apart
+- [ ] better modal picking
 
 ## TODO - AEONS END
 
