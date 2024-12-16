@@ -9,9 +9,7 @@ bin/dev
 - [ ] logs toastr
 - [ ] max players 6
 - [ ] discarding lol doesn't work...
-- [ ] dont show out players as options
 - [ ] kick ppl out if discarded - princess
-- [ ] hearts need to be somewhat apart
 - [ ] better modal picking
 
 ## TODO - AEONS END

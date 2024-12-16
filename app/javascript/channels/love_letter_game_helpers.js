@@ -51,21 +51,27 @@ function updateStats(game) {
 }
 
 function renderFavorTokens(game, player) {
-  let favorTokens = ''
+  let favorTokens = '<div>'
   for (let i = 0; i < player.victory_points; i++) {
     favorTokens += '<i class="text-red-600 fa-solid fa-heart"></i>'
   }
   for (let i = 0; i < (favor_tokens_needed[game.players.length] - player.victory_points); i++) {
     favorTokens += '<i class="text-slate-300 fa-solid fa-heart"></i>'
   }
+  favorTokens += '</div>'
   return favorTokens
 }
 
-function exposeRewards(player) {
+function exposeRewards(game, player) {
   Object.keys(rewardToStat).forEach(function(reward_name) {
     let element = document.getElementById(reward_name);
     if (player[rewardToStat[reward_name]] > 0) {
       element.classList.remove('hidden');
+      game.players.forEach(function(p) {
+        if (p.removed_from_round) {
+         document.getElementById(`${reward_name}-${p.index}`).classList.add('hidden');
+        }
+      })
       setTimeout(function() {
         document.getElementById('rewards_modal').showModal();
       }, 100);
@@ -86,7 +92,7 @@ export function updatePlayerData(player, playerId, data) {
     }
   }
   updateBanner(data, playerId);
-  exposeRewards(player);
+  exposeRewards(data, player);
   if (player.revealed_card_to_player) {
     document.getElementById('revealed_card').classList.remove('hidden');
     const container = document.getElementById('revealed_card-container');
