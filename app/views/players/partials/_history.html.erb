@@ -1,7 +1,7 @@
 <div id="logs-parent" class="overflow-auto max-h-screen">
   <% game.history.reverse.each do |history| %>
     <div>
-      <%= game.game_type.classify.constantize::Labeler.label(history, game.data['players']) %>
+      <%= @logs_labeler.label(history) %>
     </div>
   <% end %>
 </div>

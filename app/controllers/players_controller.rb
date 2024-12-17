@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
 
   def show
     @phaser_config = YAML.load_file(Rails.root.join('config', 'game', 'clank', 'phaser.yml'))
+    @logs_labeler = @game.game_type_class::Labeler.new(history: @game.history, players: @game.data['players'])
   end
 
   private
