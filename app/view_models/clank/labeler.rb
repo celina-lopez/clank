@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Labeler
+class Clank::Labeler
   class << self
     def label(history, players = []) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
       player = players.fetch(history['player_index'].to_i, {})['name']

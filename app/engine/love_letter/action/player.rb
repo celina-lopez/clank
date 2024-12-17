@@ -23,6 +23,7 @@ class LoveLetter::Action::Player < Action::Player
     chosen_player = find_player(value)
     discarded_card = chosen_player.deck.active.pop
     if discarded_card['name'] == 'princess'
+      history << { type: 'discarded_princess', value: chosen_player.index, player_index: current_player.index }
       chosen_player.removed_from_round = true
       immediately_end_turn
       return
@@ -39,8 +40,10 @@ class LoveLetter::Action::Player < Action::Player
     current_player_card = current_player.deck.active.first
     current_player.revealed_card_to_player = { index: chosen_player.index, card: other_player_card }
     if other_player_card['victory_points'] > current_player_card['victory_points']
+      history << { type: 'removed_from_round', value: current_player.index, player_index: current_player.index }
       current_player.removed_from_round = true
     elsif other_player_card['victory_points'] < current_player_card['victory_points']
+      history << { type: 'removed_from_round', value: chosen_player.index, player_index: current_player.index }
       chosen_player.removed_from_round = true
     end
     immediately_end_turn
@@ -56,7 +59,10 @@ class LoveLetter::Action::Player < Action::Player
     player_index, card_name = value.split(',')
     chosen_player = find_player(player_index)
     chosen_card = chosen_player.deck.active.find { |card| card['name'] == card_name }
-    chosen_player.removed_from_round = true unless chosen_card.nil?
+    unless chosen_card.nil?
+      history << { type: 'removed_from_round', value: chosen_player.index, player_index: current_player.index }
+      chosen_player.removed_from_round = true
+    end
     immediately_end_turn
   end
 

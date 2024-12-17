@@ -30,7 +30,11 @@ class Game < ApplicationRecord
     love_letter: 2
   }
 
+  def game_type_class
+    game_type.classify.constantize
+  end
+
   def engine
-    game_type.classify.constantize::Engine.from_json(data, history:)
+    game_type_class::Engine.from_json(data, history:)
   end
 end
