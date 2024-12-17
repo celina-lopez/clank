@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LoveLetter::Action::Player < Action::Player
-  # history.concat(card_engine.history)
+  # TODO: history.concat(card_engine.history)
   def trade_card
     chosen_player = find_player(value)
     current_player_deck = current_player.deck.active.dup
@@ -19,7 +19,7 @@ class LoveLetter::Action::Player < Action::Player
     immediately_end_turn
   end
 
-  def choose_player_to_discard # rubocop:disable Metrics/AbcSize
+  def choose_player_to_discard # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     chosen_player = find_player(value)
     discarded_card = chosen_player.deck.active.pop
     if discarded_card['name'] == 'princess'
@@ -27,8 +27,8 @@ class LoveLetter::Action::Player < Action::Player
       immediately_end_turn
       return
     end
-    new_card = gameplay_data.deck.active.pop
-    new_card = gameplay_data.deck.discarded.pop if new_card.nil?
+    new_card = gameplay_data.deck.deck.pop
+    new_card = gameplay_data.deck.active.pop if new_card.nil?
     chosen_player.deck.active << new_card if new_card.present?
     immediately_end_turn
   end
@@ -38,11 +38,10 @@ class LoveLetter::Action::Player < Action::Player
     other_player_card = chosen_player.deck.active.first
     current_player_card = current_player.deck.active.first
     current_player.revealed_card_to_player = { index: chosen_player.index, card: other_player_card }
-    # need a way to show that card to other person
     if other_player_card['victory_points'] > current_player_card['victory_points']
-        current_player.removed_from_round = true
+      current_player.removed_from_round = true
     elsif other_player_card['victory_points'] < current_player_card['victory_points']
-        chosen_player.removed_from_round = true
+      chosen_player.removed_from_round = true
     end
     immediately_end_turn
   end
@@ -68,6 +67,6 @@ class LoveLetter::Action::Player < Action::Player
   end
 
   def find_player(index)
-    gameplay_data.players.find { |player| player.index == index.to_i }
+    gameplay_data.players.find { |player| player.index.to_i == index.to_i }
   end
 end
