@@ -4,10 +4,8 @@ bin/dev
 
 ## TODO - LOVE_LETTER
 
-- [ ] still has to choose princesses on cards even if baron shows up dont automate it
 - [ ] coffee tip hehe
 - [ ] logs toastr
-- [ ] kick ppl out if discarded - princess
 - [ ] better modal picking
 
 ## TODO - AEONS END
