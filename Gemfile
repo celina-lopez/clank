@@ -6,7 +6,7 @@ ruby File.read('.ruby-version').strip
 gem 'bootsnap', '>= 1.4.2', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'jbuilder', '~> 2.7' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 4.1' # Use Puma as the app server
+gem 'puma', '~> 5.6' # Use Puma as the app server
 gem 'rails', '~> 7.0.0'
 gem 'redis'
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
