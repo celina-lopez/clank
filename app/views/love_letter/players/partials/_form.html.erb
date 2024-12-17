@@ -21,6 +21,9 @@
     clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
     clone.querySelector('input').setAttribute('value', generateName());
     document.getElementById('playerContainer').appendChild(clone);
+    if (document.querySelectorAll('input[name="game[players][]"]').length == 6) {
+      document.getElementById('addPlayerBtn').classList.add('hidden');
+    }
   };
 
   const firstPart = <%= raw RandomNameGenerator::FANTASY_NAME_FIRST %>;

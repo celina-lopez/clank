@@ -7,7 +7,6 @@ bin/dev
 - [ ] still has to choose princesses on cards even if baron shows up dont automate it
 - [ ] coffee tip hehe
 - [ ] logs toastr
-- [ ] max players 6
 - [ ] discarding lol doesn't work...
 - [ ] kick ppl out if discarded - princess
 - [ ] better modal picking
