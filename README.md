@@ -5,7 +5,6 @@ bin/dev
 ## TODO - LOVE_LETTER
 
 - [ ] coffee tip hehe
-- [ ] logs parser
 - [ ] better modal picking
 
 ## TODO - AEONS END
