@@ -1,3 +1,8 @@
+<%
+  max_players = local_assigns[:max_players].presence
+  random_first_name = local_assigns[:random_first_name] || "FANTASY_NAME_FIRST"
+  random_second_name = local_assigns[:random_second_name] || "FANTASY_NAME_SECOND"
+%>
 <div id="playerContainer">
   <label class="form-control w-full max-w-xs my-2">
     <div class="label">
@@ -21,10 +26,15 @@
     clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
     clone.querySelector('input').setAttribute('value', generateName());
     document.getElementById('playerContainer').appendChild(clone);
+    <% if max_players.present? %>
+      if (document.querySelectorAll('input[name="game[players][]"]').length == <%= max_players %>) {
+        document.getElementById('addPlayerBtn').classList.add('hidden');
+      }
+    <% end %>
   };
 
-  const firstPart = <%= raw RandomNameGenerator::FANTASY_NAME_FIRST %>;
-  const secondPart = <%= raw RandomNameGenerator::FANTASY_NAME_SECOND %>;
+  const firstPart = <%= raw RandomNameGenerator.const_get(random_first_name) %>;
+  const secondPart = <%= raw RandomNameGenerator.const_get(random_second_name) %>;
   function generateName () {
     const firstIndex = Math.floor(Math.random() * firstPart.length); 
     const secondIndex = Math.floor(Math.random() * secondPart.length); 
