@@ -26,10 +26,10 @@ class GameChannel < ApplicationCable::Channel
 
   private
 
-  def parsed_logs(history, players)
-    latest_logs = history.select { |item| item.is_a?(Hash) && item.keys.all? { |key| key.is_a?(Symbol) } }
+  def parsed_logs(game)
+    latest_logs = game.history.select { |item| item.is_a?(Hash) && item.keys.all? { |key| key.is_a?(Symbol) } }
     latest_logs.map do |log|
-      Labeler.label(log.with_indifferent_access, players)
+      game.game_type_class::Labeler.new(players: game.data['players']).label(log.with_indifferent_access)
     end
   end
 end
