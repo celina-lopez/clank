@@ -51,7 +51,7 @@ class LoveLetter::Action::Player < Action::Player
 
   def choose_player_to_reveal
     chosen_player = find_player(value)
-    current_player.revealed_card_to_player = { index: chosen_player.index, card: current_player.deck.active.first }
+    current_player.revealed_card_to_player = { index: chosen_player.index, card: chosen_player.deck.active.first }
     immediately_end_turn
   end
 
