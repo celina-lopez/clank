@@ -98,7 +98,7 @@ export function updatePlayerData(player, playerId, data) {
     const container = document.getElementById('revealed_card-container');
     container.innerHTML = '<img src="/images/profile-' + player['revealed_card_to_player']['index'] + '.png" class="rounded-full border-gray-400 border-2 rounded h-[75px] w-[75px]"/>';
     container.innerHTML += '<div id="revealed_card-cards"></div>';
-    populateCards('revealed_card', [player['revealed_card_to_player']['card']], false);
+    populateCards('revealed_card', [player['revealed_card_to_player']['card']]);
   }
 }
 // GAME FUNCTIONS
