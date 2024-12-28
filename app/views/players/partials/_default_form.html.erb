@@ -21,21 +21,9 @@
 </template>
 
 <script>
-  function addPlayerBtn() {
-    let clone = document.importNode(document.getElementById('addPlayerForm').content, true)
-    clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
-    clone.querySelector('input').setAttribute('value', generateName());
-    document.getElementById('playerContainer').appendChild(clone);
-    <% if max_players.present? %>
-      if (document.querySelectorAll('input[name="game[players][]"]').length == <%= max_players %>) {
-        document.getElementById('addPlayerBtn').classList.add('hidden');
-      }
-    <% end %>
-  };
-
   const firstPart = <%= raw RandomNameGenerator.const_get(random_first_name) %>;
   const secondPart = <%= raw RandomNameGenerator.const_get(random_second_name) %>;
-  function generateName () {
+  function generateName() {
     const firstIndex = Math.floor(Math.random() * firstPart.length); 
     const secondIndex = Math.floor(Math.random() * secondPart.length); 
     return firstPart[firstIndex] + secondPart[secondIndex];

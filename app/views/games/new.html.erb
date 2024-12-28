@@ -22,7 +22,21 @@
   <%= form.hidden_field :game_type, value: game_type %>
 
   <div class="actions mt-3">
-    <button onclick="addPlayerBtn()" type="button" id="addPlayerBtn" class="my-2 btn btn-primary btn-outline">Add Player</button>
+    <script>
+      function addPlayerBtn() {
+        let clone = document.importNode(document.getElementById('addPlayerForm').content, true)
+        clone.querySelector('input').setAttribute('value', `Player ${document.querySelectorAll('input[name="game[players][]"]').length}`)
+        clone.querySelector('input').setAttribute('value', generateName());
+        document.getElementById('playerContainer').appendChild(clone);
+        if (document.querySelectorAll('input[name="game[players][]"]').length == 6) {
+          document.getElementById('addPlayerBtn').classList.add('hidden');
+        }
+      };
+      window.addEventListener('load', function() {
+        document.getElementById('addPlayerBtn').addEventListener('click', addPlayerBtn);
+      });
+    </script>
+    <button  type="button" id="addPlayerBtn" class="my-2 btn btn-primary btn-outline">Add Player</button>
     <%= form.submit class: "btn btn-active btn-primary" %>
   </div>
 <% end %>
