@@ -18,7 +18,6 @@ export function updateLogs(history) {
         log = document.createElement('div');
     log.innerHTML = history[i];
     logsParent.prepend(log);
-    debugger
     toastr.info(history[i]);
   }
 }

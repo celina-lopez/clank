@@ -13,7 +13,7 @@ class GameChannel < ApplicationCable::Channel
     new_game_data = engine.execute(type:, value:, player_index:)
     json_data = JSON.parse(new_game_data.to_json)
     game.update!(data: json_data)
-    latest_logs = parsed_logs(game)
+    latest_logs = parsed_logs(engine.history, game)
     ActionCable.server.broadcast("game_channel_#{game.uuid}", json_data.merge(latest_logs:))
     # rescue StandardError => e
     # ActionCable.server.broadcast("game_channel_#{game.uuid}",
@@ -26,8 +26,8 @@ class GameChannel < ApplicationCable::Channel
 
   private
 
-  def parsed_logs(game)
-    latest_logs = game.history.select { |item| item.is_a?(Hash) && item.keys.all? { |key| key.is_a?(Symbol) } }
+  def parsed_logs(history, game)
+    latest_logs = history.select { |item| item.is_a?(Hash) && item.keys.all? { |key| key.is_a?(Symbol) } }
     latest_logs.map do |log|
       game.game_type_class::Labeler.new(players: game.data['players']).label(log.with_indifferent_access)
     end
