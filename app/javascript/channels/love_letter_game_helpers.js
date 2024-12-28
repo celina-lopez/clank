@@ -69,7 +69,7 @@ function exposeRewards(game, player) {
       element.classList.remove('hidden');
       game.players.forEach(function(p) {
         if (p.removed_from_round) {
-         document.getElementById(`${reward_name}-${p.index}`).classList.add('hidden');
+         document.getElementById(`${reward_name}-${p.index}`)?.classList?.add('hidden');
         }
       })
       setTimeout(function() {
@@ -99,6 +99,8 @@ export function updatePlayerData(player, playerId, data) {
     container.innerHTML = '<img src="/images/profile-' + player['revealed_card_to_player']['index'] + '.png" class="rounded-full border-gray-400 border-2 rounded h-[75px] w-[75px]"/>';
     container.innerHTML += '<div id="revealed_card-cards"></div>';
     populateCards('revealed_card', [player['revealed_card_to_player']['card']]);
+  } else {
+    document.getElementById('revealed_card').classList.add('hidden');
   }
 }
 // GAME FUNCTIONS
