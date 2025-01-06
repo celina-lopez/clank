@@ -2,13 +2,15 @@
 bin/dev
 ```
 
+## otra
+
+- [ ] coffee tip
+- [ ] check everything!
+
 ## TODO - LOVE_LETTER
 
-- [ ] coffee tip hehe
 - [ ] check everything
 - [ ] ui...
-- [ ] photos
-- [ ] 
 
 ## TODO - AEONS END
 
