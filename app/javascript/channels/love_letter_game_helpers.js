@@ -53,10 +53,10 @@ function updateStats(game) {
 function renderFavorTokens(game, player) {
   let favorTokens = '<div>'
   for (let i = 0; i < player.victory_points; i++) {
-    favorTokens += '<i class="text-red-600 fa-solid fa-heart"></i>'
+    favorTokens += '<i class="text-red-600 fa-solid fa-heart ml-1"></i>'
   }
   for (let i = 0; i < (favor_tokens_needed[game.players.length] - player.victory_points); i++) {
-    favorTokens += '<i class="text-slate-300 fa-solid fa-heart"></i>'
+    favorTokens += '<i class="text-slate-300 fa-solid fa-heart ml-1"></i>'
   }
   favorTokens += '</div>'
   return favorTokens

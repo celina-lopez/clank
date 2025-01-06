@@ -1,7 +1,7 @@
-<div id='player-stats-<%= player['index'] %>'> 
+<div class="min-w-[33vw]" id='player-stats-<%= player['index'] %>'> 
   <img
     src="/images/profile-<%= player['index'] %>.png"
-    class="rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
+    class="ml-[11px] rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
   />
   <div>
     <%= render 'love_letter/players/components/favor_tokens', game:, player: %>
