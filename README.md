@@ -6,6 +6,9 @@ bin/dev
 
 - [ ] coffee tip hehe
 - [ ] check everything
+- [ ] ui...
+- [ ] photos
+- [ ] 
 
 ## TODO - AEONS END
 
