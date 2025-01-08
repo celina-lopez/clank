@@ -11,7 +11,7 @@ class GameChannel < ApplicationCable::Channel
     type, value, player_index = data.values_at('type', 'value', 'player_index')
     engine = game.engine
     new_game_data = engine.execute(type:, value:, player_index:)
-    json_data = JSON.parse(new_game_data.to_json)
+    json_data = JSON.parse(new_game_data.to_json).symbolize_keys.reject { |k, _v| k == :gameplay_data }
     game.update!(data: json_data)
     latest_logs = parsed_logs(engine.history, game)
     ActionCable.server.broadcast("game_channel_#{game.uuid}", json_data.merge(latest_logs:))

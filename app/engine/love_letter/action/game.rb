@@ -24,10 +24,16 @@ class LoveLetter::Action::Game < Action::Game
 
   private
 
-  def end_game?
-    # TODO: count number of love tokens
-    false
-  end
+    def end_game?
+      victory_points_threshold = case gameplay_data.players.size
+                                 when 2 then 6
+                                 when 3 then 5
+                                 when 4 then 4
+                                 else 3
+                                 end
+
+      gameplay_data.players.any? { |player| player.victory_points >= victory_points_threshold }
+    end
 
   def distribute_favor_tokens_with_empty_deck # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     highest_score = 0
