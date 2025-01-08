@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class LoveLetter::Validation::Card < Validation::Card
+  def valid?
+    super
+    send("#{type}?")
+  end
+
   def can_play
     true
   end
+
   alias spy? can_play
   alias countess? can_play
   alias chancellor? can_play
@@ -13,8 +19,7 @@ class LoveLetter::Validation::Card < Validation::Card
   alias guard? can_play
 
   def princess?
-    errors << 'You cannot discard your Princess.'
-    false
+    add_error_if_error('You cannot discard your Princess.', false)
   end
 
   def king?

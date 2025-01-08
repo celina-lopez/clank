@@ -19,7 +19,7 @@ class LoveLetter::Action::Card < Action::Card
   alias countess spy
 
   def king
-    current_player.trade_card_points = 1
+    add_skills_if_active_players(:trade_card_points)
   end
 
   def chancellor
@@ -38,15 +38,15 @@ class LoveLetter::Action::Card < Action::Card
   end
 
   def baron
-    current_player.choose_player_to_compare_points = 1
+    add_skills_if_active_players(:choose_player_to_compare_points)
   end
 
   def priest
-    current_player.choose_player_to_reveal_card = 1
+    add_skills_if_active_players(:choose_player_to_reveal_card)
   end
 
   def guard
-    current_player.choose_player_to_guess_card = 1
+    add_skills_if_active_players(:choose_player_to_guess_card)
   end
 
   private
@@ -59,5 +59,19 @@ class LoveLetter::Action::Card < Action::Card
 
   def immediately_end_turn
     LoveLetter::Action::Game.new(gameplay_data, type: 'end_turn', value: nil).end_turn
+  end
+
+  def active_players
+    gameplay_data.players.select do |player|
+      !player.removed_from_round && !player.protected_from_discard && player.index != current_player_index
+    end.any?
+  end
+
+  def add_skills_if_active_players(skill)
+    if active_players
+      current_player.public_send("#{skill}=", 1)
+    else
+      immediately_end_turn
+    end
   end
 end
