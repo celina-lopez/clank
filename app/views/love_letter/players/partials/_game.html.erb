@@ -1,7 +1,13 @@
 <div>
-  <%= render 'love_letter/players/partials/stats', player:, game:, phaser_config: @phaser_config %>
-  <%= render 'love_letter/players/partials/rewards', player:, game: %> 
-  <%= render 'love_letter/players/partials/current_hand', player:, game: %>
+  <div class="flex">
+    <div>
+      <%= render 'love_letter/players/partials/stats', player:, game:, phaser_config: @phaser_config %>
+      <%= render 'love_letter/players/partials/rewards', player:, game: %> 
+    </div>
+    <div>
+      <%= render 'love_letter/players/partials/current_hand', player:, game: %>
+    </div>
+  </div>
 </div>
 
 <div tabindex="0" class="collapse collapse-arrow border-base-300 bg-base-200 border">

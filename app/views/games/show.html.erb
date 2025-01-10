@@ -1,4 +1,5 @@
-<h1><%= @game.title %></h1>
+<h1 class="text-2xl font-bold mb-2"><%= @game.game_type.humanize %></h1>
+<h2 class="mb-2"><%= @game.title %></h2>
 <p>Send your friends the links! (No peaking!)</p>
 <% @game.data['players'].each do |player| %>
 <% player_link = game_player_path(@game.game_type, @game.uuid, player['index'].to_i) %>

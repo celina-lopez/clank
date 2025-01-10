@@ -10,6 +10,9 @@
       </ul>
     </div>
   <% end %>
+  <h1 class="text-2xl font-bold">
+    <%= params.fetch(:game_type, 'clank').humanize %>
+  </h1>
   <label class="form-control w-full max-w-xs">
     <div class="label">
       <span class="label-text">Name of game</span>

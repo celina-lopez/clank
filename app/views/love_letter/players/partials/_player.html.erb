@@ -6,6 +6,7 @@
   <div>
     <%= render 'love_letter/players/components/favor_tokens', game:, player: %>
   </div>
+  <div>Played Cards</div>
   <div class="flex" id='<%= player['index'] %>-discarded-cards'>
     <% player['deck']['discarded'].each do |card| %>
       <div class="w-6">
