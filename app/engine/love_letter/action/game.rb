@@ -32,7 +32,7 @@ class LoveLetter::Action::Game < Action::Game
                                  else 3
                                  end
 
-      gameplay_data.players.any? { |player| player.victory_points >= victory_points_threshold }
+      gameplay_data.players.any? { |player| player.victory_points.to_i >= victory_points_threshold }
     end
 
   def distribute_favor_tokens_with_empty_deck # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

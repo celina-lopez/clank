@@ -17,7 +17,8 @@ class GameChannel < ApplicationCable::Channel
     ActionCable.server.broadcast("game_channel_#{game.uuid}", json_data.merge(latest_logs:))
   rescue StandardError => e
     ActionCable.server.broadcast("game_channel_#{game.uuid}",
-                                 { error: e.message, current_player_index: game.data['current_player_index'] })
+                                 { error: e.message,
+                                   current_player_index: game.data['current_player_index'] })
   end
 
   def unsubscribed

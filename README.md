@@ -11,7 +11,6 @@ bin/dev
 
 - [ ] check everything
 - [ ] ui...
-- [ ] BRUV ENDGAME
 - [ ] minimum players
 - [ ] two players
 - [ ] check handmaid rules
