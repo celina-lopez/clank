@@ -22,7 +22,7 @@ window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game
   },
 
   disconnected() {
-    alert('Disconnected from game, please refresh!');
+    document.getElementById('disconnect-alert').classList.remove('hidden');
   },
 
   received(data) {
