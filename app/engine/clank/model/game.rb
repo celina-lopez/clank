@@ -6,7 +6,7 @@ class Clank::Model::Game < Model::Game
   def self.from_json(json)
     Clank::Model::Game.new(
       dragon: Clank::Model::Dragon.from_json(json['dragon']),
-      deck: Clank::Model::Deck.from_json(json['deck']),
+      deck: Model::Deck.from_json(json['deck']),
       map: Clank::Model::Map.from_json(json['map']),
       players: json['players'].map { |p| Clank::Model::Player.from_json(p) },
       **json.symbolize_keys.reject { |k, _v| %i[dragon deck map players].include?(k) }
@@ -15,7 +15,7 @@ class Clank::Model::Game < Model::Game
 
   def initialize(
     dragon: nil,
-    deck: Clank::Model::Deck.new(Clank::Base::STARTING_GAME_CARDS, num_of_active_cards: 6),
+    deck: Model::Deck.new(Clank::Base::STARTING_GAME_CARDS, num_of_active_cards: 6),
     marketplace: Clank::Base::MARKETPLACE,
     map: Clank::Model::Map.new,
     marketplace_items: Clank::Base::MARKETPLACE_ITEMS,

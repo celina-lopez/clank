@@ -7,14 +7,14 @@ class LoveLetter::Model::Game < Model::Game
 
   def self.from_json(json)
     LoveLetter::Model::Game.new(
-      deck: LoveLetter::Model::Deck.from_json(json['deck']),
+      deck: Model::Deck.from_json(json['deck']),
       players: json['players'].map { |p| LoveLetter::Model::Player.from_json(p) },
       **json.symbolize_keys.reject { |k, _v| %i[deck players gameplay_data].include?(k) }
     )
   end
 
   def initialize(
-    deck: LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0),
+    deck: Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0),
     **kwargs
   )
     @deck = deck
@@ -32,7 +32,7 @@ class LoveLetter::Model::Game < Model::Game
       game_engine::Model::Player.new(
         index,
         name:,
-        deck: LoveLetter::Model::Deck.new(active: deck.deck.pop(index.zero? ? 2 : 1))
+        deck: Model::Deck.new(active: deck.deck.pop(index.zero? ? 2 : 1))
       )
     end
   end

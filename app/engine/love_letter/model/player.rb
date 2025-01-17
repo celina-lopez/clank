@@ -9,7 +9,7 @@ class LoveLetter::Model::Player < Model::Player
   def self.from_json(json)
     LoveLetter::Model::Player.new(
       json['index'],
-      deck: LoveLetter::Model::Deck.from_json(json['deck']),
+      deck: Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index deck game_engine].include?(k) }
     )
   end
@@ -30,7 +30,7 @@ class LoveLetter::Model::Player < Model::Player
     **kwargs
     )
     super
-    @deck = deck || LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS)
+    @deck = deck || Model::Deck.new(LoveLetter::Base::CARDS)
     @rewards = rewards || []
     @removed_from_round = removed_from_round
     @trade_card_points = trade_card_points

@@ -12,17 +12,25 @@ class LoveLetter::Action::Game < Action::Game
       gameplay_data.end_game = true
       return
     end
-    loop do
-      gameplay_data.next_player!
-      break unless current_player.removed_from_round
-    end
-    drawn_card = gameplay_data.deck.deck.pop
-    current_player.deck.active << drawn_card
-    current_player.protected_from_discard = false
-    current_player.revealed_card_to_player = nil
+    next_player
+    prepare_player
   end
 
   private
+
+    def next_player
+      loop do
+        gameplay_data.next_player!
+        break unless current_player.removed_from_round
+      end
+    end
+
+    def prepare_player
+      drawn_card = gameplay_data.deck.deck.pop
+      current_player.deck.active << drawn_card
+      current_player.protected_from_discard = false
+      current_player.revealed_card_to_player = nil
+    end
 
     def end_game?
       victory_points_threshold = case gameplay_data.players.size
@@ -62,10 +70,10 @@ class LoveLetter::Action::Game < Action::Game
         player.victory_points += 1 unless player.removed_from_round
       end
     end
-    gameplay_data.deck = LoveLetter::Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)
+    gameplay_data.deck = Model::Deck.new(LoveLetter::Base::CARDS, num_of_active_cards: 0)
     gameplay_data.setup_deck(gameplay_data.players.size)
     gameplay_data.players.each do |player|
-      player.deck = LoveLetter::Model::Deck.new(active: gameplay_data.deck.deck.pop(1))
+      player.deck = Model::Deck.new(active: gameplay_data.deck.deck.pop(1))
       player.removed_from_round = false
     end
   end

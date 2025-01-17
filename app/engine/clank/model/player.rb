@@ -14,7 +14,7 @@ class Clank::Model::Player < Model::Player
     Clank::Model::Player.new(
       json['index'],
       position: Clank::Model::Position.from_json(json['position']),
-      deck: Clank::Model::Deck.from_json(json['deck']),
+      deck: Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index position deck game_engine].include?(k) }
     )
   end
@@ -36,7 +36,7 @@ class Clank::Model::Player < Model::Player
   )
     super
     @position = position || Clank::Model::Position.new
-    @deck = deck || Clank::Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
+    @deck = deck || Model::Deck.new(Clank::Base::STARTING_DECK_CARDS)
     @clank = clank || STARTING_CLANK_CUBES[index]
     @coins = coins || START_COINS
     @rewards = rewards || []

@@ -18,10 +18,6 @@ class LoveLetter::Action::Card < Action::Card
 
   alias countess spy
 
-  def king
-    add_skills_if_active_players(:trade_card_points)
-  end
-
   def chancellor
     new_cards = gameplay_data.deck.deck.pop(2)
     current_player.deck.active.concat(new_cards)
@@ -35,6 +31,10 @@ class LoveLetter::Action::Card < Action::Card
   def handmaid
     current_player.protected_from_discard = true
     immediately_end_turn
+  end
+
+  def king
+    add_skills_if_active_players(:trade_card_points)
   end
 
   def baron

@@ -24,7 +24,6 @@ RSpec.describe LoveLetter::Action::Player do
   end
 
   context '#choose_player_to_discard' do
-    let(:value) { '0' }
     it 'discards the chosen player\'s card and draws a new one' do
       subject.choose_player_to_discard
       expect(subject.gameplay_data.players[0].deck.active).to contain_exactly(hash_including({ 'name' => 'chancellor' }))
