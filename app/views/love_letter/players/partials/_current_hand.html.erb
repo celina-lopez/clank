@@ -1,4 +1,7 @@
-<div class="mt-3 max-w-fit">
+<% 
+  color = @phaser_config.dig('player_colors', player['index'].to_i)
+%>
+<div class="mt-2 max-w-fit border-2 border-<%= color %>-400 p-3 rounded-lg mt-2"">
   <div class="<%= player['index'] == game['current_player_index'] ? 'hidden' : '' %>" id="helper_text">
     <% if player['keep_card_points'].positive? %>
       Choose a card to keep in hand
@@ -18,5 +21,5 @@
       ) %>
     <% end %>
   </div>
-  <%= render "love_letter/players/partials/player", player:, game:, phaser_config: @phaser_config %> 
+  <%= render "love_letter/players/partials/player", player:, game:, phaser_config: @phaser_config, with_border: false %> 
 </div>

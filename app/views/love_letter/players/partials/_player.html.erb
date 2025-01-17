@@ -1,11 +1,17 @@
-<div class="min-w-[33vw]" id='player-stats-<%= player['index'] %>'> 
+<% 
+  color = phaser_config.dig('player_colors', player['index'].to_i)
+  with_border = local_assigns[:with_border] != false
+%>
+
+<div class="min-w-[31vw] <%= with_border ? "border-2 border-#{color}-400 p-3 rounded-lg mt-2" : "" %>" id='player-stats-<%= player['index'] %>'> 
   <img
     src="/images/profile-<%= player['index'] %>.png"
-    class="ml-[11px] rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
+    class="ml-[11px] rounded-full border-<%= color %>-400 border-2 rounded h-[75px] w-[75px] <%= player['removed_from_round'] && 'opacity-50' %>"
   />
   <div>
     <%= render 'love_letter/players/components/favor_tokens', game:, player: %>
   </div>
+  <%# TODO only show if there have been played %>
   <div>Played Cards</div>
   <div class="flex" id='<%= player['index'] %>-discarded-cards'>
     <% player['deck']['discarded'].each do |card| %>

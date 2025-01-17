@@ -58,11 +58,15 @@
   function choosePlayerToGuess(element) {
     const player_to_guess = element.dataset.name
     document.getElementById('player_to_guess').value = player_to_guess
-    document.getElementById(`player_to_guess-${player_to_guess}`).classList.add('border-2')
-    document.getElementById(`player_to_guess-${player_to_guess}`).classList.add('border-sky-500')
+    classes = ['border-2', 'border-sky-500', 'rounded-lg', 'p-2']
+    document.getElementById(`player_to_guess-${player_to_guess}`).classList.add(...classes)
   }
 
   function guess() {
+    if (document.getElementById('player_to_guess').value === '') {
+      alert('Please choose a player to guess')
+      return
+    }
     const card_to_guess = document.getElementById('card_to_guess').value
     const player_to_guess = document.getElementById('player_to_guess').value
     let data = { type: 'choose_player_to_guess', player_index: <%= player.dig('index') %>, value: `${player_to_guess},${card_to_guess}` }

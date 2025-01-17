@@ -1,10 +1,10 @@
 <div>
-  <div class="flex">
+  <div class="flex gap-3">
     <div>
       <%= render 'love_letter/players/partials/stats', player:, game:, phaser_config: @phaser_config %>
-      <%= render 'love_letter/players/partials/rewards', player:, game: %> 
     </div>
     <div>
+      <%= render 'love_letter/players/partials/rewards', player:, game: %> 
       <%= render 'love_letter/players/partials/current_hand', player:, game: %>
     </div>
   </div>

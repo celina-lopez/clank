@@ -1,4 +1,4 @@
-<div class="flex flex-wrap gap-4">
+<div class="grid grid-cols-2 gap-4">
   <% game.data['players'].reject { |x| x['index'] == player['index'] }.each do |player| %>
     <%= render "love_letter/players/partials/player", player:, game:, phaser_config: %> 
   <% end %>
