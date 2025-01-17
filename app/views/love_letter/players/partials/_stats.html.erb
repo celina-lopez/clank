@@ -3,21 +3,3 @@
     <%= render "love_letter/players/partials/player", player:, game:, phaser_config: %> 
   <% end %>
 </div>
-
-<div class="max-w-fit border rounded p-5 border-primary <%= player['revealed_card_to_player'].present? ? '' : 'hidden' %>" id='revealed_card'>
-  <div>Revealed Card</div>
-  <div id='revealed_card-container'>
-    <% if player['revealed_card_to_player'].present? %>
-    <%# TODO: make sure this has the rounded border color %>
-      <img src="/images/profile-<%= player['revealed_card_to_player']['index'] %>.png" class="rounded-full border-<%= phaser_config.dig('player_colors', player['revealed_card_to_player']['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]"/>
-      <div class="text-sm"><%= game.data['players'].find { |p| p['index'] == player['revealed_card_to_player']['index'] }['name'] %></div>
-      <div id='revealed_card-cards'>
-        <%= render(
-          'players/components/card',
-          card: player['revealed_card_to_player']['card'],
-          game_prefix: 'love_letter'
-        ) %>
-      </div>
-    <% end %>
-  </div>
-</div>

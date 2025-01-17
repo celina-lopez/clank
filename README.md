@@ -6,6 +6,7 @@ bin/dev
 
 - [ ] coffee tip
 - [ ] check everything!
+- [ ] better disconnect foerm game
 
 ## TODO - LOVE_LETTER
 
