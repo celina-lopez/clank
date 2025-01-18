@@ -9,7 +9,7 @@ playerId = hrefParts[hrefParts.length - 1],
 gameType = hrefParts[3],
 gameHelpPath = `channels/${gameType}_game_helpers`;
 
-if (gameId != undefined && hrefParts[3] == "games") {
+if (gameId != undefined && hrefParts[4] == "games") {
   window.app.action = consumer.subscriptions.create({ channel: "GameChannel", game_id: gameId }, {
     connected() {
       console.log(`Connected to game: ${gameId}, player: ${playerId}`);

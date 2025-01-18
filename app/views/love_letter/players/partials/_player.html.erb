@@ -13,7 +13,7 @@
     <%= render 'love_letter/players/components/favor_tokens', game:, player: %>
   </div>
   <%# TODO only show if there have been played %>
-  <div>Played Cards</div>
+  <div class="text-sm <%= player['deck']['discarded'].empty? ? 'hidden' : '' %>">Played Cards</div>
   <div class="flex" id='<%= player['index'] %>-discarded-cards'>
     <% player['deck']['discarded'].each do |card| %>
       <div class="w-6">

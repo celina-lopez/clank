@@ -6,8 +6,6 @@ bin/dev
 
 - [ ] coffee tip
 - [ ] check everything!
-- [ ] validations on create form
-- [ ] game channel
 
 ## TODO - LOVE_LETTER
 
