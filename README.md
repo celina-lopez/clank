@@ -22,6 +22,10 @@ bin/dev
 - [ ] skill_points go to zero for aeons end
 - [ ] add button to portal gates on who to attack
 
+## TODO - Clank
+
+- [ ] multiple maps
+
 ## FUTURES
 
 - [ ] login with your list of games

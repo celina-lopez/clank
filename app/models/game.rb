@@ -23,6 +23,7 @@ class Game < ApplicationRecord
   validates :data, presence: true
   validates :title, presence: true
   validates :game_type, presence: true
+  validate :minimum_number_of_players, on: :create
 
   enum game_type: {
     clank: 0,
@@ -36,5 +37,17 @@ class Game < ApplicationRecord
 
   def engine
     game_type_class::Engine.from_json(data, history:)
+  end
+
+  def minimum_number_of_players
+    minimum_num = case game_type
+                  when :love_letter
+                    2
+                  else
+                    0
+                  end
+    return unless data.dig['players']&.size.to_i < minimum_num
+
+    errors.add(:minimum_number_of_players, "Minimum of #{minimum_num} of players needed") if minimum_num.zero?
   end
 end

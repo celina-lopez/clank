@@ -4,7 +4,7 @@ class Clank::Model::Game < Model::Game
   attr_accessor :deck, :marketplace, :map, :dragon, :marketplace_items
 
   def self.from_json(json)
-    Clank::Model::Game.new(
+    new(
       dragon: Clank::Model::Dragon.from_json(json['dragon']),
       deck: Model::Deck.from_json(json['deck']),
       map: Clank::Model::Map.from_json(json['map']),

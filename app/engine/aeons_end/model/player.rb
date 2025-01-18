@@ -6,7 +6,7 @@ class AeonsEnd::Model::Player < Model::Player
   MAX_HEALTH = 10
 
   def self.from_json(json)
-    AeonsEnd::Model::Player.new(
+    new(
       json['index'],
       deck: AeonsEnd::Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index deck game_engine].include?(k) }

@@ -7,7 +7,7 @@ class LoveLetter::Model::Player < Model::Player
                 :revealed_card_to_player
 
   def self.from_json(json)
-    LoveLetter::Model::Player.new(
+    new(
       json['index'],
       deck: Model::Deck.from_json(json['deck']),
       **json.symbolize_keys.reject { |k, _v| %i[index deck game_engine].include?(k) }

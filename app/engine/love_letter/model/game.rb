@@ -6,7 +6,7 @@ class LoveLetter::Model::Game < Model::Game
   MAX_FAVOR_TOKENS = 13
 
   def self.from_json(json)
-    LoveLetter::Model::Game.new(
+    new(
       deck: Model::Deck.from_json(json['deck']),
       players: json['players'].map { |p| LoveLetter::Model::Player.from_json(p) },
       **json.symbolize_keys.reject { |k, _v| %i[deck players gameplay_data].include?(k) }

@@ -11,7 +11,7 @@ class Clank::Model::Player < Model::Player
   START_COINS = 7
 
   def self.from_json(json)
-    Clank::Model::Player.new(
+    new(
       json['index'],
       position: Clank::Model::Position.from_json(json['position']),
       deck: Model::Deck.from_json(json['deck']),
