@@ -6,13 +6,13 @@ bin/dev
 
 - [ ] coffee tip
 - [ ] check everything!
+- [ ] validations on create form
+- [ ] game channel
 
 ## TODO - LOVE_LETTER
 
 - [ ] check everything
 - [ ] ui...
-- [ ] minimum players
-- [ ] two players
 - [ ] check handmaid rules
 
 ## TODO - AEONS END

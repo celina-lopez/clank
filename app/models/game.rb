@@ -40,14 +40,14 @@ class Game < ApplicationRecord
   end
 
   def minimum_number_of_players
-    minimum_num = case game_type
+    minimum_num = case game_type.to_sym
                   when :love_letter
                     2
                   else
-                    0
+                    1
                   end
-    return unless data.dig['players']&.size.to_i < minimum_num
+    return unless data['players']&.size.to_i < minimum_num
 
-    errors.add(:minimum_number_of_players, "Minimum of #{minimum_num} of players needed") if minimum_num.zero?
+    errors.add(:minimum_number_of_players, "Minimum of #{minimum_num} of players needed")
   end
 end
