@@ -17,8 +17,7 @@
     <a
       class="btn ml-10 btn-sm"
       target="_blank"
-      <%# TODO: add game title %>
-      href="mailto:?subject=Lets play Clank!&body=Hey, I made a game online. Here's your link: <%= player_link %>"
+      href="mailto:?subject=Lets play <%= @game.game_type.humanize %>!&body=Hey, I made a game online. Here's your link: <%= player_link %>"
     >
       <i class="fa-solid fa-envelope"></i>
     </a>

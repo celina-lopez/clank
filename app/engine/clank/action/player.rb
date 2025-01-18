@@ -45,12 +45,10 @@ class Clank::Action::Player < Action::Player
 
     current_player.move_points -= edge_metadata.fetch('move', 1)
     remove_health(edge_metadata.fetch('danger', 0)) unless current_player.ignore_monster_path
-    # TODO: refactor this
     current_player.health += 1 if tile_tags.include?('health')
     return unless tile_tags.include?('crystal_cave')
-    return if current_player.skip_crystal_cave
 
-    current_player.moved_to_crystal_cave = true
+    current_player.moved_to_crystal_cave = true unless current_player.skip_crystal_cave
   end
 
   def trash

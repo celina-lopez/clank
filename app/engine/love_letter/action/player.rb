@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class LoveLetter::Action::Player < Action::Player
-  # TODO: history.concat(card_engine.history)
   def trade_card
     chosen_player = find_player(value)
     current_player_deck = current_player.deck.active.dup

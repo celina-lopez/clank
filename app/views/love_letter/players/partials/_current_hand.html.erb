@@ -27,7 +27,6 @@
     <div>Revealed Card</div>
     <div id='revealed_card-container'>
       <% if player['revealed_card_to_player'].present? %>
-        <%# TODO: make sure this has the rounded border color %>
         <img src="/images/profile-<%= player['revealed_card_to_player']['index'] %>.png" class="rounded-full border-<%= @phaser_config.dig('player_colors', player['revealed_card_to_player']['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]"/>
         <div class="text-sm"><%= game.data['players'].find { |p| p['index'] == player['revealed_card_to_player']['index'] }['name'] %></div>
         <div id='revealed_card-cards'>

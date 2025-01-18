@@ -4,3 +4,11 @@
 <template id='circle-template'>
   <%= render 'players/components/circle', game_prefix: "love_letter" %>
 </template>
+<% players.each do |player| %>
+  <template id='profile-<%= player['index'] %>'>
+    <img
+      src="/images/profile-<%= player['index'] %>.png"
+      class="ml-[11px] rounded-full border-<%= phaser_config.dig('player_colors', player['index'].to_i) %>-400 border-2 rounded h-[75px] w-[75px]' %>"
+    />
+  </template>
+<% end %>

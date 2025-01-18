@@ -2,8 +2,6 @@
   color = phaser_config.dig('player_colors', player['index'].to_i)
   with_border = local_assigns[:with_border] != false
 %>
-<%# TODO: remove played cards clicks %>
-
 <div class="min-w-[31vw] <%= with_border ? "border-2 border-#{color}-400 p-3 rounded-lg mt-2" : "" %>" id='player-stats-<%= player['index'] %>'> 
   <img
     src="/images/profile-<%= player['index'] %>.png"
@@ -17,7 +15,6 @@
   <div class="flex" id='<%= player['index'] %>-discarded-cards'>
     <% player['deck']['discarded'].each do |card| %>
       <div class="w-6">
-        <%# TODO: i changed to circle %>
         <%= render(
           'players/components/circle',
           inventory: card,

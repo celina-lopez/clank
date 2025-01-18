@@ -16,8 +16,7 @@
     <%= render 'players/partials/history', game: %> 
   </div>
 </div>
-<%= render 'love_letter/players/partials/templates' %>
-
+<%= render 'love_letter/players/partials/templates', phaser_config: @phaser_config, players: game.data['players'] %>
 
 <script>
   function executeAction(e) {

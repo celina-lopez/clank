@@ -39,14 +39,6 @@ function createCircle(card) {
   return circleParent;
 }
 
-function removeFunctionsFromCards(prefix) {
-  let children = document.getElementById(`${prefix}-cards`).children
-  for (let i = 0; i < children.length; i++) {
-    children[i].classList.add('w-6')
-    children[i].children[0].onclick = null;
-  }
-}
-
 function updateStats(game) {
   game.players.forEach(function(player) {
     let playerStatContainer = document.getElementById(`player-stats-${player.index}`);
@@ -116,7 +108,8 @@ export function updatePlayerData(player, playerId, data) {
   if (player.revealed_card_to_player) {
     document.getElementById('revealed_card').classList.remove('hidden');
     const container = document.getElementById('revealed_card-container');
-    container.innerHTML = '<img src="/images/profile-' + player['revealed_card_to_player']['index'] + '.png" class="rounded-full border-gray-400 border-2 rounded h-[75px] w-[75px]"/>';
+    let profileTemplate = document.getElementById(`profile-${player['revealed_card_to_player']['index']}`)
+    container.appendChild(profileTemplate)
     container.innerHTML += '<div id="revealed_card-cards"></div>';
     populateCards('revealed_card', [player['revealed_card_to_player']['card']]);
   } else {
