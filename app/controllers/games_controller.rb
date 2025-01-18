@@ -23,6 +23,9 @@ class GamesController < ApplicationController
       game_type: game_params[:game_type]
     )
     redirect_to game_path(game.uuid)
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+    redirect_to new_game_path(game_type: game_params[:game_type])
   end
 
   private
