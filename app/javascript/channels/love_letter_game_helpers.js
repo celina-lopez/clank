@@ -79,11 +79,21 @@ function exposeRewards(game, player) {
     let element = document.getElementById(reward_name);
     if (player[rewardToStat[reward_name]] > 0) {
       element.classList.remove('hidden');
+      let activePlayers = 0;
+      let activePlayerIndex = null;
       game.players.forEach(function(p) {
         if (p.removed_from_round) {
          document.getElementById(`${reward_name}-${p.index}`)?.classList?.add('hidden');
+        } else {
+          activePlayers++;
+          activePlayerIndex = p.index;
         }
       })
+      if (activePlayers === 1 && reward_name === 'choose_player_to_guess') {
+        document.getElementById('player_to_guess').value = activePlayerIndex;
+        let classes = ['border-2', 'border-sky-500', 'rounded-lg', 'p-2']
+        document.getElementById(`player_to_guess-${activePlayerIndex}`).classList.add(...classes)
+      }
       setTimeout(function() {
         document.getElementById('rewards_modal').showModal();
       }, 100);

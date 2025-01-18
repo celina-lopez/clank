@@ -58,9 +58,13 @@
   function choosePlayerToGuess(element) {
     const player_to_guess = element.dataset.name
     document.getElementById('player_to_guess').value = player_to_guess
-    classes = ['border-2', 'border-sky-500', 'rounded-lg', 'p-2']
+    let classes = ['border-2', 'border-sky-500', 'rounded-lg', 'p-2']
     document.getElementById(`player_to_guess-${player_to_guess}`).classList.add(...classes)
   }
+
+  <% if other_players.length == 1 %>
+    choosePlayerToGuess(document.getElementById("player_to_guess-<%= other_players[0]['index']%>").children[0])
+  <% end %>
 
   function guess() {
     if (document.getElementById('player_to_guess').value === '') {
