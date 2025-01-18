@@ -1,5 +1,5 @@
 import 'jquery'
-import { createCard } from './card_helpers'
+import { createCard, createCardClone } from './card_helpers'
 import { updateBanner, updateLogs } from './utils'
 
 // PLAYER FUNCTIONS
@@ -16,7 +16,8 @@ const rewardToStat = {
         4: 4,
         5: 3,
         6: 3
-      };
+      },
+      circleTemplate = document.getElementById('circle-template')?.content;
 
 
 function populateCards(prefix, cards, playerHand=false) {
@@ -27,6 +28,16 @@ function populateCards(prefix, cards, playerHand=false) {
     container.appendChild(cardParent);
   });
 };
+
+function createCircle(card) {
+  let circleClone = document.importNode(circleTemplate, true),
+      circleParent = circleClone.children[0],
+      itemParent = circleParent.children[0],
+      popUp = circleParent.children[1].children[0];
+  itemParent.innerHTML = `<img src='/images/${card['name']}.png' class="rounded-full w-[50px]"/>`
+  createCardClone(popUp, card);
+  return circleParent;
+}
 
 function removeFunctionsFromCards(prefix) {
   let children = document.getElementById(`${prefix}-cards`).children
@@ -45,8 +56,17 @@ function updateStats(game) {
       playerStatContainer.querySelector('img').classList.remove('opacity-50')
     }
     playerStatContainer.children[1].innerHTML = renderFavorTokens(game, player);
-    populateCards(`${player.index}-discarded`, player.deck.discarded)
-    removeFunctionsFromCards(`${player.index}-discarded`)
+    let discardedContainer = document.getElementById(`${player.index}-discarded-cards`)
+    let discardedLabel = document.getElementById(`discarded-label-${player.index}`)
+    discardedLabel.classList.remove('hidden')
+    discardedContainer.innerHTML = ''
+    player.deck.discarded.forEach(function(item) {
+      let itemElement = createCircle(item);
+      let itemParent = document.createElement('div')
+      itemParent.classList.add('w-6')
+      itemParent.appendChild(itemElement)
+      discardedContainer.appendChild(itemParent)
+    });
   });
 }
 

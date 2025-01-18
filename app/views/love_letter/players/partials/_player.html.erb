@@ -13,14 +13,14 @@
     <%= render 'love_letter/players/components/favor_tokens', game:, player: %>
   </div>
   <%# TODO only show if there have been played %>
-  <div class="text-sm <%= player['deck']['discarded'].empty? ? 'hidden' : '' %>">Played Cards</div>
+  <div id="discarded-label-<%= player['index'] %>" class="text-sm <%= player['deck']['discarded'].empty? ? 'hidden' : '' %>">Played Cards</div>
   <div class="flex" id='<%= player['index'] %>-discarded-cards'>
     <% player['deck']['discarded'].each do |card| %>
       <div class="w-6">
+        <%# TODO: i changed to circle %>
         <%= render(
-          'players/components/info_card',
-          card:,
-          small_card: true,
+          'players/components/circle',
+          inventory: card,
           game_prefix: 'love_letter'
         ) %>
       </div>

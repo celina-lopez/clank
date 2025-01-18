@@ -12,6 +12,7 @@ bin/dev
 - [ ] check everything
 - [ ] ui...
 - [ ] check handmaid rules
+- [ ] i changed to circle the past cards
 
 ## TODO - AEONS END
 
