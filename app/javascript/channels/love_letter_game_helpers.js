@@ -17,7 +17,7 @@ const rewardToStat = {
         5: 3,
         6: 3
       },
-      circleTemplate = document.getElementById('circle-template')?.content;
+      circleTemplate = document.getElementById('circle-template').content;
 
 
 function populateCards(prefix, cards, playerHand=false) {
@@ -83,7 +83,10 @@ function exposeRewards(game, player) {
       let activePlayerIndex = null;
       game.players.forEach(function(p) {
         if (p.removed_from_round) {
-         document.getElementById(`${reward_name}-${p.index}`)?.classList?.add('hidden');
+          const element = document.getElementById(`${reward_name}-${p.index}`)
+          if (element) {
+            element.classList.add('hidden');
+          }
         } else {
           activePlayers++;
           activePlayerIndex = p.index;

@@ -3,15 +3,15 @@ import { createCard, createCardClone } from './card_helpers'
 import { updateLogs, updateBanner } from './utils'
 
 
-const rewardParent = document.getElementById('rewards-parent')?.content,
-      rewardTemplate = document.getElementById('rewards-option')?.content,
-      trashOptionOne = document.getElementById('trash-option-1')?.content,
-      trashOptionTwo = document.getElementById('trash-option-2')?.content,
-      circleTemplate = document.getElementById('circle-template')?.content,
+const rewardParent = document.getElementById('rewards-parent').content,
+      rewardTemplate = document.getElementById('rewards-option').content,
+      trashOptionOne = document.getElementById('trash-option-1').content,
+      trashOptionTwo = document.getElementById('trash-option-2').content,
+      circleTemplate = document.getElementById('circle-template').content,
       rewardContainer = document.getElementById('rewards-id'),
       marketplaceParent = document.getElementById('marketplace-id'),
-      statTemplate = document.getElementById('stat-template')?.content,
-      healthStatTemplate = document.getElementById('health-stat')?.content,
+      statTemplate = document.getElementById('stat-template').content,
+      healthStatTemplate = document.getElementById('health-stat').content,
       perksElm = document.getElementById('perks'),
       endTurnElm = document.getElementById('end_turn_button'),
       playAllElm = document.getElementById('play_all_cards_button'),
@@ -202,16 +202,17 @@ function replaceCard(player, cards) {
 
 function addEndTurnButton(isCurrentPlayer, endTurn) {
   if (!isCurrentPlayer) {
-    endTurnElm?.classList?.add('hidden');
-    playAllElm?.classList?.add('hidden');
+    endTurnElm.classList.add('hidden');
+    playAllElm.classList.add('hidden');
     return
   }
+  if (!endTurnElm) { return }
   if (endTurn) {
-    endTurnElm?.classList?.remove('hidden');
-    playAllElm?.classList?.add('hidden');
+    endTurnElm.classList.remove('hidden');
+    playAllElm.classList.add('hidden');
   } else {
-    endTurnElm?.classList?.add('hidden');
-    playAllElm?.classList?.remove('hidden');
+    endTurnElm.classList.add('hidden');
+    playAllElm.classList.remove('hidden');
   }
 }
 

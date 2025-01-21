@@ -291,6 +291,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uglifier (4.2.1)
+      execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -343,6 +345,7 @@ DEPENDENCIES
   toastr-rails (~> 1.0)
   turbolinks (~> 5)
   tzinfo-data
+  uglifier (~> 4.2)
   web-console (>= 3.3.0)
   webdrivers
 

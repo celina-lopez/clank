@@ -1,13 +1,13 @@
 import 'jquery'
 
 // CARD FUNCTIONS
-const statTemplate = document.getElementById('stat-template')?.content,
-      healthStatTemplate = document.getElementById('health-stat')?.content;
+const statTemplate = document.getElementById('stat-template'),
+      healthStatTemplate = document.getElementById('health-stat');
 
 export function updateStatsForPlayer(playerStatContainer, player, playerStats, minimumThreshold=0) {
   playerStats.forEach(function(stat) {
     if (player[stat] > minimumThreshold) {
-      let statClone = document.importNode(statTemplate, true),
+      let statClone = document.importNode(statTemplate.content, true),
           statParent = statClone.children[0],
           actionElm = document.getElementById('template-' + stat),
           actionTemplate = document.importNode(actionElm.content, true).children[0];
@@ -20,7 +20,7 @@ export function updateStatsForPlayer(playerStatContainer, player, playerStats, m
 }
 
 export function updateHealthStat(playerStatContainer, player, healthMax) {
-    let healthStatClone = document.importNode(healthStatTemplate, true),
+    let healthStatClone = document.importNode(healthStatTemplate.content, true),
     statParent = healthStatClone.children[0].children[0],
     heart = statParent.children[0].querySelector('rect'),
     heartStat = statParent.children[1],

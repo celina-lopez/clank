@@ -115,11 +115,12 @@ function addTrashOptions(player) {
 }
 
 function addEndTurnButton(isCurrentPlayer) {
+  if (!endTurnElm) { return }
   if (!isCurrentPlayer) {
-    endTurnElm.classList?.add('hidden');
+    endTurnElm.classList.add('hidden');
     return
   }
-  endTurnElm.classList?.remove('hidden');
+  endTurnElm.classList.remove('hidden');
 }
 
 export function updatePlayerData(player, playerId, data) {
