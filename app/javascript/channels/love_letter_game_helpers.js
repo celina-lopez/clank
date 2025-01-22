@@ -1,6 +1,6 @@
 import 'jquery'
-import { createCard, createCardClone } from './card_helpers'
-import { updateBanner, updateLogs } from './utils'
+import { createCard, createCardClone } from 'channels/card_helpers'
+import { updateBanner, updateLogs } from 'channels/utils'
 
 // PLAYER FUNCTIONS
 const rewardToStat = {

@@ -1,6 +1,6 @@
 import 'jquery'
-import { createCard, createCardClone } from './card_helpers'
-import { updateLogs, updateBanner } from './utils'
+import { createCard, createCardClone } from 'channels/card_helpers'
+import { updateLogs, updateBanner } from 'channels/utils'
 
 
 const rewardParent = document.getElementById('rewards-parent').content,

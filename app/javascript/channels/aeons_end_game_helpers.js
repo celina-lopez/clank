@@ -1,7 +1,7 @@
 import 'jquery'
-import { createCard } from './card_helpers'
-import { updateBanner, updateStat } from './utils'
-import { updateStatsForPlayer, updateHealthStat } from './player_helpers'
+import { createCard } from 'channels/card_helpers'
+import { updateBanner, updateStat } from 'channels/utils'
+import { updateStatsForPlayer, updateHealthStat } from 'channels/player_helpers'
 
 // CARD FUNCTIONS
 const rewardParent = document.getElementById('rewards-parent').content,
