@@ -1,5 +1,5 @@
 import consumer from "channels/consumer"
-import { endGame } from './utils'
+import { endGame } from 'channels/utils'
 import 'jquery'
 
 window.app = {}
