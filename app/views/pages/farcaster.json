@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjk3MDI0NywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU5ZTZhMURjOTVkYjNEMDNiYmEzNUMwYTRBY0EyYUQ1OThDNTZBZTEifQ",
+    "payload": "eyJkb21haW4iOiJwbGF5Ym9hcmQuZ2FtZXMifQ",
+    "signature": "MHg1YmZlZjlmZmE5NTliODVjODhjYTUxNWRhMWQzMWQwNWY1OTIyNGY1ZjhlZmJhZWU0Yzc2NWEzMDJjY2FlYzQxNjBhMjM2YjQ5ZmMwYmZkMzA4MTE5M2RiY2Q1NDFjYTA5MzFhYTFlZTg0MGVmNDc3ZjJkMjEyYzU4ZWM5YjZlOTFj"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Playboard",
+    "iconUrl": "https://playboard.games/images/princess.png",
+    "homeUrl": "https://playboard.games",
+    "imageUrl": "https://playboard.games/images/princess.png",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://playboard.games/images/princess.png",
+    "splashBackgroundColor": "#eeccff",
+    "webhookUrl": "https://playboard.games/warpcast_webhook"
+  }
+}

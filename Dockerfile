@@ -20,7 +20,9 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips postgresql-client pkg-config libpq-dev nodejs npm redis-server
+    apt-get install --no-install-recommends -y build-essential git libvips \
+    postgresql-client pkg-config libpq-dev \
+    nodejs npm redis-server
 
 COPY package.json ./
 RUN npm install

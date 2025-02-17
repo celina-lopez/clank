@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :games, only: %i[show]
 
   get '/:game_type/games/:game_id/players/:player_id', to: 'players#show', as: :game_player
+  get '/.well-known/farcaster', to: 'pages#farcaster'
 end
