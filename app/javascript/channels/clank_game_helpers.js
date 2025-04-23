@@ -239,7 +239,7 @@ function addMarketplace(items, data, playerId) {
 }
 
 export function updatePlayerData(player, playerId, data) {
-  // TODO: clean up this later 
+  // OPTIMIZE: clean up this later, too many functions
   addEndTurnButton(data['current_player_index'] == playerId, data.players[data['current_player_index']]['deck']['active'].length == 0)
   addTempDescription(player);
   updateInventory(player);
@@ -254,7 +254,7 @@ export function updatePlayerData(player, playerId, data) {
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
-  // TODO: fix inventory images 
+  // FIXME: inventor images, they don't load
   updateStats(data);
   updateMap(data, data['players']); 
   populateCards('active', data['deck']['active']);

@@ -124,7 +124,7 @@ function addEndTurnButton(isCurrentPlayer) {
 }
 
 export function updatePlayerData(player, playerId, data) {
-  // TODO: clean up this later 
+  // OPTIMIZE: clean up this later 
   addEndTurnButton(data['current_player_index'] == playerId)
   addRewards(player);
   addTrashOptions(player);
@@ -135,9 +135,9 @@ export function updatePlayerData(player, playerId, data) {
 // GAME FUNCTIONS
 
 export function updateGameData(data) {
-  // TODO: fix inventory images 
+  // FIXME: fix inventory images 
   updateStats(data);
   HtmlActions.addHoverCardFunctions()
   // updateLogs(data['latest_logs']);
-  // TODO: fix game logs
+  // FIXME: game logs are broken
 }

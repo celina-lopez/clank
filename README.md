@@ -6,6 +6,7 @@ bin/dev
 
 - [ ] coffee tip
 - [ ] check everything!
+- [ ] upgrade rails
 
 ## TODO - LOVE_LETTER
 
@@ -27,4 +28,3 @@ bin/dev
 ## FUTURES
 
 - [ ] login with your list of games
-- [ ]

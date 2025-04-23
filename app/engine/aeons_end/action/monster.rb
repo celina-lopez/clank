@@ -17,7 +17,7 @@ class AeonsEnd::Action::Monster < Base
 
   def gravehold_health(value)
     gameplay_data.gravehold += if value == 'this'
-                                 value # TODO: fix this later so that the card is the health
+                                 value # FIXME: this should be the health of the town
                                else
                                  value
                                end

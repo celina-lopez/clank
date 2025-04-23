@@ -9,7 +9,7 @@ class AeonsEnd::Engine < Engine
     elsif AeonsEnd::Action::Game.actions_include?(type)
       'Game'
     else
-      # TODO: fix
+      # FIXME: this should catch an error
       'Card'
     end
   end

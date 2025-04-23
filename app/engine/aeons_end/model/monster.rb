@@ -16,7 +16,7 @@ class AeonsEnd::Model::Monster
     health: 70,
     type: MONSTER_TYPES.first,
     deck: AeonsEnd::Model::Deck.new(AeonsEnd::Base::MONSTER_CARDS, num_of_active_cards: 0),
-    unleash_deck: AeonsEnd::Model::Deck.new(AeonsEnd::Base::MONSTER_CARDS, num_of_active_cards: 0), # TODO: update
+    unleash_deck: AeonsEnd::Model::Deck.new(AeonsEnd::Base::MONSTER_CARDS, num_of_active_cards: 0), # OPTIMIZE: this is a hack for one monster
     unleash_points: 0
   )
     @health = health

@@ -13,7 +13,7 @@
     <%= render "aeons_end/players/components/icon_action", key: 'slots'%>
   </div>
   <div class="stat-title text-sm"> Power up</div>
-  <%# TODO: fix below %>
+  <%# FIXME: fix below, breaks when player has no slots %>
   <div class="stat-value text-primary text-base"><%= player.fetch('slots', 0) %> / 4</div>
 </div>
 

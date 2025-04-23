@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
+  mount Prettytodo::Engine => '/pretty_todo'
   root 'pages#index'
   resources :games, only: %i[create new]
   resource :instructions, only: [] do
