@@ -214,7 +214,7 @@ GEM
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.9.0)
-    rexml (3.3.9)
+    rexml (3.4.2)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.2)
