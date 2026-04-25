@@ -6,7 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "phaser": "^3.80.1",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.10",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
